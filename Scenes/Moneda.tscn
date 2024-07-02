@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://d1ghr5ojp13cd"]
+
+[ext_resource type="Texture2D" uid="uid://reefyu4gqonu" path="res://Resources/MonedaMovimiento_32x32.png" id="2_4elu2"]
+[ext_resource type="Script" path="res://Scripts/Moneda2D.gd" id="2_nk3xk"]
+
+[sub_resource type="Animation" id="Animation_ablef"]
+resource_name = "Animacion_Moneda"
+length = 1.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_wct5p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0ih7g"]
+_data = {
+"Animacion_Moneda": SubResource("Animation_ablef"),
+"RESET": SubResource("Animation_wct5p")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pa45r"]
+radius = 14.0
+
+[node name="Moneda" type="Node2D"]
+
+[node name="Moneda2D" type="Area2D" parent="."]
+position = Vector2(4, 0)
+script = ExtResource("2_nk3xk")
+
+[node name="SpritesMoneda" type="Sprite2D" parent="Moneda2D"]
+texture_filter = 1
+position = Vector2(-4, 0)
+texture = ExtResource("2_4elu2")
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Moneda2D/SpritesMoneda"]
+libraries = {
+"": SubResource("AnimationLibrary_0ih7g")
+}
+autoplay = "Animacion_Moneda"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Moneda2D"]
+position = Vector2(-4, 0)
+shape = SubResource("CircleShape2D_pa45r")
+
+[connection signal="body_entered" from="Moneda2D" to="Moneda2D" method="_on_body_entered"]

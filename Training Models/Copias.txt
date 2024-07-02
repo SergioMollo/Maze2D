@@ -1,0 +1,67 @@
+func bfs(start_pos, end_pos):
+    var visited = {}
+    var queue = [start_pos]
+    var parent = {}
+
+    while queue:
+        var current = queue.pop_front()
+
+        if current == end_pos:
+            return construct_path(parent, start_pos, end_pos)
+
+        for neighbor in get_neighbors(current):
+            if neighbor not in visited:
+                visited[neighbor] = true
+                parent[neighbor] = current
+                queue.append(neighbor)
+
+    return null
+
+func get_neighbors(pos):
+    # Obtener los vecinos válidos de una posición dada en el laberinto
+    # Por ejemplo, aquí podrías verificar las celdas adyacentes en el laberinto y devolver las que son pasables
+    pass
+
+func construct_path(parent, start_pos, end_pos):
+    var path = []
+    var current = end_pos
+
+    while current != start_pos:
+        path.insert(0, current)
+        current = parent[current]
+
+    path.insert(0, start_pos)
+    return path
+
+
+
+extends Node
+
+func _ready():
+    # Cargar la escena del laberinto
+    var maze_scene = preload("res://Laberinto.tscn")
+    var maze_instance = maze_scene.instance()
+    add_child(maze_instance)
+
+    # Obtener las posiciones de inicio y fin (por ejemplo, posición del jugador y posición de la salida)
+    var start_pos = $Player.global_position
+    var end_pos = $Exit.global_position  # Suponiendo que "Exit" es el nodo que representa la salida
+
+    # Aplicar el algoritmo BFS para encontrar la ruta desde el inicio hasta el final
+    var path = bfs(start_pos, end_pos)
+
+    # Usar la ruta encontrada según sea necesario
+    if path:
+        print("Ruta encontrada:", path)
+        # Por ejemplo, mover al jugador a lo largo de la ruta encontrada
+        move_player_along_path(path)
+    else:
+        print("No se encontró una ruta.")
+
+
+
+func move_player_along_path(path):
+    for pos in path:
+        # Mover al jugador a la siguiente posición en la ruta
+        $Player.global_position = pos
+        yield(get_tree().create_timer(0.1), "timeout")  # Opcional: agregar un pequeño retraso para que el movimiento sea visible

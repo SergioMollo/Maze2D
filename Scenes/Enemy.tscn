@@ -1,0 +1,76 @@
+[gd_scene load_steps=9 format=3 uid="uid://ctseifvcmjqrr"]
+
+[ext_resource type="Texture2D" uid="uid://jkkxm5qih5y3" path="res://Resources/Enemy32x32.png" id="1_cnp60"]
+[ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_si1us"]
+[ext_resource type="Script" path="res://Scripts/AIController2DEnemy.gd" id="2_du2xb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b62yh"]
+size = Vector2(30, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2gg3d"]
+size = Vector2(30, 30)
+
+[sub_resource type="Animation" id="Animation_e53hy"]
+resource_name = "EnemyAnimation"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_5prpo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mn8nq"]
+_data = {
+"EnemyAnimation": SubResource("Animation_e53hy"),
+"RESET": SubResource("Animation_5prpo")
+}
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_si1us")
+
+[node name="AIController2DEnemy" type="Node2D" parent="."]
+script = ExtResource("2_du2xb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_b62yh")
+
+[node name="Node2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D"]
+shape = SubResource("RectangleShape2D_2gg3d")
+
+[node name="SpriteEnemy" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_cnp60")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SpriteEnemy"]
+libraries = {
+"": SubResource("AnimationLibrary_mn8nq")
+}
+autoplay = "EnemyAnimation"
+
+[connection signal="body_entered" from="Node2D" to="." method="_on_node_2d_body_entered"]
