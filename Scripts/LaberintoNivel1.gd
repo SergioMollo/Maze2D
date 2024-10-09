@@ -1,6 +1,6 @@
 extends Node2D
 
-var final = false
+# var final = false
 var xSize = 10
 var ySize = 10
 var map = []

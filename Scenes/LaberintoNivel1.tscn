@@ -2552,6 +2552,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LabelTime" type="Label" parent="CanvasLayer"]
+visible = false
 offset_left = 376.0
 offset_top = 128.0
 offset_right = 416.0

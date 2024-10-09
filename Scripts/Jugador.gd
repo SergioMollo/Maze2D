@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-const limite_izquierdo = 16
 var maze_finished = false
 var wall_collide = false
 var result = []
@@ -74,7 +73,7 @@ func _physics_process(delta):
 				#global_position = target
 				
 			
-		############ Movimiento de la ia                         
+		########### Movimiento de la ia                         
 		#velocity.x = ai_controller.move.x * speed
 		#velocity.y = ai_controller.move.y * speed
 		#move_and_slide()

@@ -57,9 +57,9 @@ script = ExtResource("2_du2xb")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_b62yh")
 
-[node name="Node2D" type="Area2D" parent="."]
+[node name="Enemy2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2D"]
 shape = SubResource("RectangleShape2D_2gg3d")
 
 [node name="SpriteEnemy" type="Sprite2D" parent="."]
@@ -73,4 +73,4 @@ libraries = {
 }
 autoplay = "EnemyAnimation"
 
-[connection signal="body_entered" from="Node2D" to="." method="_on_node_2d_body_entered"]
+[connection signal="body_entered" from="Enemy2D" to="." method="_on_node_2d_body_entered"]
