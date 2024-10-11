@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+
+var algoritmo
+
+
 var maze_finished = false
 var wall_collide = false
 var result = []

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://cafaxt36dri1m"]
 
-[ext_resource type="Script" path="res://Scripts/PantallaPrincipal.gd" id="1_djefx"]
+[ext_resource type="Script" path="res://Scripts/Controller/PantallaPrincipal.gd" id="1_djefx"]
 [ext_resource type="Texture2D" uid="uid://qivwcq2f0glt" path="res://Resources/Maze-in-2d.jpg" id="2_h7wmf"]
 [ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="3_7rngm"]
 

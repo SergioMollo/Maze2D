@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://blumymkv541rv"]
 
-[ext_resource type="Script" path="res://Scripts/LaberintoNivel2Enemy.gd" id="1_6xpgj"]
+[ext_resource type="Script" path="res://Scripts/Controller/LaberintoNivel2Enemy.gd" id="1_6xpgj"]
 [ext_resource type="Texture2D" uid="uid://b8pg6y0j6v20l" path="res://Resources/Paredes_Laterales.png" id="2_nhgv3"]
 [ext_resource type="Texture2D" uid="uid://ccdvefapkn64h" path="res://Resources/MuroContorno64x64.png" id="3_2t73e"]
 [ext_resource type="Texture2D" uid="uid://bjkwetwd828kp" path="res://Resources/Cesped32x32.png" id="4_3xwwx"]

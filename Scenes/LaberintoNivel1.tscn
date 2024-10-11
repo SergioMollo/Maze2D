@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://r0bherb862i5" path="res://Scenes/Personaje.tscn" id="1_nq5u8"]
 [ext_resource type="Texture2D" uid="uid://b8pg6y0j6v20l" path="res://Resources/Paredes_Laterales.png" id="1_v6wd7"]
-[ext_resource type="Script" path="res://Scripts/LaberintoNivel1.gd" id="1_ykl6e"]
+[ext_resource type="Script" path="res://Scripts/Controller/LaberintoNivel1.gd" id="1_ykl6e"]
 [ext_resource type="Texture2D" uid="uid://bjkwetwd828kp" path="res://Resources/Cesped32x32.png" id="2_b3fg3"]
 [ext_resource type="Texture2D" uid="uid://ccdvefapkn64h" path="res://Resources/MuroContorno64x64.png" id="3_egy1y"]
 [ext_resource type="PackedScene" uid="uid://d1ghr5ojp13cd" path="res://Scenes/Moneda.tscn" id="4_d7niw"]

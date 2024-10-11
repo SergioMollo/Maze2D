@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://ctseifvcmjqrr"]
 
 [ext_resource type="Texture2D" uid="uid://jkkxm5qih5y3" path="res://Resources/Enemy32x32.png" id="1_cnp60"]
-[ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_si1us"]
-[ext_resource type="Script" path="res://Scripts/AIController2DEnemy.gd" id="2_du2xb"]
+[ext_resource type="Script" path="res://Scripts/Controller/Enemy.gd" id="1_si1us"]
+[ext_resource type="Script" path="res://Scripts/Controller/AIController2DEnemy.gd" id="2_du2xb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b62yh"]
 size = Vector2(30, 30)

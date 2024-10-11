@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d1ghr5ojp13cd"]
 
 [ext_resource type="Texture2D" uid="uid://reefyu4gqonu" path="res://Resources/MonedaMovimiento_32x32.png" id="2_4elu2"]
-[ext_resource type="Script" path="res://Scripts/Moneda2D.gd" id="2_nk3xk"]
+[ext_resource type="Script" path="res://Scripts/Controller/Moneda2D.gd" id="2_nk3xk"]
 
 [sub_resource type="Animation" id="Animation_ablef"]
 resource_name = "Animacion_Moneda"

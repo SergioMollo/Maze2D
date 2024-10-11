@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://ch1saj8l3dbte"]
 
-[ext_resource type="Script" path="res://Scripts/LaberintoNivel2.gd" id="1_1j26q"]
+[ext_resource type="Script" path="res://Scripts/Controller/LaberintoNivel2.gd" id="1_1j26q"]
 [ext_resource type="Texture2D" uid="uid://b8pg6y0j6v20l" path="res://Resources/Paredes_Laterales.png" id="1_4xfea"]
 [ext_resource type="Texture2D" uid="uid://ccdvefapkn64h" path="res://Resources/MuroContorno64x64.png" id="3_t443s"]
 [ext_resource type="PackedScene" uid="uid://r0bherb862i5" path="res://Scenes/Personaje.tscn" id="6_v1ngb"]
