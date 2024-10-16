@@ -1,8 +1,10 @@
 extends Node
 
-var id
-var inicio 
-var objetivo 
+class_name Path
+
+var id: int
+var inicio: Vector2
+var objetivo: Vector2
 var trayectorias = [[]]
 
 # Called when the node enters the scene tree for the first time.

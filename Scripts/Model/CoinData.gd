@@ -1,4 +1,8 @@
-extends Node
+extends Area2D
+
+class_name Coin
+
+signal collected
 
 
 # Called when the node enters the scene tree for the first time.

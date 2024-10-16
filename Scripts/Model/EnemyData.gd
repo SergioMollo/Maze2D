@@ -1,8 +1,10 @@
-extends Node
+extends "res://Scripts/Model/CharacterData.gd"
 
-var algoritmo
+class_name Enemy
 
+var algoritmo_busqueda: Algorithm
 
+signal eliminated
 
 
 

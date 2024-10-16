@@ -1,10 +1,14 @@
 extends Node
 
-var xSize
-var ySize
+class_name Maze
+
+var xSize: int
+var ySize:int
 var map = []
 var result = []
 var graph = {}
+
+var panel_informacion: InformationPanel
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

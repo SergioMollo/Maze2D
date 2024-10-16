@@ -1,9 +1,11 @@
 extends Node
 
-var puntuation 
-var time 
-var game 
-var result 
+class_name InformationPanel
+
+var puntuation: float
+var time: Timer
+var game: int
+var result: GameConstants.Resultado
 
 
 

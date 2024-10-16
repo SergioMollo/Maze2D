@@ -1,5 +1,11 @@
 extends Node
 
+class_name Game
+
+var numero: int
+var estado: GameConstants.EstadoJuego
+var timer: Timer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

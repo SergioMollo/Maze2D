@@ -1,14 +1,23 @@
-extends Node
+extends CharacterBody2D
+
+class_name Character
 
 
-var maze_finished = false
-var wall_collide = false
-var result = []
-var target = Vector2.ZERO
+
+var positionX: int
+var positionY: int
+
+var apariencia: Interface
+var camino: Path
 
 @export var speed = 320
-@export var velocity = 0
+#@export var velocity = 0
 
+
+
+var wall_collide = false
+var result = []
+#var target = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

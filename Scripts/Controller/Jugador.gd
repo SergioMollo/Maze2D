@@ -32,29 +32,29 @@ func _physics_process(delta):
 	if !maze_finished:
 		
 		
-		#Resuelve el laberinto en base al algoritmo de busqueda
-		for destino in result:
+		# #Resuelve el laberinto en base al algoritmo de busqueda
+		# for destino in result:
 			
 			
-			var fila = (destino / 10)*32 + 16
-			var columna = (destino % 10)*32 + 16
-			target = Vector2(columna, fila)
+		# 	var fila = (destino / 10)*32 + 16
+		# 	var columna = (destino % 10)*32 + 16
+		# 	target = Vector2(columna, fila)
 			
-			velocity = position.direction_to(target) * speed
-			# look_at(target)
-			print("Target", target)
-			print("Actual", position)
-			if position.distance_to(target) > 1:
+		# 	velocity = position.direction_to(target) * speed
+		# 	# look_at(target)
+		# 	print("Target", target)
+		# 	print("Actual", position)
+		# 	if position.distance_to(target) > 1:
 				
 				
-				# No se desplaza a la posicion exacta, por lo que no mueve correctamente
-				# y se queda bloqueado
-				move_and_slide()
-				if position.distance_to(target) < 1:
-					global_position = target
+		# 		# No se desplaza a la posicion exacta, por lo que no mueve correctamente
+		# 		# y se queda bloqueado
+		# 		move_and_slide()
+		# 		if position.distance_to(target) < 1:
+		# 			global_position = target
 					
 					
-			await get_tree().create_timer(1.0).timeout
+		# 	await get_tree().create_timer(1.0).timeout
 			
 		
 		
@@ -67,14 +67,14 @@ func _physics_process(delta):
 		#move_and_slide()
 		
 		########### Movimiento al destino
-		#print("Target", target)
-		#velocity = position.direction_to(target) * speed
-			## look_at(target)
-		#if position.distance_to(target) > 1:
-			#
-			#move_and_slide()
-			#if position.distance_to(target) < 1:
-				#global_position = target
+		print("Target", target)
+		velocity = position.direction_to(target) * speed
+			# look_at(target)
+		if position.distance_to(target) > 1:
+			
+			move_and_slide()
+			if position.distance_to(target) < 1:
+				global_position = target
 				
 			
 		########### Movimiento de la ia                         

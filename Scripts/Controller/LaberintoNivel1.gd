@@ -23,7 +23,7 @@ var graph = {}
 func _ready():
 	get_window().content_scale_size = Vector2i(512, 320)
 	#bfs()
-	createMap()
+	#createMap()
 	print("Res: --- ", result)
 	await get_tree().create_timer(5.0).timeout
 	new_game()

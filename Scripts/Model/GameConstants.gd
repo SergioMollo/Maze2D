@@ -14,6 +14,8 @@ enum ModoInteraccion { MODO_USUARIO, MODO_COMPUTADORA }
 
 enum ModoJuego { MODO_SOLITARIO, MODO_ENFRENTAMIENTO }
 
+enum Resultado { EN_JUEGO, VICTORIA, DERROTA }
+
 # enum Dificultad { FACIL, MEDIA, DIFICIL }
 
 

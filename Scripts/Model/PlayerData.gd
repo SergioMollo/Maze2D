@@ -1,19 +1,52 @@
-extends Node
+extends "res://Scripts/Model/CharacterData.gd"
 
-var maze_finished = false
-var wall_collide = false
-var result = []
-var target = Vector2.ZERO
+class_name Player
 
-@export var speed = 320
-@export var velocity = 0
+var algoritmo_busqueda: Algorithm
+
+#var maze_finished = false
+#var wall_collide = false
+#var result = []
+#var target = Vector2.ZERO
+
+#@export var speed = 320
+#@export var velocity = 0
 
 
-# Called when the node enters the scene tree for the first time.
+#@onready var navigation: NavigationAgent2D = $NavigationAgent2D
+#@onready var ai_controller: Node2D = $AIController2D
+#@onready var moneda: Area2D = $"../Moneda/Moneda2D"
+
+
 func _ready():
-	pass # Replace with function body.
+	position = Vector2.ZERO
+	global_position = Vector2.ZERO
+	set_physics_process(false)
+	call_deferred("sync_frames")
+	#await get_tree().physics_frame
+	#makepath()
+	
+func sync_frames():
+	await get_tree().physics_frame
+	set_physics_process(true)
+
+#### Crear path
+#func makepath():
+	#navigation.target_position = moneda.global_position
+
+#func _on_timer_timeout():
+	#makepath()
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func move(target: Vector2):
+	velocity = position.direction_to(target) * speed
+	# look_at(target)
+	if position.distance_to(target) > 1:			
+		move_and_slide()
+		if position.distance_to(target) < 1:
+			global_position = target

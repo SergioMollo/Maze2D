@@ -1,7 +1,9 @@
 extends Node
 
-var id
-var nombre
+class_name Interface
+
+var id: int
+var nombre: String
 
 
 

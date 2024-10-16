@@ -1,8 +1,10 @@
 extends Node
 
-var id
-var nombre
-var partidas
+class_name User
+
+var id: int
+var nombre: String
+var partidas = [Match]
 
 
 # Called when the node enters the scene tree for the first time.
