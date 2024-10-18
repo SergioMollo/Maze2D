@@ -7,8 +7,11 @@ var map = []
 var result = []
 var graph = {}
 
+var player_controller: PlayerController
+var player_data: Player
 
-@onready var personaje: Node2D = $Jugador
+@onready var personaje: CharacterBody2D = $Jugador
+@onready var player_sprite: Node2D = $Jugador/Sprite2D
 @onready var agente: Node2D = $Jugador/AIController2D
 @onready var moneda: Area2D = $Moneda/Moneda2D
 @onready var winLabel : Label  = $CanvasLayer/LabelWin
@@ -21,34 +24,43 @@ var graph = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Inicializar el modelo y controlador
+	player_data = Player.new()
+	player_controller = PlayerController.new(player_data)
+	print(player_controller.position)
+
 	get_window().content_scale_size = Vector2i(512, 320)
 	#bfs()
 	#createMap()
-	print("Res: --- ", result)
-	await get_tree().create_timer(5.0).timeout
+	winLabel.hide()
+	loseLabel.hide()
+	await get_tree().create_timer(0.0).timeout
 	new_game()
 
 func new_game():
-	personaje.maze_finished = false
+	player_controller.maze_finished = false
 	moneda.show()
 	winLabel.hide()
 	loseLabel.hide()
-	personaje.position = Vector2(48, 48)
-	personaje.target = personaje.position
-	timer.start(30)
+	player_sprite.position = Vector2(48,48)
+	print(player_controller.position)
+	player_controller.position = player_sprite.position
+	player_controller.target = player_controller.position
+	#player_controller.target = player_controller.position
+	#print(player_controller.target)
+	timer.start(60)
 
 	#timeLabel.text = str(timer.time_left)
 	moneda.connect("collected", mostrarResultado)
 
-# Called every frame. 'delta' is   he elapsed time since the previous frame.
+# Called every frame. 'delta' is he elapsed time since the previous frame.
 func _process(delta):
-	if personaje.maze_finished == false:
+	if player_controller.maze_finished == false:
 		timeLabel.text= str(int(timer.time_left))
-	pass
 	
 func mostrarResultado():
-	personaje.maze_finished = true
-	agente.reward += 10.0
+	player_controller.maze_finished = true
+	#agente.reward += 10.0
 	print("Ha llegado al final del laberinto")
 	winLabel.show()
 	moneda.hide()
@@ -57,10 +69,10 @@ func mostrarResultado():
 	new_game()
 
 func _on_timer_timeout():
-	personaje.maze_finished = true
+	player_controller.maze_finished = true
 	print("Se ha excedido el tiempo")
 	loseLabel.show()
-	agente.reward -= 1.0
+	#agente.reward -= 1.0
 	await get_tree().create_timer(5.0).timeout
 	agente.reset()
 	new_game()

@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d1ghr5ojp13cd" path="res://Scenes/Moneda.tscn" id="6_l6008"]
 [ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="7_f3er3"]
 [ext_resource type="PackedScene" uid="uid://ctseifvcmjqrr" path="res://Scenes/Enemy.tscn" id="7_w58uj"]
-[ext_resource type="Script" path="res://Scripts/Controller/LaberintoNivel3Enemy.gd" id="9_0pqf1"]
+[ext_resource type="Script" path="res://Scripts/LaberintoNivel3Enemy.gd" id="9_0pqf1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ibi4t"]
 texture = ExtResource("2_b2lh6")

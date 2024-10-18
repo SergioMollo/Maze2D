@@ -17,17 +17,26 @@ var algoritmo_busqueda: Algorithm
 #@onready var ai_controller: Node2D = $AIController2D
 #@onready var moneda: Area2D = $"../Moneda/Moneda2D"
 
+func _init():
+	position = Vector2.ZERO
+	global_position = Vector2.ZERO
+	print("creando")
+	set_physics_process(false)
+	call_deferred("sync_frames")
+	#await get_tree().physics_frame
+	#makepath()
 
 func _ready():
 	position = Vector2.ZERO
 	global_position = Vector2.ZERO
+	print("creando")
 	set_physics_process(false)
 	call_deferred("sync_frames")
 	#await get_tree().physics_frame
 	#makepath()
 	
 func sync_frames():
-	await get_tree().physics_frame
+	#await get_tree().physics_frame
 	set_physics_process(true)
 
 #### Crear path
@@ -44,9 +53,15 @@ func _process(delta):
 	pass
 
 func move(target: Vector2):
+
 	velocity = position.direction_to(target) * speed
 	# look_at(target)
-	if position.distance_to(target) > 1:			
+	
+	if position.distance_to(target) > 1:	
+		print("muevo")		
 		move_and_slide()
 		if position.distance_to(target) < 1:
 			global_position = target
+
+	print(position)
+	print(global_position)
