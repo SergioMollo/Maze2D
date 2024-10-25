@@ -3,21 +3,23 @@ extends CharacterBody2D
 class_name Character
 
 
-
+var actual_position
 var positionX: int
 var positionY: int
 
 var apariencia: Interface
 var camino: Path
+var moving = false
+var direction = Vector2.ZERO
 
-@export var speed = 320
+@export var speed = 80
 #@export var velocity = 0
 
 
 
 var wall_collide = false
 var result = []
-#var target = Vector2.ZERO
+var target = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

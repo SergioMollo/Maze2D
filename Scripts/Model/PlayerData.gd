@@ -7,29 +7,15 @@ var algoritmo_busqueda: Algorithm
 #var maze_finished = false
 #var wall_collide = false
 #var result = []
-#var target = Vector2.ZERO
-
-#@export var speed = 320
-#@export var velocity = 0
-
 
 #@onready var navigation: NavigationAgent2D = $NavigationAgent2D
 #@onready var ai_controller: Node2D = $AIController2D
 #@onready var moneda: Area2D = $"../Moneda/Moneda2D"
 
-func _init():
-	position = Vector2.ZERO
-	global_position = Vector2.ZERO
-	print("creando")
-	set_physics_process(false)
-	call_deferred("sync_frames")
-	#await get_tree().physics_frame
-	#makepath()
-
 func _ready():
 	position = Vector2.ZERO
 	global_position = Vector2.ZERO
-	print("creando")
+	print("ready")
 	set_physics_process(false)
 	call_deferred("sync_frames")
 	#await get_tree().physics_frame
@@ -47,21 +33,22 @@ func sync_frames():
 	#makepath()
 
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-func move(target: Vector2):
 
-	velocity = position.direction_to(target) * speed
-	# look_at(target)
-	
-	if position.distance_to(target) > 1:	
-		print("muevo")		
-		move_and_slide()
-		if position.distance_to(target) < 1:
-			global_position = target
-
-	print(position)
-	print(global_position)
+# func move():
+# 	# Comprobacion de que ha habido colision mantener posicion actual
+# 	if get_slide_collision_count() > 0:
+# 		print("Que")
+# 		position = actual_position
+# 		moving = false
+# 		velocity = Vector2()
+				
+# 	# Si estamos muy cerca de la posición objetivo, corregimos la posición final
+# 	elif position.distance_to(target) < 1:
+# 		print("Pasa")
+# 		position = target
+# 		velocity = Vector2()  # Detenemos el movimiento
+# 		moving = false
