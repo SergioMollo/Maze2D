@@ -3,8 +3,8 @@ extends AIController2D
 var move = Vector2.ZERO
 
 @onready var enemy: CharacterBody2D = $".."
-@onready var agent: CharacterBody2D = $"../../Personaje"
-@onready var coin: Node2D = $"../../../Moneda"
+@onready var agent: CharacterBody2D = $"../../Jugador"
+@onready var coin: Node2D = $"../../Moneda"
 
 func get_obs() -> Dictionary:
 	var obs := [

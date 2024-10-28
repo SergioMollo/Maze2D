@@ -4,10 +4,6 @@ class_name Enemy
 
 var algoritmo_busqueda: Algorithm
 
-signal eliminated
-
-
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
