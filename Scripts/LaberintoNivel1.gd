@@ -49,7 +49,7 @@ func new_game():
 	timer.start(60)
 
 	#timeLabel.text = str(timer.time_left)
-	moneda.connect("collected", mostrarResultado)
+	moneda.coin.connect("collected", mostrarResultado)
 
 # Called every frame. 'delta' is he elapsed time since the previous frame.
 func _process(delta):

@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d1ghr5ojp13cd"]
 
+[ext_resource type="Script" path="res://Scripts/Controller/CoinController.gd" id="1_7jm1k"]
 [ext_resource type="Texture2D" uid="uid://reefyu4gqonu" path="res://Resources/MonedaMovimiento_32x32.png" id="2_4elu2"]
-[ext_resource type="Script" path="res://Scripts/Moneda2D.gd" id="2_nk3xk"]
 
 [sub_resource type="Animation" id="Animation_ablef"]
 resource_name = "Animacion_Moneda"
@@ -48,7 +48,7 @@ radius = 14.0
 
 [node name="Moneda2D" type="Area2D" parent="."]
 position = Vector2(4, 0)
-script = ExtResource("2_nk3xk")
+script = ExtResource("1_7jm1k")
 
 [node name="SpritesMoneda" type="Sprite2D" parent="Moneda2D"]
 texture_filter = 1
