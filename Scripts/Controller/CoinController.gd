@@ -7,7 +7,6 @@ var coin
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	coin = Coin.new()  # Ruta al nodo de datos de la moneda
-	print(coin)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

@@ -1,13 +1,15 @@
-[gd_scene load_steps=24 format=3 uid="uid://uxq57wr151ed"]
+[gd_scene load_steps=26 format=3 uid="uid://uxq57wr151ed"]
 
+[ext_resource type="Script" path="res://Scripts/View/Nivel1.gd" id="1_guovd"]
 [ext_resource type="PackedScene" uid="uid://r0bherb862i5" path="res://Scenes/Personaje.tscn" id="1_nq5u8"]
 [ext_resource type="Texture2D" uid="uid://b8pg6y0j6v20l" path="res://Resources/Paredes_Laterales.png" id="1_v6wd7"]
-[ext_resource type="Script" path="res://Scripts/LaberintoNivel1.gd" id="1_ykl6e"]
 [ext_resource type="Texture2D" uid="uid://bjkwetwd828kp" path="res://Resources/Cesped32x32.png" id="2_b3fg3"]
+[ext_resource type="Script" path="res://Scripts/Controller/MazeController.gd" id="2_iablh"]
 [ext_resource type="Texture2D" uid="uid://ccdvefapkn64h" path="res://Resources/MuroContorno64x64.png" id="3_egy1y"]
 [ext_resource type="PackedScene" uid="uid://d1ghr5ojp13cd" path="res://Scenes/Moneda.tscn" id="4_d7niw"]
 [ext_resource type="Texture2D" uid="uid://cvgek4hdmv57d" path="res://Resources/WallMazeInterior_Prueba64x64.png" id="5_xc075"]
 [ext_resource type="Texture2D" uid="uid://br386dljoaedf" path="res://Resources/WallMazeInteriora64x64.png" id="6_77a27"]
+[ext_resource type="PackedScene" uid="uid://ctseifvcmjqrr" path="res://Scenes/Enemy.tscn" id="10_hmomr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jssts"]
 bg_color = Color(0.243137, 0.396078, 0.113725, 1)
@@ -2529,7 +2531,10 @@ sources/3 = SubResource("TileSetAtlasSource_fsufk")
 sources/5 = SubResource("TileSetAtlasSource_yrhn4")
 
 [node name="Nivel1" type="Node2D"]
-script = ExtResource("1_ykl6e")
+script = ExtResource("1_guovd")
+
+[node name="Maze" type="Node2D" parent="."]
+script = ExtResource("2_iablh")
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -2608,5 +2613,7 @@ position = Vector2(80, 112)
 [node name="Jugador" parent="." instance=ExtResource("1_nq5u8")]
 position = Vector2(48, 48)
 scale = Vector2(1, 1)
+
+[node name="Enemy" parent="." instance=ExtResource("10_hmomr")]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

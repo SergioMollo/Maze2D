@@ -4,10 +4,10 @@ class_name Match
 
 var id: int
 var nombre: String
-var nivel: GameConstants.Nivel
-var modo_juego: GameConstants.ModoJuego
-var modo_interaccion: GameConstants.ModoInteraccion
-var estado: GameConstants.EstadoPartida
+var nivel: VideogameConstants.Nivel
+var modo_juego: VideogameConstants.ModoJuego
+var modo_interaccion: VideogameConstants.ModoInteraccion
+var estado: VideogameConstants.EstadoPartida
 var puntuacion: float
 
 var maze: Maze

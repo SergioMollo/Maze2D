@@ -5,7 +5,7 @@ class_name InformationPanel
 var puntuation: float
 var time: Timer
 var game: int
-var result: GameConstants.Resultado
+var result: VideogameConstants.Resultado
 
 
 

@@ -8,6 +8,14 @@ var map = []
 var result = []
 var graph = {}
 
+var player: CharacterBody2D
+var enemy: CharacterBody2D
+var coin: Area2D
+var tilemap: Node2D
+
+var timer : Timer
+
+
 # var panel_informacion: InformationPanel
 
 

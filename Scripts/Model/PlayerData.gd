@@ -15,7 +15,6 @@ var algoritmo_busqueda: Algorithm
 func _ready():
 	position = Vector2.ZERO
 	global_position = Vector2.ZERO
-	print("ready")
 	set_physics_process(false)
 	call_deferred("sync_frames")
 	#await get_tree().physics_frame

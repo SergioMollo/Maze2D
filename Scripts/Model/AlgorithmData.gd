@@ -3,7 +3,7 @@ extends Node
 class_name Algorithm
 
 var nombre: String
-var algoritmo: GameConstants.Algoritmo
+var algoritmo: VideogameConstants.Algoritmo
 var descripcion: String
 
 

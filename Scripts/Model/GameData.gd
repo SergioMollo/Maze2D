@@ -3,7 +3,7 @@ extends Node
 class_name Game
 
 var numero: int
-var estado: GameConstants.EstadoJuego
+var estado: VideogameConstants.EstadoJuego
 var timer: Timer
 
 

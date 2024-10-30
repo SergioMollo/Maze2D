@@ -1,6 +1,6 @@
 extends Node
 
-class_name GameConstants
+class_name VideogameConstants
 
 enum EstadoJuego{ EN_CURSO, EN_PAUSA, FINALIZADO }
 

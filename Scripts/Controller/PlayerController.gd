@@ -6,12 +6,16 @@ var player
 var maze_finished = false
 # var target = Vector2.ZERO
 
+var modo_juego : VideogameConstants.ModoJuego
+var enemy
+var instance : PackedScene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = Player.new()
 	player.position = position
 	player.actual_position = position
+
 	# print(position)
 	# add_child(player)
 	# player = get_node("/root/Nivel1/Jugador/Player")

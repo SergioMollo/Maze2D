@@ -9,7 +9,6 @@ var graph = {}
 
 
 @onready var jugador: CharacterBody2D = $Jugador
-#@onready var player_sprite: Node2D = $Jugador/Sprite2D
 @onready var agente: Node2D = $Jugador/AIController2D
 @onready var moneda: Area2D = $Moneda/Moneda2D
 @onready var winLabel : Label  = $CanvasLayer/LabelWin
@@ -18,14 +17,10 @@ var graph = {}
 @onready var timeLabel : Label  = $CanvasLayer/LabelTime
 @onready var secondsLabel : Label  = $CanvasLayer/LabelSec
 @onready var timer : Timer  = $Timer
-@onready var tilemap = $TileMap
+@onready var tilemap: Node2D = $TileMap
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Inicializar el modelo y controlador
-	# player_data = Player.new()
-	# player_controller = PlayerController.new(personaje)
-
 	get_window().content_scale_size = Vector2i(512, 320)
 	#bfs()
 	#createMap()
@@ -40,14 +35,7 @@ func new_game():
 	winLabel.hide()
 	loseLabel.hide()
 	jugador.position = Vector2(48,48)
-	# print(player_controller.position)
-	# player_controller.position = player_sprite.position
-	# player_controller.target = player_controller.position
-	# print(player_controller.position)
-	#player_controller.target = player_controller.position
-	#print(player_controller.target)
 	timer.start(60)
-
 	#timeLabel.text = str(timer.time_left)
 	moneda.coin.connect("collected", mostrarResultado)
 
@@ -74,6 +62,10 @@ func _on_timer_timeout():
 	await get_tree().create_timer(5.0).timeout
 	agente.reset()
 	new_game()
+
+
+
+# Para los algoritmos
 
 func createMap():
 	#map = {
