@@ -6,12 +6,11 @@ var maze
 
 var modo_juego : VideogameConstants.ModoJuego
 
-var enemy
-#var instan : EnemyController
+@export var enemy_scene: PackedScene
 
-@onready var jugador: CharacterBody2D = $"../Jugador"
+@onready var player: CharacterBody2D = $"../Jugador"
 @onready var agente: Node2D = $"../Jugador/AIController2D"
-@onready var moneda: Area2D = $"../Moneda/Moneda2D"
+@onready var coin: Area2D = $"../Moneda/Moneda2D"
 @onready var winLabel : Label  = $"../CanvasLayer/LabelWin"
 @onready var loseLabel : Label  = $"../CanvasLayer/LabelTimeExceed"
 @onready var infoLabel : Label  = $"../CanvasLayer/LabelInfo"
@@ -27,60 +26,24 @@ func setup(level_data : Dictionary):
 	maze.map = level_data.map
 	maze.result = level_data.result
 	maze.graph = level_data.graph
-
-# func _ready():
-# 	maze.jugador = $Jugador
-# 	maze.moneda = $Moneda/Moneda2D
-# 	maze.timer = $Timer
-# 	maze.tilemap = $TileMap
-# 	get_window().content_scale_size = Vector2i(512, 320)
-# 	#bfs()
-# 	#createMap()
-# 	winLabel.hide()
-# 	loseLabel.hide()
-# 	await get_tree().create_timer(0.0).timeout
-# 	new_game() 
-
-# func new_game():
-# 	maze.jugador.maze_finished = false
-# 	maze.moneda.show()
-# 	winLabel.hide()
-# 	loseLabel.hide()
-# 	maze.jugador.position = Vector2(48,48)
-# 	maze.timer.start(60)
-# 	#timeLabel.text = str(timer.time_left)
-# 	maze.moneda.coin.connect("collected", mostrarResultado)
-
-# # Called every frame. 'delta' is he elapsed time since the previous frame.
-# func _process(delta):
-# 	if maze.jugador.maze_finished == false:
-# 		timeLabel.text= str(int(maze.timer.time_left))
-	
-# func mostrarResultado():
-# 	maze.jugador.maze_finished = true
-# 	#agente.reward += 10.0
-# 	print("Ha llegado al final del laberinto")
-# 	winLabel.show()
-# 	maze.moneda.hide()
-# 	await get_tree().create_timer(5.0).timeout
-# 	agente.reset()
-# 	new_game()
-
-# func _on_timer_timeout():
-# 	maze.jugador.maze_finished = true
-# 	print("Se ha excedido el tiempo")
-# 	loseLabel.show()
-# 	#agente.reward -= 1.0
-# 	await get_tree().create_timer(5.0).timeout
-# 	agente.reset()
-# 	new_game()
+	maze.scale = level_data.scale
+	maze.initial_player_position = level_data.initial_player_position
+	maze.initial_enemy_position = level_data.initial_enemy_position
+	maze.initial_coin_position = level_data.initial_coin_position
+	maze.player = player
+	maze.moneda = coin
+	maze.timer = timer
+	maze.tilemap = tilemap
+	maze.moneda.coin.connect("collected", mostrarResultado)
+	get_window().content_scale_size = maze.scale
 
 func _ready():
+	#maze = Maze.new()
 
+	
 	# Se asigna directamente hasta que se implelmente el paso de datos de configuracion inicial
 	modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
 
-	get_window().content_scale_size = Vector2i(512, 320)
 	#bfs()
 	#createMap()
 	winLabel.hide()
@@ -89,45 +52,49 @@ func _ready():
 	new_game()
 
 func new_game():
-	jugador.maze_finished = false
-	moneda.show()
+	maze.player.maze_finished = false
+	maze.moneda.show()
 	winLabel.hide()
 	loseLabel.hide()
-	jugador.position = Vector2(48,48)
+	maze.player.position = maze.initial_player_position
+	maze.moneda.coin.position = maze.initial_coin_position
 	
 	modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
 	if modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-		var enemy_scene = preload("res://Scenes/Moneda.tscn")
-		enemy = enemy_scene.instantiate()
-		#enemy.connect("eliminated", mostrarEliminado)
-		add_sibling(enemy)
-		#enemy.maze_finished = false
-		enemy.position = Vector2(240,48)
+		#var enemy_scene = preload("res://Scenes/Enemy.tscn")
+		maze.enemy = enemy_scene.instantiate()
+		maze.enemy.position = maze.initial_enemy_position
+		#maze.enemy.global_position = Vector2(240,48)
+		maze.enemy.connect("eliminated", mostrarEliminado)
+		maze.enemy.maze_finished = false
+		get_parent().add_child(maze.enemy)
 		
-	timer.start(60)
-	#timeLabel.text = str(timer.time_left)
-	moneda.coin.connect("collected", mostrarResultado)
+		
+		
+	maze.timer.start(60)
+	timeLabel.text = str(timer.time_left)
 
 # Called every frame. 'delta' is he elapsed time since the previous frame.
 func _process(delta):
-	if jugador.maze_finished == false:
-		timeLabel.text= str(int(timer.time_left))
+	if maze.player.maze_finished == false:
+		timeLabel.text= str(int(maze.timer.time_left))
 	
 func mostrarResultado():
-	jugador.maze_finished = true
+	maze.player.maze_finished = true
 	#agente.reward += 10.0
 	print("Ha llegado al final del laberinto")
 	winLabel.show()
-	moneda.hide()
+	maze.moneda.hide()
 	await get_tree().create_timer(5.0).timeout
 	agente.reset()
 	new_game()
 
 func mostrarEliminado():
-	jugador.maze_finished = true
-	enemy.maze_finished = true
+	maze.player.maze_finished = true
+	maze.enemy.maze_finished = true
 	print("El enemigo le ha eliminado")
 	loseLabel.show()
+	maze.enemy.queue_free() 
 	agente.reward -= 5.0
 	# enemigoAgente.reward += 10.0
 	await get_tree().create_timer(5.0).timeout
@@ -136,7 +103,7 @@ func mostrarEliminado():
 	new_game()
 
 func _on_timer_timeout():
-	jugador.maze_finished = true
+	maze.player.maze_finished = true
 	print("Se ha excedido el tiempo")
 	loseLabel.show()
 	#agente.reward -= 1.0

@@ -8,7 +8,7 @@
 size = Vector2(30, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2gg3d"]
-size = Vector2(30, 30)
+size = Vector2(31, 31)
 
 [sub_resource type="Animation" id="Animation_e53hy"]
 resource_name = "EnemyAnimation"

@@ -10,8 +10,13 @@ var graph = {}
 
 var player: CharacterBody2D
 var enemy: CharacterBody2D
-var coin: Area2D
+var moneda: Area2D
 var tilemap: Node2D
+var scale: Vector2i
+
+var initial_player_position: Vector2
+var initial_enemy_position: Vector2
+var initial_coin_position: Vector2
 
 var timer : Timer
 

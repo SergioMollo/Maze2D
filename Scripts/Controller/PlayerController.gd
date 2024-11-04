@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name PlayerController
 
 var player
-var maze_finished = false
+var maze_finished: bool = false
 # var target = Vector2.ZERO
 
 var modo_juego : VideogameConstants.ModoJuego

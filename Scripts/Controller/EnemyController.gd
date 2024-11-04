@@ -16,7 +16,7 @@ func _ready():
 	enemy = Enemy.new()
 	enemy.position = position
 	enemy.actual_position = position
-	player_controller = get_node("/root/Nivel1/Jugador") 
+	player_controller = get_parent().get_node("Jugador")
 	
 func _process(delta):
 	await get_tree().physics_frame
