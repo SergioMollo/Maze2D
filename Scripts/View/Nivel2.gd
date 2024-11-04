@@ -5,8 +5,8 @@ class_name Nivel2
 @onready var maze_controller: Node2D = $Maze
 
 var level_data = {
-	"xSize" : 25,
-	"ySize" : 20,
+	"xSize" : 800,
+	"ySize" : 640,
 	"map" : [],
 	"result" : [],
 	"graph" : {},

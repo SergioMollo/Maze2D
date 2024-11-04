@@ -106,7 +106,6 @@ func bfsMaze(start_node):
 	while queue:
 		# Sacar un nodo de la cola
 		var current_node = queue.pop_front()
-		#process_node(current_node)
 		
 		# Iterar sobre los nodos adyacentes al nodo actual
 		for neighbor in get_neighbors(current_node):
@@ -127,9 +126,6 @@ func get_neighbors(node):
 	# Por ejemplo, si tienes un nodo con una lista de nodos adyacentes:
 	return graph[node]
 
-func process_node(node, visited, queue):
-	# Aquí implementa la lógica para procesar cada nodo mientras se realiza la búsqueda en anchura
-	pass
 
 
 
