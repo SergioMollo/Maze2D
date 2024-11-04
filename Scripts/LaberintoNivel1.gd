@@ -8,7 +8,7 @@ var result = []
 var graph = {}
 
 
-@onready var personaje: Node2D = $Jugador
+@onready var jugador: CharacterBody2D = $Jugador
 @onready var agente: Node2D = $Jugador/AIController2D
 @onready var moneda: Area2D = $Moneda/Moneda2D
 @onready var winLabel : Label  = $CanvasLayer/LabelWin
@@ -17,38 +17,36 @@ var graph = {}
 @onready var timeLabel : Label  = $CanvasLayer/LabelTime
 @onready var secondsLabel : Label  = $CanvasLayer/LabelSec
 @onready var timer : Timer  = $Timer
-@onready var tilemap = $TileMap
+@onready var tilemap: Node2D = $TileMap
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_window().content_scale_size = Vector2i(512, 320)
 	#bfs()
-	createMap()
-	print("Res: --- ", result)
-	await get_tree().create_timer(5.0).timeout
+	#createMap()
+	winLabel.hide()
+	loseLabel.hide()
+	await get_tree().create_timer(0.0).timeout
 	new_game()
 
 func new_game():
-	personaje.maze_finished = false
+	jugador.maze_finished = false
 	moneda.show()
 	winLabel.hide()
 	loseLabel.hide()
-	personaje.position = Vector2(48, 48)
-	personaje.target = personaje.position
-	timer.start(30)
-
+	jugador.position = Vector2(48,48)
+	timer.start(60)
 	#timeLabel.text = str(timer.time_left)
-	moneda.connect("collected", mostrarResultado)
+	moneda.coin.connect("collected", mostrarResultado)
 
-# Called every frame. 'delta' is   he elapsed time since the previous frame.
+# Called every frame. 'delta' is he elapsed time since the previous frame.
 func _process(delta):
-	if personaje.maze_finished == false:
+	if jugador.maze_finished == false:
 		timeLabel.text= str(int(timer.time_left))
-	pass
 	
 func mostrarResultado():
-	personaje.maze_finished = true
-	agente.reward += 10.0
+	jugador.maze_finished = true
+	#agente.reward += 10.0
 	print("Ha llegado al final del laberinto")
 	winLabel.show()
 	moneda.hide()
@@ -57,13 +55,17 @@ func mostrarResultado():
 	new_game()
 
 func _on_timer_timeout():
-	personaje.maze_finished = true
+	jugador.maze_finished = true
 	print("Se ha excedido el tiempo")
 	loseLabel.show()
-	agente.reward -= 1.0
+	#agente.reward -= 1.0
 	await get_tree().create_timer(5.0).timeout
 	agente.reset()
 	new_game()
+
+
+
+# Para los algoritmos
 
 func createMap():
 	#map = {
@@ -139,7 +141,7 @@ func dfsMaze(start_node, end_node):
 	var visited = {}
 	recursiveDFS(start_node, end_node, visited)
 	print("Resultado: " , result)
-	personaje.result = result
+	jugador.result = result
 			
 
 

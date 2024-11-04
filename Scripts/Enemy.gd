@@ -19,21 +19,6 @@ func _physics_process(delta):
 		velocity.x = ai_enemy.move.x * speed
 		velocity.y = ai_enemy.move.y * speed
 		move_and_slide()
-		
-		
-	# Comprobar si el personaje está fuera de los límites del mapa
-	#var posicion = global_position
-	#if posicion.x < limite_izquierdo:
-		#posicion.x = limite_izquierdo
-
-	# Actualizar la posición del personaje
-	#global_position = posicion
-
-
-
-
-
-
 
 func _on_node_2d_body_entered(body):
 	if body.name == "Personaje":

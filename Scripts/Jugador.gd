@@ -1,15 +1,21 @@
 extends CharacterBody2D
 
+
+var algoritmo
+
+var moving = false
 var maze_finished = false
 var wall_collide = false
 var result = []
 
-@export var speed = 320
+
+@export var speed = 80
 @onready var navigation: NavigationAgent2D = $NavigationAgent2D
 @onready var ai_controller: Node2D = $AIController2D
 @onready var moneda: Area2D = $"../Moneda/Moneda2D"
 
 var target = Vector2.ZERO
+var actual_position = position
 
 func _ready():
 	position = Vector2.ZERO
@@ -26,31 +32,29 @@ func sync_frames():
 func _physics_process(delta):
 	await get_tree().physics_frame
 	if !maze_finished:
-		
-		
-		#Resuelve el laberinto en base al algoritmo de busqueda
-		for destino in result:
+		# #Resuelve el laberinto en base al algoritmo de busqueda
+		# for destino in result:
 			
 			
-			var fila = (destino / 10)*32 + 16
-			var columna = (destino % 10)*32 + 16
-			target = Vector2(columna, fila)
+		# 	var fila = (destino / 10)*32 + 16
+		# 	var columna = (destino % 10)*32 + 16
+		# 	target = Vector2(columna, fila)
 			
-			velocity = position.direction_to(target) * speed
-			# look_at(target)
-			print("Target", target)
-			print("Actual", position)
-			if position.distance_to(target) > 1:
+		# 	velocity = position.direction_to(target) * speed
+		# 	# look_at(target)
+		# 	print("Target", target)
+		# 	print("Actual", position)
+		# 	if position.distance_to(target) > 1:
 				
 				
-				# No se desplaza a la posicion exacta, por lo que no mueve correctamente
-				# y se queda bloqueado
-				move_and_slide()
-				if position.distance_to(target) < 1:
-					global_position = target
+		# 		# No se desplaza a la posicion exacta, por lo que no mueve correctamente
+		# 		# y se queda bloqueado
+		# 		move_and_slide()
+		# 		if position.distance_to(target) < 1:
+		# 			global_position = target
 					
 					
-			await get_tree().create_timer(1.0).timeout
+		# 	await get_tree().create_timer(1.0).timeout
 			
 		
 		
@@ -63,14 +67,35 @@ func _physics_process(delta):
 		#move_and_slide()
 		
 		########### Movimiento al destino
-		#print("Target", target)
 		#velocity = position.direction_to(target) * speed
 			## look_at(target)
 		#if position.distance_to(target) > 1:
 			#
+			##move_and_slide()
 			#move_and_slide()
-			#if position.distance_to(target) < 1:
-				#global_position = target
+			#if get_slide_collision_count() == 0:
+				#print(position)
+				#if position.distance_to(target) < 1:
+					#global_position = target
+					#print(position)
+					#print(global_position)
+					
+		if position != target and moving:
+			var direction = (target - position).normalized()
+			velocity = direction * speed
+			move_and_slide()
+			
+			# Comprobacion de que ha habido colision mantener posicion actual
+			if get_slide_collision_count() > 0:
+				position = actual_position
+				moving = false
+				velocity = Vector2()
+				
+			# Si estamos muy cerca de la posición objetivo, corregimos la posición final
+			elif position.distance_to(target) < 1:
+				position = target
+				velocity = Vector2()  # Detenemos el movimiento
+				moving = false
 				
 			
 		########### Movimiento de la ia                         
@@ -92,26 +117,41 @@ func _physics_process(delta):
 func makepath():
 	navigation.target_position = moneda.global_position
 
-#### Registrar movimiento manual
+## Registrar movimiento manual en base a las cuatro direcciones (arriba, abajo, izquierda, derecha)
 func _input(event):
+	if !moving:
+		if event.is_action_pressed("ui_right"):
+			actual_position = position
+			target.x = position.x + 32
+			target.y = position.y
+			moving = true
+			
+		if event.is_action_pressed("ui_left"):
+			actual_position = position
+			target.x = position.x - 32
+			target.y = position.y
+			moving = true
+			
+		if event.is_action_pressed("ui_up"):
+			actual_position = position
+			target.x = position.x 
+			target.y = position.y - 32
+			moving = true
+			
+		if event.is_action_pressed("ui_down"):
+			actual_position = position
+			target.x = position.x
+			target.y = position.y + 32
+			moving = true
 
-	if event.is_action_pressed("ui_right"):
-		target.x = position.x + 32
-		target.y = position.y
-		
-	if event.is_action_pressed("ui_left"):
-		target.x = position.x - 32
-		target.y = position.y
-		
-	if event.is_action_pressed("ui_up"):
-		target.x = position.x 
-		target.y = position.y - 32
-		
-	if event.is_action_pressed("ui_down"):
-		target.x = position.x
-		target.y = position.y + 32
-
-
+func move():
+	velocity = position.direction_to(target) * speed
+	# look_at(target)
+	if position.distance_to(target) > 1:			
+		#move_and_slide()
+		move_and_slide()
+		if position.distance_to(target) < 1:
+			global_position = target
 
 
 ############################### Algoritmos de entrenamiento ###############################

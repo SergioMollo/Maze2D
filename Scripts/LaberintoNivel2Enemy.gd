@@ -2,10 +2,10 @@ extends Node2D
 
 var final = false
 
-@onready var personaje: Node2D = $Personaje
+@onready var jugador: Node2D = $Jugador
 @onready var enemigo: Node2D = $Enemy
 #@onready var enemigo: Node2D = $Enemy/EnemyAgent
-@onready var agente: Node2D = $Personaje/AIController2D
+@onready var agente: Node2D = $Jugador/AIController2D
 @onready var enemigoAgente: Node2D = $Enemy/AIController2DEnemy
 #@onready var enemigo2D: Area2D = $Enemy/Enemy2D
 @onready var moneda: Area2D = $Moneda/Moneda2D
@@ -22,17 +22,14 @@ func _ready():
 	new_game()
 	
 func new_game():
-	personaje.maze_finished = false
+	jugador.maze_finished = false
 	enemigo.maze_finished = false
 	moneda.show()
 	winLabel.hide()
 	loseLabel.hide()
-	personaje.position = Vector2(80, 208)
-	#enemy.position = Vector2(80, 144)
-	enemigo.position = Vector2(80, 144)
-	#print(enemy.position)
-	print(enemigo.position)
-	#enemy.position = Vector2(688, 336)
+	jugador.position = Vector2(80, 208)
+	# enemigo.position = Vector2(80, 144)
+	enemigo.position = Vector2(688, 336)
 	timer.start(120)
 	
 	enemigo.connect("eliminated", mostrarEliminado)
@@ -40,13 +37,12 @@ func new_game():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(enemigo.position)
-	if personaje.maze_finished == false:
+	if jugador.maze_finished == false:
 		timeLabel.text= str(int(timer.time_left))
 	pass
 	
 func mostrarResultado():
-	personaje.maze_finished = true
+	jugador.maze_finished = true
 	enemigo.maze_finished = true
 	agente.reward += 10.0
 	enemigoAgente.reward -= 10.0
@@ -59,7 +55,7 @@ func mostrarResultado():
 	new_game()
 	
 func mostrarEliminado():
-	personaje.maze_finished = true
+	jugador.maze_finished = true
 	enemigo.maze_finished = true
 	print("El enemigo le ha eliminado")
 	loseLabel.show()
@@ -71,7 +67,7 @@ func mostrarEliminado():
 	new_game()
 	
 func _on_timer_timeout():
-	personaje.maze_finished = true
+	jugador.maze_finished = true
 	enemigo.maze_finished = true
 	print("Se ha excedido el tiempo")
 	loseLabel.show()
