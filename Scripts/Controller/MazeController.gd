@@ -37,13 +37,20 @@ func _ready():
 	new_game()
 
 func new_game():
-	player.createMap(maze.xSize, maze.ySize)
+	
 	maze.player.maze_finished = false
 	maze.moneda.show()
 	winLabel.hide()
 	loseLabel.hide()
 	maze.player.position = maze.initial_player_position
-	
+
+	player.createMap(maze.xSize, maze.ySize)
+	# var result_bfs = player.bfsMaze(maze.player.position, maze.initial_coin_position)
+	# var result_dfs = player.dfsMaze(maze.player.position, maze.initial_coin_position)
+	var result_dijkstra = player.dijkstraMaze(maze.player.position, maze.initial_coin_position)
+	print("DIJKSTRA:", result_dijkstra)
+	print()	
+
 	modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
 	if modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 		maze.enemy = enemy_scene.instantiate()

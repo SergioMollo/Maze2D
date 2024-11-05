@@ -299,5 +299,5 @@ func is_wall(position: Vector2) -> bool:
 		var layerPys = tileset.get_physics_layer_collision_layer(layer_index)
 		print("Phys: ", layerPys)
 		if  layerPys != 0:
-			print("Cocacola")  # El tile tiene colisión
+			return true
 	return false  # El tile no tiene colisión
