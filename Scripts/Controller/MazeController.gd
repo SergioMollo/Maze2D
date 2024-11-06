@@ -42,24 +42,21 @@ func new_game():
 	maze.moneda.show()
 	winLabel.hide()
 	loseLabel.hide()
-	maze.player.position = maze.initial_player_position
+	maze.player.position = maze.initial_player_position	
 
-	player.createMap(maze.xSize, maze.ySize)
-	# var result_bfs = player.bfsMaze(maze.player.position, maze.initial_coin_position)
-	# var result_dfs = player.dfsMaze(maze.player.position, maze.initial_coin_position)
-	var result_dijkstra = player.dijkstraMaze(maze.player.position, maze.initial_coin_position)
-	print("DIJKSTRA:", result_dijkstra)
-	print()	
+	maze.player.createMap(maze.xSize, maze.ySize)
 
+	# Provisional hasta configurar datos y pasarlo
 	modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
 	if modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-		maze.enemy = enemy_scene.instantiate()
-		maze.enemy.position = maze.initial_enemy_position
-		maze.enemy.connect("eliminated", mostrarEliminado)
-		maze.enemy.maze_finished = false
-		get_parent().add_child(maze.enemy)
+		spawnEnemy()
+		maze.player.createHeuristic(maze.xSize, maze.ySize, maze.enemy.position)
 		
-		
+	
+	# var result_bfs = player.bfsMaze(maze.player.position, maze.initial_coin_position)
+	# var result_dfs = player.dfsMaze(maze.player.position, maze.initial_coin_position)
+	# var result_dijkstra = maze.player.dijkstraMaze(maze.player.position, maze.initial_coin_position)
+	# var result_a_star = maze.player.aStarMaze(maze.player.position, maze.initial_coin_position)
 		
 	maze.timer.start(60)
 	timeLabel.text = str(timer.time_left)
@@ -69,6 +66,15 @@ func _process(delta):
 	if maze.player.maze_finished == false:
 		timeLabel.text= str(int(maze.timer.time_left))
 	
+
+func spawnEnemy():
+	maze.enemy = enemy_scene.instantiate()
+	maze.enemy.position = maze.initial_enemy_position
+	maze.enemy.connect("eliminated", mostrarEliminado)
+	maze.enemy.maze_finished = false
+	get_parent().add_child(maze.enemy)
+
+
 func mostrarResultado():
 	maze.player.maze_finished = true
 	#agente.reward += 10.0
