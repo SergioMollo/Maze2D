@@ -29,8 +29,6 @@ func _ready():
 
 	# Se asigna directamente hasta que se implelmente el paso de datos de configuracion inicial
 	modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
-
-	#bfs()
 	winLabel.hide()
 	loseLabel.hide()
 	await get_tree().create_timer(0.0).timeout
@@ -51,7 +49,6 @@ func new_game():
 	if modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 		spawnEnemy()
 		maze.player.createHeuristic(maze.xSize, maze.ySize, maze.enemy.position)
-		
 	
 	# var result_bfs = player.bfsMaze(maze.player.position, maze.initial_coin_position)
 	# var result_dfs = player.dfsMaze(maze.player.position, maze.initial_coin_position)
@@ -77,12 +74,16 @@ func spawnEnemy():
 
 func mostrarResultado():
 	maze.player.maze_finished = true
-	#agente.reward += 10.0
+	maze.enemy.maze_finished = true
+	# agente.reward += 10.0
+	# enemigoAgente.reward -= 10.0
 	print("Ha llegado al final del laberinto")
 	winLabel.show()
+	maze.enemy.queue_free() 
 	maze.moneda.hide()
 	await get_tree().create_timer(5.0).timeout
-	agente.reset()
+	# agente.reset()
+	# enemigoAgente.reset()
 	new_game()
 
 func mostrarEliminado():
@@ -91,21 +92,22 @@ func mostrarEliminado():
 	print("El enemigo le ha eliminado")
 	loseLabel.show()
 	maze.enemy.queue_free() 
-	agente.reward -= 5.0
+	# agente.reward -= 5.0
 	# enemigoAgente.reward += 10.0
 	await get_tree().create_timer(5.0).timeout
-	agente.reset()
+	# agente.reset()
 	# enemigoAgente.reset()
 	new_game()
 
 func _on_timer_timeout():
 	maze.player.maze_finished = true
+	maze.enemy.maze_finished = true
 	print("Se ha excedido el tiempo")
 	loseLabel.show()
-	#agente.reward -= 1.0
+	maze.enemy.queue_free()
+	# agente.reward -= 1.0
+	# enemigoAgente.reward += 2.0
 	await get_tree().create_timer(5.0).timeout
-	agente.reset()
+	# agente.reset()
+	# enemigoAgente.reset()
 	new_game()
-
-
-
