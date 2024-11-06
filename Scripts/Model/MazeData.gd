@@ -32,3 +32,19 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func initialize_data(level_data, player_ref, coin_ref, timer_ref, tilemap_ref):
+	xSize = level_data.xSize
+	ySize = level_data.ySize
+	map = level_data.map
+	result = level_data.result
+	graph = level_data.graph
+	scale = level_data.scale
+	initial_player_position = level_data.initial_player_position
+	initial_enemy_position = level_data.initial_enemy_position
+	initial_coin_position = level_data.initial_coin_position
+	player = player_ref
+	moneda = coin_ref
+	timer = timer_ref
+	tilemap = tilemap_ref
+	

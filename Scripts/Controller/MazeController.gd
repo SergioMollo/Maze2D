@@ -21,55 +21,39 @@ var modo_juego : VideogameConstants.ModoJuego
 
 func setup(level_data : Dictionary):
 	maze = Maze.new()
-	maze.xSize = level_data.xSize
-	maze.ySize = level_data.ySize
-	maze.map = level_data.map
-	maze.result = level_data.result
-	maze.graph = level_data.graph
-	maze.scale = level_data.scale
-	maze.initial_player_position = level_data.initial_player_position
-	maze.initial_enemy_position = level_data.initial_enemy_position
-	maze.initial_coin_position = level_data.initial_coin_position
-	maze.player = player
-	maze.moneda = coin
-	maze.timer = timer
-	maze.tilemap = tilemap
+	maze.initialize_data(level_data, player, coin, timer, tilemap)
 	maze.moneda.coin.connect("collected", mostrarResultado)
 	get_window().content_scale_size = maze.scale
 
 func _ready():
-	#maze = Maze.new()
 
-	
 	# Se asigna directamente hasta que se implelmente el paso de datos de configuracion inicial
 	modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
-
-	#bfs()
-	#createMap()
 	winLabel.hide()
 	loseLabel.hide()
 	await get_tree().create_timer(0.0).timeout
 	new_game()
 
 func new_game():
+	
 	maze.player.maze_finished = false
 	maze.moneda.show()
 	winLabel.hide()
 	loseLabel.hide()
-	maze.player.position = maze.initial_player_position
-	maze.moneda.coin.position = maze.initial_coin_position
-	
+	maze.player.position = maze.initial_player_position	
+
+	maze.player.createMap(maze.xSize, maze.ySize)
+
+	# Provisional hasta configurar datos y pasarlo
 	modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
 	if modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-		#var enemy_scene = preload("res://Scenes/Enemy.tscn")
-		maze.enemy = enemy_scene.instantiate()
-		maze.enemy.position = maze.initial_enemy_position
-		#maze.enemy.global_position = Vector2(240,48)
-		maze.enemy.connect("eliminated", mostrarEliminado)
-		maze.enemy.maze_finished = false
-		get_parent().add_child(maze.enemy)
-		
-		
+		spawnEnemy()
+		maze.player.createHeuristic(maze.xSize, maze.ySize, maze.enemy.position)
+	
+	# var result_bfs = player.bfsMaze(maze.player.position, maze.initial_coin_position)
+	# var result_dfs = player.dfsMaze(maze.player.position, maze.initial_coin_position)
+	# var result_dijkstra = maze.player.dijkstraMaze(maze.player.position, maze.initial_coin_position)
+	# var result_a_star = maze.player.aStarMaze(maze.player.position, maze.initial_coin_position)
 		
 	maze.timer.start(60)
 	timeLabel.text = str(timer.time_left)
@@ -79,14 +63,27 @@ func _process(delta):
 	if maze.player.maze_finished == false:
 		timeLabel.text= str(int(maze.timer.time_left))
 	
+
+func spawnEnemy():
+	maze.enemy = enemy_scene.instantiate()
+	maze.enemy.position = maze.initial_enemy_position
+	maze.enemy.connect("eliminated", mostrarEliminado)
+	maze.enemy.maze_finished = false
+	get_parent().add_child(maze.enemy)
+
+
 func mostrarResultado():
 	maze.player.maze_finished = true
-	#agente.reward += 10.0
+	maze.enemy.maze_finished = true
+	# agente.reward += 10.0
+	# enemigoAgente.reward -= 10.0
 	print("Ha llegado al final del laberinto")
 	winLabel.show()
+	maze.enemy.queue_free() 
 	maze.moneda.hide()
 	await get_tree().create_timer(5.0).timeout
-	agente.reset()
+	# agente.reset()
+	# enemigoAgente.reset()
 	new_game()
 
 func mostrarEliminado():
@@ -95,18 +92,22 @@ func mostrarEliminado():
 	print("El enemigo le ha eliminado")
 	loseLabel.show()
 	maze.enemy.queue_free() 
-	agente.reward -= 5.0
+	# agente.reward -= 5.0
 	# enemigoAgente.reward += 10.0
 	await get_tree().create_timer(5.0).timeout
-	agente.reset()
+	# agente.reset()
 	# enemigoAgente.reset()
 	new_game()
 
 func _on_timer_timeout():
 	maze.player.maze_finished = true
+	maze.enemy.maze_finished = true
 	print("Se ha excedido el tiempo")
 	loseLabel.show()
-	#agente.reward -= 1.0
+	maze.enemy.queue_free()
+	# agente.reward -= 1.0
+	# enemigoAgente.reward += 2.0
 	await get_tree().create_timer(5.0).timeout
-	agente.reset()
+	# agente.reset()
+	# enemigoAgente.reset()
 	new_game()
