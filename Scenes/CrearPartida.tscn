@@ -1,0 +1,164 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwsma1g02vssj"]
+
+[ext_resource type="Script" path="res://Scripts/Controller/CrearPartida.gd" id="1_5nq6y"]
+[ext_resource type="Texture2D" uid="uid://bpmuv4s6sbdr3" path="res://Resources/maze-game.jpg" id="2_kb8ac"]
+
+[node name="CrearPartida" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5nq6y")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_kb8ac")
+expand_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 753.0
+offset_bottom = 108.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Nivel" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Nivel"
+
+[node name="NivelOption" type="OptionButton" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "Nivel1"
+popup/item_0/id = 0
+popup/item_1/text = "Nivel2"
+popup/item_1/id = 1
+popup/item_2/text = "Nivel3"
+popup/item_2/id = 2
+popup/item_3/text = "Aleatorio"
+popup/item_3/id = 3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="Dificultad" type="Label" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Dificultad"
+
+[node name="DificultadOption" type="OptionButton" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+item_count = 3
+selected = 0
+popup/item_0/text = "Facil"
+popup/item_0/id = 0
+popup/item_1/text = "Media"
+popup/item_1/id = 1
+popup/item_2/text = "Dificil"
+popup/item_2/id = 2
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="ModoJuego" type="Label" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Modo de Juego"
+
+[node name="JuegoOption" type="OptionButton" parent="HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Solitario"
+popup/item_0/id = 0
+popup/item_1/text = "Enfrentamiento"
+popup/item_1/id = 1
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="ModoJuego" type="Label" parent="HBoxContainer/VBoxContainer4"]
+layout_mode = 2
+text = "Modo de Interaccion"
+
+[node name="InteraccionOption" type="OptionButton" parent="HBoxContainer/VBoxContainer4"]
+layout_mode = 2
+item_count = 2
+selected = 0
+popup/item_0/text = "Usuario"
+popup/item_0/id = 0
+popup/item_1/text = "Computadora"
+popup/item_1/id = 1
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+
+[node name="ModoJuego" type="Label" parent="HBoxContainer/VBoxContainer5"]
+layout_mode = 2
+text = "Algoritmo de Busqueda"
+
+[node name="AlgotirmoOption" type="OptionButton" parent="HBoxContainer/VBoxContainer5"]
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "BFS"
+popup/item_0/id = 0
+popup/item_1/text = "DFS"
+popup/item_1/id = 1
+popup/item_2/text = "Dijkstra"
+popup/item_2/id = 2
+popup/item_3/text = "A star"
+popup/item_3/id = 3
+
+[node name="CrearPartida" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -355.0
+offset_top = -70.0
+offset_right = -244.0
+offset_bottom = -39.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Crear Partida"
+
+[node name="Atras" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -230.0
+offset_top = -70.0
+offset_right = -181.0
+offset_bottom = -39.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Atras"
+
+[node name="information" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = 20.0
+offset_right = -40.0
+offset_bottom = 43.0
+grow_horizontal = 0
+
+[connection signal="pressed" from="CrearPartida" to="." method="_on_crear_partida_pressed"]
+[connection signal="pressed" from="Atras" to="." method="_on_atras_pressed"]

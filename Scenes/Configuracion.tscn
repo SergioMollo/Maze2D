@@ -1,0 +1,127 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyv21ol70tga3"]
+
+[ext_resource type="Texture2D" uid="uid://t7uh072lnjb0" path="res://Resources/maze-in-the-nigth-without-anybody (2).jpg" id="1_3c1yi"]
+[ext_resource type="Texture2D" uid="uid://csixtmspdmla7" path="res://Resources/background6.jpg" id="1_aj53v"]
+[ext_resource type="Script" path="res://Scripts/Controller/Configuracion.gd" id="1_y87m1"]
+
+[sub_resource type="Theme" id="Theme_btf1m"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pypgs"]
+texture = ExtResource("1_aj53v")
+
+[node name="Configuracion" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y87m1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_3c1yi")
+expand_mode = 2
+
+[node name="Canvas" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="PanelContainer" parent="Canvas"]
+custom_minimum_size = Vector2(300, 300)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_btf1m")
+theme_override_styles/panel = SubResource("StyleBoxTexture_pypgs")
+
+[node name="Margin" type="MarginContainer" parent="Canvas/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 50
+
+[node name="Container" type="VBoxContainer" parent="Canvas/Panel/Margin"]
+layout_mode = 2
+
+[node name="Settings" type="VBoxContainer" parent="Canvas/Panel/Margin/Container"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Volume" type="HBoxContainer" parent="Canvas/Panel/Margin/Container/Settings"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="VolumeLabel" type="Label" parent="Canvas/Panel/Margin/Container/Settings/Volume"]
+layout_mode = 2
+text = "Volumen"
+
+[node name="VolumeSlider" type="HSlider" parent="Canvas/Panel/Margin/Container/Settings/Volume"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 50.0
+
+[node name="Resolution" type="HBoxContainer" parent="Canvas/Panel/Margin/Container/Settings"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="ResolutionLabel" type="Label" parent="Canvas/Panel/Margin/Container/Settings/Resolution"]
+layout_mode = 2
+text = "Resolucion"
+
+[node name="ResolutionOption" type="OptionButton" parent="Canvas/Panel/Margin/Container/Settings/Resolution"]
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "1920x1080"
+popup/item_0/id = 0
+popup/item_1/text = "1280x720"
+popup/item_1/id = 1
+popup/item_2/text = "960x540"
+popup/item_2/id = 2
+popup/item_3/text = "640x480"
+popup/item_3/id = 3
+
+[node name="HBoxContainer" type="PanelContainer" parent="Canvas/Panel/Margin/Container"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Canvas/Panel/Margin/Container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Canvas/Panel/Margin/Container/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+alignment = 2
+
+[node name="SaveButton" type="Button" parent="Canvas/Panel/Margin/Container/HBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Guardar"
+
+[node name="BackButton" type="Button" parent="Canvas/Panel/Margin/Container/HBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Cerrar"
+
+[connection signal="pressed" from="Canvas/Panel/Margin/Container/HBoxContainer/MarginContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/Container/HBoxContainer/MarginContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

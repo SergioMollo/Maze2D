@@ -1,10 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://cafaxt36dri1m"]
 
-[ext_resource type="Script" path="res://Scripts/PantallaPrincipal.gd" id="1_djefx"]
-[ext_resource type="Texture2D" uid="uid://qivwcq2f0glt" path="res://Resources/Maze-in-2d.jpg" id="2_h7wmf"]
-[ext_resource type="Script" path="res://addons/godot_rl_agents/sync.gd" id="3_7rngm"]
+[ext_resource type="Script" path="res://Scripts/Controller/PantallaPrincipal.gd" id="1_djefx"]
+[ext_resource type="Texture2D" uid="uid://gmf0a3p1dfok" path="res://Resources/maze-videogame-in-2d-without-anybody.jpg" id="2_xkog2"]
 
 [sub_resource type="Theme" id="Theme_tw5xw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o4kw6"]
+font_size = 68
+font_color = Color(0.364706, 0.427451, 0, 1)
+outline_size = 3
 
 [node name="MenuInicial" type="Control"]
 layout_mode = 3
@@ -23,49 +27,47 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_h7wmf")
+texture = ExtResource("2_xkog2")
 expand_mode = 2
-
-[node name="Container" type="Container" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Label" type="Label" parent="Container"]
-layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 30.0
-offset_right = 173.0
-offset_bottom = 201.0
+offset_left = 456.0
+offset_top = 152.0
+offset_right = 639.0
+offset_bottom = 323.0
 
-[node name="Nivel1" type="Button" parent="VBoxContainer"]
+[node name="CrearPartida" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Nivel 1"
+text = "Crear Partida"
 
-[node name="Nivel2" type="Button" parent="VBoxContainer"]
+[node name="ContinuarPartida" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Nivel 2"
+text = "Continuar Partida"
 
-[node name="Nivel3" type="Button" parent="VBoxContainer"]
+[node name="Apariencia" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Nivel 3"
+text = "Seleccionar Apariencia"
 
-[node name="Aleatorio" type="Button" parent="VBoxContainer"]
+[node name="Ajustes" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "Nivel Aleatorio"
+text = "Configuración"
 
 [node name="Salir" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "FInalizar"
+text = "Salir"
 
-[node name="Sync" type="Node" parent="."]
-script = ExtResource("3_7rngm")
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 32.0
+offset_right = 676.0
+offset_bottom = 125.0
+text = "MAZE 2D"
+label_settings = SubResource("LabelSettings_o4kw6")
 
-[connection signal="pressed" from="VBoxContainer/Nivel1" to="." method="_on_nivel_1_pressed"]
-[connection signal="pressed" from="VBoxContainer/Nivel2" to="." method="_on_nivel_2_pressed"]
-[connection signal="pressed" from="VBoxContainer/Nivel3" to="." method="_on_nivel_3_pressed"]
-[connection signal="pressed" from="VBoxContainer/Aleatorio" to="." method="_on_aleatorio_pressed"]
+[connection signal="pressed" from="VBoxContainer/CrearPartida" to="." method="_on_crear_partida_pressed"]
+[connection signal="pressed" from="VBoxContainer/ContinuarPartida" to="." method="_on_continuar_partida_pressed"]
+[connection signal="pressed" from="VBoxContainer/Apariencia" to="." method="_on_seleccionar_apariencia_pressed"]
+[connection signal="pressed" from="VBoxContainer/Ajustes" to="." method="_on_ajustes_pressed"]
 [connection signal="pressed" from="VBoxContainer/Salir" to="." method="_on_salir_pressed"]
