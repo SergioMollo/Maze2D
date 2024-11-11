@@ -1,0 +1,33 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dpjj7oabgkofc"]
+
+[ext_resource type="Texture2D" uid="uid://c07sb8wmwlb0o" path="res://Resources/Inkscape/Botones.svg" id="1_uf2s3"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8a0rw"]
+texture = ExtResource("1_uf2s3")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(5.11846, 224.329, 338.685, 71.3291)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ufv1"]
+texture = ExtResource("1_uf2s3")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(10.1844, 129.27, 341.507, 69.4304)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tyc8i"]
+texture = ExtResource("1_uf2s3")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(12.6236, 37.8253, 341.097, 70.2399)
+
+[resource]
+default_font_size = 40
+Button/styles/focus = SubResource("StyleBoxTexture_8a0rw")
+Button/styles/hover = SubResource("StyleBoxTexture_7ufv1")
+Button/styles/normal = SubResource("StyleBoxTexture_tyc8i")

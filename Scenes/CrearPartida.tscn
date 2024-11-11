@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwsma1g02vssj"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/CrearPartida.gd" id="1_5nq6y"]
-[ext_resource type="Texture2D" uid="uid://bpmuv4s6sbdr3" path="res://Resources/maze-game.jpg" id="2_kb8ac"]
+[ext_resource type="Texture2D" uid="uid://ckvbe0lkitxo4" path="res://Resources/create-game-texture.jpg" id="2_14whg"]
 
 [node name="CrearPartida" type="Control"]
 layout_mode = 3
@@ -19,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_kb8ac")
+texture = ExtResource("2_14whg")
 expand_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

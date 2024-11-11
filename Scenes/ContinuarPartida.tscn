@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c145vvgnhr6u0"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/ContinuarPartida.gd" id="1_j8rly"]
-[ext_resource type="Texture2D" uid="uid://coqnj8v1ivhcu" path="res://Resources/maze-videogame-in-2d-without-anybody (3).jpg" id="2_swdoh"]
+[ext_resource type="Texture2D" uid="uid://cf6b2v527uxsu" path="res://Resources/continue-game-texture.jpg" id="2_7b2t2"]
 [ext_resource type="Texture2D" uid="uid://b8uui7tpwcw0v" path="res://Resources/Laberinto1.jpg" id="3_mpdtp"]
 
 [sub_resource type="Theme" id="Theme_aster"]
@@ -25,7 +25,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_swdoh")
+texture = ExtResource("2_7b2t2")
 expand_mode = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

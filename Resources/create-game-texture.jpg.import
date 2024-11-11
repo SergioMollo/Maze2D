@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ce06dv1ediyhc"
-path="res://.godot/imported/maze-without-anybody.jpg-4e46ab7473a5c89a7acb27d66d4b4fc5.ctex"
+uid="uid://ckvbe0lkitxo4"
+path="res://.godot/imported/create-game-texture.jpg-944fa7acabfebc51d9382b1391b5b875.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/maze-without-anybody.jpg"
-dest_files=["res://.godot/imported/maze-without-anybody.jpg-4e46ab7473a5c89a7acb27d66d4b4fc5.ctex"]
+source_file="res://Resources/create-game-texture.jpg"
+dest_files=["res://.godot/imported/create-game-texture.jpg-944fa7acabfebc51d9382b1391b5b875.ctex"]
 
 [params]
 

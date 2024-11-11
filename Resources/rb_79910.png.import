@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coqnj8v1ivhcu"
-path="res://.godot/imported/maze-videogame-in-2d-without-anybody (3).jpg-3cd88061bf17bbeeb5b39f0b4256068c.ctex"
+uid="uid://buq2h1do1s7d7"
+path="res://.godot/imported/rb_79910.png-ff10d134a068982d7f4beb6dbf4e2754.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/maze-videogame-in-2d-without-anybody (3).jpg"
-dest_files=["res://.godot/imported/maze-videogame-in-2d-without-anybody (3).jpg-3cd88061bf17bbeeb5b39f0b4256068c.ctex"]
+source_file="res://Resources/rb_79910.png"
+dest_files=["res://.godot/imported/rb_79910.png-ff10d134a068982d7f4beb6dbf4e2754.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwy6dhbxiiycw"
-path="res://.godot/imported/maze-in-the-nigth-without-anybody (1).jpg-fe7e76f2cd37aa2f452ea76725fad001.ctex"
+uid="uid://cde5ld0q48sjb"
+path="res://.godot/imported/PanelApariencia.svg-39e0aa1e36f1602bd80a13803cf5a6cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/maze-in-the-nigth-without-anybody (1).jpg"
-dest_files=["res://.godot/imported/maze-in-the-nigth-without-anybody (1).jpg-fe7e76f2cd37aa2f452ea76725fad001.ctex"]
+source_file="res://Resources/Inkscape/PanelApariencia.svg"
+dest_files=["res://.godot/imported/PanelApariencia.svg-39e0aa1e36f1602bd80a13803cf5a6cf.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false

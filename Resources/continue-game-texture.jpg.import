@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qivwcq2f0glt"
-path="res://.godot/imported/Maze-in-2d.jpg-6b1a2f88a1ba729eb42cc8af9f83d569.ctex"
+uid="uid://cf6b2v527uxsu"
+path="res://.godot/imported/continue-game-texture.jpg-b2f13d19bf1c72c188ef011d51d0bd4a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Maze-in-2d.jpg"
-dest_files=["res://.godot/imported/Maze-in-2d.jpg-6b1a2f88a1ba729eb42cc8af9f83d569.ctex"]
+source_file="res://Resources/continue-game-texture.jpg"
+dest_files=["res://.godot/imported/continue-game-texture.jpg-b2f13d19bf1c72c188ef011d51d0bd4a.ctex"]
 
 [params]
 
