@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckvbe0lkitxo4"
-path="res://.godot/imported/create-game-texture.jpg-944fa7acabfebc51d9382b1391b5b875.ctex"
+uid="uid://dicpsu2pwtx0y"
+path="res://.godot/imported/updown.png-d2554c67bc0110b2642f6b50498f0dee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/create-game-texture.jpg"
-dest_files=["res://.godot/imported/create-game-texture.jpg-944fa7acabfebc51d9382b1391b5b875.ctex"]
+source_file="res://Resources/Pixelart/updown.png"
+dest_files=["res://.godot/imported/updown.png-d2554c67bc0110b2642f6b50498f0dee.ctex"]
 
 [params]
 

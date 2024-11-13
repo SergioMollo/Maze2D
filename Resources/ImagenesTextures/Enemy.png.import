@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8uui7tpwcw0v"
-path="res://.godot/imported/Laberinto1.jpg-a5bcb3c407b45e88c4e68a60ed052a09.ctex"
+uid="uid://1xr187ux22cy"
+path="res://.godot/imported/Enemy.png-6cea43016a51688073837b5327003bfc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Laberinto1.jpg"
-dest_files=["res://.godot/imported/Laberinto1.jpg-a5bcb3c407b45e88c4e68a60ed052a09.ctex"]
+source_file="res://Resources/ImagenesTextures/Enemy.png"
+dest_files=["res://.godot/imported/Enemy.png-6cea43016a51688073837b5327003bfc.ctex"]
 
 [params]
 

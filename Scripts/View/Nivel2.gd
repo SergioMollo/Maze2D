@@ -10,10 +10,10 @@ var level_data = {
 	"map" : [],
 	"result" : [],
 	"graph" : {},
-	"scale": Vector2i(992, 640),
-	"initial_player_position": Vector2(80,208),
+	"scale": Vector2i(992, 704),
+	"initial_player_position": Vector2(144,208),
 	"initial_enemy_position": Vector2(304,304),
-	"initial_coin_position": Vector2(464,432)
+	"initial_coin_position": Vector2(560,432)
 }
 
 func _ready():

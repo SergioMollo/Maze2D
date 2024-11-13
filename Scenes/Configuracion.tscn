@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dyv21ol70tga3"]
 
-[ext_resource type="Texture2D" uid="uid://t7uh072lnjb0" path="res://Resources/maze-in-the-nigth-without-anybody (2).jpg" id="1_3c1yi"]
-[ext_resource type="Texture2D" uid="uid://csixtmspdmla7" path="res://Resources/background6.jpg" id="1_aj53v"]
+[ext_resource type="Texture2D" path="res://Resources/maze-in-the-nigth-without-anybody (2).jpg" id="1_3c1yi"]
+[ext_resource type="Texture2D" uid="uid://csixtmspdmla7" path="res://Resources/ImagenesTextures/background6.jpg" id="1_aj53v"]
 [ext_resource type="Script" path="res://Scripts/Controller/Configuracion.gd" id="1_y87m1"]
 
 [sub_resource type="Theme" id="Theme_btf1m"]

@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://cafaxt36dri1m"]
 
 [ext_resource type="Script" path="res://Scripts/Controller/PantallaPrincipal.gd" id="1_djefx"]
-[ext_resource type="Texture2D" uid="uid://pck2gtyxs6fp" path="res://Resources/initial-texture.jpg" id="2_tcj1y"]
+[ext_resource type="Texture2D" uid="uid://pck2gtyxs6fp" path="res://Resources/ImagenesTextures/initial-texture.jpg" id="2_tcj1y"]
 [ext_resource type="Texture2D" uid="uid://8xx3oo8scomu" path="res://Resources/Pixelart/Player.png" id="3_gotop"]
 [ext_resource type="Theme" uid="uid://p0br4mpvjifp" path="res://Resources/Edit_Textures/panel_apariencia.tres" id="4_2dtc3"]
-[ext_resource type="Texture2D" uid="uid://1xr187ux22cy" path="res://Resources/Enemy.png" id="4_hjmhc"]
+[ext_resource type="Texture2D" uid="uid://1xr187ux22cy" path="res://Resources/ImagenesTextures/Enemy.png" id="4_hjmhc"]
 [ext_resource type="Theme" uid="uid://c114exd44o8sj" path="res://Resources/Edit_Textures/panel_apariencia_enemigo.tres" id="5_585rp"]
 [ext_resource type="Theme" uid="uid://dpjj7oabgkofc" path="res://Resources/Edit_Textures/buttons.tres" id="5_eah4l"]
 
@@ -1354,6 +1354,7 @@ script = ExtResource("1_djefx")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(0.537255, 0.537255, 0.537255, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1417,6 +1418,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Jugador/PanelContainer/VBoxContainer"]
 modulate = Color(0.184314, 0.2, 0.141176, 1)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 40
 text = "Jugador
 "

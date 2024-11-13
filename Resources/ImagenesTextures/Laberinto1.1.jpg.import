@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csixtmspdmla7"
-path="res://.godot/imported/background6.jpg-ac6c9b837ea14b6d4df6fecf92be38fa.ctex"
+uid="uid://byx1nhgmebrf1"
+path="res://.godot/imported/Laberinto1.1.jpg-349e532e8d47b54216a90a4f43c804cb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/background6.jpg"
-dest_files=["res://.godot/imported/background6.jpg-ac6c9b837ea14b6d4df6fecf92be38fa.ctex"]
+source_file="res://Resources/ImagenesTextures/Laberinto1.1.jpg"
+dest_files=["res://.godot/imported/Laberinto1.1.jpg-349e532e8d47b54216a90a4f43c804cb.ctex"]
 
 [params]
 
