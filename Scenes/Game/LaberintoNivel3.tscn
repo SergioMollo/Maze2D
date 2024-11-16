@@ -3,15 +3,15 @@
 [ext_resource type="Script" path="res://Scripts/View/Nivel3.gd" id="1_2qem4"]
 [ext_resource type="Texture2D" uid="uid://br386dljoaedf" path="res://Resources/WallMazeInteriora64x64.png" id="2_6n84l"]
 [ext_resource type="Script" path="res://Scripts/Controller/MazeController.gd" id="2_fn7uc"]
-[ext_resource type="PackedScene" uid="uid://r0bherb862i5" path="res://Scenes/Personaje.tscn" id="2_nu1hc"]
-[ext_resource type="PackedScene" uid="uid://ctseifvcmjqrr" path="res://Scenes/Enemy.tscn" id="3_dpp3j"]
+[ext_resource type="PackedScene" uid="uid://r0bherb862i5" path="res://Scenes/Game/Personaje.tscn" id="2_nu1hc"]
+[ext_resource type="PackedScene" uid="uid://ctseifvcmjqrr" path="res://Scenes/Game/Enemy.tscn" id="3_dpp3j"]
 [ext_resource type="Texture2D" uid="uid://ccdvefapkn64h" path="res://Resources/MuroContorno64x64.png" id="3_ksx82"]
+[ext_resource type="PackedScene" uid="uid://bc28ey48ixyl2" path="res://Scenes/UI/GameHeader.tscn" id="4_7omxh"]
 [ext_resource type="Texture2D" uid="uid://pck2gtyxs6fp" path="res://Resources/ImagenesTextures/initial-texture.jpg" id="4_atr7l"]
-[ext_resource type="Theme" uid="uid://bd2fffoq0chyl" path="res://Resources/Edit_Textures/panel_partidas.tres" id="4_bhdg2"]
 [ext_resource type="Texture2D" uid="uid://bjkwetwd828kp" path="res://Resources/Cesped32x32.png" id="4_gxqrr"]
-[ext_resource type="PackedScene" uid="uid://d1ghr5ojp13cd" path="res://Scenes/Moneda.tscn" id="6_l51q8"]
+[ext_resource type="PackedScene" uid="uid://d1ghr5ojp13cd" path="res://Scenes/Game/Moneda.tscn" id="6_l51q8"]
 
-[sub_resource type="FontFile" id="FontFile_npgtr"]
+[sub_resource type="FontFile" id="FontFile_7r0xj"]
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -2359,13 +2359,13 @@ cache/0/50/0/kerning_overrides/88/0 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/60/0 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/50/0 = Vector2(0, 0)
 
-[sub_resource type="LabelSettings" id="LabelSettings_8sie1"]
+[sub_resource type="LabelSettings" id="LabelSettings_kr5ro"]
 line_spacing = 25.0
-font = SubResource("FontFile_npgtr")
+font = SubResource("FontFile_7r0xj")
 font_size = 50
 font_color = Color(1, 1, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_al067"]
+[sub_resource type="LabelSettings" id="LabelSettings_3qq4l"]
 font_size = 50
 font_color = Color(0.984314, 0.109804, 0, 1)
 
@@ -2506,49 +2506,20 @@ enemy_scene = ExtResource("3_dpp3j")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
-offset_right = 1728.0
+[node name="Control" parent="CanvasLayer" instance=ExtResource("4_7omxh")]
+offset_right = 576.0
 offset_bottom = 64.0
-theme = ExtResource("4_bhdg2")
-
-[node name="LabelInfo" type="Label" parent="CanvasLayer"]
-offset_left = 2000.0
-offset_top = 288.0
-offset_right = 2160.0
-offset_bottom = 337.0
-text = "Nivel 1
-Tiempo restante:"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LabelTime" type="Label" parent="CanvasLayer"]
-offset_left = 2256.0
-offset_top = 264.0
-offset_right = 2296.0
-offset_bottom = 304.0
-text = "30"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LabelSec" type="Label" parent="CanvasLayer"]
-offset_left = 2376.0
-offset_top = 368.0
-offset_right = 2416.0
-offset_bottom = 417.0
-text = "sec"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="LabelWin" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
 anchor_right = 0.474
 anchor_bottom = 0.533
-offset_left = 2005.0
-offset_top = 384.0
-offset_right = 1191.92
-offset_bottom = -119.64
+offset_left = 1320.0
+offset_top = 184.0
+offset_right = 1417.0
+offset_bottom = 251.0
 text = "WIN"
-label_settings = SubResource("LabelSettings_8sie1")
+label_settings = SubResource("LabelSettings_kr5ro")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -2556,13 +2527,13 @@ vertical_alignment = 1
 anchors_preset = -1
 anchor_right = 0.474
 anchor_bottom = 0.533
-offset_left = 2230.0
-offset_top = 432.0
-offset_right = 1503.92
-offset_bottom = -2.64001
+offset_left = 1560.0
+offset_top = 200.0
+offset_right = 1744.0
+offset_bottom = 341.0
 text = "TIME
 EXCEED"
-label_settings = SubResource("LabelSettings_al067")
+label_settings = SubResource("LabelSettings_3qq4l")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -2584,6 +2555,6 @@ position = Vector2(112, 304)
 scale = Vector2(1, 1)
 
 [node name="Moneda" parent="." instance=ExtResource("6_l51q8")]
-position = Vector2(1296, 144)
+position = Vector2(1360, 176)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

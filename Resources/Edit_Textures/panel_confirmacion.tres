@@ -1,0 +1,23 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bli0ffcjwbud6"]
+
+[ext_resource type="Texture2D" uid="uid://c07sb8wmwlb0o" path="res://Resources/Inkscape/Botones.svg" id="1_88d8p"]
+[ext_resource type="Texture2D" uid="uid://diytq37w3a8fe" path="res://Resources/Inkscape/PanelInformacion.svg" id="2_hwg0m"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_guwrb"]
+texture = ExtResource("1_88d8p")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(386.889, 479.319, 338.12, 69.9948)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vtnva"]
+texture = ExtResource("2_hwg0m")
+region_rect = Rect2(671.724, 64.5768, 505.769, 131.522)
+
+[resource]
+Button/styles/focus = SubResource("StyleBoxTexture_guwrb")
+Button/styles/hover = SubResource("StyleBoxTexture_guwrb")
+Button/styles/normal = SubResource("StyleBoxTexture_guwrb")
+Button/styles/pressed = SubResource("StyleBoxTexture_guwrb")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_vtnva")

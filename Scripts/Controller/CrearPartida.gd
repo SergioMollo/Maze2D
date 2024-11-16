@@ -12,18 +12,18 @@ func _process(delta):
 
 
 func _on_atras_pressed():
-	get_tree().change_scene_to_file("res://Scenes/PantallaPrincipal.tscn")
+	get_tree().change_scene_to_file("res://Scenes/UI/PantallaPrincipal.tscn")
 
 
 func _on_crear_partida_pressed():
 	var nivel_option = $HBoxContainer/VBoxContainer/NivelOption
 	var nivel = nivel_option.get_selected()
 	if nivel == 0:
-		get_tree().change_scene_to_file("res://Scenes/LaberintoNivel1.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Game/LaberintoNivel1.tscn")
 	elif nivel == 1:
-		get_tree().change_scene_to_file("res://Scenes/LaberintoNivel2.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Game/LaberintoNivel2.tscn")
 	elif nivel == 2:
-		get_tree().change_scene_to_file("res://Scenes/LaberintoNivel3.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Game/LaberintoNivel3.tscn")
 	elif nivel == 3:
 		print("El nivel aleatorio aun no esta implementado")
 		var information = $information

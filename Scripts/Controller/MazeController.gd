@@ -11,22 +11,24 @@ var modo_juego : VideogameConstants.ModoJuego
 @onready var player: CharacterBody2D = $"../Jugador"
 @onready var agente: Node2D = $"../Jugador/AIController2D"
 @onready var coin: Area2D = $"../Moneda/Moneda2D"
-@onready var winLabel : Label  = $"../CanvasLayer/LabelWin"
-@onready var loseLabel : Label  = $"../CanvasLayer/LabelTimeExceed"
-@onready var infoLabel : Label  = $"../CanvasLayer/LabelInfo"
-@onready var timeLabel : Label  = $"../CanvasLayer/LabelTime"
-@onready var secondsLabel : Label  = $"../CanvasLayer/LabelSec"
+@onready var header : Control = $"../Layer/Header/Layer/Panel"
+@onready var winLabel : Label  = $"../Layer/LabelWin"
+@onready var loseLabel : Label  = $"../Layer/LabelTimeExceed"
+#@onready var infoLabel : Label  = $"../Control/CanvasLayer/Panel/LabelInfo"
+@onready var timeLabel : Label  = $"../Layer/Header/Layer/Panel/Container/Time/ValueTime/LabelTime"
+#@onready var secondsLabel : Label  = $"../Control/CanvasLayer/Panel/LabelSec"
 @onready var timer : Timer  = $"../Timer"
 @onready var tilemap = $"../TileMap"
+
 
 func setup(level_data : Dictionary):
 	maze = Maze.new()
 	maze.initialize_data(level_data, player, coin, timer, tilemap)
 	maze.moneda.coin.connect("collected", mostrarResultado)
 	get_window().content_scale_size = maze.scale
+	header.size = Vector2(maze.scale.x,64)
 
 func _ready():
-
 	# Se asigna directamente hasta que se implelmente el paso de datos de configuracion inicial
 	modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
 	winLabel.hide()

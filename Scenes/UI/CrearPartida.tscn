@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwsma1g02vssj"]
 
-[ext_resource type="Script" path="res://Scripts/Controller/CrearPartida.gd" id="1_5nq6y"]
-[ext_resource type="Theme" uid="uid://dpjj7oabgkofc" path="res://Resources/Edit_Textures/buttons.tres" id="1_fqklq"]
-[ext_resource type="Texture2D" uid="uid://ckvbe0lkitxo4" path="res://Resources/ImagenesTextures/create-game-texture.jpg" id="2_14whg"]
-[ext_resource type="Theme" uid="uid://4y0n3dobbb3s" path="res://Resources/Edit_Textures/panel_informacion.tres" id="4_4f8bs"]
+[ext_resource type="Theme" uid="uid://dpjj7oabgkofc" path="res://Resources/Edit_Textures/buttons.tres" id="1_he0k7"]
+[ext_resource type="Script" path="res://Scripts/Controller/CrearPartida.gd" id="2_44poj"]
+[ext_resource type="Texture2D" uid="uid://ckvbe0lkitxo4" path="res://Resources/ImagenesTextures/create-game-texture.jpg" id="3_skeva"]
+[ext_resource type="Theme" uid="uid://4y0n3dobbb3s" path="res://Resources/Edit_Textures/panel_informacion.tres" id="4_y11gq"]
 
 [node name="CrearPartida" type="Control"]
 layout_mode = 3
@@ -12,8 +12,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_fqklq")
-script = ExtResource("1_5nq6y")
+theme = ExtResource("1_he0k7")
+script = ExtResource("2_44poj")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
@@ -23,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_14whg")
+texture = ExtResource("3_skeva")
 expand_mode = 2
 
 [node name="CrearPartida" type="Button" parent="."]
@@ -205,7 +205,7 @@ offset_left = 1100.0
 offset_top = 75.0
 offset_right = 1900.0
 offset_bottom = 275.0
-theme = ExtResource("4_4f8bs")
+theme = ExtResource("4_y11gq")
 
 [node name="Nombre" type="Label" parent="Panel1"]
 layout_mode = 0
@@ -232,7 +232,7 @@ offset_left = 1100.0
 offset_top = 300.0
 offset_right = 1900.0
 offset_bottom = 500.0
-theme = ExtResource("4_4f8bs")
+theme = ExtResource("4_y11gq")
 
 [node name="Nombre" type="Label" parent="Panel2"]
 layout_mode = 0
@@ -259,7 +259,7 @@ offset_left = 1100.0
 offset_top = 525.0
 offset_right = 1900.0
 offset_bottom = 725.0
-theme = ExtResource("4_4f8bs")
+theme = ExtResource("4_y11gq")
 
 [node name="Nombre" type="Label" parent="Panel3"]
 layout_mode = 0
@@ -286,7 +286,7 @@ offset_left = 1100.0
 offset_top = 750.0
 offset_right = 1900.0
 offset_bottom = 950.0
-theme = ExtResource("4_4f8bs")
+theme = ExtResource("4_y11gq")
 
 [node name="Nombre" type="Label" parent="Panel4"]
 layout_mode = 0

@@ -11,17 +11,13 @@ func _process(delta):
 	pass
 
 
-func _on_settings_button_pressed():
-	var overlay_scene = preload("res://Scenes/Configuracion.tscn")
-	var node = $"."
-	node.modulate.a = 0.5
+func _on_configuration_pressed():
+	var overlay_scene = preload("res://Scenes/UI/GameOptions.tscn")
 	var instance = overlay_scene.instantiate()
 	add_child(instance)
+	instance.position = Vector2(288,288)
+	#instance.rect_size = Vector2(200,200)
 
 
-func _on_game_options_button_pressed():
-	var overlay_scene = preload("res://Scenes/GameOptions.tscn")
-	var node = $"."
-	node.modulate.a = 0.5
-	var instance = overlay_scene.instantiate()
-	add_child(instance)
+func _on_pause_pressed():
+	pass # Replace with function body.

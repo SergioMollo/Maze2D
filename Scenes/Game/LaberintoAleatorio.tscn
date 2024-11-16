@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://c1v7qu32qb06c"]
 
-[ext_resource type="Script" path="res://Scripts/View/Aleatorio.gd" id="1_wrf0k"]
+[ext_resource type="Script" path="res://Scripts/View/NivelAleatorio.gd" id="1_wrf0k"]
 [ext_resource type="Script" path="res://Scripts/Controller/MazeController.gd" id="2_dxm7x"]
-[ext_resource type="PackedScene" uid="uid://ctseifvcmjqrr" path="res://Scenes/Enemy.tscn" id="3_bbkdg"]
+[ext_resource type="PackedScene" uid="uid://ctseifvcmjqrr" path="res://Scenes/Game/Enemy.tscn" id="3_bbkdg"]
 [ext_resource type="Texture2D" uid="uid://bjkwetwd828kp" path="res://Resources/Cesped32x32.png" id="4_jdek8"]
 [ext_resource type="Texture2D" uid="uid://ccdvefapkn64h" path="res://Resources/MuroContorno64x64.png" id="5_l7e6c"]
 [ext_resource type="Texture2D" uid="uid://br386dljoaedf" path="res://Resources/WallMazeInteriora64x64.png" id="6_h1lvu"]
-[ext_resource type="PackedScene" uid="uid://r0bherb862i5" path="res://Scenes/Personaje.tscn" id="7_1q60y"]
-[ext_resource type="PackedScene" uid="uid://d1ghr5ojp13cd" path="res://Scenes/Moneda.tscn" id="8_4g10s"]
+[ext_resource type="PackedScene" uid="uid://r0bherb862i5" path="res://Scenes/Game/Personaje.tscn" id="7_1q60y"]
+[ext_resource type="PackedScene" uid="uid://d1ghr5ojp13cd" path="res://Scenes/Game/Moneda.tscn" id="8_4g10s"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ehlgt"]
 texture = ExtResource("4_jdek8")

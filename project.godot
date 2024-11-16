@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="LaberintoTFG"
-run/main_scene="res://Scenes/LaberintoNivel1.tscn"
+run/main_scene="res://Scenes/Game/LaberintoNivel1.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.00392157, 0.176471, 0, 1)
 config/icon="res://Resources/ParedesLaberintoProvisionales32x32.png"

@@ -14,14 +14,14 @@ func _process(delta):
 func _on_seleccionar_button_pressed():
 	var nivel = $CanvasLayer/PanelFondo/VBoxContainer/MarginContainer2/HBoxContainer/ResumePanel/MarginContainer/ContainerListaPartidas/ContainerPartida/HBoxContainer/LevelValueLabel
 	if nivel == VideogameConstants.Nivel.NIVEL1:
-		get_tree().change_scene_to_file("res://Scenes/LaberintoNivel1.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Game/LaberintoNivel1.tscn")
 	if nivel == VideogameConstants.Nivel.NIVEL2:
-		get_tree().change_scene_to_file("res://Scenes/LaberintoNivel2.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Game/LaberintoNivel2.tscn")
 	if nivel == VideogameConstants.Nivel.NIVEL2:
-		get_tree().change_scene_to_file("res://Scenes/LaberintoNivel3.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Game/LaberintoNivel3.tscn")
 	if nivel == VideogameConstants.Nivel.ALEATORIO:
-		get_tree().change_scene_to_file("res://Scenes/LaberintoNivel1.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Game/LaberintoNivel1.tscn")
 
 
 func _on_atras_button_pressed():
-	get_tree().change_scene_to_file("res://Scenes/PantallaPrincipal.tscn")
+	get_tree().change_scene_to_file("res://Scenes/UI/PantallaPrincipal.tscn")

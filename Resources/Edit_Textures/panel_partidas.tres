@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://bd2fffoq0chyl"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bd2fffoq0chyl"]
 
 [ext_resource type="Texture2D" uid="uid://c07sb8wmwlb0o" path="res://Resources/Inkscape/Botones.svg" id="1_wo2ax"]
 [ext_resource type="Texture2D" uid="uid://ck2jqp6snu0r2" path="res://Resources/ImagenesTextures/texture-panel.jpg" id="2_jvwn5"]
@@ -39,6 +39,10 @@ region_rect = Rect2(385.722, 38.7002, 602.294, 63.2211)
 texture = ExtResource("2_jvwn5")
 region_rect = Rect2(352.573, 278.18, 1661.41, 885.09)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8sg7l"]
+texture = ExtResource("2_jvwn5")
+region_rect = Rect2(350.795, 1459.88, 1662.74, 885.318)
+
 [resource]
 Button/font_sizes/font_size = 35
 Button/styles/focus = SubResource("StyleBoxTexture_bo8d0")
@@ -46,3 +50,4 @@ Button/styles/hover = SubResource("StyleBoxTexture_ot3cu")
 Button/styles/normal = SubResource("StyleBoxTexture_f277i")
 Label/styles/normal = SubResource("StyleBoxTexture_v4ck7")
 Panel/styles/panel = SubResource("StyleBoxTexture_6ts4n")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_8sg7l")

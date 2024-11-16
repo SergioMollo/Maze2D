@@ -1,19 +1,17 @@
-[gd_scene load_steps=25 format=3 uid="uid://ch1saj8l3dbte"]
+[gd_scene load_steps=23 format=3 uid="uid://ch1saj8l3dbte"]
 
 [ext_resource type="Texture2D" uid="uid://b8pg6y0j6v20l" path="res://Resources/Paredes_Laterales.png" id="1_4xfea"]
 [ext_resource type="Script" path="res://Scripts/View/Nivel2.gd" id="1_cugtc"]
 [ext_resource type="Script" path="res://Scripts/Controller/MazeController.gd" id="2_dj1ty"]
 [ext_resource type="Texture2D" uid="uid://ccdvefapkn64h" path="res://Resources/MuroContorno64x64.png" id="3_t443s"]
-[ext_resource type="PackedScene" uid="uid://ctseifvcmjqrr" path="res://Scenes/Enemy.tscn" id="3_v7wcn"]
-[ext_resource type="Theme" uid="uid://bd2fffoq0chyl" path="res://Resources/Edit_Textures/panel_partidas.tres" id="4_2ok1s"]
+[ext_resource type="PackedScene" uid="uid://ctseifvcmjqrr" path="res://Scenes/Game/Enemy.tscn" id="3_v7wcn"]
 [ext_resource type="Texture2D" uid="uid://pck2gtyxs6fp" path="res://Resources/ImagenesTextures/initial-texture.jpg" id="5_1onl8"]
-[ext_resource type="Texture2D" uid="uid://cdwkd2dfgmy3i" path="res://Resources/Pixelart/Pause64x64.png" id="5_olont"]
-[ext_resource type="Texture2D" uid="uid://bv7ns15ux5dr4" path="res://Resources/Pixelart/Setting.png" id="6_qt0sv"]
-[ext_resource type="PackedScene" uid="uid://r0bherb862i5" path="res://Scenes/Personaje.tscn" id="6_v1ngb"]
+[ext_resource type="PackedScene" uid="uid://bc28ey48ixyl2" path="res://Scenes/UI/GameHeader.tscn" id="5_bupwv"]
+[ext_resource type="PackedScene" uid="uid://r0bherb862i5" path="res://Scenes/Game/Personaje.tscn" id="6_v1ngb"]
 [ext_resource type="Texture2D" uid="uid://bjkwetwd828kp" path="res://Resources/Cesped32x32.png" id="7_2hd54"]
-[ext_resource type="PackedScene" uid="uid://d1ghr5ojp13cd" path="res://Scenes/Moneda.tscn" id="10_n4hj8"]
+[ext_resource type="PackedScene" uid="uid://d1ghr5ojp13cd" path="res://Scenes/Game/Moneda.tscn" id="10_n4hj8"]
 
-[sub_resource type="FontFile" id="FontFile_i1qn5"]
+[sub_resource type="FontFile" id="FontFile_08hwr"]
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -2361,13 +2359,13 @@ cache/0/50/0/kerning_overrides/88/0 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/60/0 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/50/0 = Vector2(0, 0)
 
-[sub_resource type="LabelSettings" id="LabelSettings_m5f4p"]
+[sub_resource type="LabelSettings" id="LabelSettings_xa1s4"]
 line_spacing = 25.0
-font = SubResource("FontFile_i1qn5")
+font = SubResource("FontFile_08hwr")
 font_size = 50
 font_color = Color(1, 1, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_7oamh"]
+[sub_resource type="LabelSettings" id="LabelSettings_nfrf1"]
 font_size = 50
 font_color = Color(0.984314, 0.109804, 0, 1)
 
@@ -2463,100 +2461,34 @@ enemy_scene = ExtResource("3_v7wcn")
 
 [node name="Timer" type="Timer" parent="."]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Layer" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="CanvasLayer"]
-offset_right = 992.0
-offset_bottom = 64.0
-theme = ExtResource("4_2ok1s")
+[node name="Header" parent="Layer" instance=ExtResource("5_bupwv")]
 
-[node name="Button" type="Button" parent="CanvasLayer"]
-offset_left = 96.0
-offset_top = 16.0
-offset_right = 168.0
-offset_bottom = 88.0
-scale = Vector2(0.5, 0.5)
-icon = ExtResource("5_olont")
-
-[node name="Button2" type="Button" parent="CanvasLayer"]
-offset_left = 856.0
-offset_top = 16.0
-offset_right = 928.0
-offset_bottom = 88.0
-scale = Vector2(0.5, 0.5)
-icon = ExtResource("6_qt0sv")
-
-[node name="LabelInfo" type="Label" parent="CanvasLayer"]
-offset_left = 208.0
-offset_top = 16.0
-offset_right = 272.0
-offset_bottom = 48.0
-text = "Nivel 2
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LabelInfo2" type="Label" parent="CanvasLayer"]
-offset_left = 480.0
-offset_top = 8.0
-offset_right = 544.0
-offset_bottom = 63.0
-theme_override_font_sizes/font_size = 40
-text = "0-0"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TimeValue" type="Label" parent="CanvasLayer"]
-offset_left = 728.0
-offset_top = 16.0
-offset_right = 768.0
-offset_bottom = 65.0
-text = "30"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LabelSec" type="Label" parent="CanvasLayer"]
-offset_left = 760.0
-offset_top = 16.0
-offset_right = 800.0
-offset_bottom = 65.0
-text = "sec"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LabelTime" type="Label" parent="CanvasLayer"]
-offset_left = 744.0
-offset_top = -8.0
-offset_right = 784.0
-offset_bottom = 41.0
-text = "Tiempo total"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="LabelWin" type="Label" parent="CanvasLayer"]
+[node name="LabelWin" type="Label" parent="Layer"]
 anchors_preset = -1
 anchor_right = 0.474
 anchor_bottom = 0.533
 offset_left = 1320.0
 offset_top = 184.0
-offset_right = 543.92
-offset_bottom = -263.64
+offset_right = 1417.0
+offset_bottom = 251.0
 text = "WIN"
-label_settings = SubResource("LabelSettings_m5f4p")
+label_settings = SubResource("LabelSettings_xa1s4")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LabelTimeExceed" type="Label" parent="CanvasLayer"]
+[node name="LabelTimeExceed" type="Label" parent="Layer"]
 anchors_preset = -1
 anchor_right = 0.474
 anchor_bottom = 0.533
 offset_left = 1560.0
 offset_top = 200.0
-offset_right = 847.92
-offset_bottom = -215.64
+offset_right = 1744.0
+offset_bottom = 341.0
 text = "TIME
 EXCEED"
-label_settings = SubResource("LabelSettings_7oamh")
+label_settings = SubResource("LabelSettings_nfrf1")
 horizontal_alignment = 1
 vertical_alignment = 1
 

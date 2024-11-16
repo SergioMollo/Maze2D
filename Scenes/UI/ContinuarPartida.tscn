@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c145vvgnhr6u0"]
+[gd_scene load_steps=9 format=3 uid="uid://c145vvgnhr6u0"]
 
-[ext_resource type="Theme" uid="uid://dpjj7oabgkofc" path="res://Resources/Edit_Textures/buttons.tres" id="1_f0ph2"]
-[ext_resource type="Script" path="res://Scripts/Controller/ContinuarPartida.gd" id="1_j8rly"]
-[ext_resource type="Texture2D" uid="uid://cf6b2v527uxsu" path="res://Resources/ImagenesTextures/continue-game-texture.jpg" id="2_7b2t2"]
-[ext_resource type="Theme" uid="uid://bd2fffoq0chyl" path="res://Resources/Edit_Textures/panel_partidas.tres" id="3_imfka"]
-[ext_resource type="Texture2D" uid="uid://cppu2akwmrfsf" path="res://Resources/ImagenesTextures/Laberinto3.jpg" id="3_k1mhb"]
-[ext_resource type="Texture2D" uid="uid://bgd4lc5f0t2i7" path="res://Resources/ImagenesTextures/Laberinto3.3.jpg" id="7_knysn"]
+[ext_resource type="Script" path="res://Scripts/Controller/ContinuarPartida.gd" id="1_n0l3a"]
+[ext_resource type="Texture2D" uid="uid://cf6b2v527uxsu" path="res://Resources/ImagenesTextures/continue-game-texture.jpg" id="2_ts5w7"]
+[ext_resource type="Texture2D" uid="uid://cabwmcowde8f7" path="res://Resources/ImagenesTextures/Laberinto2.jpg" id="3_4ne1g"]
+[ext_resource type="Theme" uid="uid://bd2fffoq0chyl" path="res://Resources/Edit_Textures/panel_partidas.tres" id="4_t1d17"]
+[ext_resource type="Theme" uid="uid://dpjj7oabgkofc" path="res://Resources/Edit_Textures/buttons.tres" id="5_ws8bb"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dknu8"]
 
@@ -20,7 +19,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_j8rly")
+script = ExtResource("1_n0l3a")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 self_modulate = Color(0.211765, 0.211765, 0.211765, 1)
@@ -30,7 +29,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_7b2t2")
+texture = ExtResource("2_ts5w7")
 expand_mode = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -83,7 +82,7 @@ layout_mode = 2
 [node name="Imagen" type="TextureRect" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox"]
 self_modulate = Color(1, 1, 1, 0.698039)
 layout_mode = 2
-texture = ExtResource("3_k1mhb")
+texture = ExtResource("3_4ne1g")
 expand_mode = 2
 
 [node name="Informacion" type="VBoxContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox"]
@@ -97,7 +96,7 @@ size_flags_horizontal = 0
 
 [node name="NameLabel" type="Button" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion"]
 layout_mode = 2
-theme = ExtResource("3_imfka")
+theme = ExtResource("4_t1d17")
 text = "Nombre de la partida"
 alignment = 0
 
@@ -190,7 +189,7 @@ theme_override_constants/separation = 10
 [node name="NameLabel" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
-theme = ExtResource("3_imfka")
+theme = ExtResource("4_t1d17")
 theme_override_font_sizes/font_size = 40
 text = "Nombre de la partida"
 
@@ -208,7 +207,7 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
-texture = ExtResource("7_knysn")
+texture = ExtResource("3_4ne1g")
 expand_mode = 5
 stretch_mode = 4
 
@@ -291,7 +290,7 @@ layout_mode = 2
 
 [node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBox"]
 layout_mode = 2
-theme = ExtResource("1_f0ph2")
+theme = ExtResource("5_ws8bb")
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 25

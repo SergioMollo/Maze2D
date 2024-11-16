@@ -6,19 +6,19 @@ func _ready():
 	
 
 func _on_crear_partida_pressed():
-	get_tree().change_scene_to_file("res://Scenes/CrearPartida.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Game/CrearPartida.tscn")
 
 
 func _on_continuar_partida_pressed():
-	get_tree().change_scene_to_file("res://Scenes/ContinuarPartida.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Game/ContinuarPartida.tscn")
 
 
 func _on_seleccionar_apariencia_pressed():
-	get_tree().change_scene_to_file("res://Scenes/SeleccionarApariencia.tscn")
+	get_tree().change_scene_to_file("res://Scenes/Game/SeleccionarApariencia.tscn")
 
 
 func _on_ajustes_pressed():
-	var overlay_scene = preload("res://Scenes/Configuracion.tscn")
+	var overlay_scene = preload("res://Scenes/UI/Configuracion.tscn")
 	var node = $"."
 	node.modulate.a = 0.5
 	var instance = overlay_scene.instantiate()

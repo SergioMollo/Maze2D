@@ -26,7 +26,7 @@ texture_margin_left = 15.0
 texture_margin_top = 15.0
 texture_margin_right = 15.0
 texture_margin_bottom = 15.0
-region_rect = Rect2(12.6236, 37.8253, 341.097, 70.2399)
+region_rect = Rect2(387.454, 478.754, 339.813, 71.1237)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_727nv"]
 texture = ExtResource("1_uf2s3")
@@ -67,9 +67,12 @@ region_rect = Rect2(23.9665, 594.188, 323.162, 42.8339)
 
 [resource]
 default_font_size = 40
+Button/font_sizes/font_size = 20
 Button/styles/focus = SubResource("StyleBoxTexture_8a0rw")
 Button/styles/hover = SubResource("StyleBoxTexture_7ufv1")
 Button/styles/normal = SubResource("StyleBoxTexture_tyc8i")
+Button/styles/pressed = SubResource("StyleBoxTexture_tyc8i")
+Label/font_sizes/font_size = 25
 LineEdit/styles/normal = SubResource("StyleBoxTexture_727nv")
 OptionButton/constants/arrow_margin = 11
 OptionButton/icons/arrow = ExtResource("2_3jh10")

@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://c3rs2wth2eni6"]
+[gd_scene format=3 uid="uid://c4uon6kmxfjpd"]
 
-[node name="GameOptions" type="Control"]
+[node name="GuardarPartida" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
