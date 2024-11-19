@@ -106,7 +106,7 @@ region_rect = Rect2(73.446, 246.5, 568, 448)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ctubc"]
 texture = ExtResource("3_1g5s0")
-region_rect = Rect2(2349.8, 287.851, 1649.38, 2049.66)
+region_rect = Rect2(2337.6, 287.851, 1661.57, 2069.95)
 
 [resource]
 Button/font_sizes/font_size = 20
