@@ -1,0 +1,10 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://4y0n3dobbb3s"]
+
+[ext_resource type="Texture2D" uid="uid://diytq37w3a8fe" path="res://Resources/Inkscape/PanelInformacion.svg" id="1_28uif"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1i8km"]
+texture = ExtResource("1_28uif")
+region_rect = Rect2(66.6095, 62.667, 520.953, 134.119)
+
+[resource]
+Panel/styles/panel = SubResource("StyleBoxTexture_1i8km")

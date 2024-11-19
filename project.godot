@@ -11,16 +11,18 @@ config_version=5
 [application]
 
 config/name="LaberintoTFG"
-run/main_scene="res://Scenes/LaberintoNivel1.tscn"
+run/main_scene="res://Maze/View/Game/LaberintoNivel1.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 boot_splash/bg_color=Color(0.00392157, 0.176471, 0, 1)
-config/icon="res://Resources/ParedesLaberintoProvisionales32x32.png"
+
+[autoload]
+
+Singleton="*res://Maze/Model/Singleton.gd"
 
 [display]
 
-window/size/viewport_width=1080
-window/size/viewport_height=720
-window/size/mode=2
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=2
 

@@ -1,0 +1,28 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://c114exd44o8sj"]
+
+[ext_resource type="Texture2D" uid="uid://cde5ld0q48sjb" path="res://Resources/Inkscape/PanelApariencia.svg" id="1_3nx3g"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sx1y8"]
+texture = ExtResource("1_3nx3g")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(797.328, 990.655, 335.298, 71.406)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_esiyb"]
+texture = ExtResource("1_3nx3g")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(217.711, 996.395, 333.553, 67.2238)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ri76g"]
+texture = ExtResource("1_3nx3g")
+region_rect = Rect2(702.318, 184.883, 523.416, 705.404)
+
+[resource]
+Button/styles/hover = SubResource("StyleBoxTexture_sx1y8")
+Button/styles/normal = SubResource("StyleBoxTexture_esiyb")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_ri76g")

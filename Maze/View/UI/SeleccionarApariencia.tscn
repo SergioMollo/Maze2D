@@ -1,0 +1,189 @@
+[gd_scene load_steps=25 format=3 uid="uid://buj4aqstdtxro"]
+
+[ext_resource type="Script" path="res://Maze/Controller/UI/SeleccionarApariencia.gd" id="1_tuwol"]
+[ext_resource type="Texture2D" uid="uid://babog7m3qbbqj" path="res://Resources/ImagenesTextures/seleccionar-apariencia-texture.jpg" id="2_tbh4h"]
+[ext_resource type="Texture2D" uid="uid://c07sb8wmwlb0o" path="res://Resources/Inkscape/Botones.svg" id="3_guf5d"]
+[ext_resource type="Texture2D" uid="uid://dt7kmyxnmck11" path="res://Resources/Pixelart/arrow_left.png" id="4_cfywt"]
+[ext_resource type="Texture2D" uid="uid://bhchyvg1l6an5" path="res://Resources/Pixelart/arrow_left_hover.png" id="5_n2jhw"]
+[ext_resource type="Texture2D" uid="uid://dd8ewxgic68jk" path="res://Resources/Pixelart/arrow_left_focus.png" id="6_q7g0x"]
+[ext_resource type="Texture2D" uid="uid://crokwetfh1rvj" path="res://Resources/Pixelart/arrow_rigth.png" id="7_itku4"]
+[ext_resource type="Texture2D" uid="uid://tr8xkxfete8h" path="res://Resources/Pixelart/arrow_rigth_hover.png" id="8_jkxtk"]
+[ext_resource type="Texture2D" uid="uid://cadevp6xkcygb" path="res://Resources/Pixelart/arrow_rigth_focus.png" id="9_dwfd5"]
+[ext_resource type="Texture2D" uid="uid://diytq37w3a8fe" path="res://Resources/Inkscape/PanelInformacion.svg" id="10_dksnx"]
+[ext_resource type="Texture2D" uid="uid://mc08adn3lorq" path="res://Resources/ImagenesTextures/Player.png" id="11_fneg6"]
+[ext_resource type="Theme" uid="uid://dpjj7oabgkofc" path="res://Resources/Edit_Textures/buttons.tres" id="12_38jhi"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wyph4"]
+texture = ExtResource("3_guf5d")
+texture_margin_left = 25.0
+texture_margin_top = 15.0
+texture_margin_right = 25.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(391.987, 628.451, 184.414, 45.0789)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rssev"]
+texture = ExtResource("4_cfywt")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qd8kr"]
+texture = ExtResource("5_n2jhw")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2058t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_es0jg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g1q6w"]
+texture = ExtResource("6_q7g0x")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ir5wq"]
+texture = ExtResource("7_itku4")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mewyi"]
+texture = ExtResource("8_jkxtk")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e1ceh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xh30x"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ekblr"]
+texture = ExtResource("9_dwfd5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dusd5"]
+texture = ExtResource("10_dksnx")
+region_rect = Rect2(667.841, 261.401, 502.698, 501.491)
+
+[node name="SeleccionarApariencia" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tuwol")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.294118, 0.294118, 0.294118, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_tbh4h")
+
+[node name="Titulo" type="Label" parent="."]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 20.0
+offset_right = 617.0
+offset_bottom = 75.0
+theme_override_font_sizes/font_size = 40
+text = "Seleccionar Apariencia Jugador"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 74.0
+offset_right = 720.0
+offset_bottom = 78.0
+
+[node name="Personaje" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -98.5
+offset_top = 40.0
+offset_right = 98.5
+offset_bottom = 133.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxTexture_wyph4")
+text = "Jugador"
+
+[node name="Left" type="Button" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 440.0
+offset_right = 500.0
+offset_bottom = 640.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_rssev")
+theme_override_styles/hover = SubResource("StyleBoxTexture_qd8kr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2058t")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_es0jg")
+theme_override_styles/focus = SubResource("StyleBoxTexture_g1q6w")
+
+[node name="Rigth" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -100.0
+offset_right = -300.0
+offset_bottom = 100.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_ir5wq")
+theme_override_styles/hover = SubResource("StyleBoxTexture_mewyi")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_e1ceh")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_xh30x")
+theme_override_styles/focus = SubResource("StyleBoxTexture_ekblr")
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(800, 800)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -400.0
+offset_right = 400.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_dusd5")
+
+[node name="Imagen" type="TextureRect" parent="Panel"]
+texture_filter = 1
+custom_minimum_size = Vector2(750, 750)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -375.0
+offset_top = -375.0
+offset_right = 375.0
+offset_bottom = 375.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_fneg6")
+
+[node name="Seleccionar" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1612.0
+offset_top = 993.0
+offset_right = 1753.0
+offset_bottom = 1051.0
+theme = ExtResource("12_38jhi")
+text = "Seleccionar"
+
+[node name="Cancelar" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1767.0
+offset_top = 994.0
+offset_right = 1882.0
+offset_bottom = 1052.0
+theme = ExtResource("12_38jhi")
+text = "Cancelar"
+
+[connection signal="pressed" from="Left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="Rigth" to="." method="_on_rigth_pressed"]
+[connection signal="pressed" from="Seleccionar" to="." method="_on_seleccionar_pressed"]
+[connection signal="pressed" from="Cancelar" to="." method="_on_cancelar_pressed"]

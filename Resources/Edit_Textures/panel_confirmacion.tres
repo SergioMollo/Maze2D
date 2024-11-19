@@ -1,0 +1,59 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bli0ffcjwbud6"]
+
+[ext_resource type="Texture2D" uid="uid://c07sb8wmwlb0o" path="res://Resources/Inkscape/Botones.svg" id="1_88d8p"]
+[ext_resource type="Texture2D" uid="uid://diytq37w3a8fe" path="res://Resources/Inkscape/PanelInformacion.svg" id="2_hwg0m"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_guwrb"]
+texture = ExtResource("1_88d8p")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(386.889, 479.319, 338.12, 69.9948)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d5l84"]
+texture = ExtResource("1_88d8p")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(24.5393, 594.348, 321.424, 41.9857)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hknmy"]
+texture = ExtResource("1_88d8p")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(24.4942, 653.35, 321.158, 42.4097)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ix2bi"]
+texture = ExtResource("1_88d8p")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(24.3158, 534.892, 321.89, 42.9187)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fyue0"]
+texture = ExtResource("1_88d8p")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(649.886, 725.635, 321.929, 42.4097)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vtnva"]
+texture = ExtResource("2_hwg0m")
+region_rect = Rect2(671.724, 64.5768, 505.769, 131.522)
+
+[resource]
+Button/styles/focus = SubResource("StyleBoxTexture_guwrb")
+Button/styles/hover = SubResource("StyleBoxTexture_guwrb")
+Button/styles/normal = SubResource("StyleBoxTexture_guwrb")
+Button/styles/pressed = SubResource("StyleBoxTexture_guwrb")
+OptionButton/styles/focus = SubResource("StyleBoxTexture_d5l84")
+OptionButton/styles/hover = SubResource("StyleBoxTexture_hknmy")
+OptionButton/styles/normal = SubResource("StyleBoxTexture_ix2bi")
+OptionButton/styles/pressed = SubResource("StyleBoxTexture_fyue0")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_vtnva")

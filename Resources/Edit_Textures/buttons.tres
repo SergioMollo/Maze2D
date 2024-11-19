@@ -1,0 +1,83 @@
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://dpjj7oabgkofc"]
+
+[ext_resource type="Texture2D" uid="uid://c07sb8wmwlb0o" path="res://Resources/Inkscape/Botones.svg" id="1_uf2s3"]
+[ext_resource type="Texture2D" uid="uid://bdywim316eqnt" path="res://Resources/Pixelart/arrow.png" id="2_3jh10"]
+[ext_resource type="Texture2D" uid="uid://dicpsu2pwtx0y" path="res://Resources/Pixelart/updown.png" id="3_6epk1"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8a0rw"]
+texture = ExtResource("1_uf2s3")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(5.11846, 224.329, 338.685, 71.3291)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ufv1"]
+texture = ExtResource("1_uf2s3")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(10.1844, 129.27, 341.507, 69.4304)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tyc8i"]
+texture = ExtResource("1_uf2s3")
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(387.454, 478.754, 339.813, 71.1237)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_727nv"]
+texture = ExtResource("1_uf2s3")
+texture_margin_left = 25.0
+region_rect = Rect2(23.3884, 533.95, 323.282, 44.7848)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gxqul"]
+texture = ExtResource("1_uf2s3")
+texture_margin_left = 25.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(23.8828, 593.101, 322.823, 43.8517)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0fhr0"]
+texture = ExtResource("1_uf2s3")
+texture_margin_left = 25.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(22.5884, 652.054, 324.121, 44.0854)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hhh3c"]
+texture = ExtResource("1_uf2s3")
+texture_margin_left = 25.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(23.4192, 534.722, 323.5, 43.4645)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ps1i"]
+texture = ExtResource("1_uf2s3")
+texture_margin_left = 25.0
+texture_margin_top = 15.0
+texture_margin_right = 15.0
+texture_margin_bottom = 15.0
+region_rect = Rect2(23.9665, 594.188, 323.162, 42.8339)
+
+[resource]
+default_font_size = 40
+Button/font_sizes/font_size = 20
+Button/styles/focus = SubResource("StyleBoxTexture_8a0rw")
+Button/styles/hover = SubResource("StyleBoxTexture_7ufv1")
+Button/styles/normal = SubResource("StyleBoxTexture_tyc8i")
+Button/styles/pressed = SubResource("StyleBoxTexture_tyc8i")
+Label/font_sizes/font_size = 25
+LineEdit/styles/normal = SubResource("StyleBoxTexture_727nv")
+OptionButton/constants/arrow_margin = 11
+OptionButton/icons/arrow = ExtResource("2_3jh10")
+OptionButton/styles/focus = SubResource("StyleBoxTexture_gxqul")
+OptionButton/styles/hover = SubResource("StyleBoxTexture_0fhr0")
+OptionButton/styles/normal = SubResource("StyleBoxTexture_hhh3c")
+OptionButton/styles/pressed = SubResource("StyleBoxTexture_4ps1i")
+SpinBox/icons/updown = ExtResource("3_6epk1")
