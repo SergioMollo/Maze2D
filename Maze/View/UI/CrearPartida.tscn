@@ -1,0 +1,322 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwsma1g02vssj"]
+
+[ext_resource type="Theme" uid="uid://dpjj7oabgkofc" path="res://Resources/Edit_Textures/buttons.tres" id="1_cggnk"]
+[ext_resource type="Script" path="res://Maze/Controller/UI/CrearPartida.gd" id="2_d2uo2"]
+[ext_resource type="Texture2D" uid="uid://ckvbe0lkitxo4" path="res://Resources/ImagenesTextures/create-game-texture.jpg" id="3_hlhse"]
+[ext_resource type="Theme" uid="uid://4y0n3dobbb3s" path="res://Resources/Edit_Textures/panel_informacion.tres" id="4_pokip"]
+
+[node name="CrearPartida" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_cggnk")
+script = ExtResource("2_d2uo2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.392157, 0.392157, 0.392157, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_hlhse")
+expand_mode = 2
+
+[node name="CrearPartida" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1870.0
+offset_top = -105.0
+offset_right = -1585.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Crear Partida"
+
+[node name="Atras" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -105.0
+offset_right = -39.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Atras"
+
+[node name="Nivel" type="Label" parent="."]
+layout_mode = 2
+offset_left = 100.0
+offset_top = 286.0
+offset_right = 197.0
+offset_bottom = 341.0
+text = "Nivel"
+
+[node name="NivelOption" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(425, 0)
+layout_mode = 2
+offset_left = 575.0
+offset_top = 267.0
+offset_right = 1000.0
+offset_bottom = 361.0
+item_count = 4
+selected = 0
+popup/item_0/text = "Nivel1"
+popup/item_0/id = 0
+popup/item_1/text = "Nivel2"
+popup/item_1/id = 1
+popup/item_2/text = "Nivel3"
+popup/item_2/id = 2
+popup/item_3/text = "Aleatorio"
+popup/item_3/id = 3
+
+[node name="Dificultad" type="Label" parent="."]
+layout_mode = 2
+offset_left = 100.0
+offset_top = 384.0
+offset_right = 286.0
+offset_bottom = 439.0
+text = "Dificultad"
+
+[node name="DificultadOption" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(425, 0)
+layout_mode = 2
+offset_left = 575.0
+offset_top = 365.0
+offset_right = 1000.0
+offset_bottom = 459.0
+item_count = 3
+selected = 0
+popup/item_0/text = "Facil"
+popup/item_0/id = 0
+popup/item_1/text = "Media"
+popup/item_1/id = 1
+popup/item_2/text = "Dificil"
+popup/item_2/id = 2
+
+[node name="ModoJuego" type="Label" parent="."]
+layout_mode = 2
+offset_left = 100.0
+offset_top = 482.0
+offset_right = 384.0
+offset_bottom = 537.0
+text = "Modo de Juego"
+
+[node name="JuegoOption" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(425, 0)
+layout_mode = 2
+offset_left = 575.0
+offset_top = 463.0
+offset_right = 1000.0
+offset_bottom = 557.0
+item_count = 2
+selected = 0
+popup/item_0/text = "Solitario"
+popup/item_0/id = 0
+popup/item_1/text = "Enfrentamiento"
+popup/item_1/id = 1
+
+[node name="ModoInteraccion" type="Label" parent="."]
+layout_mode = 2
+offset_left = 100.0
+offset_top = 580.0
+offset_right = 494.0
+offset_bottom = 635.0
+text = "Modo de Interaccion"
+
+[node name="InteraccionOption" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(425, 0)
+layout_mode = 2
+offset_left = 575.0
+offset_top = 561.0
+offset_right = 1000.0
+offset_bottom = 655.0
+item_count = 2
+selected = 0
+popup/item_0/text = "Usuario"
+popup/item_0/id = 0
+popup/item_1/text = "Computadora"
+popup/item_1/id = 1
+
+[node name="Algoritmo" type="Label" parent="."]
+layout_mode = 2
+offset_left = 100.0
+offset_top = 678.0
+offset_right = 548.0
+offset_bottom = 733.0
+text = "Algoritmo de Busqueda"
+
+[node name="Algoritmo2" type="Label" parent="."]
+layout_mode = 2
+offset_left = 104.0
+offset_top = 780.0
+offset_right = 552.0
+offset_bottom = 835.0
+text = "Número de Juegos"
+
+[node name="AlgotirmoOption" type="OptionButton" parent="."]
+custom_minimum_size = Vector2(425, 0)
+layout_mode = 2
+offset_left = 575.0
+offset_top = 659.0
+offset_right = 1000.0
+offset_bottom = 753.0
+item_count = 4
+selected = 0
+popup/item_0/text = "BFS"
+popup/item_0/id = 0
+popup/item_1/text = "DFS"
+popup/item_1/id = 1
+popup/item_2/text = "Dijkstra"
+popup/item_2/id = 2
+popup/item_3/text = "A star"
+popup/item_3/id = 3
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 40.0
+offset_top = 100.0
+offset_right = 515.0
+offset_bottom = 155.0
+text = "Configuracion de partida"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 96.0
+offset_right = 1008.0
+offset_bottom = 230.0
+
+[node name="Panel1" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 1100.0
+offset_top = 75.0
+offset_right = 1900.0
+offset_bottom = 275.0
+theme = ExtResource("4_pokip")
+
+[node name="Nombre" type="Label" parent="Panel1"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 5.0
+offset_right = 512.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 30
+text = "Información Nivel 1"
+
+[node name="Informacion" type="Label" parent="Panel1"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 50.0
+offset_right = 75.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 28
+text = "El nivel 1 tiene un tamaño de 10x10.
+Recomendado para usuarios principiantes."
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 1100.0
+offset_top = 300.0
+offset_right = 1900.0
+offset_bottom = 500.0
+theme = ExtResource("4_pokip")
+
+[node name="Nombre" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 5.0
+offset_right = 512.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 30
+text = "Información Nivel 2"
+
+[node name="Informacion" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 50.0
+offset_right = 75.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 28
+text = "El nivel 2 tiene un tamaño de 20x25.
+Recomendado para usuarios intermedios."
+
+[node name="Panel3" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 1100.0
+offset_top = 525.0
+offset_right = 1900.0
+offset_bottom = 725.0
+theme = ExtResource("4_pokip")
+
+[node name="Nombre" type="Label" parent="Panel3"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 5.0
+offset_right = 512.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 30
+text = "Información Nivel 3"
+
+[node name="Informacion" type="Label" parent="Panel3"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 50.0
+offset_right = 75.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 28
+text = "El nivel 1 tiene un tamaño de 50x25.
+Recomendado para usuarios avanzados."
+
+[node name="Panel4" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 1100.0
+offset_top = 750.0
+offset_right = 1900.0
+offset_bottom = 950.0
+theme = ExtResource("4_pokip")
+
+[node name="Nombre" type="Label" parent="Panel4"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 5.0
+offset_right = 512.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 30
+text = "Información Nivel Aleatorio"
+
+[node name="Informacion" type="Label" parent="Panel4"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 50.0
+offset_right = 75.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 28
+text = "El nivel aleatorio tiene un tamaño entre 15x15 y 50x25.
+Recomendado para usuarios de nivel intermedio-alto."
+
+[node name="SpinBox" type="SpinBox" parent="."]
+custom_minimum_size = Vector2(425, 0)
+layout_mode = 0
+offset_left = 575.0
+offset_top = 760.0
+offset_right = 1000.0
+offset_bottom = 855.0
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[connection signal="pressed" from="CrearPartida" to="." method="_on_crear_partida_pressed"]
+[connection signal="pressed" from="Atras" to="." method="_on_atras_pressed"]

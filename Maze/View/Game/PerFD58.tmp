@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://r0bherb862i5"]
+
+[ext_resource type="Script" path="res://Maze/Controller/PlayerController.gd" id="1_hv7fm"]
+[ext_resource type="Texture2D" uid="uid://bgtxbjskkjql5" path="res://Resources/PersonajeAnimado32x32.png" id="2_mah1r"]
+[ext_resource type="Script" path="res://Maze/AIController2D.gd" id="3_537n3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s70as"]
+size = Vector2(31, 31)
+
+[node name="Personaje" type="CharacterBody2D"]
+scale = Vector2(32, 32)
+script = ExtResource("1_hv7fm")
+metadata/_edit_group_ = true
+
+[node name="AIController2D" type="Node2D" parent="."]
+script = ExtResource("3_537n3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture_repeat = 1
+texture = ExtResource("2_mah1r")
+hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+root_node = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s70as")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_max_distance = 1e+06
+max_neighbors = 30
+debug_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="ready" from="." to="." method="_ready"]

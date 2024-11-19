@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://reefyu4gqonu"
-path="res://.godot/imported/MonedaMovimiento32x32.png-ab9b49e8268b29d743bcc6d711e31978.ctex"
+uid="uid://crokwetfh1rvj"
+path="res://.godot/imported/arrow_rigth.png-6ef7ad6163fcd447808a94904d8461f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/MonedaMovimiento32x32.png"
-dest_files=["res://.godot/imported/MonedaMovimiento32x32.png-ab9b49e8268b29d743bcc6d711e31978.ctex"]
+source_file="res://Resources/Pixelart/arrow_rigth.png"
+dest_files=["res://.godot/imported/arrow_rigth.png-6ef7ad6163fcd447808a94904d8461f7.ctex"]
 
 [params]
 

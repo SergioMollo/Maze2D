@@ -26,10 +26,10 @@
      inkscape:document-units="px"
      inkscape:zoom="1.2727922"
      inkscape:cx="797.06648"
-     inkscape:cy="214.09622"
-     inkscape:window-width="2400"
-     inkscape:window-height="1261"
-     inkscape:window-x="-9"
+     inkscape:cy="528.3659"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="2391"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
@@ -218,5 +218,12 @@
        height="34.71534"
        x="177.52637"
        y="17.253733" />
+    <rect
+       style="fill:#2d4554;fill-opacity:1;fill-rule:evenodd;stroke-width:0.750817"
+       id="rect4"
+       width="132.29167"
+       height="132.29167"
+       x="177.11061"
+       y="69.430687" />
   </g>
 </svg>

@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=17 format=3 uid="uid://cw4o8gt2g0buu"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://cw4o8gt2g0buu"]
 
 [ext_resource type="Texture2D" uid="uid://c07sb8wmwlb0o" path="res://Resources/Inkscape/Botones.svg" id="1_isfvk"]
 [ext_resource type="Texture2D" uid="uid://diytq37w3a8fe" path="res://Resources/Inkscape/PanelInformacion.svg" id="2_03rww"]
+[ext_resource type="Texture2D" uid="uid://ck2jqp6snu0r2" path="res://Resources/ImagenesTextures/texture-panel.jpg" id="3_1g5s0"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lysh8"]
 texture = ExtResource("1_isfvk")
@@ -104,8 +105,8 @@ texture = ExtResource("2_03rww")
 region_rect = Rect2(73.446, 246.5, 568, 448)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ctubc"]
-texture = ExtResource("2_03rww")
-region_rect = Rect2(74.0936, 273.247, 524.964, 419.754)
+texture = ExtResource("3_1g5s0")
+region_rect = Rect2(2349.8, 287.851, 1649.38, 2049.66)
 
 [resource]
 Button/font_sizes/font_size = 20
