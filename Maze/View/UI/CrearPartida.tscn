@@ -158,15 +158,7 @@ offset_right = 548.0
 offset_bottom = 733.0
 text = "Algoritmo de Busqueda"
 
-[node name="Algoritmo2" type="Label" parent="."]
-layout_mode = 2
-offset_left = 104.0
-offset_top = 780.0
-offset_right = 552.0
-offset_bottom = 835.0
-text = "Número de Juegos"
-
-[node name="AlgotirmoOption" type="OptionButton" parent="."]
+[node name="AlgoritmoOption" type="OptionButton" parent="."]
 custom_minimum_size = Vector2(425, 0)
 layout_mode = 2
 offset_left = 575.0
@@ -174,7 +166,6 @@ offset_top = 659.0
 offset_right = 1000.0
 offset_bottom = 753.0
 item_count = 4
-selected = 0
 popup/item_0/text = "BFS"
 popup/item_0/id = 0
 popup/item_1/text = "DFS"
@@ -184,13 +175,33 @@ popup/item_2/id = 2
 popup/item_3/text = "A star"
 popup/item_3/id = 3
 
-[node name="Label" type="Label" parent="."]
+[node name="Juegis" type="Label" parent="."]
+layout_mode = 2
+offset_left = 104.0
+offset_top = 780.0
+offset_right = 552.0
+offset_bottom = 835.0
+text = "Número de Juegos"
+
+[node name="NumeroJuegos" type="SpinBox" parent="."]
+custom_minimum_size = Vector2(425, 0)
+layout_mode = 0
+offset_left = 575.0
+offset_top = 760.0
+offset_right = 1000.0
+offset_bottom = 855.0
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+
+[node name="Nombre" type="Label" parent="."]
 layout_mode = 2
 offset_left = 40.0
 offset_top = 100.0
 offset_right = 515.0
 offset_bottom = 155.0
-text = "Configuracion de partida"
+theme_override_font_sizes/font_size = 40
+text = "Configuración de partida"
 
 [node name="HSeparator" type="HSeparator" parent="."]
 layout_mode = 0
@@ -307,16 +318,10 @@ theme_override_font_sizes/font_size = 28
 text = "El nivel aleatorio tiene un tamaño entre 15x15 y 50x25.
 Recomendado para usuarios de nivel intermedio-alto."
 
-[node name="SpinBox" type="SpinBox" parent="."]
-custom_minimum_size = Vector2(425, 0)
+[node name="Label2" type="Label" parent="."]
 layout_mode = 0
-offset_left = 575.0
-offset_top = 760.0
-offset_right = 1000.0
-offset_bottom = 855.0
-min_value = 1.0
-max_value = 10.0
-value = 1.0
+offset_right = 40.0
+offset_bottom = 35.0
 
 [connection signal="pressed" from="CrearPartida" to="." method="_on_crear_partida_pressed"]
 [connection signal="pressed" from="Atras" to="." method="_on_atras_pressed"]

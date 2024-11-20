@@ -4,10 +4,10 @@ class_name EnemyController
 
 var enemy
 var maze_finished = false
-var player_controller
+var player
 signal eliminated
 
-
+var path = []
 
 @onready var ai_enemy: Node2D = $AIController2DEnemy
 
@@ -16,12 +16,12 @@ func _ready():
 	enemy = Enemy.new()
 	enemy.position = position
 	enemy.actual_position = position
-	player_controller = get_parent().get_node("Jugador")
+	player = get_parent().get_node("Jugador")
 	
 func _process(delta):
 	await get_tree().physics_frame
 
-	if !maze_finished and player_controller.player.moving and enemy.position != enemy.target:
+	if !maze_finished and Singleton.move_enemy and enemy.position != enemy.target:
 
 		# var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		# velocity = direction * SPEED
@@ -38,44 +38,38 @@ func _process(delta):
 			else:
 				enemy.position = enemy.actual_position
 				position = enemy.actual_position
-				enemy.moving = false
+				Singleton.move_enemy = false
 				velocity = Vector2()
 				
-			# Si estamos muy cerca de la posición objetivo, corregimos la posición final
+		# Si estamos muy cerca de la posición objetivo, corregimos la posición final
 		elif position.distance_to(enemy.target) < 1:
 			enemy.position = enemy.target
 			position = enemy.target
 			velocity = Vector2()  # Detenemos el movimiento
-			enemy.moving = false
+			Singleton.move_enemy = false
 
 		if position == enemy.target:
-			enemy.moving = false
+			Singleton.move_enemy = false
 
 
 
-func _input(event):
+func move():
+	var node = path[0]
+	if !Singleton.move_enemy:
+		Singleton.move_enemy = true
+		enemy.actual_position = enemy.position
+		enemy.target = node
+		path.erase(node)
 
-	if !enemy.moving:
-		if event.is_action_pressed("ui_right"):
-			enemy.moving = true
-			enemy.actual_position = enemy.position
-			enemy.target.x = enemy.position.x + 32
-			enemy.target.y = enemy.position.y		
-			
-		elif event.is_action_pressed("ui_left"):
-			enemy.moving = true
-			enemy.actual_position = enemy.position
-			enemy.target.x = enemy.position.x - 32
-			enemy.target.y = enemy.position.y
-			
-		elif event.is_action_pressed("ui_up"):
-			enemy.moving = true
-			enemy.actual_position = enemy.position
-			enemy.target.x = enemy.position.x 
-			enemy.target.y = enemy.position.y - 32
-			
-		elif event.is_action_pressed("ui_down"):
-			enemy.moving = true
-			enemy.actual_position = enemy.position
-			enemy.target.x = enemy.position.x
-			enemy.target.y = enemy.position.y + 32
+
+# Asigna el algoritmo correspondiente
+func setAlgorithm(selected_algorithm: VideogameConstants.Algoritmo):
+
+	var algorithm = Algorithm.new()
+	algorithm.algoritmo = selected_algorithm  
+	algorithm.nombre = VideogameConstants.Algoritmo.keys()[selected_algorithm]
+
+
+# 
+func searchPlayer(graph: Dictionary, heuristic: Dictionary, start_node: Vector2, end_node: Vector2):
+	self.algoritmo.search(graph, heuristic, start_node, end_node)

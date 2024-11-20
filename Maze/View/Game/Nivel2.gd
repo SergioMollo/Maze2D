@@ -7,13 +7,10 @@ class_name Nivel2
 var level_data = {
 	"xSize" : 800,
 	"ySize" : 640,
-	"map" : [],
-	"result" : [],
-	"graph" : {},
-	"scale": Vector2i(992, 704),
-	"initial_player_position": Vector2(144,208),
-	"initial_enemy_position": Vector2(304,304),
-	"initial_coin_position": Vector2(560,432)
+	"scale": Vector2i(928, 704),
+	"initial_player_position": Vector2(112,208),
+	"initial_enemy_position": Vector2(272,304),
+	"initial_coin_position": Vector2(528,432)
 }
 
 func _ready():

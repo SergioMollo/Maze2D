@@ -4,9 +4,6 @@ class_name Maze
 
 var xSize
 var ySize
-var map = []
-var result = []
-var graph = {}
 
 var player: CharacterBody2D
 var enemy: CharacterBody2D
@@ -21,9 +18,6 @@ var initial_coin_position: Vector2
 var timer : Timer
 
 
-# var panel_informacion: InformationPanel
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -36,9 +30,6 @@ func _process(delta):
 func initialize_data(level_data, player_ref, coin_ref, timer_ref, tilemap_ref):
 	xSize = level_data.xSize
 	ySize = level_data.ySize
-	map = level_data.map
-	result = level_data.result
-	graph = level_data.graph
 	scale = level_data.scale
 	initial_player_position = level_data.initial_player_position
 	initial_enemy_position = level_data.initial_enemy_position

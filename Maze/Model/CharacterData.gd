@@ -12,6 +12,8 @@ var camino: Path
 var moving = false
 var direction = Vector2.ZERO
 
+var algoritmo: Algorithm
+
 @export var speed = 80
 #@export var velocity = 0
 

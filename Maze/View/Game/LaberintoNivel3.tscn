@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bc28ey48ixyl2" path="res://Maze/View/UI/GameHeader.tscn" id="4_7omxh"]
 [ext_resource type="Texture2D" uid="uid://pck2gtyxs6fp" path="res://Resources/ImagenesTextures/initial-texture.jpg" id="4_atr7l"]
 [ext_resource type="Texture2D" uid="uid://bjkwetwd828kp" path="res://Resources/Cesped32x32.png" id="4_gxqrr"]
-[ext_resource type="PackedScene" uid="uid://d1ghr5ojp13cd" path="res://Maze/View/Game/Moneda.tscn" id="6_l51q8"]
+[ext_resource type="PackedScene" uid="uid://dywo2s7j12e0f" path="res://Maze/View/Game/Moneda.tscn" id="6_l51q8"]
 
 [sub_resource type="FontFile" id="FontFile_7r0xj"]
 cache/0/16/0/ascent = 0.0

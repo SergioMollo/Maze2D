@@ -66,10 +66,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -250.0
-offset_top = -225.0
-offset_right = 250.0
-offset_bottom = 225.0
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_ubbpd")
@@ -135,38 +135,43 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Guardar" type="Button" parent="PanelContainer/Container/JuegoOptions"]
-custom_minimum_size = Vector2(265, 0)
+custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
 text = "Guardar Partida"
 
 [node name="Reiniciar" type="Button" parent="PanelContainer/Container/JuegoOptions"]
-custom_minimum_size = Vector2(265, 0)
+custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
 text = "Reiniciar Partida"
 
 [node name="CambiarConfiguracion" type="Button" parent="PanelContainer/Container/JuegoOptions"]
-custom_minimum_size = Vector2(265, 0)
+custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
 text = "Cambiar Configuración"
 
 [node name="Finalizar" type="Button" parent="PanelContainer/Container/JuegoOptions"]
-custom_minimum_size = Vector2(265, 0)
+custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
 text = "Finalizar Partida"
 
 [node name="Salir" type="Button" parent="PanelContainer/Container/JuegoOptions"]
-custom_minimum_size = Vector2(265, 0)
+custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 16
 text = "Salir"
 
 [node name="HSeparator4" type="HSeparator" parent="PanelContainer/Container/JuegoOptions"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 15)
+custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
 [node name="GeneralOptions" type="VBoxContainer" parent="PanelContainer/Container"]
@@ -234,10 +239,10 @@ theme_override_constants/margin_right = 20
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Container/Margin2"]
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_constants/separation = 20
 
 [node name="Continuar" type="Button" parent="PanelContainer/Container/Margin2/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxTexture_7txyo")
 theme_override_styles/hover = SubResource("StyleBoxTexture_tgodx")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_a73en")
@@ -246,6 +251,7 @@ text = "Continuar"
 
 [node name="Cerrar" type="Button" parent="PanelContainer/Container/Margin2/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 theme_override_styles/normal = SubResource("StyleBoxTexture_7txyo")
 theme_override_styles/hover = SubResource("StyleBoxTexture_tgodx")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_a73en")
@@ -255,6 +261,7 @@ text = "Cerrar"
 [node name="Margin3" type="MarginContainer" parent="PanelContainer/Container"]
 layout_mode = 2
 theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 40
 
 [node name="PausedLabel" type="Label" parent="PanelContainer/Container/Margin3"]

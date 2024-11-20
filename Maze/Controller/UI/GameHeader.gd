@@ -17,8 +17,6 @@ func _on_configuration_pressed():
 	add_child(instance)
 	var labirytnm = get_node("../../Maze")
 	instance.position = Vector2(labirytnm.maze.scale.x/2,labirytnm.maze.scale.y/2)
-	print(instance.position)
-	#instance.rect_size = Vector2(200,200)
 
 
 func _on_pause_pressed():
