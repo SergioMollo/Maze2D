@@ -13,5 +13,5 @@ var level_data = {
 	"initial_coin_position": Vector2(336,336)
 }
 
-func _ready():
+func _ready():	
 	maze_controller.setup(level_data)

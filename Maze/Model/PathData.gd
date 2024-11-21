@@ -2,10 +2,11 @@ extends Node
 
 class_name Path
 
-var id: int
+# var id: int
 var inicio: Vector2
 var objetivo: Vector2
-var trayectorias = [[]]
+var trayectoria = []
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

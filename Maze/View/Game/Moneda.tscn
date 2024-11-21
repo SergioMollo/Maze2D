@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dywo2s7j12e0f"]
 
-[ext_resource type="Script" path="res://Maze/Controller/CoinController.gd" id="1_7jm1k"]
+[ext_resource type="Script" path="res://Maze/Controller/Game/CoinController.gd" id="1_7jm1k"]
 [ext_resource type="Texture2D" uid="uid://reefyu4gqonu" path="res://Resources/MonedaMovimiento32x32.png" id="2_4elu2"]
 
 [sub_resource type="Animation" id="Animation_ablef"]

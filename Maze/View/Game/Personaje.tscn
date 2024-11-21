@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://r0bherb862i5"]
 
-[ext_resource type="Script" path="res://Maze/Controller/PlayerController.gd" id="1_hv7fm"]
+[ext_resource type="Script" path="res://Maze/Controller/Game/PlayerController.gd" id="1_hv7fm"]
 [ext_resource type="Texture2D" uid="uid://bgtxbjskkjql5" path="res://Resources/PersonajeAnimado32x32.png" id="2_mah1r"]
 [ext_resource type="Script" path="res://Maze/AIController2D.gd" id="3_537n3"]
 

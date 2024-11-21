@@ -2,6 +2,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_window().content_scale_size = Singleton.initial_resolution
 	$CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CrearPartida.grab_focus()
 	
 

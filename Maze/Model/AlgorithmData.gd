@@ -28,55 +28,23 @@ func _process(delta):
 func search(calcuated_graph: Dictionary, calcuated_heuristic: Dictionary, start_node: Vector2, end_node: Vector2):
 	graph = calcuated_graph
 	heuristic = calcuated_heuristic
+	var path = []
+
 	if algoritmo == VideogameConstants.Algoritmo.BFS:
-		bfsMaze(start_node, end_node)
+		path = bfsMaze(start_node, end_node)
 	elif algoritmo == VideogameConstants.Algoritmo.DFS:
 		dfsMaze(start_node, end_node)
+		path = resultdfs
 	elif algoritmo == VideogameConstants.Algoritmo.DIJKSTRA:
-		dijkstraMaze(start_node, end_node)
+		path = dijkstraMaze(start_node, end_node)
 	elif algoritmo == VideogameConstants.Algoritmo.A_STAR:
-		aStarMaze(start_node, end_node)
+		path = aStarMaze(start_node, end_node)
 
-
-# Crea el array con los datos del laberinto (celdas con colision y sin colision)
-func createMap(x_size: int, y_size:int):
-	var tilemap = get_parent().get_node("TileMap")
-	var map = []
-	
-	for i in range(80, y_size+64, pixels_move):
-		var row = []
-		for j in range(80, x_size+64, pixels_move):
-			var cell = tilemap.local_to_map(Vector2(j, i))
-			var id = tilemap.get_cell_source_id(0, cell)
-			row.append(id)
-		map.append(row)
-
-	createGraph(map, x_size, y_size)
-
-
-# Crea el grafo que se utilizara para obtener las trayectorias de cada camino
-func createGraph(map: Array, xSize: int, ySize: int):
-
-	var childs = []
-	for i in range(1, ySize/pixels_move - 1):
-		for j in range(1, xSize/pixels_move - 1):
-			if map[i][j] == 0:
-				if map[i][j+1] == 0:
-					childs.append(Vector2(pixels_center + pixels_move*(j+1) + pixels_offset, pixels_center + pixels_move*i + pixels_offset))
-				if map[i+1][j] == 0:
-					childs.append(Vector2(pixels_center + pixels_move*j + pixels_offset, pixels_center + pixels_move*(i+1) + pixels_offset))
-				if map[i][j-1] == 0:
-					childs.append(Vector2(pixels_center + pixels_move*(j-1) + pixels_offset, pixels_center + pixels_move*i + pixels_offset))				
-				if map[i-1][j] == 0:
-					childs.append(Vector2(pixels_center + pixels_move*j + pixels_offset, pixels_center + pixels_move*(i-1) + pixels_offset))					
-				
-				graph[Vector2(pixels_center + pixels_move*j + pixels_offset, pixels_center + pixels_move*i + pixels_offset)] = childs
-				childs = []
+	return path
 
 
 # Crea una heuristica en los nodos en funcion de donde esta el enemigo (mayor valor cuanto mas cercano)
 func createHeuristic(x_size: int, y_size:int, heuristic_position: Vector2):
-
 	var max_heuristic
 	var initial_heuristic = 1
 
@@ -87,9 +55,12 @@ func createHeuristic(x_size: int, y_size:int, heuristic_position: Vector2):
 
 	for node in graph.keys():
 		heuristic[node] = initial_heuristic
-		var calculated_heuristic = max_heuristic - (abs(heuristic_position.x - node.x) + abs(heuristic_position.y - node.y))/32
-		if calculated_heuristic > initial_heuristic:
-			heuristic[node] = calculated_heuristic
+		if heuristic_position != Vector2(0,0):
+			var calculated_heuristic = max_heuristic - (abs(heuristic_position.x - node.x) + abs(heuristic_position.y - node.y))/32
+			if calculated_heuristic > initial_heuristic:
+				heuristic[node] = calculated_heuristic
+
+	return heuristic
 
 
 # Utiliza el algoritmo primero en anchura (BFS) para encontrar la trayectoria hasta la moneda

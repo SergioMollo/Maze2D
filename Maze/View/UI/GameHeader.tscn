@@ -109,16 +109,16 @@ text = "Player vs Enemy"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Layer/Panel/Container/Result"]
+[node name="Results" type="HBoxContainer" parent="Layer/Panel/Container/Result"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="Layer/Panel/Container/Result/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Layer/Panel/Container/Result/Results"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("4_4rugc")
 expand_mode = 2
 
-[node name="LabelResultado" type="Label" parent="Layer/Panel/Container/Result/HBoxContainer"]
+[node name="LabelResultado" type="Label" parent="Layer/Panel/Container/Result/Results"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxEmpty_uc273")
@@ -126,7 +126,7 @@ text = "0-0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect2" type="TextureRect" parent="Layer/Panel/Container/Result/HBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="Layer/Panel/Container/Result/Results"]
 layout_mode = 2
 texture = ExtResource("5_qgc1h")
 

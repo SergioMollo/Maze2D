@@ -1,10 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://uxq57wr151ed"]
+[gd_scene load_steps=29 format=3 uid="uid://uxq57wr151ed"]
 
 [ext_resource type="Script" path="res://Maze/View/Game/Nivel1.gd" id="1_guovd"]
 [ext_resource type="PackedScene" uid="uid://r0bherb862i5" path="res://Maze/View/Game/Personaje.tscn" id="1_nq5u8"]
 [ext_resource type="Texture2D" uid="uid://b8pg6y0j6v20l" path="res://Resources/Paredes_Laterales.png" id="1_v6wd7"]
 [ext_resource type="Texture2D" uid="uid://bjkwetwd828kp" path="res://Resources/Cesped32x32.png" id="2_b3fg3"]
-[ext_resource type="Script" path="res://Maze/Controller/MazeController.gd" id="2_iablh"]
+[ext_resource type="Script" path="res://Maze/Controller/Game/MazeController.gd" id="2_iablh"]
 [ext_resource type="Texture2D" uid="uid://ccdvefapkn64h" path="res://Resources/MuroContorno64x64.png" id="3_egy1y"]
 [ext_resource type="PackedScene" uid="uid://bc28ey48ixyl2" path="res://Maze/View/UI/GameHeader.tscn" id="4_5s8gs"]
 [ext_resource type="PackedScene" uid="uid://dywo2s7j12e0f" path="res://Maze/View/Game/Moneda.tscn" id="4_d7niw"]
@@ -13,7 +13,16 @@
 [ext_resource type="Texture2D" uid="uid://br386dljoaedf" path="res://Resources/WallMazeInteriora64x64.png" id="6_77a27"]
 [ext_resource type="PackedScene" uid="uid://ctseifvcmjqrr" path="res://Maze/View/Game/Enemy.tscn" id="10_hmomr"]
 
-[sub_resource type="FontFile" id="FontFile_i1qn5"]
+[sub_resource type="LabelSettings" id="LabelSettings_o4p7b"]
+line_spacing = 25.0
+font_size = 50
+font_color = Color(0.207843, 0.513726, 0.203922, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ipyu1"]
+font_size = 50
+font_color = Color(0.823529, 0.305882, 0, 1)
+
+[sub_resource type="FontFile" id="FontFile_ybrdl"]
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -2314,6 +2323,11 @@ cache/0/50/0/descent = 0.0
 cache/0/50/0/underline_position = 0.0
 cache/0/50/0/underline_thickness = 0.0
 cache/0/50/0/scale = 1.0
+cache/0/50/0/glyphs/0/advance = Vector2(0, 0)
+cache/0/50/0/glyphs/0/offset = Vector2(0, 0)
+cache/0/50/0/glyphs/0/size = Vector2(0, 0)
+cache/0/50/0/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/50/0/glyphs/0/texture_idx = -1
 cache/0/50/0/kerning_overrides/16/0 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/17/0 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/18/0 = Vector2(0, 0)
@@ -2362,14 +2376,13 @@ cache/0/50/0/kerning_overrides/60/0 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/50/0 = Vector2(0, 0)
 
 [sub_resource type="LabelSettings" id="LabelSettings_bhcs4"]
-line_spacing = 25.0
-font = SubResource("FontFile_i1qn5")
+line_spacing = 10.0
+font = SubResource("FontFile_ybrdl")
 font_size = 50
-font_color = Color(1, 1, 0, 1)
+font_color = Color(0.705882, 0.478431, 0.278431, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_6ulbu"]
-font_size = 50
-font_color = Color(0.984314, 0.109804, 0, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_qrjss"]
+font_size = 40
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_7nxfs"]
 vertices = PackedVector2Array(16, 16, -2, 16, -16, 16, -16, -16, 16, -16)
@@ -2544,20 +2557,72 @@ offset_bottom = 64.0
 
 [node name="LabelWin" type="Label" parent="Layer"]
 visible = false
-offset_right = 97.0
-offset_bottom = 67.0
-text = "WIN"
-label_settings = SubResource("LabelSettings_bhcs4")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -35.0
+offset_right = 135.0
+offset_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(115, 35)
+size_flags_horizontal = 4
+text = "VICTORIA"
+label_settings = SubResource("LabelSettings_o4p7b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelLose" type="Label" parent="Layer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -35.0
+offset_right = 135.0
+offset_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(115, 35)
+size_flags_horizontal = 4
+text = "DERROTA"
+label_settings = SubResource("LabelSettings_ipyu1")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LabelTimeExceed" type="Label" parent="Layer"]
 visible = false
-offset_right = 184.0
-offset_bottom = 141.0
-text = "TIME
-EXCEED"
-label_settings = SubResource("LabelSettings_6ulbu")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -80.0
+offset_right = 130.0
+offset_bottom = 70.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(120, 80)
+size_flags_horizontal = 4
+text = "TIEMPO
+EXCEDIDO"
+label_settings = SubResource("LabelSettings_bhcs4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelFinish" type="Label" parent="Layer"]
+visible = false
+offset_right = 340.0
+offset_bottom = 60.0
+size_flags_horizontal = 4
+text = "Partida finalizada"
+label_settings = SubResource("LabelSettings_qrjss")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -2583,4 +2648,4 @@ scale = Vector2(1, 1)
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer" to="Maze" method="_on_timer_timeout"]

@@ -17,6 +17,8 @@ var modo_interaccion: VideogameConstants.ModoInteraccion
 var algoritmo: VideogameConstants.Algoritmo
 var juegos: int
 
+var maze_size: Vector2i = Vector2i(0,0)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

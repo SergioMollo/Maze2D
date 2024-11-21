@@ -8,6 +8,7 @@ var index = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_window().content_scale_size = Singleton.initial_resolution
 	
 	var texture
 	if Singleton.selection == "player":
