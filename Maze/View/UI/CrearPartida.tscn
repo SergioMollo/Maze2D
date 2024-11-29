@@ -33,10 +33,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1870.0
-offset_top = -105.0
-offset_right = -1585.0
-offset_bottom = -20.0
+offset_left = -472.0
+offset_top = -103.0
+offset_right = -187.0
+offset_bottom = -18.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "Crear Partida"
@@ -62,6 +62,7 @@ offset_left = 100.0
 offset_top = 286.0
 offset_right = 197.0
 offset_bottom = 341.0
+theme_override_font_sizes/font_size = 35
 text = "Nivel"
 
 [node name="NivelOption" type="OptionButton" parent="."]
@@ -71,10 +72,9 @@ offset_left = 575.0
 offset_top = 267.0
 offset_right = 1000.0
 offset_bottom = 361.0
-item_count = 4
 selected = 0
+item_count = 4
 popup/item_0/text = "Nivel1"
-popup/item_0/id = 0
 popup/item_1/text = "Nivel2"
 popup/item_1/id = 1
 popup/item_2/text = "Nivel3"
@@ -97,10 +97,9 @@ offset_left = 575.0
 offset_top = 365.0
 offset_right = 1000.0
 offset_bottom = 459.0
-item_count = 3
 selected = 0
+item_count = 3
 popup/item_0/text = "Facil"
-popup/item_0/id = 0
 popup/item_1/text = "Media"
 popup/item_1/id = 1
 popup/item_2/text = "Dificil"
@@ -121,10 +120,9 @@ offset_left = 575.0
 offset_top = 463.0
 offset_right = 1000.0
 offset_bottom = 557.0
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Solitario"
-popup/item_0/id = 0
 popup/item_1/text = "Enfrentamiento"
 popup/item_1/id = 1
 
@@ -143,31 +141,32 @@ offset_left = 575.0
 offset_top = 561.0
 offset_right = 1000.0
 offset_bottom = 655.0
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Usuario"
-popup/item_0/id = 0
 popup/item_1/text = "Computadora"
 popup/item_1/id = 1
 
 [node name="Algoritmo" type="Label" parent="."]
+visible = false
 layout_mode = 2
 offset_left = 100.0
-offset_top = 678.0
+offset_top = 780.0
 offset_right = 548.0
-offset_bottom = 733.0
+offset_bottom = 835.0
 text = "Algoritmo de Busqueda"
 
 [node name="AlgoritmoOption" type="OptionButton" parent="."]
+visible = false
 custom_minimum_size = Vector2(425, 0)
 layout_mode = 2
 offset_left = 575.0
-offset_top = 659.0
+offset_top = 760.0
 offset_right = 1000.0
-offset_bottom = 753.0
+offset_bottom = 854.0
+selected = 0
 item_count = 4
 popup/item_0/text = "BFS"
-popup/item_0/id = 0
 popup/item_1/text = "DFS"
 popup/item_1/id = 1
 popup/item_2/text = "Dijkstra"
@@ -177,19 +176,19 @@ popup/item_3/id = 3
 
 [node name="Juegis" type="Label" parent="."]
 layout_mode = 2
-offset_left = 104.0
-offset_top = 780.0
-offset_right = 552.0
-offset_bottom = 835.0
+offset_left = 100.0
+offset_top = 680.0
+offset_right = 548.0
+offset_bottom = 735.0
 text = "Número de Juegos"
 
 [node name="NumeroJuegos" type="SpinBox" parent="."]
 custom_minimum_size = Vector2(425, 0)
 layout_mode = 0
 offset_left = 575.0
-offset_top = 760.0
+offset_top = 660.0
 offset_right = 1000.0
-offset_bottom = 855.0
+offset_bottom = 755.0
 min_value = 1.0
 max_value = 10.0
 value = 1.0
@@ -210,7 +209,7 @@ offset_top = 96.0
 offset_right = 1008.0
 offset_bottom = 230.0
 
-[node name="Panel1" type="Panel" parent="."]
+[node name="PanelNivel" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 1100.0
 offset_top = 75.0
@@ -218,16 +217,16 @@ offset_right = 1900.0
 offset_bottom = 275.0
 theme = ExtResource("4_pokip")
 
-[node name="Nombre" type="Label" parent="Panel1"]
+[node name="Nombre" type="Label" parent="PanelNivel"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 5.0
 offset_right = 512.0
 offset_bottom = 60.0
 theme_override_font_sizes/font_size = 30
-text = "Información Nivel 1"
+text = "Nivel: 1"
 
-[node name="Informacion" type="Label" parent="Panel1"]
+[node name="Informacion" type="Label" parent="PanelNivel"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 50.0
@@ -237,7 +236,7 @@ theme_override_font_sizes/font_size = 28
 text = "El nivel 1 tiene un tamaño de 10x10.
 Recomendado para usuarios principiantes."
 
-[node name="Panel2" type="Panel" parent="."]
+[node name="PanelJuego" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 1100.0
 offset_top = 300.0
@@ -245,26 +244,27 @@ offset_right = 1900.0
 offset_bottom = 500.0
 theme = ExtResource("4_pokip")
 
-[node name="Nombre" type="Label" parent="Panel2"]
+[node name="Nombre" type="Label" parent="PanelJuego"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 5.0
 offset_right = 512.0
 offset_bottom = 60.0
 theme_override_font_sizes/font_size = 30
-text = "Información Nivel 2"
+text = "Modo de juego: Solitario"
 
-[node name="Informacion" type="Label" parent="Panel2"]
+[node name="Informacion" type="Label" parent="PanelJuego"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 50.0
 offset_right = 75.0
 offset_bottom = 105.0
 theme_override_font_sizes/font_size = 28
-text = "El nivel 2 tiene un tamaño de 20x25.
-Recomendado para usuarios intermedios."
+text = "El modo Solitario interactuará únicamente el jugador. 
+El objetivo será alcanzar la moneda antes de que 
+finalice el tiempo estimado."
 
-[node name="Panel3" type="Panel" parent="."]
+[node name="PanelInteraccion" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 1100.0
 offset_top = 525.0
@@ -272,26 +272,28 @@ offset_right = 1900.0
 offset_bottom = 725.0
 theme = ExtResource("4_pokip")
 
-[node name="Nombre" type="Label" parent="Panel3"]
+[node name="Nombre" type="Label" parent="PanelInteraccion"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 5.0
 offset_right = 512.0
 offset_bottom = 60.0
 theme_override_font_sizes/font_size = 30
-text = "Información Nivel 3"
+text = "Modo de interacción: Usuario"
 
-[node name="Informacion" type="Label" parent="Panel3"]
+[node name="Informacion" type="Label" parent="PanelInteraccion"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 50.0
 offset_right = 75.0
 offset_bottom = 105.0
 theme_override_font_sizes/font_size = 28
-text = "El nivel 1 tiene un tamaño de 50x25.
-Recomendado para usuarios avanzados."
+text = "El modo Usuario permite los movimientos del 
+jugador en base a entradas de teclado determinadas 
+por el usuario."
 
-[node name="Panel4" type="Panel" parent="."]
+[node name="PanelAlgoritmo" type="Panel" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 1100.0
 offset_top = 750.0
@@ -299,24 +301,25 @@ offset_right = 1900.0
 offset_bottom = 950.0
 theme = ExtResource("4_pokip")
 
-[node name="Nombre" type="Label" parent="Panel4"]
+[node name="Nombre" type="Label" parent="PanelAlgoritmo"]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 5.0
 offset_right = 512.0
 offset_bottom = 60.0
 theme_override_font_sizes/font_size = 30
-text = "Información Nivel Aleatorio"
+text = "Algoritmo: BFS"
 
-[node name="Informacion" type="Label" parent="Panel4"]
+[node name="Informacion" type="Label" parent="PanelAlgoritmo"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 50.0
 offset_right = 75.0
 offset_bottom = 105.0
 theme_override_font_sizes/font_size = 28
-text = "El nivel aleatorio tiene un tamaño entre 15x15 y 50x25.
-Recomendado para usuarios de nivel intermedio-alto."
+text = "El algoritmo BFS realiza la búsqueda primero en 
+anchura, examinando todos los nodos para encontrar 
+una solución"
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
@@ -325,3 +328,7 @@ offset_bottom = 35.0
 
 [connection signal="pressed" from="CrearPartida" to="." method="_on_crear_partida_pressed"]
 [connection signal="pressed" from="Atras" to="." method="_on_atras_pressed"]
+[connection signal="item_selected" from="NivelOption" to="." method="_on_nivel_option_item_selected"]
+[connection signal="item_selected" from="JuegoOption" to="." method="_on_juego_option_item_selected"]
+[connection signal="item_selected" from="InteraccionOption" to="." method="_on_interaccion_option_item_selected"]
+[connection signal="item_selected" from="AlgoritmoOption" to="." method="_on_algoritmo_option_item_selected"]

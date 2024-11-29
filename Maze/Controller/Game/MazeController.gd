@@ -7,11 +7,13 @@ const pixels_offset = 64
 const pixels_center = 16
 
 var maze
-var juegos
 
+var juegos = 0
 var win = 0
 var lose = 0
 
+var match_state: VideogameConstants.EstadoPartida
+var game_state: VideogameConstants.EstadoJuego
 var initiate: bool = false
  
 var graph = {}
@@ -49,7 +51,6 @@ func _ready():
 	winLabel.hide()
 	loseLabel.hide()
 	await get_tree().create_timer(0.0).timeout
-	juegos = Singleton.juegos
 	new_game()
 
 
@@ -59,9 +60,12 @@ func new_game():
 	winLabel.hide()
 	loseLabel.hide()
 	maze.moneda.show()
-	juegos -= 1
+	juegos += 1
+	
+	Singleton.move_player = false
+	Singleton.move_enemy = false
 
-	# maze.player.position = maze.initial_player_position	
+	maze.player.position = maze.initial_player_position	
 	maze.player.player.position = maze.initial_player_position	
 	maze.player.player.target = maze.initial_player_position
 	maze.player.player.actual_position = maze.initial_player_position
@@ -122,7 +126,7 @@ func mostrarResultado():
 	# agente.reset()
 	# enemigoAgente.reset()
 
-	if juegos > 0:
+	if juegos == Singleton.juegos:
 		updatePuntuation()
 		new_game()
 	else:
@@ -146,7 +150,7 @@ func mostrarEliminado():
 	await get_tree().create_timer(5.0).timeout
 	# agente.reset()
 	# enemigoAgente.reset()
-	if juegos > 0:
+	if juegos == Singleton.juegos:
 		updatePuntuation()
 		new_game()
 	else:
@@ -170,7 +174,7 @@ func _on_timer_timeout():
 	await get_tree().create_timer(5.0).timeout
 	# agente.reset()
 	# enemigoAgente.reset()
-	if juegos > 0:
+	if juegos == Singleton.juegos:
 		updatePuntuation()
 		new_game()
 	else:
@@ -217,3 +221,74 @@ func createGraph(map: Array, xSize: int, ySize: int):
 				
 				graph[Vector2(pixels_center + pixels_move*j + pixels_offset, pixels_center + pixels_move*i + pixels_offset)] = childs
 				childs = []
+
+
+#saveGame()
+
+
+func saveGame(nombre: String):
+	
+	var partida: Dictionary = {
+		"nombre": nombre,
+		"nivel": Singleton.nivel,
+		"dificultad": Singleton.dificultad,
+		"modo_juego": Singleton.modo_juego,
+		"modo_interaccion": Singleton.modo_interaccion,
+		"estado": match_state,
+		"win_games": win,
+		"lose_games": lose,
+		"id_jugador": "",
+		"id_enemigo": "",
+		"id_moneda": "",
+		"id_juego": ""
+	}
+	
+	var jugador: Dictionary = {
+		"posicion_x": maze.player.position.x,
+		"posicion_y": maze.player.position.y,
+		"id_camino": "",
+		"algoritmo": Singleton.algoritmo,
+		"apariencia": Singleton.player_texture
+	}
+	
+	var enemigo: Dictionary = {}
+	var camino_enemigo: Dictionary = {}
+	if maze.enemy != null:
+		enemigo = {
+			"posicion_x": maze.enemy.position.x,
+			"posicion_y": maze.enemy.position.y,
+			"id_camino": "",
+			"algoritmo": Singleton.algoritmo,
+			"apariencia": Singleton.enemy_texture
+		}
+		
+		camino_enemigo = {
+			"inicio_x": maze.enemigo.position.x,
+			"inicio_y": maze.enemigo.position.y,
+			"objetivo_x": maze.player.position.x,
+			"objetivo_y": maze.player.position.y,
+			"trayectoria": maze.player.path.trayectory
+		}
+	
+	var juego: Dictionary = {
+		"numero": juegos,
+		"estado": game_state,
+		"tiempo_restante": maze.timer.time_left,
+	}
+	
+	var moneda: Dictionary = {
+		"posicion_x": maze.initial_coin_position.x,
+		"posicion_y": maze.initial_coin_position.x
+	}
+	
+	var camino_jugador: Dictionary
+	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:
+		camino_jugador = {
+			"inicio_x": maze.player.position.x,
+			"inicio_y": maze.player.position.y,
+			"objetivo_x": maze.initial_coin_position.x,
+			"objetivo_y": maze.initial_coin_position.y,
+			"trayectoria": maze.enemy.path.trayectory
+		}
+
+	Singleton.save(partida, jugador, enemigo, juego, moneda, camino_jugador, camino_enemigo)

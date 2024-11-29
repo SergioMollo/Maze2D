@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8m03mwdh7b0t"]
+[gd_scene load_steps=7 format=3 uid="uid://b8m03mwdh7b0t"]
 
 [ext_resource type="Script" path="res://Maze/Controller/UI/InicioSesion.gd" id="1_18nwm"]
 [ext_resource type="Texture2D" uid="uid://pck2gtyxs6fp" path="res://Resources/ImagenesTextures/initial-texture.jpg" id="2_bwww2"]
@@ -1491,6 +1491,8 @@ font_size = 200
 font_color = Color(0.364706, 0.427451, 0, 1)
 outline_size = 3
 
+[sub_resource type="LabelSettings" id="LabelSettings_tw0gr"]
+
 [node name="InicioSesion" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -1500,9 +1502,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_18nwm")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Canvas" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="Canvas"]
 modulate = Color(0.537255, 0.537255, 0.537255, 1)
 anchors_preset = 15
 anchor_right = 1.0
@@ -1513,7 +1515,7 @@ texture = ExtResource("2_bwww2")
 expand_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Label" type="Label" parent="Canvas"]
 offset_left = 529.0
 offset_top = 42.0
 offset_right = 1362.0
@@ -1522,7 +1524,7 @@ size_flags_horizontal = 4
 text = "MAZE 2D"
 label_settings = SubResource("LabelSettings_bkcwg")
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+[node name="Panel" type="PanelContainer" parent="Canvas"]
 custom_minimum_size = Vector2(500, 500)
 offset_left = 710.0
 offset_top = 290.0
@@ -1534,83 +1536,90 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("3_sne4g")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
+[node name="Margin" type="MarginContainer" parent="Canvas/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="Canvas/Panel/Margin"]
 layout_mode = 2
 
-[node name="Salir" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Salir" type="Button" parent="Canvas/Panel/Margin/VBox"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 theme_override_font_sizes/font_size = 25
 text = "Salir"
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Iniciar sesión"
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Canvas/Panel/Margin/VBox"]
 custom_minimum_size = Vector2(250, 10)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="Canvas/Panel/Margin/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="UserLabel" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="EmailLabel" type="Label" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Usuario"
+text = "Email"
 
-[node name="UserValue" type="TextEdit" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="EmailValue" type="LineEdit" parent="Canvas/Panel/Margin/VBox"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 placeholder_text = "nombre de usuario"
 
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="Canvas/Panel/Margin/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="PasswordLabel" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PasswordLabel" type="Label" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Contraseña"
 
-[node name="PasswordValue" type="TextEdit" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PasswordValue" type="LineEdit" parent="Canvas/Panel/Margin/VBox"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 placeholder_text = "password"
+secret = true
 
-[node name="HSeparator4" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Margin" type="MarginContainer" parent="Canvas/Panel/Margin/VBox"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="InfoSesion" type="Label" parent="Canvas/Panel/Margin/VBox/Margin"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_tw0gr")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 alignment = 2
 
-[node name="Registro" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Registro" type="Button" parent="Canvas/Panel/Margin/VBox/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Registrarse"
 
-[node name="IniciarSesion" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="IniciarSesion" type="Button" parent="Canvas/Panel/Margin/VBox/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Iniciar Sesion"
 
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/Salir" to="." method="_on_salir_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Registro" to="." method="_on_registro_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/IniciarSesion" to="." method="_on_iniciar_sesion_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBox/Salir" to="." method="_on_salir_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBoxContainer/Registro" to="." method="_on_registro_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBoxContainer/IniciarSesion" to="." method="_on_iniciar_sesion_pressed"]

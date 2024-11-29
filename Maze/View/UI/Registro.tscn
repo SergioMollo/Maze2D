@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bnj22ojphiwmw"]
+[gd_scene load_steps=7 format=3 uid="uid://bnj22ojphiwmw"]
 
 [ext_resource type="Script" path="res://Maze/Controller/UI/Registro.gd" id="1_ghjsh"]
 [ext_resource type="Texture2D" uid="uid://pck2gtyxs6fp" path="res://Resources/ImagenesTextures/initial-texture.jpg" id="2_aoleh"]
@@ -1491,6 +1491,8 @@ font_size = 150
 font_color = Color(0.364706, 0.427451, 0, 1)
 outline_size = 3
 
+[sub_resource type="LabelSettings" id="LabelSettings_pmmf5"]
+
 [node name="Registro" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -1500,9 +1502,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ghjsh")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Canvas" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="Canvas"]
 modulate = Color(0.537255, 0.537255, 0.537255, 1)
 anchors_preset = 15
 anchor_right = 1.0
@@ -1513,7 +1515,7 @@ texture = ExtResource("2_aoleh")
 expand_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="CanvasLayer"]
+[node name="Label" type="Label" parent="Canvas"]
 offset_left = 645.0
 offset_top = 61.0
 offset_right = 1270.0
@@ -1522,8 +1524,8 @@ size_flags_horizontal = 4
 text = "MAZE 2D"
 label_settings = SubResource("LabelSettings_bkcwg")
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-custom_minimum_size = Vector2(500, 500)
+[node name="Panel" type="PanelContainer" parent="Canvas"]
+custom_minimum_size = Vector2(750, 500)
 offset_left = 710.0
 offset_top = 290.0
 offset_right = 1210.0
@@ -1534,92 +1536,115 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("3_jspaw")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
+[node name="Margin" type="MarginContainer" parent="Canvas/Panel"]
 layout_mode = 2
-theme_override_constants/margin_left = 25
+theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="Canvas/Panel/Margin"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
-text = "Iniciar sesión"
+text = "Registrar usuario"
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(250, 10)
+[node name="HSeparator" type="HSeparator" parent="Canvas/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(500, 10)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="Canvas/Panel/Margin/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="UserLabel" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="NombreLabel" type="Label" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Usuario"
+text = "Nombre de usuario"
 
-[node name="UserValue" type="TextEdit" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="NombreValue" type="LineEdit" parent="Canvas/Panel/Margin/VBox"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 placeholder_text = "nombre de usuario"
 
-[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator6" type="HSeparator" parent="Canvas/Panel/Margin/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="PasswordLabel" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="EmailLabel" type="Label" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Contraseña"
+text = "Email"
 
-[node name="PasswordValue" type="TextEdit" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="EmailValue" type="LineEdit" parent="Canvas/Panel/Margin/VBox"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-placeholder_text = "password"
+placeholder_text = "email"
 
-[node name="HSeparator4" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="Canvas/Panel/Margin/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="PasswordConfirmLabel" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PasswordLabel" type="Label" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Repite Contraseña"
+text = "Contraseña"
 
-[node name="PasswordConfirmValue" type="TextEdit" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="PasswordValue" type="LineEdit" parent="Canvas/Panel/Margin/VBox"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 placeholder_text = "password"
+secret = true
 
-[node name="HSeparator5" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator4" type="HSeparator" parent="Canvas/Panel/Margin/VBox"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="PasswordConfirmLabel" type="Label" parent="Canvas/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Repite Contraseña"
+
+[node name="PasswordConfirmValue" type="LineEdit" parent="Canvas/Panel/Margin/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+placeholder_text = "password"
+secret = true
+
+[node name="Margin" type="MarginContainer" parent="Canvas/Panel/Margin/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="InfoSesion" type="Label" parent="Canvas/Panel/Margin/VBox/Margin"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_pmmf5")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 alignment = 2
 
-[node name="CrearCuenta" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="CrearCuenta" type="Button" parent="Canvas/Panel/Margin/VBox/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Crear Cuenta"
 
-[node name="Cancelar" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Cancelar" type="Button" parent="Canvas/Panel/Margin/VBox/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Cancelar"
 
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/CrearCuenta" to="." method="_on_crear_cuenta_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Cancelar" to="." method="_on_cancelar_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBoxContainer/CrearCuenta" to="." method="_on_crear_cuenta_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBoxContainer/Cancelar" to="." method="_on_cancelar_pressed"]

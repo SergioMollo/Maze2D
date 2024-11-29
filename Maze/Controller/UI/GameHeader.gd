@@ -12,12 +12,12 @@ func _process(delta):
 
 
 func _on_configuration_pressed():
-	print("Configuracion")
 	var overlay_scene = preload("res://Maze/View/UI/GameOptions.tscn")
 	var instance = overlay_scene.instantiate()
 	add_child(instance)
 	var labirytnm = get_node("../../Maze")
 	instance.position = Vector2(labirytnm.maze.scale.x/2,labirytnm.maze.scale.y/2)
+	instance.setMaze(labirytnm)
 
 
 func _on_pause_pressed():

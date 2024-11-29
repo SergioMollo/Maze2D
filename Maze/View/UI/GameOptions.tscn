@@ -2,32 +2,32 @@
 
 [ext_resource type="Script" path="res://Maze/Controller/UI/GameOptions.gd" id="1_3vsrw"]
 [ext_resource type="Theme" uid="uid://cw4o8gt2g0buu" path="res://Resources/Edit_Textures/panel_configuracion.tres" id="2_ubbpd"]
-[ext_resource type="Texture2D" uid="uid://ck2jqp6snu0r2" path="res://Resources/ImagenesTextures/texture-panel.jpg" id="3_titsk"]
+[ext_resource type="Texture2D" uid="uid://brqajglsstp4a" path="res://Resources/ImagenesTextures/texture-panel.png" id="3_5imtq"]
 [ext_resource type="Texture2D" uid="uid://c07sb8wmwlb0o" path="res://Resources/Inkscape/Botones.svg" id="4_qj2il"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ruwn"]
-texture = ExtResource("3_titsk")
-region_rect = Rect2(4318.46, 1368.06, 1154.44, 455.7)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vwy5w"]
+texture = ExtResource("3_5imtq")
+region_rect = Rect2(505.015, 31.75, 132.908, 52.3423)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_givgs"]
-texture = ExtResource("3_titsk")
-region_rect = Rect2(4324.06, 821.223, 1146.84, 440.51)
+texture = ExtResource("3_5imtq")
+region_rect = Rect2(502.784, 226.688, 134.94, 46.2653)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_knbhl"]
-texture = ExtResource("3_titsk")
-region_rect = Rect2(4308.87, 1945.28, 1162.04, 402.535)
+texture = ExtResource("3_5imtq")
+region_rect = Rect2(504.188, 159.928, 133.246, 51.8291)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vwy5w"]
-texture = ExtResource("3_titsk")
-region_rect = Rect2(4316.46, 281.978, 1150.64, 436.713)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ruwn"]
+texture = ExtResource("3_5imtq")
+region_rect = Rect2(503.893, 96.8653, 134.015, 50.4677)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7txyo"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e52o8"]
 texture = ExtResource("4_qj2il")
 texture_margin_left = 15.0
 texture_margin_top = 10.0
 texture_margin_right = 15.0
 texture_margin_bottom = 10.0
-region_rect = Rect2(13.5033, 37.321, 341.732, 70.4493)
+region_rect = Rect2(5.28266, 225.777, 338.577, 69.0473)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tgodx"]
 texture = ExtResource("4_qj2il")
@@ -45,13 +45,13 @@ texture_margin_right = 15.0
 texture_margin_bottom = 10.0
 region_rect = Rect2(386.581, 479.189, 339.979, 69.7483)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e52o8"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7txyo"]
 texture = ExtResource("4_qj2il")
 texture_margin_left = 15.0
 texture_margin_top = 10.0
 texture_margin_right = 15.0
 texture_margin_bottom = 10.0
-region_rect = Rect2(5.28266, 225.777, 338.577, 69.0473)
+region_rect = Rect2(13.5033, 37.321, 341.732, 70.4493)
 
 [node name="GameOptions" type="Control"]
 layout_mode = 3
@@ -86,21 +86,21 @@ custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 
 [node name="Juego" type="Button" parent="PanelContainer/Container/Tipo"]
-custom_minimum_size = Vector2(110, 0)
+custom_minimum_size = Vector2(110, 30)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_7ruwn")
+theme_override_styles/focus = SubResource("StyleBoxTexture_vwy5w")
 theme_override_styles/hover = SubResource("StyleBoxTexture_givgs")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_knbhl")
-theme_override_styles/focus = SubResource("StyleBoxTexture_vwy5w")
+theme_override_styles/normal = SubResource("StyleBoxTexture_7ruwn")
 text = "Juego"
 
 [node name="General" type="Button" parent="PanelContainer/Container/Tipo"]
-custom_minimum_size = Vector2(110, 0)
+custom_minimum_size = Vector2(110, 30)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_7ruwn")
+theme_override_styles/focus = SubResource("StyleBoxTexture_vwy5w")
 theme_override_styles/hover = SubResource("StyleBoxTexture_givgs")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_knbhl")
-theme_override_styles/focus = SubResource("StyleBoxTexture_vwy5w")
+theme_override_styles/normal = SubResource("StyleBoxTexture_7ruwn")
 text = "General"
 
 [node name="HSeparator" type="HSeparator" parent="PanelContainer/Container"]
@@ -180,7 +180,7 @@ layout_mode = 2
 
 [node name="HSeparator3" type="HSeparator" parent="PanelContainer/Container/GeneralOptions"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 65)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="Volume" type="HBoxContainer" parent="PanelContainer/Container/GeneralOptions"]
@@ -216,10 +216,9 @@ text = "Resolución"
 
 [node name="ResolutionOption" type="OptionButton" parent="PanelContainer/Container/GeneralOptions/Resolution"]
 layout_mode = 2
-item_count = 4
 selected = 0
+item_count = 4
 popup/item_0/text = "1920x1080"
-popup/item_0/id = 0
 popup/item_1/text = "1280x720"
 popup/item_1/id = 1
 popup/item_2/text = "960x540"
@@ -229,7 +228,7 @@ popup/item_3/id = 3
 
 [node name="HSeparator5" type="HSeparator" parent="PanelContainer/Container/GeneralOptions"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 70)
+custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 
 [node name="Margin2" type="MarginContainer" parent="PanelContainer/Container"]
@@ -243,19 +242,19 @@ size_flags_horizontal = 8
 [node name="Continuar" type="Button" parent="PanelContainer/Container/Margin2/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxTexture_7txyo")
+theme_override_styles/focus = SubResource("StyleBoxTexture_e52o8")
 theme_override_styles/hover = SubResource("StyleBoxTexture_tgodx")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_a73en")
-theme_override_styles/focus = SubResource("StyleBoxTexture_e52o8")
+theme_override_styles/normal = SubResource("StyleBoxTexture_7txyo")
 text = "Continuar"
 
 [node name="Cerrar" type="Button" parent="PanelContainer/Container/Margin2/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
-theme_override_styles/normal = SubResource("StyleBoxTexture_7txyo")
+theme_override_styles/focus = SubResource("StyleBoxTexture_e52o8")
 theme_override_styles/hover = SubResource("StyleBoxTexture_tgodx")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_a73en")
-theme_override_styles/focus = SubResource("StyleBoxTexture_e52o8")
+theme_override_styles/normal = SubResource("StyleBoxTexture_7txyo")
 text = "Cerrar"
 
 [node name="Margin3" type="MarginContainer" parent="PanelContainer/Container"]

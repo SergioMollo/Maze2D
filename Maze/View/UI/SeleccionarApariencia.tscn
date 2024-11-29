@@ -167,10 +167,10 @@ texture = ExtResource("11_fneg6")
 
 [node name="Seleccionar" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1612.0
-offset_top = 993.0
-offset_right = 1753.0
-offset_bottom = 1051.0
+offset_left = 1563.0
+offset_top = 995.0
+offset_right = 1757.0
+offset_bottom = 1067.0
 theme = ExtResource("12_38jhi")
 text = "Seleccionar"
 

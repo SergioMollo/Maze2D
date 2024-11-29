@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c07sb8wmwlb0o" path="res://Resources/Inkscape/Botones.svg" id="1_isfvk"]
 [ext_resource type="Texture2D" uid="uid://diytq37w3a8fe" path="res://Resources/Inkscape/PanelInformacion.svg" id="2_03rww"]
-[ext_resource type="Texture2D" uid="uid://ck2jqp6snu0r2" path="res://Resources/ImagenesTextures/texture-panel.jpg" id="3_1g5s0"]
+[ext_resource type="Texture2D" uid="uid://brqajglsstp4a" path="res://Resources/ImagenesTextures/texture-panel.png" id="3_h3apt"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lysh8"]
 texture = ExtResource("1_isfvk")
@@ -105,8 +105,8 @@ texture = ExtResource("2_03rww")
 region_rect = Rect2(73.446, 246.5, 568, 448)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ctubc"]
-texture = ExtResource("3_1g5s0")
-region_rect = Rect2(2337.6, 287.851, 1661.57, 2069.95)
+texture = ExtResource("3_h3apt")
+region_rect = Rect2(274.852, 35.5759, 191.244, 237.813)
 
 [resource]
 Button/font_sizes/font_size = 20

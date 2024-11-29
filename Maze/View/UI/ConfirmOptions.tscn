@@ -9,7 +9,7 @@ anchors_preset = 0
 pivot_offset = Vector2(225, 135)
 script = ExtResource("1_smq5k")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(450, 270)
 layout_mode = 1
 anchors_preset = -1
@@ -23,27 +23,27 @@ offset_right = 225.0
 offset_bottom = 135.0
 theme = ExtResource("1_rnfrw")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBox" type="VBoxContainer" parent="Panel"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Margin" type="MarginContainer" parent="Panel/VBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="Panel/VBox/Margin"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Option" type="Label" parent="Panel/VBox/Margin/VBox"]
 layout_mode = 2
 text = "Confirmacion"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Panel/VBox/Margin/VBox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Info" type="Label" parent="Panel/VBox"]
 custom_minimum_size = Vector2(375, 130)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -53,47 +53,48 @@ este se establecerá como empate.
 Tras esta acción solo podrá visualizar sus datos.
 ¿Está seguro que desea finalizar la partida? "
 
-[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Margin2" type="MarginContainer" parent="Panel/VBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 23
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBox/Margin2"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="GuardarSalir" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="GuardarSalir" type="Button" parent="Panel/VBox/Margin2/HBoxContainer"]
 visible = false
 layout_mode = 2
 text = "Guardar y Salir"
 
-[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Panel/VBox/Margin2/HBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 
-[node name="Finalizar" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
-layout_mode = 2
-text = "Confirmacion"
-
-[node name="Reiniciar" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="Finalizar" type="Button" parent="Panel/VBox/Margin2/HBoxContainer"]
 visible = false
 layout_mode = 2
-text = "Confirmacion"
+text = "Finalizar"
 
-[node name="Salir" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="Reiniciar" type="Button" parent="Panel/VBox/Margin2/HBoxContainer"]
 visible = false
 layout_mode = 2
-text = "Confirmacion"
+text = "Reiniciar"
 
-[node name="Cancelar" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="Salir" type="Button" parent="Panel/VBox/Margin2/HBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Salir"
+
+[node name="Cancelar" type="Button" parent="Panel/VBox/Margin2/HBoxContainer"]
 layout_mode = 2
 text = "Cancelar"
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer/GuardarSalir" to="." method="_on_guardar_salir_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer/Finalizar" to="." method="_on_finalizar_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer/Reiniciar" to="." method="_on_reiniciar_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer/Salir" to="." method="_on_salir_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer/Cancelar" to="." method="_on_cancelar_pressed"]
+[connection signal="pressed" from="Panel/VBox/Margin2/HBoxContainer/GuardarSalir" to="." method="_on_guardar_salir_pressed"]
+[connection signal="pressed" from="Panel/VBox/Margin2/HBoxContainer/Finalizar" to="." method="_on_finalizar_pressed"]
+[connection signal="pressed" from="Panel/VBox/Margin2/HBoxContainer/Reiniciar" to="." method="_on_reiniciar_pressed"]
+[connection signal="pressed" from="Panel/VBox/Margin2/HBoxContainer/Salir" to="." method="_on_salir_pressed"]
+[connection signal="pressed" from="Panel/VBox/Margin2/HBoxContainer/Cancelar" to="." method="_on_cancelar_pressed"]

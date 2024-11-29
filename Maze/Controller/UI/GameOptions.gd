@@ -1,10 +1,12 @@
 extends Control
 
-@onready var panel = $PanelContainer
+
+var maze: MazeController
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#get_window().content_scale_size = Vector2(800,800)
+	maze.game_state = VideogameConstants.EstadoJuego.EN_PAUSA
 	$PanelContainer/Container/Tipo/Juego.grab_focus()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,6 +23,7 @@ func _on_juego_pressed():
 
 
 func _on_general_pressed():
+	print("General")
 	$PanelContainer/Container/Tipo/General.grab_focus()
 	$PanelContainer/Container/JuegoOptions.visible = false
 	$PanelContainer/Container/Margin/Info/JuegoLabel.visible = false
@@ -33,6 +36,7 @@ func _on_guardar_pressed():
 	var instance = overlay_scene.instantiate()
 	add_child(instance)
 	instance.position = Vector2(0,0)
+	instance.setMaze(maze)
 
 
 func _on_reiniciar_pressed():
@@ -40,6 +44,7 @@ func _on_reiniciar_pressed():
 	var instance = overlay_scene.instantiate()
 	add_child(instance)
 	instance.position = Vector2(0,0)
+	instance.setOptions(maze, "Reiniciar")
 
 
 func _on_cambiar_configuracion_pressed():
@@ -47,6 +52,7 @@ func _on_cambiar_configuracion_pressed():
 	var instance = overlay_scene.instantiate()
 	add_child(instance)
 	instance.position = Vector2(0,0)
+	instance.setMaze(maze)
 
 
 func _on_finalizar_pressed():
@@ -54,6 +60,7 @@ func _on_finalizar_pressed():
 	var instance = overlay_scene.instantiate()
 	add_child(instance)
 	instance.position = Vector2(0,0)
+	instance.setOptions(maze, "Finalizar")
 
 
 func _on_salir_pressed():
@@ -61,12 +68,22 @@ func _on_salir_pressed():
 	var instance = overlay_scene.instantiate()
 	add_child(instance)
 	instance.position = Vector2(0,0)
+	instance.setOptions(maze, "Salir")
 
 
 func _on_continuar_pressed():
+	maze.game_state = VideogameConstants.EstadoJuego.EN_CURSO
 	queue_free()
 
 
 func _on_cerrar_pressed():
+	maze.game_state = VideogameConstants.EstadoJuego.EN_CURSO
 	queue_free()
 
+
+func _on_juego_button_pressed() -> void:
+	$PanelContainer/Container/Tipo/JuegoButton.grab_focus()
+	
+	
+func setMaze(maze_instance):
+	maze = maze_instance

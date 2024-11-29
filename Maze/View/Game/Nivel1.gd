@@ -5,12 +5,12 @@ class_name Nivel1
 @onready var maze_controller: Node2D = $Maze
 
 var level_data = {
-	"xSize" : 320,
-	"ySize" : 320,
-	"scale": Vector2i(448, 448),
+	"xSize" : 480,
+	"ySize" : 480,
+	"scale": Vector2i(608, 608),
 	"initial_player_position": Vector2(112,112),
-	"initial_enemy_position": Vector2(336,240),
-	"initial_coin_position": Vector2(336,336)
+	"initial_enemy_position": Vector2(496,208),
+	"initial_coin_position": Vector2(496,496)
 }
 
 func _ready():	

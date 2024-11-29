@@ -12,12 +12,13 @@ config_version=5
 
 config/name="LaberintoTFG"
 run/main_scene="res://Maze/View/UI/InicioSesion.tscn"
-config/features=PackedStringArray("4.2", "GL Compatibility")
+config/features=PackedStringArray("4.3", "GL Compatibility")
 boot_splash/bg_color=Color(0.00392157, 0.176471, 0, 1)
 
 [autoload]
 
 Singleton="*res://Maze/Model/Singleton.gd"
+Firebase="*res://addons/godot-firebase/firebase/firebase.tscn"
 
 [display]
 
@@ -28,7 +29,7 @@ window/vsync/vsync_mode=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_rl_agents/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-firebase/plugin.cfg", "res://addons/godot-sqlite/plugin.cfg", "res://addons/godot_rl_agents/plugin.cfg")
 
 [input]
 

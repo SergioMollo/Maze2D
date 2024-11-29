@@ -101,6 +101,7 @@ func setAlgorithm(selected_algorithm: VideogameConstants.Algoritmo):
 func updatePosition(new_position: Vector2):
 	player.position = new_position
 	position = new_position
+	Singleton.move_player = false
 
 
 # 
@@ -116,7 +117,6 @@ func searchCoin(graph: Dictionary, start_node: Vector2, end_node: Vector2):
 	var trayectory = algorithm.search(graph, heuristic, start_node, end_node)
 	path.inicio = start_node
 	path.objetivo = end_node
-	print(trayectory)
 	path.trayectoria = trayectory
 
 
@@ -127,4 +127,3 @@ func searchCoinWithEnemy(graph: Dictionary, start_node: Vector2, end_node: Vecto
 	path.inicio = start_node
 	path.objetivo = end_node
 	path.trayectoria = trayectory
-

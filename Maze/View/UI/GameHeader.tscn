@@ -7,15 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://1xr187ux22cy" path="res://Resources/ImagenesTextures/Enemy.png" id="5_qgc1h"]
 [ext_resource type="Texture2D" uid="uid://ljriwsdql76o" path="res://Resources/ImagenesTextures/setting-icon3.png" id="6_i7w10"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1yoqu"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tfogf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hpnl2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mt3mn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1b66d"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hpnl2"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tfogf"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1yoqu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a2bga"]
 
@@ -27,15 +27,15 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ts8el"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bth0o"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fm7v0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2sdmw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_05i0j"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_il52o"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2sdmw"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fm7v0"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bth0o"]
 
 [node name="Header" type="Control"]
 custom_minimum_size = Vector2(0, 64)
@@ -71,11 +71,11 @@ custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/normal = SubResource("StyleBoxEmpty_1yoqu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tfogf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_hpnl2")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_mt3mn")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_1b66d")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_hpnl2")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_tfogf")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_1yoqu")
 icon = ExtResource("3_pl8x3")
 
 [node name="VSeparator2" type="VSeparator" parent="Layer/Panel/Container"]
@@ -177,11 +177,11 @@ custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/normal = SubResource("StyleBoxEmpty_bth0o")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_fm7v0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2sdmw")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_05i0j")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_il52o")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_2sdmw")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_fm7v0")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bth0o")
 icon = ExtResource("6_i7w10")
 
 [node name="VSeparator6" type="VSeparator" parent="Layer/Panel/Container"]

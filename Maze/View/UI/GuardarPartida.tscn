@@ -65,8 +65,8 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="TextEdit" type="TextEdit" parent="PanelContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
-custom_minimum_size = Vector2(200, 30)
+[node name="Nombre" type="LineEdit" parent="PanelContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(200, 25)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 
