@@ -91,10 +91,11 @@ func asign_values():
 
 
 # Asigna el algoritmo correspondiente
-func setAlgorithm(selected_algorithm: VideogameConstants.Algoritmo):
+func setAlgorithm(selected_algorithm: VideogameConstants.Algoritmo, graph: Dictionary):
 	algorithm = Algorithm.new()
 	algorithm.algoritmo = selected_algorithm  
 	algorithm.nombre = VideogameConstants.Algoritmo.keys()[selected_algorithm]
+	algorithm.graph = graph
 
 
 # 
@@ -108,22 +109,25 @@ func updatePosition(new_position: Vector2):
 func newSearch():
 	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:				
 		if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-			searchCoinWithEnemy(algorithm.graph, player.position, coin_position)
+			searchCoinWithEnemy(player.position, coin_position)
+
+
+#
+func setPath(start_node: Vector2, end_node: Vector2, trayectory: Array):
+	path.inicio = start_node
+	path.objetivo = end_node
+	path.trayectoria = trayectory
 
 
 # 
-func searchCoin(graph: Dictionary, start_node: Vector2, end_node: Vector2):
+func searchCoin(start_node: Vector2, end_node: Vector2):
 	var heuristic = algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y, Vector2(0,0))
-	var trayectory = algorithm.search(graph, heuristic, start_node, end_node)
-	path.inicio = start_node
-	path.objetivo = end_node
-	path.trayectoria = trayectory
+	var trayectory = algorithm.search(heuristic, start_node, end_node)
+	setPath(start_node, end_node, trayectory)
 
 
 # 
-func searchCoinWithEnemy(graph: Dictionary, start_node: Vector2, end_node: Vector2):
+func searchCoinWithEnemy(start_node: Vector2, end_node: Vector2):
 	var heuristic = algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y, enemy.position)
-	var trayectory = algorithm.search(graph, heuristic, start_node, end_node)
-	path.inicio = start_node
-	path.objetivo = end_node
-	path.trayectoria = trayectory
+	var trayectory = algorithm.search(heuristic, start_node, end_node)
+	setPath(start_node, end_node, trayectory)

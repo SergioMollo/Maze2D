@@ -8,7 +8,7 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_8df2m")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="Panel" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(450, 350)
 layout_mode = 1
 anchors_preset = -1
@@ -24,79 +24,80 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_3bfin")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBox" type="VBoxContainer" parent="Panel"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Margin" type="MarginContainer" parent="Panel/VBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="Panel/VBox/Margin"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Panel/VBox/Margin/VBox"]
 layout_mode = 2
 text = "Guardar Partida"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Panel/VBox/Margin/VBox"]
 layout_mode = 2
 
-[node name="MarginContainer4" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Margin2" type="MarginContainer" parent="Panel/VBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 10
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer4"]
+[node name="Label" type="Label" parent="Panel/VBox/Margin2"]
 layout_mode = 2
 text = "Nombre de la partida"
 
-[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Margin3" type="MarginContainer" parent="Panel/VBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer3"]
+[node name="HBox" type="HBoxContainer" parent="Panel/VBox/Margin3"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Nombre" type="LineEdit" parent="PanelContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+[node name="Nombre" type="LineEdit" parent="Panel/VBox/Margin3/HBox"]
 custom_minimum_size = Vector2(200, 25)
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 20
+max_length = 25
 
-[node name="Label2" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer3/HBoxContainer"]
+[node name="Longitud" type="Label" parent="Panel/VBox/Margin3/HBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "max 25 caracteres"
 
-[node name="MarginContainer5" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Margin4" type="MarginContainer" parent="Panel/VBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer5"]
+[node name="Label" type="Label" parent="Panel/VBox/Margin4"]
 layout_mode = 2
 text = "Detalles de la partida"
 
-[node name="MarginContainer6" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Margin5" type="MarginContainer" parent="Panel/VBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 35
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer6"]
+[node name="HBox" type="HBoxContainer" parent="Panel/VBox/Margin5"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="TextEdit" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer6/HBoxContainer"]
+[node name="Info" type="Label" parent="Panel/VBox/Margin5/HBox"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
@@ -104,24 +105,24 @@ text = "Resultado:
 Tiempo:
 Ultimo guardado:"
 
-[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Margin6" type="MarginContainer" parent="Panel/VBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer2"]
+[node name="HBox" type="HBoxContainer" parent="Panel/VBox/Margin6"]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="Guardar" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="Guardar" type="Button" parent="Panel/VBox/Margin6/HBox"]
 layout_mode = 2
 text = "Guardar"
 
-[node name="Cancelar" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="Cancelar" type="Button" parent="Panel/VBox/Margin6/HBox"]
 layout_mode = 2
 text = "Cancelar"
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer/Guardar" to="." method="_on_guardar_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer/Cancelar" to="." method="_on_cancelar_pressed"]
+[connection signal="pressed" from="Panel/VBox/Margin6/HBox/Guardar" to="." method="_on_guardar_pressed"]
+[connection signal="pressed" from="Panel/VBox/Margin6/HBox/Cancelar" to="." method="_on_cancelar_pressed"]

@@ -6,11 +6,11 @@
 [ext_resource type="Theme" uid="uid://bd2fffoq0chyl" path="res://Resources/Edit_Textures/panel_partidas.tres" id="4_t1d17"]
 [ext_resource type="Theme" uid="uid://dpjj7oabgkofc" path="res://Resources/Edit_Textures/buttons.tres" id="5_ws8bb"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dknu8"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qtpbv"]
 
 [sub_resource type="Theme" id="Theme_clsyy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dknu8"]
 
 [node name="ContinuarPartida" type="Control"]
 layout_mode = 3
@@ -32,263 +32,173 @@ grow_vertical = 2
 texture = ExtResource("2_ts5w7")
 expand_mode = 2
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Canvas" type="CanvasLayer" parent="."]
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer"]
+[node name="VBox" type="VBoxContainer" parent="Canvas"]
 offset_right = 1920.0
 offset_bottom = 1080.0
 
-[node name="Margin" type="MarginContainer" parent="CanvasLayer/VBox"]
+[node name="Margin" type="MarginContainer" parent="Canvas/VBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 10
 
-[node name="VBox" type="VBoxContainer" parent="CanvasLayer/VBox/Margin"]
+[node name="VBox" type="VBoxContainer" parent="Canvas/VBox/Margin"]
 layout_mode = 2
 
-[node name="PartidasGuardadas" type="Label" parent="CanvasLayer/VBox/Margin/VBox"]
+[node name="PartidasGuardadas" type="Label" parent="Canvas/VBox/Margin/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "Partidas Guardadas"
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/VBox/Margin/VBox"]
+[node name="HSeparator" type="HSeparator" parent="Canvas/VBox/Margin/VBox"]
 modulate = Color(0.172549, 0.278431, 0.756863, 1)
 custom_minimum_size = Vector2(1000, 20)
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/VBox/Margin/VBox"]
+[node name="HBox" type="HBoxContainer" parent="Canvas/VBox/Margin/VBox"]
 layout_mode = 2
 alignment = 1
 
-[node name="Scroll" type="ScrollContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox"]
+[node name="Scroll" type="ScrollContainer" parent="Canvas/VBox/Margin/VBox/HBox"]
 custom_minimum_size = Vector2(1000, 800)
 layout_mode = 2
 
-[node name="ContainerListaPartidas" type="VBoxContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll"]
+[node name="ListaPartidas" type="VBoxContainer" parent="Canvas/VBox/Margin/VBox/HBox/Scroll"]
 layout_mode = 2
 
-[node name="PanelPartida" type="PanelContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas"]
-self_modulate = Color(0, 0.552941, 0.854902, 1)
-custom_minimum_size = Vector2(650, 0)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_dknu8")
-
-[node name="HBox" type="HBoxContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida"]
-layout_mode = 2
-
-[node name="Imagen" type="TextureRect" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox"]
-self_modulate = Color(1, 1, 1, 0.698039)
-layout_mode = 2
-texture = ExtResource("3_4ne1g")
-expand_mode = 2
-
-[node name="Informacion" type="VBoxContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox"]
-layout_mode = 2
-
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion"]
-self_modulate = Color(0.968627, 0.984314, 1, 1)
-custom_minimum_size = Vector2(650, 10)
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="NameLabel" type="Button" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion"]
-layout_mode = 2
-theme = ExtResource("4_t1d17")
-text = "Nombre de la partida"
-alignment = 0
-
-[node name="HSeparator4" type="HSeparator" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion"]
-custom_minimum_size = Vector2(650, 15)
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="Margin1" type="MarginContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 5
-
-[node name="Fila1" type="HBoxContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion/Margin1"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="LevelValueLabel" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion/Margin1/Fila1"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Nivel: Aleatorio"
-
-[node name="VSeparator" type="VSeparator" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion/Margin1/Fila1"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-
-[node name="TimeLabel" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion/Margin1/Fila1"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "00:00"
-
-[node name="Margin2" type="MarginContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion"]
-layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 5
-
-[node name="Fila2" type="HBoxContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion/Margin2"]
-layout_mode = 2
-
-[node name="ResultLabel" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion/Margin2/Fila2"]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "Resultado: 9-9"
-
-[node name="VSeparator2" type="VSeparator" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion/Margin2/Fila2"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-
-[node name="DateSaveLabel" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion/Margin2/Fila2"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 30
-text = "00/00/0000"
-
-[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/VBox/Margin/VBox/HBox/Scroll/ContainerListaPartidas/PanelPartida/HBox/Informacion"]
-self_modulate = Color(0.968627, 0.984314, 1, 1)
-custom_minimum_size = Vector2(650, 35)
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="VSeparator" type="VSeparator" parent="CanvasLayer/VBox/Margin/VBox/HBox"]
+[node name="VSeparator" type="VSeparator" parent="Canvas/VBox/Margin/VBox/HBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox"]
+[node name="Extension" type="VBoxContainer" parent="Canvas/VBox/Margin/VBox/HBox"]
+custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 
-[node name="AmpliationPanel" type="PanelContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2"]
+[node name="AmpliationPanel" type="PanelContainer" parent="Canvas/VBox/Margin/VBox/HBox/Extension"]
+visible = false
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_qtpbv")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel"]
+[node name="Margin" type="MarginContainer" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_right = 25
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="NameLabel" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer"]
+[node name="NameLabel" type="Label" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox"]
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("4_t1d17")
 theme_override_font_sizes/font_size = 40
 text = "Nombre de la partida"
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox"]
 layout_mode = 2
 
-[node name="LevelLabel" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer"]
+[node name="LevelLabel" type="Label" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Nivel"
 horizontal_alignment = 1
 
-[node name="HSeparator1" type="HSeparator" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer"]
+[node name="HSeparator1" type="HSeparator" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox"]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox"]
 layout_mode = 2
 texture = ExtResource("3_4ne1g")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="ResultLabel2" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer"]
+[node name="ResultLabel" type="Label" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 28
 text = "Resultado"
 horizontal_alignment = 1
 
-[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox"]
 layout_mode = 2
 
-[node name="VSeparator2" type="VSeparator" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VSeparator2" type="VSeparator" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer"]
 layout_mode = 2
 
-[node name="DifficultyLabel" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="DifficultyLabel" type="Label" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Dificultad:"
 
-[node name="ModoJuegoLabel" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="ModoJuegoLabel" type="Label" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Modo de juego:"
 
-[node name="ModoInteraccionLabel" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="ModoInteraccionLabel" type="Label" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Modo de interaccion:"
 
-[node name="AlgorithmLabel" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="AlgorithmLabel" type="Label" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Algoritmo:"
 
-[node name="VSeparator" type="VSeparator" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer"]
 layout_mode = 2
 
-[node name="DifficultyValue" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="DifficultyValue" type="Label" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Dificultad"
 
-[node name="ModoJuegoValue" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="ModoJuegoValue" type="Label" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Modo de juego"
 
-[node name="ModoInteraccionValue" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="ModoInteraccionValue" type="Label" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Modo de interaccion"
 
-[node name="AlgorithmValue" type="Label" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="AlgorithmValue" type="Label" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer2"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Algoritmo"
 
-[node name="HSeparator4" type="HSeparator" parent="CanvasLayer/VBox/Margin/VBox/HBox/VBoxContainer2/AmpliationPanel/MarginContainer/VBoxContainer"]
+[node name="HSeparator4" type="HSeparator" parent="Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/VBox"]
+[node name="HSeparator" type="HSeparator" parent="Canvas/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="MarginContainer3" type="MarginContainer" parent="CanvasLayer/VBox"]
+[node name="MarginContainer3" type="MarginContainer" parent="Canvas/VBox"]
 layout_mode = 2
 theme = ExtResource("5_ws8bb")
 theme_override_constants/margin_left = 25
@@ -296,20 +206,114 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBox/MarginContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Canvas/VBox/MarginContainer3"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="SeleccionarButton" type="Button" parent="CanvasLayer/VBox/MarginContainer3/HBoxContainer"]
+[node name="SeleccionarButton" type="Button" parent="Canvas/VBox/MarginContainer3/HBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_clsyy")
 text = "Continuar Partida
 "
 
-[node name="AtrasButton" type="Button" parent="CanvasLayer/VBox/MarginContainer3/HBoxContainer"]
+[node name="AtrasButton" type="Button" parent="Canvas/VBox/MarginContainer3/HBoxContainer"]
 layout_mode = 2
 text = "Atras"
 
-[connection signal="pressed" from="CanvasLayer/VBox/MarginContainer3/HBoxContainer/SeleccionarButton" to="." method="_on_seleccionar_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBox/MarginContainer3/HBoxContainer/AtrasButton" to="." method="_on_atras_button_pressed"]
+[node name="PanelPartida" type="PanelContainer" parent="."]
+visible = false
+self_modulate = Color(0, 0.552941, 0.854902, 1)
+custom_minimum_size = Vector2(650, 0)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_dknu8")
+
+[node name="HBox" type="HBoxContainer" parent="PanelPartida"]
+layout_mode = 2
+
+[node name="Imagen" type="TextureRect" parent="PanelPartida/HBox"]
+self_modulate = Color(1, 1, 1, 0.698039)
+layout_mode = 2
+texture = ExtResource("3_4ne1g")
+expand_mode = 2
+
+[node name="Informacion" type="VBoxContainer" parent="PanelPartida/HBox"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="PanelPartida/HBox/Informacion"]
+self_modulate = Color(0.968627, 0.984314, 1, 1)
+custom_minimum_size = Vector2(650, 10)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="NameLabel" type="Button" parent="PanelPartida/HBox/Informacion"]
+layout_mode = 2
+theme = ExtResource("4_t1d17")
+text = "Nombre de la partida"
+alignment = 0
+
+[node name="HSeparator4" type="HSeparator" parent="PanelPartida/HBox/Informacion"]
+custom_minimum_size = Vector2(650, 15)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Margin1" type="MarginContainer" parent="PanelPartida/HBox/Informacion"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="Fila1" type="HBoxContainer" parent="PanelPartida/HBox/Informacion/Margin1"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LevelValueLabel" type="Label" parent="PanelPartida/HBox/Informacion/Margin1/Fila1"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Nivel: Aleatorio"
+
+[node name="VSeparator" type="VSeparator" parent="PanelPartida/HBox/Informacion/Margin1/Fila1"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="TimeLabel" type="Label" parent="PanelPartida/HBox/Informacion/Margin1/Fila1"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "00:00"
+
+[node name="Margin2" type="MarginContainer" parent="PanelPartida/HBox/Informacion"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="Fila2" type="HBoxContainer" parent="PanelPartida/HBox/Informacion/Margin2"]
+layout_mode = 2
+
+[node name="ResultLabel" type="Label" parent="PanelPartida/HBox/Informacion/Margin2/Fila2"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Resultado: 9-9"
+
+[node name="VSeparator2" type="VSeparator" parent="PanelPartida/HBox/Informacion/Margin2/Fila2"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="DateSaveLabel" type="Label" parent="PanelPartida/HBox/Informacion/Margin2/Fila2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "00/00/0000"
+
+[node name="HSeparator3" type="HSeparator" parent="PanelPartida/HBox/Informacion"]
+self_modulate = Color(0.968627, 0.984314, 1, 1)
+custom_minimum_size = Vector2(650, 35)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[connection signal="pressed" from="Canvas/VBox/MarginContainer3/HBoxContainer/SeleccionarButton" to="." method="_on_seleccionar_button_pressed"]
+[connection signal="pressed" from="Canvas/VBox/MarginContainer3/HBoxContainer/AtrasButton" to="." method="_on_atras_button_pressed"]

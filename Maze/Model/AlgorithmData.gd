@@ -25,8 +25,8 @@ func _process(delta):
 	pass
 
 
-func search(calcuated_graph: Dictionary, calcuated_heuristic: Dictionary, start_node: Vector2, end_node: Vector2):
-	graph = calcuated_graph
+func search(calcuated_heuristic: Dictionary, start_node: Vector2, end_node: Vector2):
+	
 	heuristic = calcuated_heuristic
 	var path = []
 

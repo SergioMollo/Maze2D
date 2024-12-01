@@ -6,7 +6,7 @@ enum EstadoJuego{ EN_CURSO, EN_PAUSA, FINALIZADO }
 
 enum EstadoPartida{ INICIADA, EN_CURSO, GUARDADA, FINALIZADA }
 
-enum Algoritmo{ BFS, DFS, A_STAR, DIJKSTRA }
+enum Algoritmo{ BFS, DFS, A_STAR, DIJKSTRA, EMPTY }
 
 enum Nivel { NIVEL1, NIVEL2, NIVEL3, ALEATORIO }
 

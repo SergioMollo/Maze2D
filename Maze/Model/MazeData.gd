@@ -5,6 +5,8 @@ class_name Maze
 var xSize
 var ySize
 
+var maze_size
+
 var player: CharacterBody2D
 var enemy: CharacterBody2D
 var moneda: Area2D
@@ -28,8 +30,8 @@ func _process(delta):
 	pass
 
 func initialize_data(level_data, player_ref, coin_ref, timer_ref, tilemap_ref):
-	xSize = level_data.xSize
-	ySize = level_data.ySize
+	maze_size = level_data.maze_size
+	#ySize = level_data.ySize
 	scale = level_data.scale
 	initial_player_position = level_data.initial_player_position
 	initial_enemy_position = level_data.initial_enemy_position

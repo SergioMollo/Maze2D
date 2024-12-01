@@ -4,6 +4,7 @@ extends Control
 func _ready():
 	get_window().content_scale_size = Singleton.initial_resolution
 	$CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CrearPartida.grab_focus()
+	initSingeltonVariables()
 	
 
 func _on_crear_partida_pressed():
@@ -34,3 +35,12 @@ func _on_apariencia_jugador_pressed():
 func _on_apariencia_enemigo_pressed():
 	Singleton.selection = "enemy"
 	get_tree().change_scene_to_file("res://Maze/View/UI/SeleccionarApariencia.tscn")
+	
+	
+func initSingeltonVariables():
+	Singleton.partida_reference = ""
+	Singleton.nombre_partida = ""
+	Singleton.move_player = false
+	Singleton.move_enemy = false
+	Singleton.juegos = 0
+	Singleton.maze_size = Vector2i(0,0)

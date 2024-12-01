@@ -32,6 +32,13 @@ var graph = {}
 @onready var timer : Timer  = $"../Timer"
 @onready var tilemap = $"../TileMap"
 
+# 
+func _ready():
+	#winLabel.hide()
+	#loseLabel.hide()
+	await get_tree().create_timer(0.0).timeout
+	#new_game()
+
 
 # 
 func setup(level_data : Dictionary):
@@ -40,18 +47,82 @@ func setup(level_data : Dictionary):
 	maze.moneda.coin.connect("collected", mostrarResultado)
 	get_window().content_scale_size = maze.scale
 	header.size.x = maze.scale.x
+	
+	createMap(maze.maze_size.x, maze.maze_size.y)
 
 	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:
-		maze.player.setAlgorithm(Singleton.algoritmo)
+		maze.player.setAlgorithm(Singleton.algoritmo, graph)
 		
-
-# 
-func _ready():
-	# Se asigna directamente hasta que se implelmente el paso de datos de configuracion inicial
 	winLabel.hide()
 	loseLabel.hide()
-	await get_tree().create_timer(0.0).timeout
+	maze.moneda.show()
+	
+	
+func initGame(level_data : Dictionary):
+	setup(level_data)
 	new_game()
+
+		
+func reloadGame(level_data : Dictionary, jugador: Dictionary, enemigo: Dictionary, juego: Dictionary, 	
+	moneda: Dictionary, camino_jugador: Dictionary, camino_enemigo: Dictionary):
+	setup(level_data)
+	initiate = false
+	
+	Singleton.move_player = false
+	Singleton.move_enemy = false
+	
+	var jugador_position = Vector2(jugador["posicion_x"], jugador["posicion_y"])
+	maze.player.position = jugador_position	
+	maze.player.player.position = jugador_position	
+	maze.player.player.target = jugador_position
+	maze.player.player.actual_position = jugador_position
+	maze.player.coin_position = maze.initial_coin_position
+	#maze.player.setAlgorithm(Singleton.algoritmo_jugador, graph)
+
+	if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+		var enemy_position = Vector2(enemigo["posicion_x"], enemigo["posicion_y"])
+		spawnEnemy(enemy_position)
+		var trayectoria = []
+		var camino = camino_enemigo["trayectoria"]
+		for value in camino:
+			var node = value.split(",")
+			trayectoria.append(Vector2(int(node[0]), int(node[1])))
+		
+		maze.enemy.setPath(maze.enemy.position, maze.player.position, trayectoria)
+		#maze.enemy.searchPlayer(graph, maze.enemy.position, maze.player.position)
+		if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:
+			trayectoria = []
+			camino = camino_jugador["trayectoria"]
+			for value in camino:
+				var node = value.split(",")
+				trayectoria.append(Vector2(int(node[0]), int(node[1])))
+				maze.player.setPath(maze.enemy.position, maze.player.position, trayectoria)
+			#maze.player.searchCoinWithEnemy(graph, maze.player.position, maze.initial_coin_position)
+	else:
+		if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:
+			var trayectoria = []
+			var camino = camino_jugador["trayectoria"]
+			for value in camino:
+				var node = value.split(",")
+				trayectoria.append(Vector2(int(node[0]), int(node[1])))
+				maze.player.setPath(maze.enemy.position, maze.player.position, trayectoria)
+			#maze.player.searchCoin(graph, maze.player.position, maze.initial_coin_position)	
+		
+	
+		
+	maze.player.maze_finished = false
+	maze.timer.start(juego["tiempo_restante"])
+	juegos = juego["numero"]
+	
+	win = level_data["win_games"]
+	lose = level_data["lose_games"]
+	updatePuntuation()
+	
+	match_state = VideogameConstants.EstadoPartida.EN_CURSO
+	game_state = VideogameConstants.EstadoJuego.EN_CURSO
+	timeLabel.text = str(timer.time_left)
+
+	initiate = true
 
 
 # 
@@ -71,16 +142,14 @@ func new_game():
 	maze.player.player.actual_position = maze.initial_player_position
 	maze.player.coin_position = maze.initial_coin_position
 
-	createMap(maze.xSize, maze.ySize)
-
 	if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-		spawnEnemy()
-		maze.enemy.searchPlayer(graph, maze.enemy.position, maze.player.position)
+		spawnEnemy(maze.initial_enemy_position)
+		maze.enemy.searchPlayer(maze.enemy.position, maze.player.position)
 		if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:
-			maze.player.searchCoinWithEnemy(graph, maze.player.position, maze.initial_coin_position)
+			maze.player.searchCoinWithEnemy(maze.player.position, maze.initial_coin_position)
 	else:
 		if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:
-			maze.player.searchCoin(graph, maze.player.position, maze.initial_coin_position)	
+			maze.player.searchCoin(maze.player.position, maze.initial_coin_position)	
 		
 	maze.player.maze_finished = false
 	maze.timer.start(60)
@@ -99,11 +168,11 @@ func _process(delta):
 	
 
 # Crea un enemigo y lo situa en la posicion concreta
-func spawnEnemy():
+func spawnEnemy(enemy_position: Vector2):
 	maze.enemy = enemy_scene.instantiate()
-	maze.enemy.position = maze.initial_enemy_position
+	maze.enemy.position = enemy_position
 	maze.enemy.connect("eliminated", mostrarEliminado)
-	maze.enemy.setAlgorithm(Singleton.algoritmo)
+	maze.enemy.setAlgorithm(Singleton.algoritmo, graph)
 	maze.player.enemy = maze.enemy
 	maze.enemy.maze_finished = false
 	get_parent().add_child(maze.enemy)
@@ -125,9 +194,8 @@ func mostrarResultado():
 	await get_tree().create_timer(5.0).timeout
 	# agente.reset()
 	# enemigoAgente.reset()
-
-	if juegos == Singleton.juegos:
-		updatePuntuation()
+	updatePuntuation()
+	if juegos <= Singleton.juegos:
 		new_game()
 	else:
 		finishLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
@@ -150,8 +218,8 @@ func mostrarEliminado():
 	await get_tree().create_timer(5.0).timeout
 	# agente.reset()
 	# enemigoAgente.reset()
-	if juegos == Singleton.juegos:
-		updatePuntuation()
+	updatePuntuation()
+	if juegos <= Singleton.juegos:
 		new_game()
 	else:
 		finishLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
@@ -174,8 +242,8 @@ func _on_timer_timeout():
 	await get_tree().create_timer(5.0).timeout
 	# agente.reset()
 	# enemigoAgente.reset()
-	if juegos == Singleton.juegos:
-		updatePuntuation()
+	updatePuntuation()
+	if juegos <= Singleton.juegos:
 		new_game()
 	else:
 		finishLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
@@ -234,7 +302,9 @@ func saveGame(nombre: String):
 		"dificultad": Singleton.dificultad,
 		"modo_juego": Singleton.modo_juego,
 		"modo_interaccion": Singleton.modo_interaccion,
+
 		"estado": match_state,
+		"juegos": Singleton.juegos,
 		"win_games": win,
 		"lose_games": lose,
 		"id_jugador": "",
@@ -247,7 +317,7 @@ func saveGame(nombre: String):
 		"posicion_x": maze.player.position.x,
 		"posicion_y": maze.player.position.y,
 		"id_camino": "",
-		"algoritmo": Singleton.algoritmo,
+		"algoritmo": Singleton.algoritmo_jugador,
 		"apariencia": Singleton.player_texture
 	}
 	
@@ -258,16 +328,20 @@ func saveGame(nombre: String):
 			"posicion_x": maze.enemy.position.x,
 			"posicion_y": maze.enemy.position.y,
 			"id_camino": "",
-			"algoritmo": Singleton.algoritmo,
+			"algoritmo": Singleton.algoritmo_enemigo,
 			"apariencia": Singleton.enemy_texture
 		}
 		
+		var trayectoria: Array = []
+		for node in maze.enemy.path.trayectoria:
+			trayectoria.append(str(node.x)+ "," +str(node.y))
+		
 		camino_enemigo = {
-			"inicio_x": maze.enemigo.position.x,
-			"inicio_y": maze.enemigo.position.y,
+			"inicio_x": maze.enemy.position.x,
+			"inicio_y": maze.enemy.position.y,
 			"objetivo_x": maze.player.position.x,
 			"objetivo_y": maze.player.position.y,
-			"trayectoria": maze.player.path.trayectory
+			"trayectoria": trayectoria
 		}
 	
 	var juego: Dictionary = {
@@ -283,12 +357,16 @@ func saveGame(nombre: String):
 	
 	var camino_jugador: Dictionary
 	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:
+		var trayectoria: Array = []
+		for node in maze.enemy.path.trayectoria:
+			trayectoria.append(str(node.x)+ "," +str(node.y))
+		
 		camino_jugador = {
 			"inicio_x": maze.player.position.x,
 			"inicio_y": maze.player.position.y,
 			"objetivo_x": maze.initial_coin_position.x,
 			"objetivo_y": maze.initial_coin_position.y,
-			"trayectoria": maze.enemy.path.trayectory
+			"trayectoria": trayectoria
 		}
 
 	Singleton.save(partida, jugador, enemigo, juego, moneda, camino_jugador, camino_enemigo)
