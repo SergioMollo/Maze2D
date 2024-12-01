@@ -12,10 +12,10 @@ func _ready():
 	
 	var texture
 	if Singleton.selection == "player":
-		texture = load("res://Resources/PixelArt/" + Singleton.player_texture)
+		texture = load(Singleton.player_texture)
 		index = player_textures.find(Singleton.player_texture)
 	elif Singleton.selection == "enemy":	
-		texture = load("res://Resources/PixelArt/" + Singleton.enemy_texture)
+		texture = load(Singleton.enemy_texture)
 		index = enemy_textures.find(Singleton.enemy_texture)
 	
 	imagen.texture = texture
@@ -72,9 +72,9 @@ func _on_rigth_pressed():
 func _on_seleccionar_pressed():
 	
 	if Singleton.selection == "player":
-		Singleton.player_texture = imagen.texture
+		Singleton.player_texture = imagen.texture.resource_path
 	elif Singleton.selection == "enemy":
-		Singleton.enemy_texture = imagen.texture
+		Singleton.enemy_texture = imagen.texture.resource_path
 	
 	get_tree().change_scene_to_file("res://Maze/View/UI/PantallaPrincipal.tscn")
 

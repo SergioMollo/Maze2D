@@ -6,8 +6,8 @@ const color_blue = Color(0,0,1)
 
 var initial_resolution: Vector2 = Vector2(1920,1080)
 
-var player_texture = "player1.png"
-var enemy_texture = "enemy1.png"
+var player_texture = "res://Resources/PixelArt/player1.png"
+var enemy_texture = "res://Resources/PixelArt/enemy1.png"
 
 var selection = ""
 

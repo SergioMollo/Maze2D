@@ -225,6 +225,7 @@ text = "Atras"
 visible = false
 self_modulate = Color(0, 0.552941, 0.854902, 1)
 custom_minimum_size = Vector2(650, 0)
+layout_mode = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_dknu8")
 
 [node name="HBox" type="HBoxContainer" parent="PanelPartida"]

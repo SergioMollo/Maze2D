@@ -1,10 +1,14 @@
 extends Control
 
+@onready var player: TextureRect = $Canvas/Panel/Margin/VBox/HBox/Jugador/Panel/VBox/Player
+@onready var enemy: TextureRect = $Canvas/Panel/Margin/VBox/HBox/Enemigo/Panel/VBox/Enemy
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_window().content_scale_size = Singleton.initial_resolution
-	$CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CrearPartida.grab_focus()
+	$Canvas/Panel/Margin/VBox/HBox/VBox/CrearPartida.grab_focus()
 	initSingeltonVariables()
+	setTextures()
 	
 
 func _on_crear_partida_pressed():
@@ -44,3 +48,10 @@ func initSingeltonVariables():
 	Singleton.move_enemy = false
 	Singleton.juegos = 0
 	Singleton.maze_size = Vector2i(0,0)
+	
+	
+func setTextures():
+	var texture = load(Singleton.player_texture)
+	player.texture = texture
+	texture = load(Singleton.enemy_texture)
+	enemy.texture = texture
