@@ -95,6 +95,7 @@ func saveUser():
 		collection.add(auth.localid, usuario)
 
 
+
 func save(partida: Dictionary, jugador: Dictionary, enemigo: Dictionary, juego: Dictionary, moneda: Dictionary, camino_jugador: Dictionary, camino_enemigo: Dictionary):
 	var auth = Firebase.Auth.auth
 	var usuario_collection: FirestoreCollection = Firebase.Firestore.collection("usuario")
@@ -105,6 +106,7 @@ func save(partida: Dictionary, jugador: Dictionary, enemigo: Dictionary, juego: 
 	var moneda_collection: FirestoreCollection = Firebase.Firestore.collection("moneda")	
 	var camino_collection: FirestoreCollection = Firebase.Firestore.collection("camino")
 	
+
 	if partida_reference == "":
 		if !camino_jugador.is_empty():		
 			var camino_document = await camino_collection.add("", camino_jugador)		
@@ -293,7 +295,7 @@ func configureGame(partida: Dictionary):
 	if partida["modo_interaccion"] == 0:
 		Singleton.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_USUARIO
 	else:
-		Singleton.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_COMPUTADORA
+		Singleton.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_SIMULACION
 
 	Singleton.juegos = partida["juegos"]
 
@@ -305,20 +307,19 @@ func configureGame(partida: Dictionary):
 		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.DIJKSTRA
 	elif partida["algoritmo_jugador"] == 3:
 		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.A_STAR
-	elif partida["algoritmo_jugador"] == 4:
+	elif partida["algoritmo_jugador"] == -1:
 		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.EMPTY
-		
-	if partida.has("algoritmo_enemigo"):
-		if partida["algoritmo_enemigo"] == 0:
-			Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.BFS
-		elif partida["algoritmo_enemigo"] == 1:
-			Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.DFS
-		elif partida["algoritmo_enemigo"] == 2:
-			Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.DIJKSTRA
-		elif partida["algoritmo_enemigo"] == 3:
-			Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.A_STAR
-		elif partida["algoritmo_enemigo"] == 4:
-			Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.EMPTY
+
+	if partida["algoritmo_enemigo"] == 0:
+		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.BFS
+	elif partida["algoritmo_enemigo"] == 1:
+		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.DFS
+	elif partida["algoritmo_enemigo"] == 2:
+		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.DIJKSTRA
+	elif partida["algoritmo_enemigo"] == 3:
+		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.A_STAR
+	elif partida["algoritmo_enemigo"] == -1:
+		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.EMPTY
 
 	var new_scene
 	if partida["nivel"] == 0:

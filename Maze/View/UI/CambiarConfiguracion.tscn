@@ -67,11 +67,10 @@ text = "Modo de Interacción:"
 [node name="JuegoOption" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Usuario"
-popup/item_0/id = 0
-popup/item_1/text = "Computadora"
+popup/item_1/text = "Simulacion"
 popup/item_1/id = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer"]
@@ -90,10 +89,9 @@ layout_mode = 2
 [node name="JuegoOption" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer2"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Solitario"
-popup/item_0/id = 0
 popup/item_1/text = "Enfrentamiento"
 popup/item_1/id = 1
 
@@ -113,10 +111,9 @@ layout_mode = 2
 [node name="AlgotirmoOption" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer3"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-item_count = 4
 selected = 0
+item_count = 4
 popup/item_0/text = "BFS"
-popup/item_0/id = 0
 popup/item_1/text = "DFS"
 popup/item_1/id = 1
 popup/item_2/text = "Dijkstra"

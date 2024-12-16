@@ -8,19 +8,17 @@ const pixels_center = 16
 var player
 var enemy
 var coin
-var coin_position
 var maze_finished: bool = false
 
-var path: Path
-var algorithm: Algorithm
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = Player.new()
 	player.position = position
 	player.actual_position = position
-	coin = get_parent().get_node("Moneda/Moneda2D")
-	path = Path.new()
+	coin = get_parent().get_node("Moneda")
+	player.path = Path.new()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -47,7 +45,7 @@ func _process(delta):
 		
 		# Llegado a la posicion objetivo, se busca de nuevo evitando al enemigo
 		if position == player.target:
-			newSearch()
+			# enemy.move()
 			Singleton.move_player = false
 
 
@@ -74,10 +72,11 @@ func _input(event: InputEvent):
 
 # 
 func move():
-	var node = path.trayectoria[0]
+	await newSearch()
+	var node = player.path.trayectoria[0]
 	if !Singleton.move_player:
 		Singleton.move_player = true
-		path.trayectoria.erase(node)
+		player.path.trayectoria.erase(node)
 		player.actual_position = player.position
 		player.target = node
 
@@ -90,14 +89,6 @@ func asign_values():
 		enemy.move()
 
 
-# Asigna el algoritmo correspondiente
-func setAlgorithm(selected_algorithm: VideogameConstants.Algoritmo, graph: Dictionary):
-	algorithm = Algorithm.new()
-	algorithm.algoritmo = selected_algorithm  
-	algorithm.nombre = VideogameConstants.Algoritmo.keys()[selected_algorithm]
-	algorithm.graph = graph
-
-
 # 
 func updatePosition(new_position: Vector2):
 	player.position = new_position
@@ -107,27 +98,42 @@ func updatePosition(new_position: Vector2):
 
 # 
 func newSearch():
-	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:				
+	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:				
 		if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-			searchCoinWithEnemy(player.position, coin_position)
+			searchCoinWithEnemy(player.position, coin.position)
+		else:
+			await searchCoin(player.position, coin.position)
+		
+
+
+# Asigna el algoritmo correspondiente
+func setAlgorithm(selected_algorithm: VideogameConstants.Algoritmo, graph: Dictionary):
+	player.algorithm = Algorithm.new()
+	player.algorithm.algoritmo = selected_algorithm  
+	player.algorithm.nombre = VideogameConstants.Algoritmo.keys()[selected_algorithm]
+	player.algorithm.graph = graph
 
 
 #
 func setPath(start_node: Vector2, end_node: Vector2, trayectory: Array):
-	path.inicio = start_node
-	path.objetivo = end_node
-	path.trayectoria = trayectory
+	player.path.inicio = start_node
+	player.path.objetivo = end_node
+	player.path.trayectoria = trayectory
 
 
 # 
 func searchCoin(start_node: Vector2, end_node: Vector2):
-	var heuristic = algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y, Vector2(0,0))
-	var trayectory = algorithm.search(heuristic, start_node, end_node)
+	var heuristic = player.algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y)
+	var scene = get_tree().get_current_scene()
+	var tilemap = scene.get_node("./TileMap")
+	var trayectory = await player.algorithm.search(heuristic, start_node, end_node, tilemap, scene)
 	setPath(start_node, end_node, trayectory)
 
 
 # 
 func searchCoinWithEnemy(start_node: Vector2, end_node: Vector2):
-	var heuristic = algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y, enemy.position)
-	var trayectory = algorithm.search(heuristic, start_node, end_node)
+	var heuristic = player.algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y, enemy.position)
+	var scene = get_tree().get_current_scene()
+	var tilemap = scene.get_node("./TileMap")
+	var trayectory = await player.algorithm.search(heuristic, start_node, end_node, tilemap, scene, enemy.position)
 	setPath(start_node, end_node, trayectory)

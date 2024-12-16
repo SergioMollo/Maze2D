@@ -56,158 +56,21 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Atras"
 
-[node name="Nivel" type="Label" parent="."]
-layout_mode = 2
-offset_left = 100.0
-offset_top = 286.0
-offset_right = 197.0
-offset_bottom = 341.0
-theme_override_font_sizes/font_size = 35
-text = "Nivel"
-
-[node name="NivelOption" type="OptionButton" parent="."]
-custom_minimum_size = Vector2(425, 0)
-layout_mode = 2
-offset_left = 575.0
-offset_top = 267.0
-offset_right = 1000.0
-offset_bottom = 361.0
-selected = 0
-item_count = 4
-popup/item_0/text = "Nivel1"
-popup/item_1/text = "Nivel2"
-popup/item_1/id = 1
-popup/item_2/text = "Nivel3"
-popup/item_2/id = 2
-popup/item_3/text = "Aleatorio"
-popup/item_3/id = 3
-
-[node name="Dificultad" type="Label" parent="."]
-layout_mode = 2
-offset_left = 100.0
-offset_top = 384.0
-offset_right = 286.0
-offset_bottom = 439.0
-text = "Dificultad"
-
-[node name="DificultadOption" type="OptionButton" parent="."]
-custom_minimum_size = Vector2(425, 0)
-layout_mode = 2
-offset_left = 575.0
-offset_top = 365.0
-offset_right = 1000.0
-offset_bottom = 459.0
-selected = 0
-item_count = 3
-popup/item_0/text = "Facil"
-popup/item_1/text = "Media"
-popup/item_1/id = 1
-popup/item_2/text = "Dificil"
-popup/item_2/id = 2
-
-[node name="ModoJuego" type="Label" parent="."]
-layout_mode = 2
-offset_left = 100.0
-offset_top = 482.0
-offset_right = 384.0
-offset_bottom = 537.0
-text = "Modo de Juego"
-
-[node name="JuegoOption" type="OptionButton" parent="."]
-custom_minimum_size = Vector2(425, 0)
-layout_mode = 2
-offset_left = 575.0
-offset_top = 463.0
-offset_right = 1000.0
-offset_bottom = 557.0
-selected = 0
-item_count = 2
-popup/item_0/text = "Solitario"
-popup/item_1/text = "Enfrentamiento"
-popup/item_1/id = 1
-
-[node name="ModoInteraccion" type="Label" parent="."]
-layout_mode = 2
-offset_left = 100.0
-offset_top = 580.0
-offset_right = 494.0
-offset_bottom = 635.0
-text = "Modo de Interaccion"
-
-[node name="InteraccionOption" type="OptionButton" parent="."]
-custom_minimum_size = Vector2(425, 0)
-layout_mode = 2
-offset_left = 575.0
-offset_top = 561.0
-offset_right = 1000.0
-offset_bottom = 655.0
-selected = 0
-item_count = 2
-popup/item_0/text = "Usuario"
-popup/item_1/text = "Computadora"
-popup/item_1/id = 1
-
-[node name="Algoritmo" type="Label" parent="."]
-visible = false
-layout_mode = 2
-offset_left = 100.0
-offset_top = 780.0
-offset_right = 548.0
-offset_bottom = 835.0
-text = "Algoritmo de Busqueda"
-
-[node name="AlgoritmoOption" type="OptionButton" parent="."]
-visible = false
-custom_minimum_size = Vector2(425, 0)
-layout_mode = 2
-offset_left = 575.0
-offset_top = 760.0
-offset_right = 1000.0
-offset_bottom = 854.0
-selected = 0
-item_count = 4
-popup/item_0/text = "BFS"
-popup/item_1/text = "DFS"
-popup/item_1/id = 1
-popup/item_2/text = "Dijkstra"
-popup/item_2/id = 2
-popup/item_3/text = "A star"
-popup/item_3/id = 3
-
-[node name="Juegis" type="Label" parent="."]
-layout_mode = 2
-offset_left = 100.0
-offset_top = 680.0
-offset_right = 548.0
-offset_bottom = 735.0
-text = "Número de Juegos"
-
-[node name="NumeroJuegos" type="SpinBox" parent="."]
-custom_minimum_size = Vector2(425, 0)
-layout_mode = 0
-offset_left = 575.0
-offset_top = 660.0
-offset_right = 1000.0
-offset_bottom = 755.0
-min_value = 1.0
-max_value = 10.0
-value = 1.0
-
 [node name="Nombre" type="Label" parent="."]
 layout_mode = 2
-offset_left = 40.0
-offset_top = 100.0
-offset_right = 515.0
-offset_bottom = 155.0
+offset_left = 37.0
+offset_top = 38.0
+offset_right = 516.0
+offset_bottom = 93.0
 theme_override_font_sizes/font_size = 40
 text = "Configuración de partida"
 
 [node name="HSeparator" type="HSeparator" parent="."]
 layout_mode = 0
-offset_left = 28.0
-offset_top = 96.0
-offset_right = 1008.0
-offset_bottom = 230.0
+offset_left = 35.0
+offset_top = 32.0
+offset_right = 1015.0
+offset_bottom = 166.0
 
 [node name="PanelNivel" type="Panel" parent="."]
 layout_mode = 0
@@ -224,7 +87,7 @@ offset_top = 5.0
 offset_right = 512.0
 offset_bottom = 60.0
 theme_override_font_sizes/font_size = 30
-text = "Nivel: 1"
+text = "Tamaño: Nivel 1"
 
 [node name="Informacion" type="Label" parent="PanelNivel"]
 layout_mode = 0
@@ -326,9 +189,160 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 35.0
 
+[node name="Titulo" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 550.0
+offset_bottom = 924.0
+
+[node name="Nivel" type="Label" parent="Titulo"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Tamaño"
+vertical_alignment = 1
+
+[node name="Dificultad" type="Label" parent="Titulo"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Dificultad"
+vertical_alignment = 1
+
+[node name="ModoJuego" type="Label" parent="Titulo"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Modo de Juego"
+vertical_alignment = 1
+
+[node name="Algoritmo1" type="Label" parent="Titulo"]
+visible = false
+custom_minimum_size = Vector2(450, 100)
+layout_mode = 2
+text = "Algoritmo del Enemigo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ModoInteraccion" type="Label" parent="Titulo"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Modo de Interaccion"
+vertical_alignment = 1
+
+[node name="Algoritmo2" type="Label" parent="Titulo"]
+visible = false
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Algoritmo de Jugador"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Juegos" type="Label" parent="Titulo"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+text = "Número de Juegos"
+vertical_alignment = 1
+
+[node name="Opciones" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 575.0
+offset_top = 200.0
+offset_right = 1000.0
+offset_bottom = 924.0
+
+[node name="NivelOption" type="OptionButton" parent="Opciones"]
+custom_minimum_size = Vector2(425, 100)
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "Nivel1"
+popup/item_1/text = "Nivel2"
+popup/item_1/id = 1
+popup/item_2/text = "Nivel3"
+popup/item_2/id = 2
+popup/item_3/text = "Aleatorio"
+popup/item_3/id = 3
+
+[node name="DificultadOption" type="OptionButton" parent="Opciones"]
+custom_minimum_size = Vector2(425, 100)
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Facil"
+popup/item_1/text = "Media"
+popup/item_1/id = 1
+popup/item_2/text = "Dificil"
+popup/item_2/id = 2
+
+[node name="JuegoOption" type="OptionButton" parent="Opciones"]
+custom_minimum_size = Vector2(425, 100)
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Solitario"
+popup/item_1/text = "Enfrentamiento"
+popup/item_1/id = 1
+
+[node name="AlgoritmoOptionEnemigo" type="OptionButton" parent="Opciones"]
+visible = false
+custom_minimum_size = Vector2(425, 100)
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "Anchura"
+popup/item_1/text = "Profundidad"
+popup/item_1/id = 1
+popup/item_2/text = "Dijkstra"
+popup/item_2/id = 2
+popup/item_3/text = "A*"
+popup/item_3/id = 3
+
+[node name="InteraccionOption" type="OptionButton" parent="Opciones"]
+custom_minimum_size = Vector2(425, 100)
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Interacivo"
+popup/item_1/text = "Simulacion"
+popup/item_1/id = 1
+
+[node name="AlgoritmoOptionJugador" type="OptionButton" parent="Opciones"]
+visible = false
+custom_minimum_size = Vector2(425, 100)
+layout_mode = 2
+selected = 0
+item_count = 4
+popup/item_0/text = "Anchura"
+popup/item_1/text = "Profundidad"
+popup/item_1/id = 1
+popup/item_2/text = "Dijkstra"
+popup/item_2/id = 2
+popup/item_3/text = "A*"
+popup/item_3/id = 3
+
+[node name="JuegosOption" type="OptionButton" parent="Opciones"]
+custom_minimum_size = Vector2(425, 100)
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Al mejor de 1"
+popup/item_1/text = "Al mejor de 3"
+popup/item_1/id = 1
+popup/item_2/text = "Al mejor de 5"
+popup/item_2/id = 2
+
+[node name="NumeroJuegos" type="SpinBox" parent="Opciones"]
+visible = false
+custom_minimum_size = Vector2(425, 100)
+layout_mode = 2
+min_value = 1.0
+max_value = 25.0
+value = 1.0
+
 [connection signal="pressed" from="CrearPartida" to="." method="_on_crear_partida_pressed"]
 [connection signal="pressed" from="Atras" to="." method="_on_atras_pressed"]
-[connection signal="item_selected" from="NivelOption" to="." method="_on_nivel_option_item_selected"]
-[connection signal="item_selected" from="JuegoOption" to="." method="_on_juego_option_item_selected"]
-[connection signal="item_selected" from="InteraccionOption" to="." method="_on_interaccion_option_item_selected"]
-[connection signal="item_selected" from="AlgoritmoOption" to="." method="_on_algoritmo_option_item_selected"]
+[connection signal="item_selected" from="Opciones/NivelOption" to="." method="_on_nivel_option_item_selected"]
+[connection signal="item_selected" from="Opciones/JuegoOption" to="." method="_on_juego_option_item_selected"]
+[connection signal="item_selected" from="Opciones/AlgoritmoOptionEnemigo" to="." method="_on_algoritmo_option_item_selected"]
+[connection signal="item_selected" from="Opciones/InteraccionOption" to="." method="_on_interaccion_option_item_selected"]
+[connection signal="item_selected" from="Opciones/AlgoritmoOptionJugador" to="." method="_on_algoritmo_option_item_selected"]
+[connection signal="item_selected" from="Opciones/JuegosOption" to="." method="_on_algoritmo_option_item_selected"]

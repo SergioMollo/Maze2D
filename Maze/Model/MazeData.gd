@@ -31,7 +31,6 @@ func _process(delta):
 
 func initialize_data(level_data, player_ref, coin_ref, timer_ref, tilemap_ref):
 	maze_size = level_data.maze_size
-	#ySize = level_data.ySize
 	scale = level_data.scale
 	initial_player_position = level_data.initial_player_position
 	initial_enemy_position = level_data.initial_enemy_position

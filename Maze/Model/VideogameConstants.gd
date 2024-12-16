@@ -10,7 +10,7 @@ enum Algoritmo{ BFS, DFS, A_STAR, DIJKSTRA, EMPTY }
 
 enum Nivel { NIVEL1, NIVEL2, NIVEL3, ALEATORIO }
 
-enum ModoInteraccion { MODO_USUARIO, MODO_COMPUTADORA }
+enum ModoInteraccion { MODO_USUARIO, MODO_SIMULACION }
 
 enum ModoJuego { MODO_SOLITARIO, MODO_ENFRENTAMIENTO }
 

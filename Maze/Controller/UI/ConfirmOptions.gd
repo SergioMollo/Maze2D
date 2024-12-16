@@ -31,7 +31,7 @@ func _on_finalizar_pressed():
 
 
 func _on_reiniciar_pressed():
-	maze.juegos = 0
+	maze.game_number = 0
 	maze.win = 0
 	maze.lose = 0
 	maze.match_state = VideogameConstants.EstadoPartida.EN_CURSO
@@ -41,7 +41,7 @@ func _on_reiniciar_pressed():
 	queue_free()
 
 
-func _on_salir_pressed():
+func _on_menu_principal_pressed() -> void:
 	Singleton.partida_reference = ""
 	Singleton.nombre_partida = ""
 	get_tree().change_scene_to_file("res://Maze/View/UI/PantallaPrincipal.tscn")
@@ -68,8 +68,8 @@ func setOptions(maze_instance: MazeController, option: String):
 		info.text = "Esta acción reinicia la partida sin guardar 
 					el progreso alcanzado hasta el momento.
 					¿Está seguro que desea reiniciar la partida? "
-	elif option == "Salir":
-		$Panel/VBox/Margin2/HBoxContainer/Salir.show()
+	elif option == "MenuPrincipal":
+		$Panel/VBox/Margin2/HBoxContainer/MenuPrincipal.show()
 		$Panel/VBox/Margin2/HBoxContainer/GuardarSalir.show()
 		info.text = "Podra salir de la partida al menú principal 
 					almacenando el progreso alcanzado.

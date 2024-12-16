@@ -16,7 +16,6 @@ func _ready():
 	pass
 	
 	
-	
 func createGame():
 	maze_controller.initGame(level_data)
 	

@@ -1,11 +1,13 @@
 extends Control
 
-@onready var algoritmo_label: Label = $Algoritmo
-@onready var algoritmo_button: OptionButton = $AlgoritmoOption
+@onready var jugador_label: Label = $Titulo/Algoritmo2
+@onready var jugador_button: OptionButton = $Opciones/AlgoritmoOptionJugador
+@onready var enemigo_label: Label = $Titulo/Algoritmo1
+@onready var enemigo_button: OptionButton = $Opciones/AlgoritmoOptionEnemigo
 @onready var algoritmo_panel: Panel = $PanelAlgoritmo
-@onready var juego_button: OptionButton = $JuegoOption
-@onready var interaccion_button: OptionButton = $InteraccionOption
-@onready var nivel_button: OptionButton = $NivelOption
+@onready var juego_button: OptionButton = $Opciones/JuegoOption
+@onready var interaccion_button: OptionButton = $Opciones/InteraccionOption
+@onready var nivel_button: OptionButton = $Opciones/NivelOption
 
 
 # Called when the node enters the scene tree for the first time.
@@ -23,12 +25,21 @@ func _on_atras_pressed():
 
 
 func _on_crear_partida_pressed():
-	var nivel = $NivelOption.get_selected()
-	var dificultad = $DificultadOption.get_selected()
-	var modo_juego = $JuegoOption.get_selected()
-	var modo_interaccion = $InteraccionOption.get_selected()
-	var algoritmo = $AlgoritmoOption.get_selected()
-	var juegos = $NumeroJuegos.value
+	var nivel = $Opciones/NivelOption.get_selected()
+	var dificultad = $Opciones/DificultadOption.get_selected()
+	var modo_juego = $Opciones/JuegoOption.get_selected()
+	var modo_interaccion = $Opciones/InteraccionOption.get_selected()
+	var algoritmo_jugador = $Opciones/AlgoritmoOptionJugador.get_selected()
+	var algoritmo_enemigo = $Opciones/AlgoritmoOptionEnemigo.get_selected()
+	var juegos = $Opciones/JuegosOption.get_selected()
+	
+	if juegos == 0:
+		juegos = 1
+	elif juegos == 1:
+		juegos = 3
+	elif juegos == 2:
+		juegos = 5
+	
 	
 	var partida = {
 		"nivel": nivel,
@@ -37,8 +48,8 @@ func _on_crear_partida_pressed():
 		"modo_interaccion": modo_interaccion,
 		"estado": VideogameConstants.EstadoPartida.INICIADA,
 		"juegos": juegos,
-		"algoritmo_jugador": algoritmo,
-		"algoritmo_enemigo": algoritmo
+		"algoritmo_jugador": algoritmo_jugador,
+		"algoritmo_enemigo": algoritmo_enemigo
 	}
 
 	var new_scene = Singleton.configureGame(partida)
@@ -46,63 +57,19 @@ func _on_crear_partida_pressed():
 	get_tree().current_scene.queue_free()
 	get_tree().current_scene = new_scene
 	new_scene.createGame()
-	
-	#Singleton.juegos = juegos
-#
-	#if dificultad == 0:
-		#Singleton.dificultad = VideogameConstants.Dificultad.FACIL
-	#elif dificultad == 1:
-		#Singleton.dificultad = VideogameConstants.Dificultad.MEDIA
-	#else :
-		#Singleton.dificultad = VideogameConstants.Dificultad.DIFICIL
-#
-	#if algoritmo == 0:
-		#Singleton.algoritmo = VideogameConstants.Algoritmo.BFS
-	#elif algoritmo == 1:
-		#Singleton.algoritmo = VideogameConstants.Algoritmo.DFS
-	#elif algoritmo == 2:
-		#Singleton.algoritmo = VideogameConstants.Algoritmo.DIJKSTRA
-	#elif algoritmo == 3:
-		#Singleton.algoritmo = VideogameConstants.Algoritmo.A_STAR
-	#
-	#Singleton.algoritmo_jugador = Singleton.algoritmo
-	#Singleton.algoritmo_enemigo = Singleton.algoritmo
-#
-	#if modo_juego == 0:
-		#Singleton.modo_juego = VideogameConstants.ModoJuego.MODO_SOLITARIO
-		#Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.EMPTY
-	#else:
-		#Singleton.modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
-#
-	#if modo_interaccion == 0:
-		#Singleton.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_USUARIO
-	#else:
-		#Singleton.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_COMPUTADORA
-
-	#if nivel == 0:
-		##Singleton.nivel = VideogameConstants.Nivel.NIVEL1
-		#get_tree().change_scene_to_file("res://Maze/View/Game/LaberintoNivel1.tscn")
-	#elif nivel == 1:
-		##Singleton.nivel = VideogameConstants.Nivel.NIVEL2
-		#get_tree().change_scene_to_file("res://Maze/View/Game/LaberintoNivel2.tscn")
-	#elif nivel == 2:
-		##Singleton.nivel = VideogameConstants.Nivel.NIVEL3
-		#get_tree().change_scene_to_file("res://Maze/View/Game/LaberintoNivel3.tscn")
-	#elif nivel == 3:
-		##Singleton.nivel = VideogameConstants.Nivel.ALEATORIO
-		#print("No disponible")
 
 
 func _on_juego_option_item_selected(index: int) -> void:
 	if juego_button.get_selected() == 0:
 		if interaccion_button.get_selected() == 0:
-			hideAlgoritmo()
+			algoritmo_panel.hide()
+		hideAlgoritmo(false)
 		$PanelJuego/Nombre.text = "Modo de juego: Solitario"
 		$PanelJuego/Informacion.text = "El modo Solitario interactuará únicamente el jugador. 
 										El objetivo será alcanzar la moneda antes de que
 										finalice el tiempo estimado."
 	else: 
-		showAlgoritmo()
+		showAlgoritmo(false)
 		$PanelJuego/Nombre.text = "Modo de juego: Enfrentamiento"
 		$PanelJuego/Informacion.text = "El modo Enfrentamiento se enfrentara a un adversdario. 
 										El objetivo será alcanzar la moneda evitando al 
@@ -112,77 +79,90 @@ func _on_juego_option_item_selected(index: int) -> void:
 func _on_interaccion_option_item_selected(index: int) -> void:
 	if interaccion_button.get_selected() == 0:
 		if juego_button.get_selected() == 0:
-			hideAlgoritmo()
-		
+			algoritmo_panel.hide()
+		hideAlgoritmo(true)
 		$PanelInteraccion/Nombre.text = "Modo de interaccion: Usuario"
 		$PanelInteraccion/Informacion.text = "El modo Usuario permite los movimientos del 
 											jugador en base a entradas de teclado determinadas
 											por el usuario."
 	else: 
-		showAlgoritmo()
-		$PanelInteraccion/Nombre.text = "Modo de interaccion: Computadora"
-		$PanelInteraccion/Informacion.text = "El modo Computadora permite los movimientos del 
+		showAlgoritmo(true)
+		$PanelInteraccion/Nombre.text = "Modo de interaccion: Simulacion"
+		$PanelInteraccion/Informacion.text = "El modo Simulacion permite los movimientos del 
 											jugador en base a movimientos realizados por la 
 											computadora en base al algoritmo determinado."
 
 
 func _on_algoritmo_option_item_selected(index: int) -> void:
-	if algoritmo_button.get_selected() == 0:
-		$PanelAlgoritmo/Nombre.text = "Algoritmo: BFS"
-		$PanelAlgoritmo/Informacion.text = "El algoritmo BFS realiza la búsqueda primero en 
-											anchura, examinando todos los nodos para encontrar 
-											una solución"
+	if jugador_button.get_selected() == 0:
+		$PanelAlgoritmo/Nombre.text = "Algoritmo: Anchura"
+		$PanelAlgoritmo/Informacion.text = "El algoritmo en Anchura (BFS) realiza la búsqueda 
+											primero en anchura, examinando todos los nodos 
+											para encontrar una solución"
 		
-	elif algoritmo_button.get_selected() == 1:
-		$PanelAlgoritmo/Nombre.text = "Algoritmo: DFS"
-		$PanelAlgoritmo/Informacion.text = "El algoritmo DFS realiza la búsqueda primero en 
-											profundidad, examinando nodo y sus hijos hasta 
-											encontrar una solución"
+	elif jugador_button.get_selected() == 1:
+		$PanelAlgoritmo/Nombre.text = "Algoritmo: Profundidad"
+		$PanelAlgoritmo/Informacion.text = "El algoritmo en Profundidad (DFS) realiza la búsqueda 
+											primero en profundidad, examinando nodo y sus hijos 
+											hasta encontrar una solución"
 		
-	elif algoritmo_button.get_selected() == 2:
+	elif jugador_button.get_selected() == 2:
 		$PanelAlgoritmo/Nombre.text = "Algoritmo: Dijkstra"
 		$PanelAlgoritmo/Informacion.text = "El algoritmo Dijkstra determina el camino más 
 											corto, examinando todos los nodos para encontrar 
 											la solución"
 		
-	elif algoritmo_button.get_selected() == 3:
-		$PanelAlgoritmo/Nombre.text = "Algoritmo: A Star"
-		$PanelAlgoritmo/Informacion.text = "El algoritmo A Star determina el camino de menor 
+	elif jugador_button.get_selected() == 3:
+		$PanelAlgoritmo/Nombre.text = "Algoritmo: A Estrella"
+		$PanelAlgoritmo/Informacion.text = "El algoritmo A Estrella determina el camino de menor 
 											coste, examinando todos los nodos para encontrar 
 											una solución"
 
 
 func _on_nivel_option_item_selected(index: int) -> void:
 	if nivel_button.get_selected() == 0:
-		$PanelNivel/Nombre.text = "Nivel: 1"
+		$PanelNivel/Nombre.text = "Tamaño: Nivel 1"
 		$PanelNivel/Informacion.text = "El Nivel 1 tiene un tamaño de 15x15. 
 										Recomendado para usuarios principiantes."
 		
 	elif nivel_button.get_selected() == 1:
-		$PanelNivel/Nombre.text = "Nivel: 2"
-		$PanelNivel/Informacion.text = "El Nivel 2 tiene un tamaño de 20x25. 
+		$PanelNivel/Nombre.text = "Tamaño: Nivel 2"
+		$PanelNivel/Informacion.text = "El Nivel 2 tiene un tamaño de 25x20. 
 										Recomendado para usuarios intermedios."
 		
 	elif nivel_button.get_selected() == 2:
-		$PanelNivel/Nombre.text = "Nivel: 3"
+		$PanelNivel/Nombre.text = "Tamaño: Nivel 3"
 		$PanelNivel/Informacion.text = "El Nivel 3 tiene un tamaño de 50x25. 
 										Recomendado para usuarios avanzados."
 		
 	elif nivel_button.get_selected() == 3:
-		$PanelNivel/Nombre.text = "Nivel: Aleatorio"
+		$PanelNivel/Nombre.text = "Tamaño: Nivel Aleatorio"
 		$PanelNivel/Informacion.text = "El nivel Aleatorio tiene un tamaño comprendido 
 										entre 15x15 y 50x25.
 										Recomendado para usuarios de nivel intermedio-alto."
 
 
 
-func hideAlgoritmo():
-	algoritmo_label.hide()
-	algoritmo_button.hide()
-	algoritmo_panel.hide()
+func hideAlgoritmo(player: bool):
 	
+	if player:	
+		jugador_label.hide()
+		jugador_button.hide()
+		jugador_button.select(-1)
+	else:
+		enemigo_label.hide()
+		enemigo_button.hide()
+		enemigo_button.select(-1)
+		
 	
-func showAlgoritmo():
-	algoritmo_label.show()
-	algoritmo_button.show()	
+func showAlgoritmo(player: bool):
+	if player:	
+		jugador_label.show()
+		jugador_button.show()
+		jugador_button.select(0)
+	else:
+		enemigo_label.show()
+		enemigo_button.show()
+		enemigo_button.select(0)
+		
 	algoritmo_panel.show()

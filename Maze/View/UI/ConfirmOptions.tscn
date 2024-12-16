@@ -84,10 +84,10 @@ visible = false
 layout_mode = 2
 text = "Reiniciar"
 
-[node name="Salir" type="Button" parent="Panel/VBox/Margin2/HBoxContainer"]
+[node name="MenuPrincipal" type="Button" parent="Panel/VBox/Margin2/HBoxContainer"]
 visible = false
 layout_mode = 2
-text = "Salir"
+text = "Menu Principal"
 
 [node name="Cancelar" type="Button" parent="Panel/VBox/Margin2/HBoxContainer"]
 layout_mode = 2
@@ -96,5 +96,5 @@ text = "Cancelar"
 [connection signal="pressed" from="Panel/VBox/Margin2/HBoxContainer/GuardarSalir" to="." method="_on_guardar_salir_pressed"]
 [connection signal="pressed" from="Panel/VBox/Margin2/HBoxContainer/Finalizar" to="." method="_on_finalizar_pressed"]
 [connection signal="pressed" from="Panel/VBox/Margin2/HBoxContainer/Reiniciar" to="." method="_on_reiniciar_pressed"]
-[connection signal="pressed" from="Panel/VBox/Margin2/HBoxContainer/Salir" to="." method="_on_salir_pressed"]
+[connection signal="pressed" from="Panel/VBox/Margin2/HBoxContainer/MenuPrincipal" to="." method="_on_menu_principal_pressed"]
 [connection signal="pressed" from="Panel/VBox/Margin2/HBoxContainer/Cancelar" to="." method="_on_cancelar_pressed"]

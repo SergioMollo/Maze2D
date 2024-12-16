@@ -8,7 +8,7 @@ const pixels_center = 16
 
 var maze
 
-var juegos = 0
+var game_number = 0
 var win = 0
 var lose = 0
 
@@ -34,8 +34,6 @@ var graph = {}
 
 # 
 func _ready():
-	#winLabel.hide()
-	#loseLabel.hide()
 	await get_tree().create_timer(0.0).timeout
 	#new_game()
 
@@ -50,8 +48,8 @@ func setup(level_data : Dictionary):
 	
 	createMap(maze.maze_size.x, maze.maze_size.y)
 
-	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:
-		maze.player.setAlgorithm(Singleton.algoritmo, graph)
+	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
+		maze.player.setAlgorithm(Singleton.algoritmo_jugador, graph)
 		
 	winLabel.hide()
 	loseLabel.hide()
@@ -76,7 +74,7 @@ func reloadGame(level_data : Dictionary, jugador: Dictionary, enemigo: Dictionar
 	maze.player.player.position = jugador_position	
 	maze.player.player.target = jugador_position
 	maze.player.player.actual_position = jugador_position
-	maze.player.coin_position = maze.initial_coin_position
+	# maze.player.coin_position = maze.initial_coin_position
 	#maze.player.setAlgorithm(Singleton.algoritmo_jugador, graph)
 
 	if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
@@ -90,7 +88,7 @@ func reloadGame(level_data : Dictionary, jugador: Dictionary, enemigo: Dictionar
 		
 		maze.enemy.setPath(maze.enemy.position, maze.player.position, trayectoria)
 		#maze.enemy.searchPlayer(graph, maze.enemy.position, maze.player.position)
-		if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:
+		if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
 			trayectoria = []
 			camino = camino_jugador["trayectoria"]
 			for value in camino:
@@ -99,7 +97,7 @@ func reloadGame(level_data : Dictionary, jugador: Dictionary, enemigo: Dictionar
 				maze.player.setPath(maze.enemy.position, maze.player.position, trayectoria)
 			#maze.player.searchCoinWithEnemy(graph, maze.player.position, maze.initial_coin_position)
 	else:
-		if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:
+		if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
 			var trayectoria = []
 			var camino = camino_jugador["trayectoria"]
 			for value in camino:
@@ -112,7 +110,7 @@ func reloadGame(level_data : Dictionary, jugador: Dictionary, enemigo: Dictionar
 		
 	maze.player.maze_finished = false
 	maze.timer.start(juego["tiempo_restante"])
-	juegos = juego["numero"]
+	game_number = juego["numero"]
 	
 	win = level_data["win_games"]
 	lose = level_data["lose_games"]
@@ -128,10 +126,11 @@ func reloadGame(level_data : Dictionary, jugador: Dictionary, enemigo: Dictionar
 # 
 func new_game():
 	initiate = false
+	
 	winLabel.hide()
 	loseLabel.hide()
 	maze.moneda.show()
-	juegos += 1
+	game_number += 1
 	
 	Singleton.move_player = false
 	Singleton.move_enemy = false
@@ -140,16 +139,16 @@ func new_game():
 	maze.player.player.position = maze.initial_player_position	
 	maze.player.player.target = maze.initial_player_position
 	maze.player.player.actual_position = maze.initial_player_position
-	maze.player.coin_position = maze.initial_coin_position
+	# maze.player.coin_position = maze.initial_coin_position
 
 	if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 		spawnEnemy(maze.initial_enemy_position)
 		maze.enemy.searchPlayer(maze.enemy.position, maze.player.position)
-		if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:
-			maze.player.searchCoinWithEnemy(maze.player.position, maze.initial_coin_position)
-	else:
-		if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:
-			maze.player.searchCoin(maze.player.position, maze.initial_coin_position)	
+		#if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
+			#maze.player.searchCoinWithEnemy(maze.player.position, maze.initial_coin_position)
+	#else:
+		#if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
+			#maze.player.searchCoin(maze.player.position, maze.initial_coin_position)	
 		
 	maze.player.maze_finished = false
 	maze.timer.start(60)
@@ -159,9 +158,9 @@ func new_game():
 
 # Called every frame. 'delta' is he elapsed time since the previous frame.
 func _process(delta):
-	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA and !Singleton.move_player and !Singleton.move_enemy and initiate:
-		if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-			maze.enemy.move()
+	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION and !Singleton.move_player and !Singleton.move_enemy and initiate:
+		# if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+		# 	maze.enemy.move()
 		maze.player.move()
 	if !maze.player.maze_finished:
 		timeLabel.text= str(int(maze.timer.time_left))
@@ -172,10 +171,10 @@ func spawnEnemy(enemy_position: Vector2):
 	maze.enemy = enemy_scene.instantiate()
 	maze.enemy.position = enemy_position
 	maze.enemy.connect("eliminated", mostrarEliminado)
-	maze.enemy.setAlgorithm(Singleton.algoritmo, graph)
 	maze.player.enemy = maze.enemy
 	maze.enemy.maze_finished = false
 	get_parent().add_child(maze.enemy)
+	maze.enemy.setAlgorithm(Singleton.algoritmo_enemigo, graph)
 
 
 # 
@@ -195,7 +194,7 @@ func mostrarResultado():
 	# agente.reset()
 	# enemigoAgente.reset()
 	updatePuntuation()
-	if juegos <= Singleton.juegos:
+	if game_number < Singleton.juegos:
 		new_game()
 	else:
 		finishLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
@@ -219,7 +218,7 @@ func mostrarEliminado():
 	# agente.reset()
 	# enemigoAgente.reset()
 	updatePuntuation()
-	if juegos <= Singleton.juegos:
+	if game_number < Singleton.juegos:
 		new_game()
 	else:
 		finishLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
@@ -243,7 +242,7 @@ func _on_timer_timeout():
 	# agente.reset()
 	# enemigoAgente.reset()
 	updatePuntuation()
-	if juegos <= Singleton.juegos:
+	if game_number < Singleton.juegos:
 		new_game()
 	else:
 		finishLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
@@ -282,10 +281,10 @@ func createGraph(map: Array, xSize: int, ySize: int):
 					childs.append(Vector2(pixels_center + pixels_move*(j+1) + pixels_offset, pixels_center + pixels_move*i + pixels_offset))
 				if map[i+1][j] == 0:
 					childs.append(Vector2(pixels_center + pixels_move*j + pixels_offset, pixels_center + pixels_move*(i+1) + pixels_offset))
-				if map[i][j-1] == 0:
-					childs.append(Vector2(pixels_center + pixels_move*(j-1) + pixels_offset, pixels_center + pixels_move*i + pixels_offset))				
 				if map[i-1][j] == 0:
-					childs.append(Vector2(pixels_center + pixels_move*j + pixels_offset, pixels_center + pixels_move*(i-1) + pixels_offset))					
+					childs.append(Vector2(pixels_center + pixels_move*j + pixels_offset, pixels_center + pixels_move*(i-1) + pixels_offset))	
+				if map[i][j-1] == 0:
+					childs.append(Vector2(pixels_center + pixels_move*(j-1) + pixels_offset, pixels_center + pixels_move*i + pixels_offset))								
 				
 				graph[Vector2(pixels_center + pixels_move*j + pixels_offset, pixels_center + pixels_move*i + pixels_offset)] = childs
 				childs = []
@@ -302,7 +301,6 @@ func saveGame(nombre: String):
 		"dificultad": Singleton.dificultad,
 		"modo_juego": Singleton.modo_juego,
 		"modo_interaccion": Singleton.modo_interaccion,
-
 		"estado": match_state,
 		"juegos": Singleton.juegos,
 		"win_games": win,
@@ -310,7 +308,12 @@ func saveGame(nombre: String):
 		"id_jugador": "",
 		"id_enemigo": "",
 		"id_moneda": "",
-		"id_juego": ""
+		"id_juego": "",
+		#"maze_size": maze.maze_size,
+		#"scale": maze.scale,
+		#"initial_player_position": maze.initial_player_position,
+		#"initial_enemy_position": maze.initial_enemy_position,
+		#"initial_coin_position": maze.initial_coin_position,
 	}
 	
 	var jugador: Dictionary = {
@@ -345,7 +348,7 @@ func saveGame(nombre: String):
 		}
 	
 	var juego: Dictionary = {
-		"numero": juegos,
+		"numero": game_number,
 		"estado": game_state,
 		"tiempo_restante": maze.timer.time_left,
 	}
@@ -356,7 +359,7 @@ func saveGame(nombre: String):
 	}
 	
 	var camino_jugador: Dictionary
-	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_COMPUTADORA:
+	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
 		var trayectoria: Array = []
 		for node in maze.enemy.path.trayectoria:
 			trayectoria.append(str(node.x)+ "," +str(node.y))

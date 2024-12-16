@@ -1459,7 +1459,7 @@ text = "Crear Partida"
 
 [node name="ContinuarPartida" type="Button" parent="Canvas/Panel/Margin/VBox/HBox/VBox"]
 layout_mode = 2
-text = "Continuar Partida"
+text = "Cargar Partida"
 
 [node name="Ajustes" type="Button" parent="Canvas/Panel/Margin/VBox/HBox/VBox"]
 layout_mode = 2

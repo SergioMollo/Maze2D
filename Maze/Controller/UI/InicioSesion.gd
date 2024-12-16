@@ -17,7 +17,6 @@ func _on_iniciar_sesion_pressed():
 	var email = $Canvas/Panel/Margin/VBox/EmailValue.text
 	var password = $Canvas/Panel/Margin/VBox/PasswordValue.text
 	Singleton.login(email, password)
-	
 	#get_tree().change_scene_to_file("res://Maze/View/UI/PantallaPrincipal.tscn")
 
 

@@ -48,11 +48,12 @@ func _on_reiniciar_pressed():
 
 
 func _on_cambiar_configuracion_pressed():
-	var overlay_scene = preload("res://Maze/View/UI/CambiarConfiguracion.tscn")
-	var instance = overlay_scene.instantiate()
-	instance.setMaze(maze)
-	add_child(instance)
-	instance.position = Vector2(0,0)
+	#var overlay_scene = preload("res://Maze/View/UI/CambiarConfiguracion.tscn")
+	#var instance = overlay_scene.instantiate()
+	#instance.setMaze(maze)
+	#add_child(instance)
+	#instance.position = Vector2(0,0)
+	pass
 
 
 func _on_finalizar_pressed():
@@ -66,7 +67,7 @@ func _on_finalizar_pressed():
 func _on_salir_pressed():
 	var overlay_scene = preload("res://Maze/View/UI/ConfirmOptions.tscn")
 	var instance = overlay_scene.instantiate()
-	instance.setOptions(maze, "Salir")
+	instance.setOptions(maze, "MenuPrincipal")
 	add_child(instance)
 	instance.position = Vector2(0,0)
 
