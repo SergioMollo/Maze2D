@@ -45,7 +45,6 @@ func _process(delta):
 		
 		# Llegado a la posicion objetivo, se busca de nuevo evitando al enemigo
 		if position == player.target:
-			# enemy.move()
 			Singleton.move_player = false
 
 
@@ -72,10 +71,10 @@ func _input(event: InputEvent):
 
 # 
 func move():
-	await newSearch()
-	var node = player.path.trayectoria[0]
 	if !Singleton.move_player:
 		Singleton.move_player = true
+		await newSearch()
+		var node = player.path.trayectoria[0]
 		player.path.trayectoria.erase(node)
 		player.actual_position = player.position
 		player.target = node
@@ -85,8 +84,8 @@ func move():
 func asign_values():
 	Singleton.move_player = true
 	player.actual_position = player.position
-	if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-		enemy.move()
+	# if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+	# 	enemy.move()
 
 
 # 
@@ -100,7 +99,7 @@ func updatePosition(new_position: Vector2):
 func newSearch():
 	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:				
 		if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-			searchCoinWithEnemy(player.position, coin.position)
+			await searchCoinWithEnemy(player.position, coin.position)
 		else:
 			await searchCoin(player.position, coin.position)
 		
@@ -126,7 +125,7 @@ func searchCoin(start_node: Vector2, end_node: Vector2):
 	var heuristic = player.algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y)
 	var scene = get_tree().get_current_scene()
 	var tilemap = scene.get_node("./TileMap")
-	var trayectory = await player.algorithm.search(heuristic, start_node, end_node, tilemap, scene)
+	var trayectory = await player.algorithm.search(heuristic, start_node, end_node, tilemap, scene, true)
 	setPath(start_node, end_node, trayectory)
 
 
@@ -135,5 +134,5 @@ func searchCoinWithEnemy(start_node: Vector2, end_node: Vector2):
 	var heuristic = player.algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y, enemy.position)
 	var scene = get_tree().get_current_scene()
 	var tilemap = scene.get_node("./TileMap")
-	var trayectory = await player.algorithm.search(heuristic, start_node, end_node, tilemap, scene, enemy.position)
+	var trayectory = await player.algorithm.search(heuristic, start_node, end_node, tilemap, scene, true, enemy.position)
 	setPath(start_node, end_node, trayectory)

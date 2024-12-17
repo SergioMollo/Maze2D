@@ -15,6 +15,7 @@ var resultdfs = []
 
 var tilemap
 var scene
+var is_player
 
 
 # Called when the node enters the scene tree for the first time.
@@ -28,12 +29,13 @@ func _process(delta):
 
 
 # 
-func search(calcuated_heuristic: Dictionary, start_node: Vector2, end_node: Vector2, tile: TileMap, scene_tree, avoid_node: Vector2 = Vector2(-1,-1)):
+func search(calcuated_heuristic: Dictionary, start_node: Vector2, end_node: Vector2, tile: TileMap, scene_tree, player: bool, avoid_node: Vector2 = Vector2(-1,-1)):
 	tilemap = tile
 	scene = scene_tree
 	heuristic = calcuated_heuristic
 	var path = []
 	resultdfs = []
+	is_player = player
 
 	if algoritmo == VideogameConstants.Algoritmo.BFS:
 		path = await bfsSearch(start_node, end_node, avoid_node)
@@ -91,8 +93,11 @@ func bfsSearch(start_node: Vector2, end_node: Vector2, avoid_node: Vector2):
 		for neighbor in get_neighbors(current_node):
 			var cell = tilemap.local_to_map(neighbor)
 			var atlas_coords = Vector2i(0, 0)
-			tilemap.set_cell(0, cell, 7, atlas_coords)
-			await scene.get_tree().create_timer(0.025).timeout
+			if is_player:
+				tilemap.set_cell(0, cell, 7, atlas_coords)
+			else:
+				tilemap.set_cell(0, cell, 6, atlas_coords)
+			await scene.get_tree().create_timer(0.01).timeout
 			
 			# Si el vecino no ha sido visitado, marcarlo como visitado y agregarlo a la cola
 			if neighbor not in visited:
@@ -227,11 +232,21 @@ func createPath(start_node: Vector2, end_node: Vector2, parent: Dictionary):
 
 # Resalta el camino encontrado hacia el objetivo
 func setTilesPath(path: Array):
+	for node in path:
+		var cell = tilemap.local_to_map(node)
+		var atlas_coords = Vector2i(0, 0)
+		var id = tilemap.get_cell_source_id(0, cell)
+		if is_player and id != 4:
+			tilemap.set_cell(0, cell, 8, atlas_coords)
+		elif !is_player and id != 8:
+			tilemap.set_cell(0, cell, 4, atlas_coords)
+		await scene.get_tree().create_timer(0.01).timeout
+
+
 	for node in graph:
 		var cell = tilemap.local_to_map(node)
 		var atlas_coords = Vector2i(0, 0)
-		if node in path:
-			tilemap.set_cell(0, cell, 8, atlas_coords)
-		else:
+		if node not in path:
 			tilemap.set_cell(0, cell, 0, atlas_coords)
-		await scene.get_tree().create_timer(0.005).timeout
+
+		await scene.get_tree().create_timer(0.0005).timeout

@@ -29,6 +29,7 @@ var user_name: String
 
 var partida_reference: String = ""
 var nombre_partida: String = ""
+var email: String = "sergio@mail"
 
 signal set_text_info(message: String, color: Color)
 
@@ -96,186 +97,75 @@ func saveUser():
 
 
 
-func save(partida: Dictionary, jugador: Dictionary, enemigo: Dictionary, juego: Dictionary, moneda: Dictionary, camino_jugador: Dictionary, camino_enemigo: Dictionary):
-	var auth = Firebase.Auth.auth
-	var usuario_collection: FirestoreCollection = Firebase.Firestore.collection("usuario")
-	var partida_collection: FirestoreCollection = Firebase.Firestore.collection("partida")	
-	var jugador_collection: FirestoreCollection = Firebase.Firestore.collection("jugador")
-	var enemigo_collection: FirestoreCollection = Firebase.Firestore.collection("enemigo")	
-	var juego_collection: FirestoreCollection = Firebase.Firestore.collection("juego")
-	var moneda_collection: FirestoreCollection = Firebase.Firestore.collection("moneda")	
-	var camino_collection: FirestoreCollection = Firebase.Firestore.collection("camino")
-	
+func saveGame(partida: Dictionary, nivel_information: Dictionary, jugador: Dictionary, enemigo: Dictionary, juego: Dictionary, camino_jugador: Dictionary, camino_enemigo: Dictionary, ids: Dictionary):
+
+	var database_api = Database.new()
+	database_api.initDatabase()
+
 
 	if partida_reference == "":
-		if !camino_jugador.is_empty():		
-			var camino_document = await camino_collection.add("", camino_jugador)		
-			jugador["id_camino"] = camino_document.doc_name
-			
-		var jugador_document = await jugador_collection.add("", jugador)
-		partida["id_jugador"] = jugador_document.doc_name
+		database_api.addResource("juego", juego)
+		partida["id_juego"] = database_api.getLastInsertId()
+		database_api.addResource("nivel", nivel_information)
+		partida["id_nivel"] = database_api.getLastInsertId()
+
 		
+		if !camino_jugador.is_empty():
+			database_api.addResource("camino_jugador", camino_jugador)
+			jugador["id_camino"] = database_api.getLastInsertId()
+
+		database_api.addResource("jugador", jugador)
+		partida["id_jugador"] = database_api.getLastInsertId()
+
 		if !enemigo.is_empty():
-			var camino_document = await camino_collection.add("", camino_enemigo)
-			enemigo["id_camino"] = camino_document.doc_name
-			var enemigo_document = await enemigo_collection.add("", enemigo)
-			partida["id_enemigo"] = enemigo_document.doc_name
-			
-		var juego_document = await juego_collection.add("", juego)
-		partida["id_juego"] = juego_document.doc_name
+			database_api.addResource("camino_enemigo", camino_enemigo)
+			enemigo["id_camino"] = database_api.getLastInsertId()
+			database_api.addResource("enemigo", enemigo)
+			partida["id_enemigo"] = database_api.getLastInsertId()
 		
-		var moneda_document = await moneda_collection.add("", moneda)
-		partida["id_moneda"] = moneda_document.doc_name
-		
-		var partida_document = await partida_collection.add("", partida)
-		partida_reference = partida_document.doc_name	
-		
-		var usuario_document = await usuario_collection.get_doc(auth.localid)
-		var partidas = usuario_document.get_value("partidas")
-		partidas.append(partida_document.doc_name)
-		usuario_document.add_or_update_field("partidas", partidas)
-		usuario_collection.update(usuario_document)
+		partida["email_usuario"] = email
+		database_api.addResource("partida", partida)
 
 	else:
-		var partida_document = await partida_collection.get_doc(partida_reference)	
-		var jugador_reference = partida_document.get_value("id_jugador")
-		var moneda_reference = partida_document.get_value("id_moneda")
-		var juego_reference = partida_document.get_value("id_juego")
+		database_api.updateResource("partida", partida, partida_reference)
+		database_api.updateResource("nivel", nivel_information, ids["id_nivel"])
+		database_api.updateResource("jugador", jugador, ids["id_jugador"])	
+		database_api.updateResource("juego", juego, ids["id_juego"])
 		
-		var jugador_document = await jugador_collection.get_doc(jugador_reference)
-		var moneda_document = await moneda_collection.get_doc(moneda_reference)
-		var juego_document = await juego_collection.get_doc(juego_reference)	
-	
 		if !camino_jugador.is_empty():
-			var camino_jugador_reference = jugador_document.get_value("id_camino")
-			var camino_jugador_document = await camino_collection.get_doc(camino_jugador_reference)
-			jugador["id_camino"] = camino_jugador_reference
-			
-			for key in camino_jugador.keys():
-				camino_jugador_document.add_or_update_field(key, camino_jugador[key])
-				camino_collection.update(camino_jugador_document)
-				
-		for key in jugador.keys():
-			jugador_document.add_or_update_field(key, jugador[key])
-		jugador_collection.update(jugador_document)
+			database_api.updateResource("camino_jugador", camino_jugador, ids["id_camino_jugador"])
 
 		if !enemigo.is_empty():
-			var enemigo_reference = partida_document.get_value("id_enemigo")
-			var enemigo_document = await enemigo_collection.get_doc(enemigo_reference)
-			var camino_enemigo_reference = enemigo_document.get_value("id_camino")
-			var camino_enemigo_document = await camino_collection.get_doc(camino_enemigo_reference)
-			
-			enemigo["id_camino"] = camino_enemigo_reference
-			partida["id_enemigo"] = enemigo_reference
-			for key in enemigo.keys():
-				enemigo_document.add_or_update_field(key, enemigo[key])		
-			enemigo_collection.update(enemigo_document)
-			
-			for key in camino_enemigo.keys():
-				camino_enemigo_document.add_or_update_field(key, camino_enemigo[key])
-			camino_collection.update(camino_enemigo_document)
+			database_api.updateResource("enemigo", enemigo, ids["id_enemigo"])
+			database_api.updateResource("camino_enemigo", camino_enemigo, ids["id_camino_enemigo"])
 
-		for key in moneda.keys():
-				moneda_document.add_or_update_field(key, moneda[key])
-		moneda_collection.update(moneda_document)
-		
-		for key in juego.keys():
-				juego_document.add_or_update_field(key, juego[key])
-		juego_collection.update(juego_document)
-	
-		partida["id_jugador"] = jugador_reference
-		partida["id_juego"] = juego_reference
-		partida["id_moneda"] = moneda_reference
-		
-		for key in partida.keys():
-			partida_document.add_or_update_field(key, partida[key])
-		partida_collection.update(partida_document)
-		
+	database_api.closeDatabase()
+
+
+
+
+
+
 	
 func loadGames():
-	var auth = Firebase.Auth.auth
-	var usuario_collection: FirestoreCollection = Firebase.Firestore.collection("usuario")
-	var partida_collection: FirestoreCollection = Firebase.Firestore.collection("partida")
-	var jugador_collection: FirestoreCollection = Firebase.Firestore.collection("jugador")
-	var enemigo_collection: FirestoreCollection = Firebase.Firestore.collection("enemigo")	
-
-	var user_games = await usuario_collection.get_doc(auth.localid)
-	var partidas = user_games.get_value("partidas")
-
-	var lista_partidas = []
-	var lista_partidas_finalizadas = []
+	var database_api = Database.new()
+	database_api.initDatabase()
 	
-	for partida in partidas:
-		var partida_document = await partida_collection.get_doc(partida)
-		var jugador = partida_document.get_value("id_jugador")
-		var enemigo = partida_document.get_value("id_enemigo")
-		var jugador_document = await jugador_collection.get_doc(jugador)
-		var enemigo_document = await enemigo_collection.get_doc(enemigo)
-		
-		partida_document.add_or_update_field("algoritmo_jugador", jugador_document.get_value("algoritmo"))
-		if enemigo_document.doc_name != "":
-			partida_document.add_or_update_field("algoritmo_enemigo", enemigo_document.get_value("algoritmo"))
-		
-		partida_document.add_or_update_field("reference", partida)
-		
-		if partida_document.get_value("estado") == 3:
-			lista_partidas_finalizadas.append(partida_document.get_unsafe_document())
-		else:
-			lista_partidas.append(partida_document.get_unsafe_document())
-		
-	return [lista_partidas, lista_partidas_finalizadas]
+	database_api.closeDatabase()
+	
 	
 	
 func initSaveGame(partida: Dictionary):
+	pass
 	
-	var new_scene = configureGame(partida)	
 
-	Singleton.nombre_partida = partida["nombre"]
-	Singleton.partida_reference = partida["reference"]
-	
-	# Aqui hay que rellenar partida con los datos de posiciones y todos los objetos que se requieran, es decir, obtener
-	# los datos de cada instancia y pasarlas a la escena para despues asignar
-	var partida_collection: FirestoreCollection = Firebase.Firestore.collection("partida")
-	var jugador_collection: FirestoreCollection = Firebase.Firestore.collection("jugador")
-	var enemigo_collection: FirestoreCollection = Firebase.Firestore.collection("enemigo")	
-	var juego_collection: FirestoreCollection = Firebase.Firestore.collection("juego")
-	var moneda_collection: FirestoreCollection = Firebase.Firestore.collection("moneda")	
-	var camino_collection: FirestoreCollection = Firebase.Firestore.collection("camino")
 
-	var partida_document = await partida_collection.get_doc(partida_reference)
-	var jugador_reference = partida_document.get_value("id_jugador")
-	var enemigo_reference = partida_document.get_value("id_enemigo")
-	var jugador_document = await jugador_collection.get_doc(jugador_reference)
-	var enemigo_document = await enemigo_collection.get_doc(enemigo_reference)
-	
-	var jugador = jugador_document.get_unsafe_document()
-	var juego_reference = partida_document.get_value("id_juego")
-	var moneda_reference = partida_document.get_value("id_moneda")
-	
-	var camino_jugador_reference = jugador_document.get_value("id_camino")
-	
-	var enemigo = {}
-	var camino_enemigo_reference
-	var camino_enemigo: Dictionary = {}
-	if enemigo_document.doc_name != "":
-		enemigo = enemigo_document.get_unsafe_document()
-		camino_enemigo_reference = enemigo_document.get_value("id_camino")
-		var camino_enemigo_document = await camino_collection.get_doc(camino_enemigo_reference)
-		camino_enemigo = camino_enemigo_document.get_unsafe_document()
-	
-	var juego = await juego_collection.get_doc(juego_reference)
-	juego = juego.get_unsafe_document()
-	var moneda = await moneda_collection.get_doc(moneda_reference)
-	moneda = moneda.get_unsafe_document()
-	var camino_jugador = {} 
-	if camino_jugador_reference != "":
-		var camino_jugador_document = await camino_collection.get_doc(camino_jugador_reference)
-		camino_jugador = camino_jugador_document.get_unsafe_document()
-	
-	get_tree().root.add_child(new_scene)
-	get_tree().current_scene.queue_free()
-	get_tree().current_scene = new_scene
-	new_scene.asignValues(partida, jugador, juego, moneda, enemigo, camino_jugador, camino_enemigo)
+func deleteGame(name: String, id: String):
+	var database_api = Database.new()
+	database_api.initDatabase()
+	database_api.deleteResource(name, id)
+	database_api.closeDatabase()
+
 
 
 func configureGame(partida: Dictionary):

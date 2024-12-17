@@ -60,10 +60,11 @@ func newSearch():
 
 # 
 func move():
-	await newSearch()
-	var node = enemy.path.trayectoria[0]
 	if !Singleton.move_enemy:
 		Singleton.move_enemy = true
+		await newSearch()
+		var node = enemy.path.trayectoria[0]
+		
 		enemy.actual_position = enemy.position
 		enemy.target = node
 		enemy.path.trayectoria.erase(node)
@@ -92,5 +93,5 @@ func searchPlayer(start_node: Vector2, end_node: Vector2):
 	var heuristic = enemy.algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y, player.position)
 	var scene = get_tree().get_current_scene()
 	var tilemap = scene.get_node("./TileMap")
-	var trayectory = await enemy.algorithm.search(heuristic, start_node, end_node, tilemap, scene)
+	var trayectory = await enemy.algorithm.search(heuristic, start_node, end_node, tilemap, scene, false)
 	setPath(start_node, end_node, trayectory)
