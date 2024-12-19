@@ -9,6 +9,10 @@ var player
 var enemy
 var coin
 var maze_finished: bool = false
+var is_moving: bool = false
+var can_move: bool = false
+
+signal movement_finished
 
 
 # Called when the node enters the scene tree for the first time.
@@ -29,7 +33,7 @@ func _process(delta):
 		return
 
 	# Movimiento hacia una posición (target) siguiendo las fisicas de movimiento
-	if player.position != player.target and Singleton.move_player:
+	if player.position != player.target and is_moving:
 		player.direction = (player.target - player.position).normalized()
 		velocity = player.direction * player.speed
 		var collision = move_and_collide(velocity * delta)
@@ -45,13 +49,14 @@ func _process(delta):
 		
 		# Llegado a la posicion objetivo, se busca de nuevo evitando al enemigo
 		if position == player.target:
-			Singleton.move_player = false
+			emit_signal("movement_finished")
+			is_moving = false
 
 
 # Registrar movimiento manual 
 func _input(event: InputEvent):
 
-	if !Singleton.move_player and !Singleton.move_enemy and Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO: 
+	if !is_moving and !Singleton.move_enemy and Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO: 
 		if event.is_action_pressed("ui_right"):
 			player.target = Vector2(player.position.x + pixels_move, player.position.y)
 			asign_values()	
@@ -71,38 +76,41 @@ func _input(event: InputEvent):
 
 # 
 func move():
-	if !Singleton.move_player:
-		Singleton.move_player = true
-		await newSearch()
-		var node = player.path.trayectoria[0]
-		player.path.trayectoria.erase(node)
+	if !is_moving:
+		is_moving = true
+		var node = player.path.trayectoria.pop_front()
 		player.actual_position = player.position
 		player.target = node
 
 
 # 
 func asign_values():
-	Singleton.move_player = true
+	if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+		Singleton.move_enemy = true
+	is_moving = true
+	can_move = false
 	player.actual_position = player.position
-	# if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-	# 	enemy.move()
+
 
 
 # 
 func updatePosition(new_position: Vector2):
 	player.position = new_position
 	position = new_position
-	Singleton.move_player = false
+	is_moving = false
 
-
-# 
-func newSearch():
-	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:				
-		if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-			await searchCoinWithEnemy(player.position, coin.position)
-		else:
-			await searchCoin(player.position, coin.position)
 		
+
+
+
+
+
+#
+func setPath(start_node: Vector2, end_node: Vector2, trayectory: Array):
+	player.path.inicio = start_node
+	player.path.objetivo = end_node
+	player.path.trayectoria = trayectory
+
 
 
 # Asigna el algoritmo correspondiente
@@ -113,26 +121,30 @@ func setAlgorithm(selected_algorithm: VideogameConstants.Algoritmo, graph: Dicti
 	player.algorithm.graph = graph
 
 
-#
-func setPath(start_node: Vector2, end_node: Vector2, trayectory: Array):
-	player.path.inicio = start_node
-	player.path.objetivo = end_node
-	player.path.trayectoria = trayectory
-
 
 # 
-func searchCoin(start_node: Vector2, end_node: Vector2):
-	var heuristic = player.algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y)
-	var scene = get_tree().get_current_scene()
-	var tilemap = scene.get_node("./TileMap")
-	var trayectory = await player.algorithm.search(heuristic, start_node, end_node, tilemap, scene, true)
-	setPath(start_node, end_node, trayectory)
+# func newSearch():
+# 	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:				
+# 		if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+# 			await searchCoinWithEnemy(player.position, coin.position)
+# 		else:
+# 			await searchCoin(player.position, coin.position)
 
 
-# 
-func searchCoinWithEnemy(start_node: Vector2, end_node: Vector2):
-	var heuristic = player.algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y, enemy.position)
-	var scene = get_tree().get_current_scene()
-	var tilemap = scene.get_node("./TileMap")
-	var trayectory = await player.algorithm.search(heuristic, start_node, end_node, tilemap, scene, true, enemy.position)
-	setPath(start_node, end_node, trayectory)
+
+# # 
+# func searchCoin(start_node: Vector2, end_node: Vector2):
+# 	var heuristic = player.algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y)
+# 	var scene = get_tree().get_current_scene()
+# 	var tilemap = scene.get_node("./TileMap")
+# 	var trayectory = await player.algorithm.search(heuristic, start_node, end_node, tilemap, scene, true)
+# 	setPath(start_node, end_node, trayectory)
+
+
+# # 
+# func searchCoinWithEnemy(start_node: Vector2, end_node: Vector2):
+# 	var heuristic = player.algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y, enemy.position)
+# 	var scene = get_tree().get_current_scene()
+# 	var tilemap = scene.get_node("./TileMap")
+# 	var trayectory = await player.algorithm.search(heuristic, start_node, end_node, tilemap, scene, true, enemy.position)
+# 	setPath(start_node, end_node, trayectory)

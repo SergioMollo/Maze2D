@@ -67,6 +67,7 @@ custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
 [node name="Pause" type="Button" parent="Layer/Panel/Container"]
+visible = false
 custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4

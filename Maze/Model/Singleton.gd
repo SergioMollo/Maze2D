@@ -45,20 +45,22 @@ func _process(delta):
 
 
 func login(email: String, password: String):
-	var authentificacion = Firebase.Auth
-	authentificacion.login_succeeded.connect(on_login_succeeded)
-	authentificacion.login_failed.connect(on_login_failed)
-	authentificacion.login_with_email_and_password(email, password) 
-	setTextinfo("Iniciando sesion...", color_blue)
+	pass
+	# var authentificacion = Firebase.Auth
+	# authentificacion.login_succeeded.connect(on_login_succeeded)
+	# authentificacion.login_failed.connect(on_login_failed)
+	# authentificacion.login_with_email_and_password(email, password) 
+	# setTextinfo("Iniciando sesion...", color_blue)
 
 
 func signUp(email: String, password: String, name: String):
-	user_name = name
-	var authentificacion = Firebase.Auth
-	authentificacion.signup_succeeded.connect(on_signup_succeeded)
-	authentificacion.signup_failed.connect(on_signup_failed)
-	authentificacion.signup_with_email_and_password(email, password) 
-	setTextinfo("Creando usuario...", color_blue)
+	pass
+	# user_name = name
+	# var authentificacion = Firebase.Auth
+	# authentificacion.signup_succeeded.connect(on_signup_succeeded)
+	# authentificacion.signup_failed.connect(on_signup_failed)
+	# authentificacion.signup_with_email_and_password(email, password) 
+	# setTextinfo("Creando usuario...", color_blue)
 
 
 func on_login_succeeded(auth):
@@ -85,15 +87,16 @@ func setTextinfo(message: String, color: Color):
 	
 	
 func saveUser():
-	var auth = Firebase.Auth.auth
-	if auth.localid:
-		var collection: FirestoreCollection = Firebase.Firestore.collection("usuario")
-		var usuario: Dictionary = {
-			"email": auth.email,
-			"nombre": user_name,
-			"partidas": []
-		}
-		collection.add(auth.localid, usuario)
+	pass
+	# var auth = Firebase.Auth.auth
+	# if auth.localid:
+	# 	var collection: FirestoreCollection = Firebase.Firestore.collection("usuario")
+	# 	var usuario: Dictionary = {
+	# 		"email": auth.email,
+	# 		"nombre": user_name,
+	# 		"partidas": []
+	# 	}
+	# 	collection.add(auth.localid, usuario)
 
 
 

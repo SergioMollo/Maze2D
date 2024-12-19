@@ -309,7 +309,6 @@ popup/item_1/id = 1
 visible = false
 custom_minimum_size = Vector2(425, 100)
 layout_mode = 2
-selected = 0
 item_count = 4
 popup/item_0/text = "Anchura"
 popup/item_1/text = "Profundidad"

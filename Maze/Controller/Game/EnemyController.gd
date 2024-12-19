@@ -5,7 +5,10 @@ class_name EnemyController
 var enemy
 var maze_finished = false
 var player
+# var is_moving: bool = false
+
 signal eliminated
+signal movement_finished
 
 
 @onready var ai_enemy: Node2D = $AIController2DEnemy
@@ -29,7 +32,6 @@ func _process(delta):
 		enemy.direction = (enemy.target - enemy.position).normalized()
 		velocity = enemy.direction * enemy.speed
 		var collision = move_and_collide(velocity * delta)
-
 		if collision:
 
 			if collision.get_collider() != null and collision.get_collider().name == "Jugador":
@@ -44,6 +46,7 @@ func _process(delta):
 			velocity = Vector2()  # Detenemos el movimiento
 
 		if position == enemy.target:
+			emit_signal("movement_finished")
 			Singleton.move_enemy = false
 
 
@@ -54,20 +57,13 @@ func updatePosition(new_position: Vector2):
 
 
 # 
-func newSearch():
-	await searchPlayer(enemy.position, player.position)
-
-
-# 
 func move():
 	if !Singleton.move_enemy:
 		Singleton.move_enemy = true
-		await newSearch()
-		var node = enemy.path.trayectoria[0]
-		
+		var node = enemy.path.trayectoria.pop_front()	
 		enemy.actual_position = enemy.position
 		enemy.target = node
-		enemy.path.trayectoria.erase(node)
+
 
 
 # Asigna el algoritmo correspondiente

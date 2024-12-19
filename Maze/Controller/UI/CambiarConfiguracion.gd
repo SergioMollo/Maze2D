@@ -12,8 +12,11 @@ func _process(delta):
 
 
 func _on_guardar_pressed():
-	pass # Replace with function body.
-
+	var modo_juego = $Panel/VBox/Margin2/VBox/HBox/InteraccionOption.get_selected()
+	var modo_interaccion = $Panel/VBox/Margin2/VBox/HBox2/JuegoOption.get_selected()
+	var algoritmo = $Panel/VBox/Margin2/VBox/HBox3/AlgotirmoOption.get_selected()
+	
+	
 
 func _on_cancelar_pressed():
 	queue_free()
