@@ -10,12 +10,16 @@ const pixels_offset = 64
 const pixels_center = 16
 
 var graph = {}
-var heuristic = {}
+var heuristic_player = {}
+var heuristic_enemy = {}
 var resultdfs = []
+
+var path_jugador = []
+var path_enemigo = []
 
 var tilemap
 var scene
-var is_player
+var is_player: bool = true
 
 
 # Called when the node enters the scene tree for the first time.

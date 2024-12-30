@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ch1saj8l3dbte"]
+[gd_scene load_steps=31 format=3 uid="uid://ch1saj8l3dbte"]
 
 [ext_resource type="Texture2D" uid="uid://b8pg6y0j6v20l" path="res://Resources/Paredes_Laterales.png" id="1_4xfea"]
 [ext_resource type="Script" path="res://Maze/View/Game/Nivel2.gd" id="1_cugtc"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://bc28ey48ixyl2" path="res://Maze/View/UI/GameHeader.tscn" id="5_bupwv"]
 [ext_resource type="PackedScene" uid="uid://r0bherb862i5" path="res://Maze/View/Game/Personaje.tscn" id="6_v1ngb"]
 [ext_resource type="Texture2D" uid="uid://bjkwetwd828kp" path="res://Resources/Cesped32x32.png" id="7_2hd54"]
+[ext_resource type="Texture2D" uid="uid://cn70q04gpdt1a" path="res://Resources/Pixelart/PlayerPathSearch_32x32.png" id="9_81rex"]
+[ext_resource type="Texture2D" uid="uid://oswblhtp5ohf" path="res://Resources/Pixelart/EnemyPathOk_32x32.png" id="9_a764s"]
+[ext_resource type="Texture2D" uid="uid://y5waasdwv32b" path="res://Resources/Pixelart/PlayerPathOK_32x32.png" id="10_d3ja2"]
 [ext_resource type="PackedScene" uid="uid://dywo2s7j12e0f" path="res://Maze/View/Game/Moneda.tscn" id="10_n4hj8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_eg21r"]
@@ -2443,6 +2446,21 @@ texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yhxi0"]
+texture = ExtResource("9_a764s")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1lunr"]
+texture = ExtResource("9_81rex")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_a8f0v"]
+texture = ExtResource("10_d3ja2")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_5obrj"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
@@ -2450,6 +2468,9 @@ navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_ioelj")
 sources/1 = SubResource("TileSetAtlasSource_4o2no")
 sources/2 = SubResource("TileSetAtlasSource_43dpj")
+sources/7 = SubResource("TileSetAtlasSource_1lunr")
+sources/8 = SubResource("TileSetAtlasSource_a8f0v")
+sources/4 = SubResource("TileSetAtlasSource_yhxi0")
 
 [node name="Nivel2" type="Node2D"]
 script = ExtResource("1_cugtc")
@@ -2553,4 +2574,3 @@ position = Vector2(112, 208)
 scale = Vector2(1, 1)
 
 [node name="Moneda" parent="." instance=ExtResource("10_n4hj8")]
-position = Vector2(528, 432)

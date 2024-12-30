@@ -4,14 +4,45 @@ class_name User
 
 var id: int
 var nombre: String
-var partidas = [Match]
+var email: String
+var password: String
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+# Asigna el identificador
+func setId(value: int):
+	id = value
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+# Asigna el nombre
+func setNombre(value: String):
+	nombre = value
+
+
+# Asigna el email
+func setEmail(value: String):
+	email = value
+
+
+# Asigna la constraseña
+func setPassword(value: String):
+	password = value
+
+
+# Devuelve el identificador
+func getId():
+	return id
+
+
+# Devuelve el nombre
+func getNombre():
+	return nombre
+
+
+# Devuelve el email
+func getEmail():
+	return email
+
+
+# Devuelve la contraseña
+func getPassword():
+	return password

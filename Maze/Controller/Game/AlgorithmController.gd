@@ -2,9 +2,6 @@ extends Node
 
 class_name AlgorithmController
 
-# var nombre: String
-# var algoritmo: VideogameConstants.Algoritmo
-
 const pixels_move = 32
 const pixels_offset = 64
 const pixels_center = 16
@@ -22,7 +19,16 @@ var scene
 var is_player: bool = true
 
 
-# 
+# Inica los datos cuando se instancia por primera vez
+func _ready():
+	pass
+
+
+# Realiza la busqueda y recreacion de los caminos entre dos elementos mediante los algoritmos de busqueda de cada personaje
+#  	- Comprueba el algoritmo del jugador y busca la moneda aplicando ese algoritmo, luego recrea el camino
+#  	- Comprueba el algoritmo del enemigo y busca al jugador aplicando ese algoritmo, luego recrea el camino
+#  	- Actualiza el mapa de tiles del laberinto, mostrando los caminos obtenidos
+#	- Devuelve los caminos del jugador y del enemigo
 func search(jugador_position: Vector2, coin_position: Vector2, tile: TileMap, scene_tree, enemy_position: Vector2 = Vector2(-1,-1)):
 	tilemap = tile
 	scene = scene_tree
@@ -56,7 +62,9 @@ func search(jugador_position: Vector2, coin_position: Vector2, tile: TileMap, sc
 	return [path_jugador, path_enemigo]
 
 
-# Crea una heuristica en los nodos en funcion de donde esta el enemigo (mayor valor cuanto mas cercano)
+# Crea una heuristica en los nodos en funcion de la posicion en la que se encuentra el enemigo 
+#  	- El valor calculado para cada nodo depende de la cercania a la posicion del enemigo
+#	- Mayor valor cuando más cercania
 func createHeuristic(x_size: int, y_size:int, heuristic_position: Vector2 = Vector2(0,0)):
 	var heuristic = {}
 	var max_heuristic
@@ -77,36 +85,36 @@ func createHeuristic(x_size: int, y_size:int, heuristic_position: Vector2 = Vect
 	return heuristic
 
 
-
+# Establece la heuristica del jugador
 func setPlayerHeuristic(heuristic: Dictionary):
 	heuristic_player = heuristic
 
 
-
+# Establece la heuristica del enemigo
 func setEnemyHeuristic(heuristic: Dictionary):
 	heuristic_enemy = heuristic
 
 
-# Utiliza el algoritmo primero en anchura (BFS) para encontrar la trayectoria hasta la moneda
+# Utiliza el algoritmo primero en anchura (BFS) para encontrar la trayectoria hasta el objetivo
+# 	- Agregar el nodo inicial a la cola y marcarlo como visitado
+# 	- Saca un nodo de la cola e itera sobre los nodos adyacentes al nodo actual
+# 	- Si el vecino no ha sido visitado, lo marca como visitado y lo agrega a la cola
 func bfsSearch(start_node: Vector2, end_node: Vector2):
 	var queue = []
 	var visited = {}
 	var parent = {}
-	
-	# Agregar el nodo inicial a la cola y marcarlo como visitado
+
 	queue.append(start_node)
 	visited[start_node] = true
 	parent[start_node] = null
 
 	while queue:
-		# Sacar un nodo de la cola
 		var current_node = queue.pop_front()
 
 		if current_node == end_node:
 			visited[current_node] = true
 			return await createPath(start_node, end_node, parent)
 		
-		# Iterar sobre los nodos adyacentes al nodo actual
 		for neighbor in get_neighbors(current_node):
 			
 			if is_player:
@@ -115,15 +123,14 @@ func bfsSearch(start_node: Vector2, end_node: Vector2):
 				tilemap.set_cell(0, cell, 7, atlas_coords)
 				await scene.get_tree().create_timer(0.001).timeout
 			
-			# Si el vecino no ha sido visitado, marcarlo como visitado y agregarlo a la cola
 			if neighbor not in visited:
 				visited[neighbor] = true
-				# if neighbor != avoid_node:
 				queue.append(neighbor)
 				parent[neighbor] = current_node
 
 
-# Utiliza el algoritmo primero en profundidad (DFS) para encontrar la trayectoria hasta la moneda
+# Utiliza el algoritmo primero en profundidad (DFS) para encontrar la trayectoria hasta el objetivo
+# 	- Itera recursivamente en la busqueda de los nodos hijos
 func dfsSearch(start_node: Vector2, end_node: Vector2):
 	var visited = {}
 	await recursiveDFS(start_node, end_node, visited)
@@ -131,23 +138,23 @@ func dfsSearch(start_node: Vector2, end_node: Vector2):
 
 
 # Ejecuta de manera recursiva la busqueda de los hijos de un nodo
+# 	- Comprueba si el nodo ya se ha visitado, en su defecto, comprueba si ha llegado al objetivo
+# 	- Para cada hijo del nodo se realiza la busqueda recursiva de sus hijos
 func recursiveDFS(start: Vector2, end: Vector2, visited: Dictionary):
 
-	# Comprueba si ya se ha visitado
 	if start not in visited:
 		visited[start] = true
 		
-		#Comprueba si ha llegado al objetivo
 		if start == end:
 			return true
 				
-		#Para cada hijo del nodo se realiza la busqueda recursiva
 		for neighbor in get_neighbors(start):
 			if is_player:
 				var cell = tilemap.local_to_map(neighbor)
 				var atlas_coords = Vector2i(0, 0)
 				tilemap.set_cell(0, cell, 7, atlas_coords)
 				await scene.get_tree().create_timer(0.001).timeout
+
 			if await recursiveDFS(neighbor, end, visited):
 				resultdfs.push_front(neighbor)
 				return true
@@ -155,15 +162,20 @@ func recursiveDFS(start: Vector2, end: Vector2, visited: Dictionary):
 	return false
 
 
-# 
+# Utiliza el algoritmo Dijkstra para encontrar la trayectoria hasta el objetivo
+# 	- Agregar el nodo inicial a la cola y marcarlo como visitado
+# 	- Saca un nodo de la cola, ordena la lista e itera sobre los nodos adyacentes al nodo actual
+# 	- Si el vecino no ha sido visitado, lo marca como visitado y lo agrega a la cola
+#	- Comprueba el peso y distancia desde un nodo hasta el hijo
+# 	- Actualiza la distancia acumulada en caso de ser menor
 func dijkstraSearch(start_node: Vector2, end_node: Vector2):
 
 	var weigth = 1
 	var distances = {}
 	var parent = {}
 	var queue = []
-	
 	var asign = asignWeigth(start_node, distances, parent)
+
 	distances = asign[0]
 	parent = asign[1]
 	queue.append([0, start_node])
@@ -178,6 +190,7 @@ func dijkstraSearch(start_node: Vector2, end_node: Vector2):
 			return await createPath(start_node, end_node, parent)
 		
 		for neighbor in get_neighbors(current_node):
+
 			if is_player:
 				var cell = tilemap.local_to_map(neighbor)
 				var atlas_coords = Vector2i(0, 0)
@@ -193,7 +206,12 @@ func dijkstraSearch(start_node: Vector2, end_node: Vector2):
 	return []			
 
 
-# 
+# Utiliza el algoritmo Dijkstra para encontrar la trayectoria hasta el objetivo
+# 	- Agregar el nodo inicial a la cola y marcarlo como visitado
+# 	- Saca un nodo de la cola, ordena la lista e itera sobre los nodos adyacentes al nodo actual
+# 	- Si el vecino no ha sido visitado, lo marca como visitado y lo agrega a la cola
+#	- Comprueba el peso, heuristica del hijo y distancia desde un nodo hasta el hijo
+# 	- Actualiza la distancia acumulada en caso de ser menor
 func aStarSearch(start_node: Vector2, end_node: Vector2, heuristic: Dictionary):
 
 	var weigth = 1
@@ -234,10 +252,10 @@ func aStarSearch(start_node: Vector2, end_node: Vector2, heuristic: Dictionary):
 
 #  Obtiene la lista de nodos adyacentes al nodo actual que puede realizar el desplazamiento
 func get_neighbors(node: Vector2):
-	return graph[node]		
+	return graph[node]	
 
 
-# Asigna pesos al grafo
+# Asigna pesos al grafo que se usara para calcular las distancias y pesos en los algoritmos Dijkstra y A Estrella
 func asignWeigth(start_node: Vector2, distances: Dictionary, parent: Dictionary):
 
 	for key in graph.keys():
@@ -261,8 +279,14 @@ func createPath(start_node: Vector2, end_node: Vector2, parent: Dictionary):
 	return path
 
 
-# Resalta el camino encontrado hacia el objetivo
-func setTilesPath(path_jugador: Array, path_enemigo: Array):
+# Resalta el camino encontrado hacia el objetivo en el mapa de tiles del laberinto
+# 	- Muestra el camino del enemigo
+# 	- Muestra el camino del jugador
+# 	- Reestableblece los tiles que no se encuentran en ambos caminos
+func setTilesPath(camino_jugador: Array, camino_enemigo: Array):
+
+	path_jugador = camino_jugador
+	path_enemigo = camino_enemigo
 
 	for node in path_enemigo:
 		var cell = tilemap.local_to_map(node)
@@ -282,5 +306,6 @@ func setTilesPath(path_jugador: Array, path_enemigo: Array):
 			await scene.get_tree().create_timer(0.0000005).timeout
 
 
+# Establece el valor boleano de is_player
 func setValueIsPlayer(value: bool):
 	is_player = value

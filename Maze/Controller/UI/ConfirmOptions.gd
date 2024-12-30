@@ -2,16 +2,7 @@ extends Control
 
 var maze: MazeController
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
+# Sale de la partida al menu principal, guardando el progreso alcanzado
 func _on_guardar_salir_pressed():
 	maze.match_state = VideogameConstants.EstadoPartida.GUARDADA
 	maze.game_state = VideogameConstants.EstadoJuego.EN_PAUSA
@@ -21,6 +12,7 @@ func _on_guardar_salir_pressed():
 	get_tree().change_scene_to_file("res://Maze/View/UI/PantallaPrincipal.tscn")
 
 
+# Finaliza la partida al menu principal, guardando el progreso alcanzado
 func _on_finalizar_pressed():
 	maze.match_state = VideogameConstants.EstadoPartida.FINALIZADA
 	maze.game_state = VideogameConstants.EstadoJuego.FINALIZADO
@@ -30,27 +22,30 @@ func _on_finalizar_pressed():
 	get_tree().change_scene_to_file("res://Maze/View/UI/PantallaPrincipal.tscn")
 
 
+# Reinicia completamente la partida al estado inicial
 func _on_reiniciar_pressed():
 	maze.game_number = 0
 	maze.win = 0
 	maze.lose = 0
-	maze.match_state = VideogameConstants.EstadoPartida.EN_CURSO
-	maze.game_state = VideogameConstants.EstadoJuego.EN_CURSO
+	maze.time_left = maze.maze.time
 	maze.updatePuntuation()
 	maze.new_game()
 	queue_free()
 
 
+# Sale de la partida al menu principal, sin guardar el progreso alcanzado
 func _on_menu_principal_pressed() -> void:
 	Singleton.partida_reference = ""
 	Singleton.nombre_partida = ""
 	get_tree().change_scene_to_file("res://Maze/View/UI/PantallaPrincipal.tscn")
 
 
+# Cancela la secuencia y cierra el menu
 func _on_cancelar_pressed():
 	queue_free()
 	
 	
+#  Muestra el mensaje en funcion del tipo de opcion seleccionada en el menu anterior
 func setOptions(maze_instance: MazeController, option: String):
 	maze = maze_instance
 	$Panel/VBox/Margin/VBox/Option.text = option
@@ -76,6 +71,9 @@ func setOptions(maze_instance: MazeController, option: String):
 					¿Está seguro que desea salir de la partida? "
 
 
+# Guarda el progreso alcanzado en la partida
+#  	- Si la partida no se ha guardado anteriormente se crea una nueva entrada en la BBDD
+#  	- Si la partida se ha guardado anteriormente se actualiza esa entrada (partida) en la BBDD
 func save():
 	if Singleton.nombre_partida == "":
 		var overlay_scene = preload("res://Maze/View/UI/GuardarPartida.tscn")

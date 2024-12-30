@@ -19,92 +19,102 @@ var nivel: VideogameConstants.Nivel
 var dificultad: VideogameConstants.Dificultad
 var modo_juego: VideogameConstants.ModoJuego
 var modo_interaccion: VideogameConstants.ModoInteraccion
-var algoritmo: VideogameConstants.Algoritmo
 var algoritmo_jugador: VideogameConstants.Algoritmo
 var algoritmo_enemigo: VideogameConstants.Algoritmo
 var juegos: int
 
 var maze_size: Vector2i = Vector2i(0,0)
-var user_name: String
+
 
 var partida_reference: String = ""
 var nombre_partida: String = ""
-var email: String = "sergio@mail"
+var email: String = ""
+var usuario: String
 
 signal set_text_info(message: String, color: Color)
 
 
-# Called when the node enters the scene tree for the first time.
+# Inica los datos cuando se instancia por primera vez
 func _ready():
 	pass
-	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 
-func login(email: String, password: String):
-	pass
-	# var authentificacion = Firebase.Auth
-	# authentificacion.login_succeeded.connect(on_login_succeeded)
-	# authentificacion.login_failed.connect(on_login_failed)
-	# authentificacion.login_with_email_and_password(email, password) 
-	# setTextinfo("Iniciando sesion...", color_blue)
+# Inicia sesion con el usuario y contraseña introducidos
+# 	- Comprueba que las credenciales sean correctas
+func login(user_email: String, user_password: String):
+
+	var database_api = Database.new()
+	database_api.initDatabase()
+	var result = database_api.getUser(user_email)
+
+	if !result.is_empty() and result[0]["password"] == user_password:
+		email = user_email
+		loginSucceeded()
+	else:
+		loginFailed()
+
+	database_api.closeDatabase()
 
 
-func signUp(email: String, password: String, name: String):
-	pass
-	# user_name = name
-	# var authentificacion = Firebase.Auth
-	# authentificacion.signup_succeeded.connect(on_signup_succeeded)
-	# authentificacion.signup_failed.connect(on_signup_failed)
-	# authentificacion.signup_with_email_and_password(email, password) 
-	# setTextinfo("Creando usuario...", color_blue)
+# Crea un usuario y contraseña
+# 	- Comprueba que el email no exista
+func signUp(user_email: String, user_password: String, user_name: String):
+
+	var database_api = Database.new()
+	database_api.initDatabase()
+	var result = database_api.getUser(user_email)
+
+	if result.is_empty():
+
+		var user: Dictionary = {
+			"nombre": user_name,
+			"email": user_email,
+			"password": user_password
+		}
+
+		database_api.addResource("usuario", user)
+		signupSucceeded()
+
+	else:
+		signupFailed()
+
+	database_api.closeDatabase()
 
 
-func on_login_succeeded(auth):
+# Muestra el mensaje de sesion iniciada correctamente
+func loginSucceeded():
 	get_tree().change_scene_to_file("res://Maze/View/UI/PantallaPrincipal.tscn")
 	setTextinfo("Sesion Iniciada", color_green)
 	
 
-func on_signup_succeeded(auth):
+# Muestra el mensaje de registro completado correctamente
+func signupSucceeded():
 	get_tree().change_scene_to_file("res://Maze/View/UI/InicioSesion.tscn")
 	setTextinfo("Registrado completado", color_green)
-	saveUser()
-	
-
-func on_login_failed(error_code, message):
-	setTextinfo("Sesion fallida", color_red)
 
 
-func on_signup_failed(error_code, message):
-	setTextinfo("Registro fallido", color_red)	
+# Muestra el mensaje de sesion fallida
+func loginFailed():
+	setTextinfo("Sesion fallida, credenciales incorrectos", color_red)
+
+
+# Muestra el mensaje de sesion iniciada correctamente
+func signupFailed():
+	setTextinfo("Registro fallido, cuenta existente", color_red)	
 	
-	
+
+# Muestra el mensaje de registro fallido
 func setTextinfo(message: String, color: Color):
-	emit_signal("set_text_info", message, color)
+	emit_signal("set_text_info", message, color)	
+
 	
-	
-func saveUser():
-	pass
-	# var auth = Firebase.Auth.auth
-	# if auth.localid:
-	# 	var collection: FirestoreCollection = Firebase.Firestore.collection("usuario")
-	# 	var usuario: Dictionary = {
-	# 		"email": auth.email,
-	# 		"nombre": user_name,
-	# 		"partidas": []
-	# 	}
-	# 	collection.add(auth.localid, usuario)
-
-
-
+# Guarda la partida con los datos necesarios
+# 	- Añade cada recurso en una tabla diferente, asignando los identificadores correspondientes
+# 	- Comprueba que la partida ya ha sido guardada anteriormente, en su caso, actualiza los datos
 func saveGame(partida: Dictionary, nivel_information: Dictionary, jugador: Dictionary, enemigo: Dictionary, juego: Dictionary, camino_jugador: Dictionary, camino_enemigo: Dictionary, ids: Dictionary):
 
 	var database_api = Database.new()
 	database_api.initDatabase()
-
 
 	if partida_reference == "":
 		database_api.addResource("juego", juego)
@@ -112,7 +122,6 @@ func saveGame(partida: Dictionary, nivel_information: Dictionary, jugador: Dicti
 		database_api.addResource("nivel", nivel_information)
 		partida["id_nivel"] = database_api.getLastInsertId()
 
-		
 		if !camino_jugador.is_empty():
 			database_api.addResource("camino_jugador", camino_jugador)
 			jugador["id_camino"] = database_api.getLastInsertId()
@@ -145,24 +154,53 @@ func saveGame(partida: Dictionary, nivel_information: Dictionary, jugador: Dicti
 	database_api.closeDatabase()
 
 
-
-
-
-
-	
+# Carga las partidas guardadas por un usuario
+# 	- Obtiene las partidas del usuario con la sesion iniciada para mostrarlas en la lista
 func loadGames():
 	var database_api = Database.new()
 	database_api.initDatabase()
+	var enCurso = database_api.getPartidasEnCurso(email)
+	var finalizadas = database_api.getPartidasFinalizadas(email)
+	database_api.closeDatabase()
+	return [enCurso, finalizadas]
 	
+	
+# Carga los datos de la partida selecionada
+# 	- Inicia la partida seleccionada
+func initSaveGame(partida: Dictionary):
+	var database_api = Database.new()
+	database_api.initDatabase()
+	
+	var camino_jugador = {}
+	var enemigo = {}
+	var camino_enemigo = {}
+
+	var juego = database_api.getJuego(partida["id_juego"])
+	var jugador = database_api.getJugador(partida["id_juego"])
+	
+	if jugador["id_camino"] != null:
+		camino_jugador = database_api.getCamino(jugador[0]["id_camino"])
+		partida.get_or_add(jugador["algoritmo"])
+		
+	if partida["id_enemigo"] != null:
+		enemigo = database_api.getEnemigo(partida["id_enemigo"])
+		camino_enemigo = database_api.getCamino(enemigo[0]["id_camino"])
+		partida.get_or_add(enemigo["algoritmo"])
+		
+	var nivel_partida = database_api.getNivel(partida["id_nivel"])
+	partida.get_or_add(nivel_partida["nivel"])
+	nivel_partida = splitLevelValues(nivel_partida)
+
+	var new_scene = configureGame(partida)
+	get_tree().root.add_child(new_scene)
+	get_tree().current_scene.queue_free()
+	get_tree().current_scene = new_scene
+	new_scene.asignValues(partida, jugador, juego, nivel_partida, enemigo, camino_jugador, camino_enemigo)
+
 	database_api.closeDatabase()
 	
-	
-	
-func initSaveGame(partida: Dictionary):
-	pass
-	
 
-
+# Borra una partida seleccionada de la base de datos
 func deleteGame(name: String, id: String):
 	var database_api = Database.new()
 	database_api.initDatabase()
@@ -170,7 +208,8 @@ func deleteGame(name: String, id: String):
 	database_api.closeDatabase()
 
 
-
+# Configura los datos de la partida mediante los datos seleccionados al crear la partida
+# 	- Establece los datos de configuración de la partida
 func configureGame(partida: Dictionary):
 	
 	if partida["dificultad"] == 0:
@@ -190,7 +229,7 @@ func configureGame(partida: Dictionary):
 	else:
 		Singleton.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_SIMULACION
 
-	Singleton.juegos = partida["juegos"]
+	Singleton.juegos = partida["numero_juegos"]
 
 	if partida["algoritmo_jugador"] == 0:
 		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.BFS
@@ -231,29 +270,52 @@ func configureGame(partida: Dictionary):
 	return new_scene
 
 
+# Asigna los valores de configuracion del nivel en el formato correcto
+func splitLevelValues(level_data: Dictionary):
+	var value
+	
+	value = level_data.maze_size.split(",")
+	level_data.maze_size = Vector2(int(value[0]), int(value[1]))
+	value = level_data.scale.split(",")
+	level_data.scale = Vector2(int(value[0]), int(value[1]))
+	value = level_data.initial_player_position.split(",")
+	level_data.initial_player_position = Vector2(int(value[0]), int(value[1]))
+	value = level_data.initial_enemy_position.split(",")
+	level_data.initial_enemy_position = Vector2(int(value[0]), int(value[1]))
+	value = level_data.initial_coin_position.split(",")
+	level_data.initial_coin_position = Vector2(int(value[0]), int(value[1]))
+
+
+# Obtiene la cadena de texto correspondiente al tipo de Nivel
 func getNivelString(value: int):
 	return VideogameConstants.Nivel.keys()[value]
 	
-	
+
+# Obtiene la cadena de texto correspondiente al Modo de Juego
 func getModoJuegoString(value: int):
 	return VideogameConstants.ModoJuego.keys()[value]
 	
-	
+
+# Obtiene la cadena de texto correspondiente al Modo de Interaccion
 func getModoInteraccionString(value: int):
 	return VideogameConstants.ModoInteraccion.keys()[value]
 	
 	
+# Obtiene la cadena de texto correspondiente al tipo de Dificultad
 func getDificultadString(value: int):
 	return VideogameConstants.Dificultad.keys()[value]
 	
 	
+# Obtiene la cadena de texto correspondiente al tipo de Algoritmo
 func getAlgoritmoString(value: int):
 	return VideogameConstants.Algoritmo.keys()[value]
 	
-	
+
+# Obtiene la cadena de texto correspondiente al Estado de la Partida	
 func getEstadoPartidaString(value: int):
 	return VideogameConstants.EstadoPartida.keys()[value]
 	
-	
+
+# Obtiene la cadena de texto correspondiente al Estado del Juego	
 func getEstadoJuegoString(value: int):
 	return VideogameConstants.EstadoPartida.keys()[value]

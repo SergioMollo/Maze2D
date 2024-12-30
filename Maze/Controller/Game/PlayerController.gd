@@ -15,7 +15,7 @@ var can_move: bool = false
 signal movement_finished
 
 
-# Called when the node enters the scene tree for the first time.
+# Inicia los datos del jugador
 func _ready():
 	player = Player.new()
 	player.position = position
@@ -24,36 +24,37 @@ func _ready():
 	player.path = Path.new()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# Fisica del juego, procesa el movimiento hacia una posicion objetivo
+# 	- Si el juego, no se ejecuta la fisica de movimiento
+# 	- Movimiento hacia una posición (target) siguiendo las fisicas de movimiento
+# 	- Comprueba la colision y mantiene la posicion actual
+# 	- Estando cerca de la posición objetivo, se corrige la posición final (< 1) y detiene el movimiento
 func _process(delta):
 	await get_tree().physics_frame
 
-	# Ha finalizado el juego y no se ejecuta la fisica de movimiento
 	if maze_finished:
 		return
 
-	# Movimiento hacia una posición (target) siguiendo las fisicas de movimiento
 	if player.position != player.target and is_moving:
 		player.direction = (player.target - player.position).normalized()
 		velocity = player.direction * player.speed
 		var collision = move_and_collide(velocity * delta)
-		# Comprueba la colision y mantiene la posicion actual
+		
 		if collision:
 			updatePosition(player.actual_position)	
-			velocity = Vector2()
-			
-		# Estando cerca de la posición objetivo, se corrige la posición final
+			velocity = Vector2()	
 		elif position.distance_to(player.target) < 1:
 			updatePosition(player.target)
 			velocity = Vector2()  
-		
-		# Llegado a la posicion objetivo, se busca de nuevo evitando al enemigo
-		if position == player.target:
-			emit_signal("movement_finished")
+				
+		if position == player.target:	
 			is_moving = false
+			emit_signal("movement_finished")
 
 
-# Registrar movimiento manual 
+# Registrar movimiento manual en base a las cuatro direcciones (Arriba, Abajo, Derecha, Izquierda) 
+#  - Se encuentra en modo Usuario 
+#  - Asigna los valores de objetivo y posicion actual
 func _input(event: InputEvent):
 
 	if !is_moving and !Singleton.move_enemy and Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO: 
@@ -74,7 +75,8 @@ func _input(event: InputEvent):
 			asign_values()
 
 
-# 
+# Si no se esta moviendo, obtiene el siguiente nodo al que desplazarse
+#  	- Se obtiene del camino obtenido mediante la busqueda con los algoritmos
 func move():
 	if !is_moving:
 		is_moving = true
@@ -83,7 +85,7 @@ func move():
 		player.target = node
 
 
-# 
+#  - Asigna los valores de objetivo y posicion actual, establece al jugador en movimiento
 func asign_values():
 	if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 		Singleton.move_enemy = true
@@ -92,28 +94,14 @@ func asign_values():
 	player.actual_position = player.position
 
 
-
-# 
+# Actualiza la posicion cuando ha llegado al objetivo, y lo establece en No movimiento
 func updatePosition(new_position: Vector2):
 	player.position = new_position
 	position = new_position
 	is_moving = false
 
-		
 
-
-
-
-
-#
-func setPath(start_node: Vector2, end_node: Vector2, trayectory: Array):
-	player.path.inicio = start_node
-	player.path.objetivo = end_node
-	player.path.trayectoria = trayectory
-
-
-
-# Asigna el algoritmo correspondiente
+# Asigna el algoritmo de busqueda correspondiente
 func setAlgorithm(selected_algorithm: VideogameConstants.Algoritmo, graph: Dictionary):
 	player.algorithm = Algorithm.new()
 	player.algorithm.algoritmo = selected_algorithm  
@@ -121,30 +109,8 @@ func setAlgorithm(selected_algorithm: VideogameConstants.Algoritmo, graph: Dicti
 	player.algorithm.graph = graph
 
 
-
-# 
-# func newSearch():
-# 	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:				
-# 		if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-# 			await searchCoinWithEnemy(player.position, coin.position)
-# 		else:
-# 			await searchCoin(player.position, coin.position)
-
-
-
-# # 
-# func searchCoin(start_node: Vector2, end_node: Vector2):
-# 	var heuristic = player.algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y)
-# 	var scene = get_tree().get_current_scene()
-# 	var tilemap = scene.get_node("./TileMap")
-# 	var trayectory = await player.algorithm.search(heuristic, start_node, end_node, tilemap, scene, true)
-# 	setPath(start_node, end_node, trayectory)
-
-
-# # 
-# func searchCoinWithEnemy(start_node: Vector2, end_node: Vector2):
-# 	var heuristic = player.algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y, enemy.position)
-# 	var scene = get_tree().get_current_scene()
-# 	var tilemap = scene.get_node("./TileMap")
-# 	var trayectory = await player.algorithm.search(heuristic, start_node, end_node, tilemap, scene, true, enemy.position)
-# 	setPath(start_node, end_node, trayectory)
+# Asigna el camino encontrado mediante el algoritmo de busqueda
+func setPath(start_node: Vector2, end_node: Vector2, trayectory: Array):
+	player.path.inicio = start_node
+	player.path.objetivo = end_node
+	player.path.trayectoria = trayectory

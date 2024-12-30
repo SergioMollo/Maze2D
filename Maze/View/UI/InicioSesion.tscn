@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8m03mwdh7b0t"]
+[gd_scene load_steps=9 format=3 uid="uid://b8m03mwdh7b0t"]
 
 [ext_resource type="Script" path="res://Maze/Controller/UI/InicioSesion.gd" id="1_18nwm"]
 [ext_resource type="Texture2D" uid="uid://pck2gtyxs6fp" path="res://Resources/ImagenesTextures/initial-texture.jpg" id="2_bwww2"]
 [ext_resource type="Theme" uid="uid://bli0ffcjwbud6" path="res://Resources/Edit_Textures/panel_confirmacion.tres" id="3_sne4g"]
+[ext_resource type="Texture2D" uid="uid://b8yquptnqg0le" path="res://Resources/Pixelart/CloseButton_0001.png" id="4_bjwfj"]
+[ext_resource type="Texture2D" uid="uid://b1qftsb3xkpdj" path="res://Resources/Pixelart/CloseButton_0002.png" id="5_d7fgv"]
 
 [sub_resource type="FontFile" id="FontFile_x0o2x"]
 subpixel_positioning = 0
@@ -1620,6 +1622,20 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Iniciar Sesion"
 
+[node name="Close" type="Button" parent="Canvas"]
+offset_left = 1720.0
+offset_right = 1920.0
+offset_bottom = 72.0
+icon = ExtResource("4_bjwfj")
+
+[node name="Minimize" type="Button" parent="Canvas"]
+offset_left = 1517.0
+offset_right = 1717.0
+offset_bottom = 72.0
+icon = ExtResource("5_d7fgv")
+
 [connection signal="pressed" from="Canvas/Panel/Margin/VBox/Salir" to="." method="_on_salir_pressed"]
 [connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBoxContainer/Registro" to="." method="_on_registro_pressed"]
 [connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBoxContainer/IniciarSesion" to="." method="_on_iniciar_sesion_pressed"]
+[connection signal="pressed" from="Canvas/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Canvas/Minimize" to="." method="_on_minimize_pressed"]

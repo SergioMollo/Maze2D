@@ -6,7 +6,7 @@ var index = 0
 
 @onready var imagen = $Panel/Imagen
 
-# Called when the node enters the scene tree for the first time.
+# Inica los datos cuando se instancia por primera vez
 func _ready():
 	get_window().content_scale_size = Singleton.initial_resolution
 	
@@ -21,11 +21,7 @@ func _ready():
 	imagen.texture = texture
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
+# Muestra la siguiente apariencia al presionar el boton derecho
 func _on_left_pressed():
 	var texture
 	
@@ -48,6 +44,7 @@ func _on_left_pressed():
 	imagen.texture = texture
 
 
+# Muestra la siguiente apariencia al presionar el boton izquierdo
 func _on_rigth_pressed():
 	var texture
 	
@@ -69,6 +66,7 @@ func _on_rigth_pressed():
 	imagen.texture = texture
 	
 
+# Asigna la apariencia seleccionada al jugador/enemigo
 func _on_seleccionar_pressed():
 	
 	if Singleton.selection == "player":
@@ -79,5 +77,6 @@ func _on_seleccionar_pressed():
 	get_tree().change_scene_to_file("res://Maze/View/UI/PantallaPrincipal.tscn")
 
 
+# Cancela la asignación de apariencia al jugador/enemigo
 func _on_cancelar_pressed():
 	get_tree().change_scene_to_file("res://Maze/View/UI/PantallaPrincipal.tscn")

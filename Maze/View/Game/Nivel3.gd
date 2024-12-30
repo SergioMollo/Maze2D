@@ -9,7 +9,8 @@ var level_data = {
 	"scale": Vector2i(1728, 928),
 	"initial_player_position": Vector2(112,304),
 	"initial_enemy_position": Vector2(880,464),
-	"initial_coin_position": Vector2(1360,176)
+	"initial_coin_position": Vector2(1360,176),
+	"time": 180
 }
 
 func _ready():	

@@ -47,12 +47,10 @@ radius = 14.0
 [node name="Moneda" type="Node2D"]
 
 [node name="Moneda2D" type="Area2D" parent="."]
-position = Vector2(4, 0)
 script = ExtResource("1_7jm1k")
 
 [node name="SpritesMoneda" type="Sprite2D" parent="Moneda2D"]
 texture_filter = 1
-position = Vector2(-4, 0)
 texture = ExtResource("2_4elu2")
 hframes = 7
 
@@ -63,7 +61,6 @@ libraries = {
 autoplay = "Animacion_Moneda"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Moneda2D"]
-position = Vector2(-4, 0)
 shape = SubResource("CircleShape2D_pa45r")
 
 [connection signal="body_entered" from="Moneda2D" to="Moneda2D" method="_on_body_entered"]

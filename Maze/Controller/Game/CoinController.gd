@@ -8,11 +8,8 @@ var coin
 func _ready():
 	coin = Coin.new()  # Ruta al nodo de datos de la moneda
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
-# Se llama si hay colisión con el jugador
+# Emite la señal de recoleción de la moneda cuando el jugador alcanza su posicion
 func _on_body_entered(body):
 	if body.name == "Jugador":
 		coin.emit_collected_signal()

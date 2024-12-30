@@ -5,19 +5,21 @@ class_name Maze
 var xSize
 var ySize
 
-var maze_size
+
 
 var player: CharacterBody2D
 var enemy: CharacterBody2D
 var moneda: Area2D
 var tilemap: Node2D
+var maze_size: Vector2i
 var scale: Vector2i
 
 var initial_player_position: Vector2
 var initial_enemy_position: Vector2
 var initial_coin_position: Vector2
 
-var timer : Timer
+var timer: Timer
+var time: int
 
 
 # Called when the node enters the scene tree for the first time.
@@ -29,14 +31,19 @@ func _ready():
 func _process(delta):
 	pass
 
+
+# Asigna los valores de configuracion del laberitno
 func initialize_data(level_data, player_ref, coin_ref, timer_ref, tilemap_ref):
+	
 	maze_size = level_data.maze_size
 	scale = level_data.scale
 	initial_player_position = level_data.initial_player_position
 	initial_enemy_position = level_data.initial_enemy_position
 	initial_coin_position = level_data.initial_coin_position
+	
 	player = player_ref
 	moneda = coin_ref
 	timer = timer_ref
 	tilemap = tilemap_ref
+	time = level_data.time
 	

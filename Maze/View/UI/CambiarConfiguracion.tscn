@@ -74,19 +74,45 @@ popup/item_1/text = "Simulacion"
 popup/item_1/id = 1
 
 [node name="HBox2" type="HBoxContainer" parent="Panel/VBox/Margin2/VBox"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="ModoJuego" type="Label" parent="Panel/VBox/Margin2/VBox/HBox2"]
 layout_mode = 2
+text = "Algoritmo Jugador:"
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBox/Margin2/VBox/HBox2"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="AlgotirmoOption" type="OptionButton" parent="Panel/VBox/Margin2/VBox/HBox2"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "Anchura"
+popup/item_1/text = "Profundidad"
+popup/item_1/id = 1
+popup/item_2/text = "Dijkstra"
+popup/item_2/id = 2
+popup/item_3/text = "A Estrella"
+popup/item_3/id = 3
+
+[node name="HBox3" type="HBoxContainer" parent="Panel/VBox/Margin2/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ModoJuego" type="Label" parent="Panel/VBox/Margin2/VBox/HBox3"]
+layout_mode = 2
 text = "Modo de Juego:"
 
-[node name="HSeparator" type="HSeparator" parent="Panel/VBox/Margin2/VBox/HBox2"]
+[node name="HSeparator" type="HSeparator" parent="Panel/VBox/Margin2/VBox/HBox3"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 
-[node name="JuegoOption" type="OptionButton" parent="Panel/VBox/Margin2/VBox/HBox2"]
+[node name="JuegoOption" type="OptionButton" parent="Panel/VBox/Margin2/VBox/HBox3"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 selected = 0
@@ -94,33 +120,6 @@ item_count = 2
 popup/item_0/text = "Solitario"
 popup/item_1/text = "Enfrentamiento"
 popup/item_1/id = 1
-
-[node name="HBox3" type="HBoxContainer" parent="Panel/VBox/Margin2/VBox"]
-visible = false
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="ModoJuego" type="Label" parent="Panel/VBox/Margin2/VBox/HBox3"]
-layout_mode = 2
-text = "Algoritmo Jugador:"
-
-[node name="HSeparator2" type="HSeparator" parent="Panel/VBox/Margin2/VBox/HBox3"]
-self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(10, 0)
-layout_mode = 2
-
-[node name="AlgotirmoOption" type="OptionButton" parent="Panel/VBox/Margin2/VBox/HBox3"]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-selected = 0
-item_count = 4
-popup/item_0/text = "BFS"
-popup/item_1/text = "DFS"
-popup/item_1/id = 1
-popup/item_2/text = "Dijkstra"
-popup/item_2/id = 2
-popup/item_3/text = "A star"
-popup/item_3/id = 3
 
 [node name="HBox4" type="HBoxContainer" parent="Panel/VBox/Margin2/VBox"]
 visible = false
@@ -139,14 +138,13 @@ layout_mode = 2
 [node name="AlgotirmoOption" type="OptionButton" parent="Panel/VBox/Margin2/VBox/HBox4"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-selected = 0
 item_count = 4
-popup/item_0/text = "BFS"
-popup/item_1/text = "DFS"
+popup/item_0/text = "Anchura"
+popup/item_1/text = "Profundidad"
 popup/item_1/id = 1
 popup/item_2/text = "Dijkstra"
 popup/item_2/id = 2
-popup/item_3/text = "A star"
+popup/item_3/text = "A Estrella"
 popup/item_3/id = 3
 
 [node name="Margin3" type="MarginContainer" parent="Panel/VBox"]
@@ -164,11 +162,13 @@ size_flags_vertical = 8
 
 [node name="Guardar" type="Button" parent="Panel/VBox/Margin3/HBox"]
 layout_mode = 2
-text = "Guardar"
+text = "Confirmar"
 
 [node name="Cancelar" type="Button" parent="Panel/VBox/Margin3/HBox"]
 layout_mode = 2
 text = "Cancelar"
 
+[connection signal="item_selected" from="Panel/VBox/Margin2/VBox/HBox/InteraccionOption" to="." method="_on_interaccion_option_item_selected"]
+[connection signal="item_selected" from="Panel/VBox/Margin2/VBox/HBox3/JuegoOption" to="." method="_on_juego_option_item_selected"]
 [connection signal="pressed" from="Panel/VBox/Margin3/HBox/Guardar" to="." method="_on_guardar_pressed"]
 [connection signal="pressed" from="Panel/VBox/Margin3/HBox/Cancelar" to="." method="_on_cancelar_pressed"]

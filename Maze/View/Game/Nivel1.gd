@@ -9,7 +9,8 @@ var level_data = {
 	"scale": Vector2i(608, 608),
 	"initial_player_position": Vector2(112,112),
 	"initial_enemy_position": Vector2(496,208),
-	"initial_coin_position": Vector2(496,496)
+	"initial_coin_position": Vector2(496,496),
+	"time": 60
 }
 
 func _ready():	
@@ -20,10 +21,13 @@ func createGame():
 	maze_controller.initGame(level_data)
 	
 
-func asignValues(partida: Dictionary, jugador: Dictionary, juego: Dictionary, moneda: Dictionary, 
+# Asigna los valores de la partida cargada
+# 	- Carga la partida con la configuracion recuperada
+func asignValues(partida: Dictionary, jugador: Dictionary, juego: Dictionary, nivel: Dictionary, 
 	enemigo: Dictionary = {}, camino_jugador: Dictionary = {}, camino_enemigo: Dictionary = {}):
-	
-	for key in partida.keys():
-		level_data[key] = partida[key]
+
+	for key in level_data.keys():
+		if nivel.has(key):
+			level_data[key] = nivel[key]
 		
-	maze_controller.reloadGame(level_data, jugador, enemigo, juego, moneda, camino_jugador, camino_enemigo)
+	maze_controller.reloadGame(partida, jugador, juego, level_data, enemigo, camino_jugador, camino_enemigo)
