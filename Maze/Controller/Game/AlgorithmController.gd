@@ -303,7 +303,7 @@ func setTilesPath(camino_jugador: Array, camino_enemigo: Array):
 		var atlas_coords = Vector2i(0, 0)
 		if node not in path_jugador and node not in path_enemigo:
 			tilemap.set_cell(0, cell, 0, atlas_coords)
-			await scene.get_tree().create_timer(0.0000005).timeout
+			
 
 
 # Establece el valor boleano de is_player

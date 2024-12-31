@@ -204,6 +204,7 @@ text = "Tamaño"
 vertical_alignment = 1
 
 [node name="Dificultad" type="Label" parent="Titulo"]
+visible = false
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 text = "Dificultad"
@@ -264,6 +265,7 @@ popup/item_3/text = "Aleatorio"
 popup/item_3/id = 3
 
 [node name="DificultadOption" type="OptionButton" parent="Opciones"]
+visible = false
 custom_minimum_size = Vector2(425, 100)
 layout_mode = 2
 selected = 0

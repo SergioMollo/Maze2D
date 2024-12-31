@@ -32,6 +32,7 @@ var email: String = ""
 var usuario: String
 
 signal set_text_info(message: String, color: Color)
+signal save_completed
 
 
 # Inica los datos cuando se instancia por primera vez
@@ -111,15 +112,15 @@ func setTextinfo(message: String, color: Color):
 # Guarda la partida con los datos necesarios
 # 	- Añade cada recurso en una tabla diferente, asignando los identificadores correspondientes
 # 	- Comprueba que la partida ya ha sido guardada anteriormente, en su caso, actualiza los datos
-func saveGame(partida: Dictionary, nivel_information: Dictionary, jugador: Dictionary, enemigo: Dictionary, juego: Dictionary, camino_jugador: Dictionary, camino_enemigo: Dictionary, ids: Dictionary):
+func saveGame(partida: Dictionary, level_data: Dictionary, jugador: Dictionary, enemigo: Dictionary, juego: Dictionary, camino_jugador: Dictionary, camino_enemigo: Dictionary, ids: Dictionary = {}):
 
 	var database_api = Database.new()
 	database_api.initDatabase()
 
-	if partida_reference == "":
+	if ids["id_partida"] == -1:
 		database_api.addResource("juego", juego)
 		partida["id_juego"] = database_api.getLastInsertId()
-		database_api.addResource("nivel", nivel_information)
+		database_api.addResource("nivel", level_data)
 		partida["id_nivel"] = database_api.getLastInsertId()
 
 		if !camino_jugador.is_empty():
@@ -139,8 +140,8 @@ func saveGame(partida: Dictionary, nivel_information: Dictionary, jugador: Dicti
 		database_api.addResource("partida", partida)
 
 	else:
-		database_api.updateResource("partida", partida, partida_reference)
-		database_api.updateResource("nivel", nivel_information, ids["id_nivel"])
+		database_api.updateResource("partida", partida, ids["id_partida"])
+		database_api.updateResource("nivel", level_data, ids["id_nivel"])
 		database_api.updateResource("jugador", jugador, ids["id_jugador"])	
 		database_api.updateResource("juego", juego, ids["id_juego"])
 		
@@ -152,6 +153,7 @@ func saveGame(partida: Dictionary, nivel_information: Dictionary, jugador: Dicti
 			database_api.updateResource("camino_enemigo", camino_enemigo, ids["id_camino_enemigo"])
 
 	database_api.closeDatabase()
+	emit_signal("save_completed")
 
 
 # Carga las partidas guardadas por un usuario
@@ -284,6 +286,8 @@ func splitLevelValues(level_data: Dictionary):
 	level_data.initial_enemy_position = Vector2(int(value[0]), int(value[1]))
 	value = level_data.initial_coin_position.split(",")
 	level_data.initial_coin_position = Vector2(int(value[0]), int(value[1]))
+	
+	return level_data
 
 
 # Obtiene la cadena de texto correspondiente al tipo de Nivel

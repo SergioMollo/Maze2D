@@ -19,7 +19,9 @@ var initiate: bool = false
  
 var map = []
 var graph = {}
-var ids = {}
+var ids = {
+	"id_partida": -1
+}
 
 @export var enemy_scene: PackedScene
 
@@ -144,25 +146,31 @@ func game_process():
 		await searchPath(algorithm, trayectory, scene)
 
 		while initiate:
-			await moveOneStep(algorithm)
-			Singleton.move_enemy = false
-			if Singleton.algoritmo_enemigo == VideogameConstants.Algoritmo.DIJKSTRA or Singleton.algoritmo_enemigo == VideogameConstants.Algoritmo.A_STAR:
-				var path_enemigo = await newSearch(Singleton.algoritmo_enemigo ,algorithm, heuristic, maze.enemy.position, maze.player.position, maze.initial_coin_position)
-				if !path_enemigo.is_empty():
-					await maze.enemy.setPath(maze.enemy.position, maze.player.position, path_enemigo)
-
+			if maze.enemy.enemy.path.trayectoria.size() > 0:
+				await moveOneStep(algorithm)
+				Singleton.move_enemy = false
+				if Singleton.algoritmo_enemigo == VideogameConstants.Algoritmo.DIJKSTRA or Singleton.algoritmo_enemigo == VideogameConstants.Algoritmo.A_STAR:
+					var path_enemigo = await newSearch(Singleton.algoritmo_enemigo ,algorithm, heuristic, maze.enemy.position, maze.player.position, maze.initial_coin_position)
+					if !path_enemigo.is_empty():
+						await maze.enemy.setPath(maze.enemy.position, maze.player.position, path_enemigo)
+			else:
+				Singleton.move_enemy = false
+				break
 
 	# Para DFS y BFS con y sin enemigo
 	elif Singleton.algoritmo_jugador == VideogameConstants.Algoritmo.BFS or Singleton.algoritmo_jugador == VideogameConstants.Algoritmo.DFS:
 		await searchPath(algorithm, trayectory, scene)
 
 		while initiate:	
-			await moveOneStep(algorithm)
-			if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-				var path_enemigo = await newSearch(Singleton.algoritmo_enemigo ,algorithm, heuristic, maze.enemy.position, maze.player.position, maze.initial_coin_position)
-				if !path_enemigo.is_empty():
-					await maze.enemy.setPath(maze.enemy.position, maze.player.position, path_enemigo)
-
+			if maze.enemy.enemy.path.trayectoria.size() > 0:
+				await moveOneStep(algorithm)
+				if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+					var path_enemigo = await newSearch(Singleton.algoritmo_enemigo ,algorithm, heuristic, maze.enemy.position, maze.player.position, maze.initial_coin_position)
+					if !path_enemigo.is_empty():
+						await maze.enemy.setPath(maze.enemy.position, maze.player.position, path_enemigo)
+			else:
+				Singleton.move_enemy = false
+				break	
 	# Para DFS y BFS con enemigo y modo interaccion
 	elif Singleton.algoritmo_enemigo == VideogameConstants.Algoritmo.BFS or Singleton.algoritmo_enemigo == VideogameConstants.Algoritmo.DFS:		
 		await searchPath(algorithm, trayectory, scene)
@@ -170,15 +178,19 @@ func game_process():
 		algorithm.setValueIsPlayer(true)
 
 		while initiate:	
-			await moveOneStep(algorithm)
-			var path_jugador = await newSearch(Singleton.algoritmo_jugador ,algorithm, heuristic, maze.player.position, maze.initial_coin_position, maze.enemy.position)
-			if !path_jugador.is_empty():
-				await maze.player.setPath(maze.player.position, maze.initial_coin_position, path_jugador)
-	
+			if maze.enemy.enemy.path.trayectoria.size() > 0:
+				await moveOneStep(algorithm)
+				var path_jugador = await newSearch(Singleton.algoritmo_jugador,algorithm , heuristic, maze.player.position, maze.initial_coin_position, maze.enemy.position)
+				if !path_jugador.is_empty():
+					await maze.player.setPath(maze.player.position, maze.initial_coin_position, path_jugador)
+			else:
+				Singleton.move_enemy = false
+				break		
+
 	else:
 		while initiate:
 			await searchPath(algorithm, trayectory, scene)
-			await moveOneStep(algorithm)
+			await moveOneStep(algorithm) 
 
 			if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 				heuristic = algorithm.createHeuristic(Singleton.maze_size.x, Singleton.maze_size.y, maze.enemy.position)
@@ -225,15 +237,13 @@ func moveOneStep(algorithm: AlgorithmController):
 		if maze.enemy.enemy.path.trayectoria.size() > 0:
 			maze.enemy.move()
 			await maze.enemy.movement_finished	
+			algorithm.setTilesPath([], maze.enemy.enemy.path.trayectoria)
+			await maze.player.movement_finished
 	if maze.player.player.path.trayectoria.size() > 0:
 		maze.player.move()
-		await maze.player.movement_finished
-
-	# maze.timer.stop()
-	if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-		algorithm.setTilesPath(maze.player.player.path.trayectoria, maze.enemy.enemy.path.trayectoria)
-	else:
 		algorithm.setTilesPath(maze.player.player.path.trayectoria, [])
+		await maze.player.movement_finished
+		
 
 
 # Inicia el temporizador desde un valor determinado
@@ -459,9 +469,7 @@ func saveGame(nombre: String):
 func reloadGame(partida : Dictionary, jugador: Dictionary, juego: Dictionary, level_data: Dictionary, 
 		enemigo: Dictionary, camino_jugador: Dictionary, camino_enemigo: Dictionary):
 
-	# setIds(jugador[0], enemigo[0], juego[0], nivel[0], camino_jugador[0], camino_enemigo[0])		
-	# for value in level_data:
-	# 	partida.get_or_add(value)
+	setIds(partida, jugador, enemigo, juego, level_data, camino_jugador, camino_enemigo)		
 
 	setup(level_data)
 	initiate = false
@@ -515,6 +523,23 @@ func reloadGame(partida : Dictionary, jugador: Dictionary, juego: Dictionary, le
 	if game_state != 1:
 		maze.timer.start(time_left)
 		game_process()
+
+
+# Asigna los ids de la partida recuperada para su guardado posterior
+func setIds(partida: Dictionary, jugador: Dictionary,  enemigo: Dictionary, juego: Dictionary, nivel: Dictionary, camino_jugador: Dictionary, camino_enemigo: Dictionary):
+	Singleton.nombre_partida = partida["nombre"]
+	
+	ids["id_partida"] = partida["id_partida"]
+	ids["id_jugador"] = jugador["id_jugador"]
+	ids["id_juego"] = juego["id_juego"]
+	ids["id_nivel"] = partida["id_nivel"]
+
+	if camino_jugador.has("id_camino"):
+		ids["id_camino_jugador"] = camino_jugador["id_camino"]
+
+	if enemigo.has("id_enemigo"):
+		ids["id_enemigo"] = enemigo["id_enemigo"]
+		ids["id_camino_enemigo"] = camino_enemigo["id_camino"]
 
 
 # Recrea el mapa basandose en los id de los tiles del mapa creado

@@ -42,6 +42,7 @@ func _process(delta):
 		
 		if collision:
 			updatePosition(player.actual_position)	
+			emit_signal("movement_finished")
 			velocity = Vector2()	
 		elif position.distance_to(player.target) < 1:
 			updatePosition(player.target)
@@ -88,7 +89,8 @@ func move():
 #  - Asigna los valores de objetivo y posicion actual, establece al jugador en movimiento
 func asign_values():
 	if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-		Singleton.move_enemy = true
+		if enemy.enemy.path.trayectoria.size() > 0:
+			Singleton.move_enemy = true
 	is_moving = true
 	can_move = false
 	player.actual_position = player.position

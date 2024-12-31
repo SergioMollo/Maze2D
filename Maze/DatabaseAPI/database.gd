@@ -109,8 +109,8 @@ func getEnemigo(id: int):
 	
 	
 # Actualiza un elemento de una tabla
-func updateResource(name_collection: String, collection: Dictionary, id: String):
-	database.update_rows(name_collection, "id_" + name_collection + " = " + id, collection)
+func updateResource(name_collection: String, collection: Dictionary, id: int):
+	database.update_rows(name_collection, "id_" + name_collection + " = " + str(id), collection)
 	
 	
 # Elimina un elemento de una tabla

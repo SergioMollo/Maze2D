@@ -7,16 +7,13 @@ func _on_guardar_salir_pressed():
 	maze.match_state = VideogameConstants.EstadoPartida.GUARDADA
 	maze.game_state = VideogameConstants.EstadoJuego.EN_PAUSA
 	save()
-	Singleton.partida_reference = ""
-	Singleton.nombre_partida = ""	
-	get_tree().change_scene_to_file("res://Maze/View/UI/PantallaPrincipal.tscn")
 
 
 # Finaliza la partida al menu principal, guardando el progreso alcanzado
 func _on_finalizar_pressed():
 	maze.match_state = VideogameConstants.EstadoPartida.FINALIZADA
 	maze.game_state = VideogameConstants.EstadoJuego.FINALIZADO
-	save()
+	await save()
 	Singleton.partida_reference = ""
 	Singleton.nombre_partida = ""
 	get_tree().change_scene_to_file("res://Maze/View/UI/PantallaPrincipal.tscn")
@@ -83,3 +80,13 @@ func save():
 		instance.setMaze(maze)
 	else:
 		maze.saveGame(Singleton.nombre_partida)
+
+	Singleton.connect("save_completed", _on_save_completed)
+
+
+func _on_save_completed():
+	print("Entro aqui")
+	Singleton.partida_reference = ""
+	Singleton.nombre_partida = ""	
+	queue_free()
+	get_tree().change_scene_to_file("res://Maze/View/UI/PantallaPrincipal.tscn")

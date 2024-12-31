@@ -1,6 +1,7 @@
 extends Control
 
 var maze: MazeController
+
 @onready var nombre: LineEdit = $Panel/VBox/Margin3/HBox/Nombre
 
 # Inica los datos cuando se instancia por primera vez
