@@ -2,11 +2,6 @@ extends Node
 
 class_name Maze
 
-var xSize
-var ySize
-
-
-
 var player: CharacterBody2D
 var enemy: CharacterBody2D
 var moneda: Area2D

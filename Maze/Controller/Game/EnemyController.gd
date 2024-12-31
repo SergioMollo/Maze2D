@@ -9,8 +9,6 @@ var player
 signal eliminated
 signal movement_finished
 
-@onready var ai_enemy: Node2D = $AIController2DEnemy
-
 
 # Inicia los datos del enemigo
 func _ready():

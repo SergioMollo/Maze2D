@@ -10,7 +10,6 @@ var enemy
 var coin
 var maze_finished: bool = false
 var is_moving: bool = false
-var can_move: bool = false
 
 signal movement_finished
 
@@ -92,7 +91,6 @@ func asign_values():
 		if enemy.enemy.path.trayectoria.size() > 0:
 			Singleton.move_enemy = true
 	is_moving = true
-	can_move = false
 	player.actual_position = player.position
 
 

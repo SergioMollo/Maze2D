@@ -2,10 +2,6 @@ extends "res://Maze/Model/CharacterData.gd"
 
 class_name Player
 
-#@onready var navigation: NavigationAgent2D = $NavigationAgent2D
-#@onready var ai_controller: Node2D = $AIController2D
-#@onready var moneda: Area2D = $"../Moneda/Moneda2D"
-
 func _ready():
 	position = Vector2.ZERO
 	global_position = Vector2.ZERO

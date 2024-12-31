@@ -2,7 +2,6 @@ extends Node
 
 class_name Path
 
-# var id: int
 var inicio: Vector2
 var objetivo: Vector2
 var trayectoria = []
