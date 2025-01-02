@@ -43,7 +43,7 @@ func createGame():
 	pos_player = Vector2(randi_range(1, size_x-2) * pixels_move + pixels_init, randi_range(1, size_y-2) * pixels_move + pixels_init)
 	pos_coin = Vector2(randi_range(1, size_x-2) * pixels_move + pixels_init, randi_range(1, size_y-2) * pixels_move + pixels_init)
 
-	if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+	if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 		pos_enemy = Vector2(randi_range(1, size_x-2) * pixels_move + pixels_init, randi_range(1, size_y-2) * pixels_move + pixels_init)
 	
 	while pos_coin == pos_player:
@@ -69,7 +69,7 @@ func asignValues(partida: Dictionary, jugador: Dictionary, juego: Dictionary, ni
 		if nivel.has(key):
 			level_data[key] = nivel[key]
 		
-	maze_controller.reloadGame(partida, jugador, juego, level_data, enemigo, camino_jugador, camino_enemigo)
+	maze_controller.continuarPartida(partida, jugador, juego, level_data, enemigo, camino_jugador, camino_enemigo)
 
 
 # Genera un mapa aleatorio asegurando la conexion entre el jugador y la moneda, y el jugador y el enemigo (en su defecto)
@@ -99,7 +99,7 @@ func generateAleatoryMap(pos_player: Vector2, pos_coin: Vector2, pos_enemy: Vect
 	map = createMap(size_x, size_y, maze_map)
 	algorithm.graph = map
 	conexion_coin = await algorithm.dfsSearch(pos_player, pos_coin)
-	if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+	if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 		conexion_enemy = await algorithm.dfsSearch(pos_player, pos_enemy)
 
 	for node in graph:

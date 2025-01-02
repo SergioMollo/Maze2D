@@ -3,9 +3,9 @@ extends Control
 
 # Inica los datos cuando se instancia por primera vez
 func _ready():
-	Singleton._ready()
-	get_window().content_scale_size = Singleton.initial_resolution
-	Singleton.connect("set_text_info", on_set_text_info)
+	Videogame._ready()
+	get_window().content_scale_size = Videogame.initial_resolution
+	Videogame.connect("set_text_info", on_set_text_info)
 
 
 # Inicia sesion con las credenciales de usuario indicadas
@@ -14,7 +14,7 @@ func _ready():
 func _on_iniciar_sesion_pressed():
 	var email = $Canvas/Panel/Margin/VBox/EmailValue.text
 	var password = $Canvas/Panel/Margin/VBox/PasswordValue.text
-	Singleton.login(email, password)
+	Videogame.login(email, password)
 
 
 # Cierra la aplicacion cuando se presiona el boton "Salir"

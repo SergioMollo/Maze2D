@@ -30,4 +30,4 @@ func asignValues(partida: Dictionary, jugador: Dictionary, juego: Dictionary, ni
 		if nivel.has(key):
 			level_data[key] = nivel[key]
 		
-	maze_controller.reloadGame(partida, jugador, juego, level_data, enemigo, camino_jugador, camino_enemigo)
+	maze_controller.continuarPartida(partida, jugador, juego, level_data, enemigo, camino_jugador, camino_enemigo)

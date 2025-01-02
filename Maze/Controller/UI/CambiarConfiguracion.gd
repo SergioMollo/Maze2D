@@ -5,7 +5,7 @@ extends Control
 @onready var jugador_button: OptionButton = $Panel/VBox/Margin2/VBox/HBox2/AlgotirmoOption
 @onready var enemigo_button: OptionButton = $Panel/VBox/Margin2/VBox/HBox4/AlgotirmoOption
 
-var maze: MazeController
+var maze_instance: MazeController
 
 # Inica los datos cuando se instancia por primera vez
 func _ready():
@@ -20,42 +20,42 @@ func _on_guardar_pressed():
 	var enemigo = $Panel/VBox/Margin2/VBox/HBox4/AlgotirmoOption.get_selected()
 	
 	if modo_juego == 0:
-		Singleton.modo_juego = VideogameConstants.ModoJuego.MODO_SOLITARIO
+		Videogame.modo_juego = VideogameConstants.ModoJuego.MODO_SOLITARIO
 	else:
-		Singleton.modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
+		Videogame.modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
 		
 	if modo_interaccion == 0:
-		Singleton.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_USUARIO
+		Videogame.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_USUARIO
 	else:
-		Singleton.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_SIMULACION
+		Videogame.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_SIMULACION
 	
 	if jugador == 0:
-		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.BFS
+		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.BFS
 	elif jugador == 1:
-		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.DFS
+		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.DFS
 	elif jugador == 2:
-		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.DIJKSTRA
+		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.DIJKSTRA
 	elif jugador == 3:
-		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.A_STAR
+		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.A_STAR
 	elif jugador == -1:
-		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.EMPTY	
+		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.EMPTY	
 		
 	if enemigo == 0:
-		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.BFS
+		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.BFS
 	elif enemigo == 1:
-		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.DFS
+		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.DFS
 	elif enemigo == 2:
-		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.DIJKSTRA
+		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.DIJKSTRA
 	elif enemigo == 3:
-		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.A_STAR
+		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.A_STAR
 	elif enemigo == -1:
-		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.EMPTY
+		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.EMPTY
 	
-	maze.time_left = maze.maze.time
-	maze.game_number -= 1
-	maze.initiate = false
+	maze_instance.time_left = maze_instance.maze.time
+	maze_instance.game_number -= 1
+	maze_instance.initiate = false
 	queue_free()
-	maze.new_game()
+	maze_instance.nuevoJuego()
 
 
 # Cancela el cambio y cierra el menu
@@ -105,14 +105,14 @@ func showAlgoritmo(player: bool):
 # Inicia y muestra las opciones de configuracion actuales
 func initOptions():
 
-	if Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
+	if Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
 		showAlgoritmo(true)
 		$Panel/VBox/Margin2/VBox/HBox/InteraccionOption.select(1)
 
-	if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+	if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 		showAlgoritmo(false)
 		$Panel/VBox/Margin2/VBox/HBox3/JuegoOption.select(1)
 
 # Asigna la instancia del scrip del laberinto actual
-func setMaze(maze_instance: MazeController):
-	maze = maze_instance
+func setMaze(instance: MazeController):
+	maze_instance = instance

@@ -8,15 +8,15 @@ var index = 0
 
 # Inica los datos cuando se instancia por primera vez
 func _ready():
-	get_window().content_scale_size = Singleton.initial_resolution
+	get_window().content_scale_size = Videogame.initial_resolution
 	
 	var texture
-	if Singleton.selection == "player":
-		texture = load(Singleton.player_texture)
-		index = player_textures.find(Singleton.player_texture)
-	elif Singleton.selection == "enemy":	
-		texture = load(Singleton.enemy_texture)
-		index = enemy_textures.find(Singleton.enemy_texture)
+	if Videogame.selection == "player":
+		texture = load(Videogame.player_texture)
+		index = player_textures.find(Videogame.player_texture)
+	elif Videogame.selection == "enemy":	
+		texture = load(Videogame.enemy_texture)
+		index = enemy_textures.find(Videogame.enemy_texture)
 	
 	imagen.texture = texture
 
@@ -25,14 +25,14 @@ func _ready():
 func _on_left_pressed():
 	var texture
 	
-	if Singleton.selection == "player":
+	if Videogame.selection == "player":
 		if index == 0:
 			index = player_textures.size()-1
 			texture = load("res://Resources/PixelArt/" + player_textures[index])
 		else:
 			index -= 1
 			texture = load("res://Resources/PixelArt/" + player_textures[index])
-	elif Singleton.selection == "enemy":
+	elif Videogame.selection == "enemy":
 		if index == 0:
 			index = enemy_textures.size()-1
 			texture = load("res://Resources/PixelArt/" + enemy_textures[index])
@@ -48,14 +48,14 @@ func _on_left_pressed():
 func _on_rigth_pressed():
 	var texture
 	
-	if Singleton.selection == "player":
+	if Videogame.selection == "player":
 		if index == player_textures.size()-1:
 			index = 0
 			texture = load("res://Resources/PixelArt/" + player_textures[index])			
 		else:
 			index += 1
 			texture = load("res://Resources/PixelArt/" + player_textures[index])
-	elif Singleton.selection == "enemy":
+	elif Videogame.selection == "enemy":
 		if index == enemy_textures.size()-1:
 			index = 0
 			texture = load("res://Resources/PixelArt/" + enemy_textures[index])
@@ -69,10 +69,10 @@ func _on_rigth_pressed():
 # Asigna la apariencia seleccionada al jugador/enemigo
 func _on_seleccionar_pressed():
 	
-	if Singleton.selection == "player":
-		Singleton.player_texture = imagen.texture.resource_path
-	elif Singleton.selection == "enemy":
-		Singleton.enemy_texture = imagen.texture.resource_path
+	if Videogame.selection == "player":
+		Videogame.player_texture = imagen.texture.resource_path
+	elif Videogame.selection == "enemy":
+		Videogame.enemy_texture = imagen.texture.resource_path
 	
 	get_tree().change_scene_to_file("res://Maze/View/UI/PantallaPrincipal.tscn")
 

@@ -63,7 +63,7 @@ func getPartidasFinalizadas(email: String):
 func getUser(email: String):
 	var query = "SELECT * FROM usuario WHERE email = ?"
 	database.query_with_bindings(query, [email])
-	return database.query_result
+	return database.query_result[0]
 
 
 # Obtiene una partida concreta

@@ -3,8 +3,8 @@ extends Control
 
 # Inica los datos cuando se instancia por primera vez
 func _ready():
-	get_window().content_scale_size = Singleton.initial_resolution
-	Singleton.connect("set_text_info", on_set_text_info)
+	get_window().content_scale_size = Videogame.initial_resolution
+	Videogame.connect("set_text_info", on_set_text_info)
 
 
 # Crea una cuenta de usuario con los credenciales introducidos
@@ -15,7 +15,7 @@ func _on_crear_cuenta_pressed():
 	var password_confirm = $Canvas/Panel/Margin/VBox/PasswordConfirmValue.text
 	
 	if password == password_confirm:
-		Singleton.signUp(email, password, nombre)	
+		Videogame.signUp(email, password, nombre)	
 
 
 # Cancela la creacion de una cuenta de usuario

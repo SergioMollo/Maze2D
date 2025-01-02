@@ -12,7 +12,7 @@ extends Control
 
 # Inica los datos cuando se instancia por primera vez
 func _ready():
-	get_window().content_scale_size = Singleton.initial_resolution
+	get_window().content_scale_size = Videogame.initial_resolution
 
 
 # Vuelve a la pagina principal al seleccionar el boton "Atras"
@@ -51,7 +51,7 @@ func _on_crear_partida_pressed():
 		"algoritmo_enemigo": algoritmo_enemigo
 	}
 
-	var new_scene = Singleton.configureGame(partida)
+	var new_scene = Videogame.configurarPartida(partida)
 	get_tree().root.add_child(new_scene)
 	get_tree().current_scene.queue_free()
 	get_tree().current_scene = new_scene

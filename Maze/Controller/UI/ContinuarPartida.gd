@@ -8,8 +8,8 @@ var partida_selected: Dictionary
 
 # Inica los datos cuando se instancia por primera vez
 func _ready():
-	get_window().content_scale_size = Singleton.initial_resolution
-	var listas = Singleton.loadGames()
+	get_window().content_scale_size = Videogame.initial_resolution
+	var listas = Videogame.cargarPartidasGuardadas()
 	partidas = listas[0]
 	finalizadas = listas[1]
 	printGames()
@@ -27,7 +27,7 @@ func _on_name_label_pressed(button) -> void:
 # Al presionar el boton "Seleccionar" con una partida elegida 
 # 	- Se inicia un nuevo juego con los datos de la partida cargada
 func _on_seleccionar_button_pressed():	
-	Singleton.initSaveGame(partida_selected)
+	Videogame.continuaPartida(partida_selected)
 
 
 # Vuelve al menu principal al presionar el boton "Atras"
@@ -48,7 +48,7 @@ func printGames():
 		var resultado = partida["resultado"].split(",")
 
 		button_name.text = partida["nombre"]
-		new_panel.get_node("./HBox/Informacion/Margin1/Fila1/LevelValueLabel").text = "Nivel: " + Singleton.getNivelString(partida["nivel"])
+		new_panel.get_node("./HBox/Informacion/Margin1/Fila1/LevelValueLabel").text = "Nivel: " + Videogame.getNivelString(partida["nivel"])
 		new_panel.get_node("./HBox/Informacion/Margin1/Fila1/TimeLabel").text = str(partida["tiempo_restante"])
 		new_panel.get_node("./HBox/Informacion/Margin2/Fila2/ResultLabel").text = resultado[0] + "-" + resultado[1]
 		new_panel.get_node("./HBox/Informacion/Margin2/Fila2/DateSaveLabel").text = partida["fecha"]
@@ -65,21 +65,21 @@ func printExtensionGame(partida: Dictionary):
 	var resultado = partida["resultado"].split(",")
 	
 	$Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/NameLabel.text = partida["nombre"]
-	$Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/LevelLabel.text = Singleton.getNivelString(partida["nivel"])
+	$Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/LevelLabel.text = Videogame.getNivelString(partida["nivel"])
 	$Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/ResultLabel.text = resultado[0] + "-" + resultado[1]
-	$Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer2/DifficultyValue.text = Singleton.getDificultadString(partida["dificultad"])
-	$Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer2/ModoJuegoValue.text = Singleton.getModoJuegoString(partida["modo_juego"])
-	$Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer2/ModoInteraccionValue.text = Singleton.getModoInteraccionString(partida["modo_interaccion"])
+	$Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer2/DifficultyValue.text = Videogame.getDificultadString(partida["dificultad"])
+	$Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer2/ModoJuegoValue.text = Videogame.getModoJuegoString(partida["modo_juego"])
+	$Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer2/ModoInteraccionValue.text = Videogame.getModoInteraccionString(partida["modo_interaccion"])
 	
 	var value_algoritmo = $Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer2/AlgorithmValue
 	var label_algoritmo = $Canvas/VBox/Margin/VBox/HBox/Extension/AmpliationPanel/Margin/VBox/HBoxContainer/VBoxContainer/AlgorithmLabel
 	
 	if partida["algoritmo_jugador"] != 4:	
-		value_algoritmo.text = Singleton.getAlgoritmoString(partida["algoritmo_jugador"])
+		value_algoritmo.text = Videogame.getAlgoritmoString(partida["algoritmo_jugador"])
 		value_algoritmo.show()
 		label_algoritmo.show()	
 	if partida["algoritmo_enemigo"] != null:	
-			value_algoritmo.text = Singleton.getAlgoritmoString(partida["algoritmo_enemigo"])
+			value_algoritmo.text = Videogame.getAlgoritmoString(partida["algoritmo_enemigo"])
 			value_algoritmo.show()
 			label_algoritmo.show()
 	else:

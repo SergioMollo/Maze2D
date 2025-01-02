@@ -6,10 +6,11 @@ class_name Character
 var actual_position
 var target = Vector2.ZERO
 
-var apariencia: Interface
 var moving = false
 var direction = Vector2.ZERO
+var maze_finished = false
 
+var apariencia: Interface
 var algorithm: Algorithm
 var path: Path
 

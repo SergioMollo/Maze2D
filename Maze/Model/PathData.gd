@@ -15,3 +15,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+
+# Inicializa los datos
+func _init(start_node: Vector2, end_node: Vector2, trayectory: Array):
+	inicio = start_node
+	objetivo = end_node
+	trayectoria = trayectory

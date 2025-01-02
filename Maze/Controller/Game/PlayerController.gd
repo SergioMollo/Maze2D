@@ -8,7 +8,6 @@ const pixels_center = 16
 var player
 var enemy
 var coin
-var maze_finished: bool = false
 var is_moving: bool = false
 
 signal movement_finished
@@ -20,7 +19,6 @@ func _ready():
 	player.position = position
 	player.actual_position = position
 	coin = get_parent().get_node("Moneda")
-	player.path = Path.new()
 
 
 # Fisica del juego, procesa el movimiento hacia una posicion objetivo
@@ -31,7 +29,7 @@ func _ready():
 func _process(delta):
 	await get_tree().physics_frame
 
-	if maze_finished:
+	if player.maze_finished:
 		return
 
 	if player.position != player.target and is_moving:
@@ -40,11 +38,11 @@ func _process(delta):
 		var collision = move_and_collide(velocity * delta)
 		
 		if collision:
-			updatePosition(player.actual_position)	
+			actualizaPosicion(player.actual_position)	
 			emit_signal("movement_finished")
 			velocity = Vector2()	
 		elif position.distance_to(player.target) < 1:
-			updatePosition(player.target)
+			actualizaPosicion(player.target)
 			velocity = Vector2()  
 				
 		if position == player.target:	
@@ -57,7 +55,7 @@ func _process(delta):
 #  - Asigna los valores de objetivo y posicion actual
 func _input(event: InputEvent):
 
-	if !is_moving and !Singleton.move_enemy and Singleton.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO: 
+	if !is_moving and !Videogame.move_enemy and Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO: 
 		if event.is_action_pressed("ui_right"):
 			player.target = Vector2(player.position.x + pixels_move, player.position.y)
 			asign_values()	
@@ -77,7 +75,7 @@ func _input(event: InputEvent):
 
 # Si no se esta moviendo, obtiene el siguiente nodo al que desplazarse
 #  	- Se obtiene del camino obtenido mediante la busqueda con los algoritmos
-func move():
+func desplazarse():
 	if !is_moving:
 		is_moving = true
 		var node = player.path.trayectoria.pop_front()
@@ -87,15 +85,15 @@ func move():
 
 #  - Asigna los valores de objetivo y posicion actual, establece al jugador en movimiento
 func asign_values():
-	if Singleton.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+	if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 		if enemy.enemy.path.trayectoria.size() > 0:
-			Singleton.move_enemy = true
+			Videogame.move_enemy = true
 	is_moving = true
 	player.actual_position = player.position
 
 
 # Actualiza la posicion cuando ha llegado al objetivo, y lo establece en No movimiento
-func updatePosition(new_position: Vector2):
+func actualizaPosicion(new_position: Vector2):
 	player.position = new_position
 	position = new_position
 	is_moving = false
@@ -103,14 +101,9 @@ func updatePosition(new_position: Vector2):
 
 # Asigna el algoritmo de busqueda correspondiente
 func setAlgorithm(selected_algorithm: VideogameConstants.Algoritmo, graph: Dictionary):
-	player.algorithm = Algorithm.new()
-	player.algorithm.algoritmo = selected_algorithm  
-	player.algorithm.nombre = VideogameConstants.Algoritmo.keys()[selected_algorithm]
-	player.algorithm.graph = graph
-
+	player.algorithm = Algorithm.new(selected_algorithm, Videogame.getAlgoritmoString(selected_algorithm), graph)
+	
 
 # Asigna el camino encontrado mediante el algoritmo de busqueda
 func setPath(start_node: Vector2, end_node: Vector2, trayectory: Array):
-	player.path.inicio = start_node
-	player.path.objetivo = end_node
-	player.path.trayectoria = trayectory
+	player.path = Path.new(start_node, end_node, trayectory)

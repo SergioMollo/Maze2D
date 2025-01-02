@@ -5,7 +5,7 @@ extends Control
 
 # Inica los datos cuando se instancia por primera vez
 func _ready():
-	get_window().content_scale_size = Singleton.initial_resolution
+	get_window().content_scale_size = Videogame.initial_resolution
 	$Canvas/Panel/Margin/VBox/HBox/VBox/CrearPartida.grab_focus()
 	initSingeltonVariables()
 	setTextures()
@@ -37,29 +37,27 @@ func _on_salir_pressed():
 
 # Muestra la escena de seleccion de apariencia del jugador
 func _on_apariencia_jugador_pressed():
-	Singleton.selection = "player"
+	Videogame.selection = "player"
 	get_tree().change_scene_to_file("res://Maze/View/UI/SeleccionarApariencia.tscn")
 
 
 # Muestra la escena de seleccion de apariencia del enemigo
 func _on_apariencia_enemigo_pressed():
-	Singleton.selection = "enemy"
+	Videogame.selection = "enemy"
 	get_tree().change_scene_to_file("res://Maze/View/UI/SeleccionarApariencia.tscn")
 	
 	
 # Inicia las variables 
 func initSingeltonVariables():
-	Singleton.partida_reference = ""
-	Singleton.nombre_partida = ""
-	Singleton.move_player = false
-	Singleton.move_enemy = false
-	Singleton.juegos = 0
-	Singleton.maze_size = Vector2i(0,0)
+	Videogame.move_player = false
+	Videogame.move_enemy = false
+	Videogame.juegos = 0
+	Videogame.maze_size = Vector2i(0,0)
 	
 	
 # Muestra las apariencias de los personajes
 func setTextures():
-	var texture = load(Singleton.player_texture)
+	var texture = load(Videogame.player_texture)
 	player.texture = texture
-	texture = load(Singleton.enemy_texture)
+	texture = load(Videogame.enemy_texture)
 	enemy.texture = texture

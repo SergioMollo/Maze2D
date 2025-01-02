@@ -1,10 +1,8 @@
 extends Node
 
-class_name Game
+class_name Interface
 
-var numero: int
-var estado: VideogameConstants.EstadoJuego
-var tiempo_restante: int
+var nombre: String
 
 
 # Called when the node enters the scene tree for the first time.
@@ -15,9 +13,3 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
-
-func _init(time: int):
-	tiempo_restante = time
-	numero = 0
-	estado = VideogameConstants.EstadoJuego.EN_CURSO

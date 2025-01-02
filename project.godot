@@ -17,8 +17,8 @@ boot_splash/bg_color=Color(0.00392157, 0.176471, 0, 1)
 
 [autoload]
 
-Singleton="*res://Maze/Model/Singleton.gd"
 Firebase="*res://addons/godot-firebase/firebase/firebase.tscn"
+Videogame="*res://Maze/Model/Videogame.gd"
 
 [display]
 

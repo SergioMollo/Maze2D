@@ -35,26 +35,26 @@ func search(jugador_position: Vector2, coin_position: Vector2, tile: TileMap, sc
 
 	# Jugador	
 	is_player = true
-	if Singleton.algoritmo_jugador == VideogameConstants.Algoritmo.BFS:
+	if Videogame.algoritmo_jugador == VideogameConstants.Algoritmo.BFS:
 		path_jugador = await bfsSearch(jugador_position, coin_position)
-	elif Singleton.algoritmo_jugador == VideogameConstants.Algoritmo.DFS:
+	elif Videogame.algoritmo_jugador == VideogameConstants.Algoritmo.DFS:
 		await dfsSearch(jugador_position, coin_position)
 		path_jugador = resultdfs
-	elif Singleton.algoritmo_jugador == VideogameConstants.Algoritmo.DIJKSTRA:
+	elif Videogame.algoritmo_jugador == VideogameConstants.Algoritmo.DIJKSTRA:
 		path_jugador = await dijkstraSearch(jugador_position, coin_position)
-	elif Singleton.algoritmo_jugador == VideogameConstants.Algoritmo.A_STAR:
+	elif Videogame.algoritmo_jugador == VideogameConstants.Algoritmo.A_STAR:
 		path_jugador = await aStarSearch(jugador_position, coin_position, heuristic_player)
 		
 	# Enemigo	
 	is_player = false
-	if Singleton.algoritmo_enemigo == VideogameConstants.Algoritmo.BFS:
+	if Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.BFS:
 		path_enemigo = await bfsSearch(enemy_position, jugador_position)
-	elif Singleton.algoritmo_enemigo == VideogameConstants.Algoritmo.DFS:
+	elif Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.DFS:
 		await dfsSearch(enemy_position, jugador_position)
 		path_enemigo = resultdfs
-	elif Singleton.algoritmo_enemigo == VideogameConstants.Algoritmo.DIJKSTRA:
+	elif Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.DIJKSTRA:
 		path_enemigo = await dijkstraSearch(enemy_position, jugador_position)
-	elif Singleton.algoritmo_enemigo == VideogameConstants.Algoritmo.A_STAR:
+	elif Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.A_STAR:
 		path_enemigo = await aStarSearch(enemy_position, jugador_position, heuristic_enemy)
 
 	await setTilesPath(path_jugador, path_enemigo)

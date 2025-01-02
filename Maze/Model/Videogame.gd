@@ -14,7 +14,6 @@ var selection = ""
 var move_player = false
 var move_enemy = false
 
-var configuracion: Dictionary # Se usara para eliminar las siguientes variables
 var nivel: VideogameConstants.Nivel
 var dificultad: VideogameConstants.Dificultad
 var modo_juego: VideogameConstants.ModoJuego
@@ -25,11 +24,7 @@ var juegos: int
 
 var maze_size: Vector2i = Vector2i(0,0)
 
-
-var partida_reference: String = ""
-var nombre_partida: String = ""
-var email: String = ""
-var usuario: String
+var usuario: User
 
 signal set_text_info(message: String, color: Color)
 signal save_completed
@@ -48,8 +43,11 @@ func login(user_email: String, user_password: String):
 	database_api.initDatabase()
 	var result = database_api.getUser(user_email)
 
-	if !result.is_empty() and result[0]["password"] == user_password:
-		email = user_email
+	if !result.is_empty() and result["password"] == user_password:
+		usuario = User.new()	
+		usuario.setEmail(result["email"])
+		usuario.setPassword(result["password"])
+		usuario.setNombre(result["nombre"])
 		loginSucceeded()
 	else:
 		loginFailed()
@@ -112,7 +110,7 @@ func setTextinfo(message: String, color: Color):
 # Guarda la partida con los datos necesarios
 # 	- Añade cada recurso en una tabla diferente, asignando los identificadores correspondientes
 # 	- Comprueba que la partida ya ha sido guardada anteriormente, en su caso, actualiza los datos
-func saveGame(partida: Dictionary, level_data: Dictionary, jugador: Dictionary, enemigo: Dictionary, juego: Dictionary, camino_jugador: Dictionary, camino_enemigo: Dictionary, ids: Dictionary = {}):
+func guardarPartida(partida: Dictionary, level_data: Dictionary, jugador: Dictionary, enemigo: Dictionary, juego: Dictionary, camino_jugador: Dictionary, camino_enemigo: Dictionary, ids: Dictionary = {}):
 
 	var database_api = Database.new()
 	database_api.initDatabase()
@@ -136,7 +134,7 @@ func saveGame(partida: Dictionary, level_data: Dictionary, jugador: Dictionary, 
 			database_api.addResource("enemigo", enemigo)
 			partida["id_enemigo"] = database_api.getLastInsertId()
 		
-		partida["email_usuario"] = email
+		partida["email_usuario"] = usuario.getEmail()
 		database_api.addResource("partida", partida)
 
 	else:
@@ -158,18 +156,18 @@ func saveGame(partida: Dictionary, level_data: Dictionary, jugador: Dictionary, 
 
 # Carga las partidas guardadas por un usuario
 # 	- Obtiene las partidas del usuario con la sesion iniciada para mostrarlas en la lista
-func loadGames():
+func cargarPartidasGuardadas():
 	var database_api = Database.new()
 	database_api.initDatabase()
-	var enCurso = database_api.getPartidasEnCurso(email)
-	var finalizadas = database_api.getPartidasFinalizadas(email)
+	var enCurso = database_api.getPartidasEnCurso(usuario.getEmail())
+	var finalizadas = database_api.getPartidasFinalizadas(usuario.getEmail())
 	database_api.closeDatabase()
 	return [enCurso, finalizadas]
 	
 	
 # Carga los datos de la partida selecionada
 # 	- Inicia la partida seleccionada
-func initSaveGame(partida: Dictionary):
+func continuaPartida(partida: Dictionary):
 	var database_api = Database.new()
 	database_api.initDatabase()
 	
@@ -193,7 +191,7 @@ func initSaveGame(partida: Dictionary):
 	partida.get_or_add(nivel_partida["nivel"])
 	nivel_partida = splitLevelValues(nivel_partida)
 
-	var new_scene = configureGame(partida)
+	var new_scene = configurarPartida(partida)
 	get_tree().root.add_child(new_scene)
 	get_tree().current_scene.queue_free()
 	get_tree().current_scene = new_scene
@@ -203,70 +201,70 @@ func initSaveGame(partida: Dictionary):
 	
 
 # Borra una partida seleccionada de la base de datos
-func deleteGame(name: String, id: String):
+func borrarPartida(nombre: String, id: String):
 	var database_api = Database.new()
 	database_api.initDatabase()
-	database_api.deleteResource(name, id)
+	database_api.deleteResource(nombre, id)
 	database_api.closeDatabase()
 
 
 # Configura los datos de la partida mediante los datos seleccionados al crear la partida
 # 	- Establece los datos de configuración de la partida
-func configureGame(partida: Dictionary):
+func configurarPartida(partida: Dictionary):
 	
 	if partida["dificultad"] == 0:
-		Singleton.dificultad = VideogameConstants.Dificultad.FACIL
+		dificultad = VideogameConstants.Dificultad.FACIL
 	elif partida["dificultad"] == 1:
-		Singleton.dificultad = VideogameConstants.Dificultad.MEDIA
+		dificultad = VideogameConstants.Dificultad.MEDIA
 	else :
-		Singleton.dificultad = VideogameConstants.Dificultad.DIFICIL
+		dificultad = VideogameConstants.Dificultad.DIFICIL
 
 	if partida["modo_juego"] == 0:
-		Singleton.modo_juego = VideogameConstants.ModoJuego.MODO_SOLITARIO
+		modo_juego = VideogameConstants.ModoJuego.MODO_SOLITARIO
 	else:
-		Singleton.modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
+		modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
 
 	if partida["modo_interaccion"] == 0:
-		Singleton.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_USUARIO
+		modo_interaccion = VideogameConstants.ModoInteraccion.MODO_USUARIO
 	else:
-		Singleton.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_SIMULACION
+		modo_interaccion = VideogameConstants.ModoInteraccion.MODO_SIMULACION
 
-	Singleton.juegos = partida["numero_juegos"]
+	juegos = partida["numero_juegos"]
 
 	if partida["algoritmo_jugador"] == 0:
-		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.BFS
+		algoritmo_jugador = VideogameConstants.Algoritmo.BFS
 	elif partida["algoritmo_jugador"] == 1:
-		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.DFS
+		algoritmo_jugador = VideogameConstants.Algoritmo.DFS
 	elif partida["algoritmo_jugador"] == 2:
-		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.DIJKSTRA
+		algoritmo_jugador = VideogameConstants.Algoritmo.DIJKSTRA
 	elif partida["algoritmo_jugador"] == 3:
-		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.A_STAR
+		algoritmo_jugador = VideogameConstants.Algoritmo.A_STAR
 	elif partida["algoritmo_jugador"] == -1:
-		Singleton.algoritmo_jugador = VideogameConstants.Algoritmo.EMPTY
+		algoritmo_jugador = VideogameConstants.Algoritmo.EMPTY
 
 	if partida["algoritmo_enemigo"] == 0:
-		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.BFS
+		algoritmo_enemigo = VideogameConstants.Algoritmo.BFS
 	elif partida["algoritmo_enemigo"] == 1:
-		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.DFS
+		algoritmo_enemigo = VideogameConstants.Algoritmo.DFS
 	elif partida["algoritmo_enemigo"] == 2:
-		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.DIJKSTRA
+		algoritmo_enemigo = VideogameConstants.Algoritmo.DIJKSTRA
 	elif partida["algoritmo_enemigo"] == 3:
-		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.A_STAR
+		algoritmo_enemigo = VideogameConstants.Algoritmo.A_STAR
 	elif partida["algoritmo_enemigo"] == -1:
-		Singleton.algoritmo_enemigo = VideogameConstants.Algoritmo.EMPTY
+		algoritmo_enemigo = VideogameConstants.Algoritmo.EMPTY
 
 	var new_scene
 	if partida["nivel"] == 0:
-		Singleton.nivel = VideogameConstants.Nivel.NIVEL1
+		nivel = VideogameConstants.Nivel.NIVEL1
 		new_scene = load("res://Maze/View/Game/LaberintoNivel1.tscn").instantiate()
 	elif partida["nivel"] == 1:
-		Singleton.nivel = VideogameConstants.Nivel.NIVEL2
+		nivel = VideogameConstants.Nivel.NIVEL2
 		new_scene = load("res://Maze/View/Game/LaberintoNivel2.tscn").instantiate()
 	elif partida["nivel"] == 2:
-		Singleton.nivel = VideogameConstants.Nivel.NIVEL3
+		nivel = VideogameConstants.Nivel.NIVEL3
 		new_scene = load("res://Maze/View/Game/LaberintoNivel3.tscn").instantiate()
 	elif partida["nivel"] == 3:
-		Singleton.nivel = VideogameConstants.Nivel.ALEATORIO
+		nivel = VideogameConstants.Nivel.ALEATORIO
 		new_scene = load("res://Maze/View/Game/LaberintoAleatorio.tscn").instantiate()
 	
 	return new_scene
