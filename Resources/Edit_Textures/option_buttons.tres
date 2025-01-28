@@ -1,0 +1,26 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://w5b2mtpwf0ab"]
+
+[ext_resource type="Texture2D" uid="uid://d138kb1ilodlp" path="res://Resources/Inkscape/PanelConfiguracion.svg" id="1_tydvy"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vpjqx"]
+texture = ExtResource("1_tydvy")
+region_rect = Rect2(627.615, 682.712, 168.704, 58.0562)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mgsky"]
+texture = ExtResource("1_tydvy")
+region_rect = Rect2(626.097, 793.57, 167.543, 57.8513)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hdafm"]
+texture = ExtResource("1_tydvy")
+region_rect = Rect2(839.251, 681.198, 169.343, 56.9607)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7d4em"]
+texture = ExtResource("1_tydvy")
+region_rect = Rect2(840.216, 794.731, 168.022, 58.0563)
+
+[resource]
+default_font_size = 25
+OptionButton/styles/focus = SubResource("StyleBoxTexture_vpjqx")
+OptionButton/styles/hover = SubResource("StyleBoxTexture_mgsky")
+OptionButton/styles/normal = SubResource("StyleBoxTexture_hdafm")
+OptionButton/styles/pressed = SubResource("StyleBoxTexture_7d4em")

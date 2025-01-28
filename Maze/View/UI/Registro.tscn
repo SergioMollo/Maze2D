@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bnj22ojphiwmw"]
+[gd_scene load_steps=10 format=3 uid="uid://bnj22ojphiwmw"]
 
 [ext_resource type="Script" path="res://Maze/Controller/UI/Registro.gd" id="1_ghjsh"]
 [ext_resource type="Texture2D" uid="uid://pck2gtyxs6fp" path="res://Resources/ImagenesTextures/initial-texture.jpg" id="2_aoleh"]
 [ext_resource type="Theme" uid="uid://bli0ffcjwbud6" path="res://Resources/Edit_Textures/panel_confirmacion.tres" id="3_jspaw"]
 [ext_resource type="Texture2D" uid="uid://b8yquptnqg0le" path="res://Resources/Pixelart/CloseButton_0001.png" id="4_wqrw8"]
 [ext_resource type="Texture2D" uid="uid://b1qftsb3xkpdj" path="res://Resources/Pixelart/CloseButton_0002.png" id="5_o5cnp"]
+[ext_resource type="Theme" uid="uid://dpjj7oabgkofc" path="res://Resources/Edit_Textures/buttons.tres" id="6_uks03"]
 
 [sub_resource type="FontFile" id="FontFile_x0o2x"]
 subpixel_positioning = 0
@@ -1566,29 +1567,29 @@ layout_mode = 2
 [node name="NombreLabel" type="Label" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Nombre de usuario"
+text = "Nombre "
 
 [node name="NombreValue" type="LineEdit" parent="Canvas/Panel/Margin/VBox"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-placeholder_text = "nombre de usuario"
+placeholder_text = "nombre"
 
 [node name="HSeparator6" type="HSeparator" parent="Canvas/Panel/Margin/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="EmailLabel" type="Label" parent="Canvas/Panel/Margin/VBox"]
+[node name="UserLabel" type="Label" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Email"
+text = "Usuario"
 
-[node name="EmailValue" type="LineEdit" parent="Canvas/Panel/Margin/VBox"]
+[node name="UserValue" type="LineEdit" parent="Canvas/Panel/Margin/VBox"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-placeholder_text = "email"
+placeholder_text = "nombre de usuario"
 
 [node name="HSeparator3" type="HSeparator" parent="Canvas/Panel/Margin/VBox"]
 self_modulate = Color(1, 1, 1, 0)
@@ -1604,7 +1605,7 @@ text = "Contraseña"
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-placeholder_text = "password"
+placeholder_text = "contraseña"
 secret = true
 
 [node name="HSeparator4" type="HSeparator" parent="Canvas/Panel/Margin/VBox"]
@@ -1621,7 +1622,7 @@ text = "Repite Contraseña"
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-placeholder_text = "password"
+placeholder_text = "contraseña"
 secret = true
 
 [node name="Margin" type="MarginContainer" parent="Canvas/Panel/Margin/VBox"]
@@ -1649,18 +1650,28 @@ theme_override_font_sizes/font_size = 25
 text = "Cancelar"
 
 [node name="Close" type="Button" parent="Canvas"]
+visible = false
 offset_left = 1720.0
 offset_right = 1920.0
 offset_bottom = 72.0
 icon = ExtResource("4_wqrw8")
 
 [node name="Minimize" type="Button" parent="Canvas"]
+visible = false
 offset_left = 1517.0
 offset_right = 1717.0
 offset_bottom = 72.0
 icon = ExtResource("5_o5cnp")
 
+[node name="Salir" type="Button" parent="Canvas"]
+offset_left = 1758.0
+offset_top = 11.0
+offset_right = 1908.0
+offset_bottom = 86.0
+theme = ExtResource("6_uks03")
+text = "Salir"
+
 [connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBoxContainer/CrearCuenta" to="." method="_on_crear_cuenta_pressed"]
 [connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBoxContainer/Cancelar" to="." method="_on_cancelar_pressed"]
-[connection signal="pressed" from="Canvas/Close" to="." method="_on_close_pressed"]
 [connection signal="pressed" from="Canvas/Minimize" to="." method="_on_minimize_pressed"]
+[connection signal="pressed" from="Canvas/Salir" to="." method="_on_salir_pressed"]

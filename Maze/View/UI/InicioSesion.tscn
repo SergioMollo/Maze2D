@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://b8m03mwdh7b0t"]
+[gd_scene load_steps=10 format=3 uid="uid://b8m03mwdh7b0t"]
 
 [ext_resource type="Script" path="res://Maze/Controller/UI/InicioSesion.gd" id="1_18nwm"]
 [ext_resource type="Texture2D" uid="uid://pck2gtyxs6fp" path="res://Resources/ImagenesTextures/initial-texture.jpg" id="2_bwww2"]
 [ext_resource type="Theme" uid="uid://bli0ffcjwbud6" path="res://Resources/Edit_Textures/panel_confirmacion.tres" id="3_sne4g"]
 [ext_resource type="Texture2D" uid="uid://b8yquptnqg0le" path="res://Resources/Pixelart/CloseButton_0001.png" id="4_bjwfj"]
 [ext_resource type="Texture2D" uid="uid://b1qftsb3xkpdj" path="res://Resources/Pixelart/CloseButton_0002.png" id="5_d7fgv"]
+[ext_resource type="Theme" uid="uid://dpjj7oabgkofc" path="res://Resources/Edit_Textures/buttons.tres" id="5_mulcb"]
 
 [sub_resource type="FontFile" id="FontFile_x0o2x"]
 subpixel_positioning = 0
@@ -1570,16 +1571,16 @@ self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="EmailLabel" type="Label" parent="Canvas/Panel/Margin/VBox"]
+[node name="UserLabel" type="Label" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-text = "Email"
+text = "Usuario"
 
-[node name="EmailValue" type="LineEdit" parent="Canvas/Panel/Margin/VBox"]
+[node name="UserValue" type="LineEdit" parent="Canvas/Panel/Margin/VBox"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-placeholder_text = "nombre de usuario"
+placeholder_text = "usuario"
 
 [node name="HSeparator2" type="HSeparator" parent="Canvas/Panel/Margin/VBox"]
 self_modulate = Color(1, 1, 1, 0)
@@ -1595,7 +1596,7 @@ text = "Contraseña"
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
-placeholder_text = "password"
+placeholder_text = "contraseña"
 secret = true
 
 [node name="Margin" type="MarginContainer" parent="Canvas/Panel/Margin/VBox"]
@@ -1623,12 +1624,22 @@ theme_override_font_sizes/font_size = 25
 text = "Iniciar Sesion"
 
 [node name="Close" type="Button" parent="Canvas"]
+visible = false
 offset_left = 1720.0
 offset_right = 1920.0
 offset_bottom = 72.0
 icon = ExtResource("4_bjwfj")
 
+[node name="Salir" type="Button" parent="Canvas"]
+offset_left = 1758.0
+offset_top = 11.0
+offset_right = 1908.0
+offset_bottom = 86.0
+theme = ExtResource("5_mulcb")
+text = "Salir"
+
 [node name="Minimize" type="Button" parent="Canvas"]
+visible = false
 offset_left = 1517.0
 offset_right = 1717.0
 offset_bottom = 72.0
@@ -1638,4 +1649,5 @@ icon = ExtResource("5_d7fgv")
 [connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBoxContainer/Registro" to="." method="_on_registro_pressed"]
 [connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBoxContainer/IniciarSesion" to="." method="_on_iniciar_sesion_pressed"]
 [connection signal="pressed" from="Canvas/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="Canvas/Salir" to="." method="_on_salir_pressed"]
 [connection signal="pressed" from="Canvas/Minimize" to="." method="_on_minimize_pressed"]

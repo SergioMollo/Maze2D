@@ -5,6 +5,8 @@ class_name EnemyController
 var enemy
 var player
 
+var maze_finished = false
+
 signal eliminated
 signal movement_finished
 
@@ -24,7 +26,7 @@ func _ready():
 func _process(delta):
 	await get_tree().physics_frame
 
-	if !enemy.maze_finished and Videogame.move_enemy and enemy.position != enemy.target:
+	if !maze_finished and Videogame.move_enemy and enemy.position != enemy.target:
 
 		enemy.direction = (enemy.target - enemy.position).normalized()
 		velocity = enemy.direction * enemy.speed
@@ -51,7 +53,8 @@ func _process(delta):
 func actualizaPosicion(new_position: Vector2):
 	enemy.position = new_position
 	position = new_position
-
+	force_update_transform()
+	
 
 # Si no se esta moviendo, obtiene el siguiente nodo al que desplazarse
 #  	- Se obtiene del camino obtenido mediante la busqueda con los algoritmos

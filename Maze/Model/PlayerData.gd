@@ -2,6 +2,8 @@ extends "res://Maze/Model/CharacterData.gd"
 
 class_name Player
 
+var maze_finished = false
+
 func _ready():
 	position = Vector2.ZERO
 	global_position = Vector2.ZERO

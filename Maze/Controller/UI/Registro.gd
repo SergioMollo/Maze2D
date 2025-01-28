@@ -10,12 +10,12 @@ func _ready():
 # Crea una cuenta de usuario con los credenciales introducidos
 func _on_crear_cuenta_pressed():
 	var nombre = $Canvas/Panel/Margin/VBox/NombreValue.text
-	var email = $Canvas/Panel/Margin/VBox/EmailValue.text
+	var user = $Canvas/Panel/Margin/VBox/UserValue.text
 	var password = $Canvas/Panel/Margin/VBox/PasswordValue.text
 	var password_confirm = $Canvas/Panel/Margin/VBox/PasswordConfirmValue.text
 	
 	if password == password_confirm:
-		Videogame.signUp(email, password, nombre)	
+		Videogame.signUp(user, password, nombre)	
 
 
 # Cancela la creacion de una cuenta de usuario
@@ -25,6 +25,11 @@ func _on_cancelar_pressed():
 	
 # Cierra la aplicacion
 func _on_close_pressed() -> void:
+	get_tree().quit()
+	
+	
+# Cierra la aplicacion
+func _on_salir_pressed() -> void:
 	get_tree().quit()
 	
 	

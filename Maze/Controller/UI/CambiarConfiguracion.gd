@@ -19,37 +19,8 @@ func _on_guardar_pressed():
 	var jugador = $Panel/VBox/Margin2/VBox/HBox2/AlgotirmoOption.get_selected()
 	var enemigo = $Panel/VBox/Margin2/VBox/HBox4/AlgotirmoOption.get_selected()
 	
-	if modo_juego == 0:
-		Videogame.modo_juego = VideogameConstants.ModoJuego.MODO_SOLITARIO
-	else:
-		Videogame.modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
-		
-	if modo_interaccion == 0:
-		Videogame.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_USUARIO
-	else:
-		Videogame.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_SIMULACION
-	
-	if jugador == 0:
-		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.BFS
-	elif jugador == 1:
-		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.DFS
-	elif jugador == 2:
-		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.DIJKSTRA
-	elif jugador == 3:
-		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.A_STAR
-	elif jugador == -1:
-		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.EMPTY	
-		
-	if enemigo == 0:
-		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.BFS
-	elif enemigo == 1:
-		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.DFS
-	elif enemigo == 2:
-		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.DIJKSTRA
-	elif enemigo == 3:
-		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.A_STAR
-	elif enemigo == -1:
-		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.EMPTY
+
+	maze_instance.guardarConfiguracion(modo_interaccion, modo_juego, jugador, enemigo)
 	
 	maze_instance.time_left = maze_instance.maze.time
 	maze_instance.game_number -= 1
@@ -77,8 +48,8 @@ func _on_juego_option_item_selected(index: int) -> void:
 		showAlgoritmo(false)
 	else:
 		hideAlgoritmo(false)
-	
-	
+
+
 # Oculta el algoritmo segun el tipo de modo seleccionado
 # 	- Establece la opcion a una indefinida
 func hideAlgoritmo(player: bool):

@@ -12,9 +12,9 @@ func _ready():
 # 	- Comprueba que las credenciales son correctas 
 # 	- Comprueba que las credenciales corresponden a un usuario registrado
 func _on_iniciar_sesion_pressed():
-	var email = $Canvas/Panel/Margin/VBox/EmailValue.text
+	var user = $Canvas/Panel/Margin/VBox/UserValue.text
 	var password = $Canvas/Panel/Margin/VBox/PasswordValue.text
-	Videogame.login(email, password)
+	Videogame.login(user, password)
 
 
 # Cierra la aplicacion cuando se presiona el boton "Salir"

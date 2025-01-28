@@ -2,24 +2,24 @@
 
 [ext_resource type="Script" path="res://Maze/Controller/UI/GameOptions.gd" id="1_3vsrw"]
 [ext_resource type="Theme" uid="uid://cw4o8gt2g0buu" path="res://Resources/Edit_Textures/panel_configuracion.tres" id="2_ubbpd"]
-[ext_resource type="Texture2D" uid="uid://brqajglsstp4a" path="res://Resources/ImagenesTextures/texture-panel.png" id="3_5imtq"]
+[ext_resource type="Texture2D" uid="uid://d138kb1ilodlp" path="res://Resources/Inkscape/PanelConfiguracion.svg" id="3_ld0gb"]
 [ext_resource type="Texture2D" uid="uid://c07sb8wmwlb0o" path="res://Resources/Inkscape/Botones.svg" id="4_qj2il"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vwy5w"]
-texture = ExtResource("3_5imtq")
-region_rect = Rect2(505.015, 31.75, 132.908, 52.3423)
+texture = ExtResource("3_ld0gb")
+region_rect = Rect2(358.778, 680.053, 174.423, 60.3987)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_givgs"]
-texture = ExtResource("3_5imtq")
-region_rect = Rect2(502.784, 226.688, 134.94, 46.2653)
+texture = ExtResource("3_ld0gb")
+region_rect = Rect2(112.427, 794.321, 173.88, 58.9496)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_knbhl"]
-texture = ExtResource("3_5imtq")
-region_rect = Rect2(504.188, 159.928, 133.246, 51.8291)
+texture = ExtResource("3_ld0gb")
+region_rect = Rect2(357.565, 789.622, 174.474, 59.713)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7ruwn"]
-texture = ExtResource("3_5imtq")
-region_rect = Rect2(503.893, 96.8653, 134.015, 50.4677)
+texture = ExtResource("3_ld0gb")
+region_rect = Rect2(115.632, 683.102, 173.88, 61.4942)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e52o8"]
 texture = ExtResource("4_qj2il")
@@ -37,14 +37,6 @@ texture_margin_right = 15.0
 texture_margin_bottom = 10.0
 region_rect = Rect2(11.942, 129.741, 336.124, 69.3978)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a73en"]
-texture = ExtResource("4_qj2il")
-texture_margin_left = 15.0
-texture_margin_top = 10.0
-texture_margin_right = 15.0
-texture_margin_bottom = 10.0
-region_rect = Rect2(386.581, 479.189, 339.979, 69.7483)
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7txyo"]
 texture = ExtResource("4_qj2il")
 texture_margin_left = 15.0
@@ -52,6 +44,14 @@ texture_margin_top = 10.0
 texture_margin_right = 15.0
 texture_margin_bottom = 10.0
 region_rect = Rect2(13.5033, 37.321, 341.732, 70.4493)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a73en"]
+texture = ExtResource("4_qj2il")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 15.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(386.581, 479.189, 339.979, 69.7483)
 
 [node name="GameOptions" type="Control"]
 layout_mode = 3
@@ -197,7 +197,7 @@ text = "Volumen"
 custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
 size_flags_vertical = 4
-value = 50.0
+max_value = 10.0
 
 [node name="HSeparator4" type="HSeparator" parent="PanelContainer/Container/GeneralOptions"]
 self_modulate = Color(1, 1, 1, 0)
@@ -212,7 +212,7 @@ alignment = 1
 [node name="ResolutionLabel" type="Label" parent="PanelContainer/Container/GeneralOptions/Resolution"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Resolución"
+text = "Tamaño ventana"
 
 [node name="ResolutionOption" type="OptionButton" parent="PanelContainer/Container/GeneralOptions/Resolution"]
 layout_mode = 2
@@ -244,7 +244,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 16
 theme_override_styles/focus = SubResource("StyleBoxTexture_e52o8")
 theme_override_styles/hover = SubResource("StyleBoxTexture_tgodx")
-theme_override_styles/pressed = SubResource("StyleBoxTexture_a73en")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_tgodx")
 theme_override_styles/normal = SubResource("StyleBoxTexture_7txyo")
 text = "Continuar"
 
@@ -275,5 +275,6 @@ text = "Partida pausada"
 [connection signal="pressed" from="PanelContainer/Container/JuegoOptions/CambiarConfiguracion" to="." method="_on_cambiar_configuracion_pressed"]
 [connection signal="pressed" from="PanelContainer/Container/JuegoOptions/Finalizar" to="." method="_on_finalizar_pressed"]
 [connection signal="pressed" from="PanelContainer/Container/JuegoOptions/Salir" to="." method="_on_salir_pressed"]
+[connection signal="value_changed" from="PanelContainer/Container/GeneralOptions/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="PanelContainer/Container/Margin2/HBoxContainer/Continuar" to="." method="_on_continuar_pressed"]
 [connection signal="pressed" from="PanelContainer/Container/Margin2/HBoxContainer/Cerrar" to="." method="_on_cerrar_pressed"]

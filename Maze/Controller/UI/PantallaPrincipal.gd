@@ -25,7 +25,6 @@ func _on_continuar_partida_pressed():
 func _on_ajustes_pressed():
 	var overlay_scene = preload("res://Maze/View/UI/Configuracion.tscn")
 	var node = $"."
-	node.modulate.a = 0.5
 	var instance = overlay_scene.instantiate()
 	add_child(instance)
 
@@ -49,10 +48,8 @@ func _on_apariencia_enemigo_pressed():
 	
 # Inicia las variables 
 func initSingeltonVariables():
-	Videogame.move_player = false
 	Videogame.move_enemy = false
 	Videogame.juegos = 0
-	Videogame.maze_size = Vector2i(0,0)
 	
 	
 # Muestra las apariencias de los personajes

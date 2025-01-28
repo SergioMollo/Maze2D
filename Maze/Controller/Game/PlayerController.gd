@@ -54,8 +54,10 @@ func _process(delta):
 #  - Se encuentra en modo Usuario 
 #  - Asigna los valores de objetivo y posicion actual
 func _input(event: InputEvent):
+	
+	var iniciado = get_parent().get_node("Maze").initiate
 
-	if !is_moving and !Videogame.move_enemy and Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO: 
+	if !is_moving and !Videogame.move_enemy and Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO and iniciado: 
 		if event.is_action_pressed("ui_right"):
 			player.target = Vector2(player.position.x + pixels_move, player.position.y)
 			asign_values()	
@@ -97,6 +99,7 @@ func actualizaPosicion(new_position: Vector2):
 	player.position = new_position
 	position = new_position
 	is_moving = false
+	force_update_transform()
 
 
 # Asigna el algoritmo de busqueda correspondiente

@@ -1,12 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cafaxt36dri1m"]
+[gd_scene load_steps=8 format=3 uid="uid://cafaxt36dri1m"]
 
 [ext_resource type="Script" path="res://Maze/Controller/UI/PantallaPrincipal.gd" id="1_831yr"]
 [ext_resource type="Texture2D" uid="uid://pck2gtyxs6fp" path="res://Resources/ImagenesTextures/initial-texture.jpg" id="2_qiq10"]
 [ext_resource type="Theme" uid="uid://p0br4mpvjifp" path="res://Resources/Edit_Textures/panel_apariencia.tres" id="3_4xcu5"]
-[ext_resource type="Texture2D" uid="uid://8xx3oo8scomu" path="res://Resources/Pixelart/Player.png" id="4_06x8k"]
 [ext_resource type="Theme" uid="uid://dpjj7oabgkofc" path="res://Resources/Edit_Textures/buttons.tres" id="5_nbxkg"]
 [ext_resource type="Theme" uid="uid://c114exd44o8sj" path="res://Resources/Edit_Textures/panel_apariencia_enemigo.tres" id="6_yud2d"]
-[ext_resource type="Texture2D" uid="uid://1xr187ux22cy" path="res://Resources/ImagenesTextures/Enemy.png" id="7_a6bao"]
 
 [sub_resource type="FontFile" id="FontFile_7txp5"]
 cache/0/16/0/ascent = 0.0
@@ -1428,7 +1426,6 @@ horizontal_alignment = 1
 [node name="Player" type="TextureRect" parent="Canvas/Panel/Margin/VBox/HBox/Jugador/Panel/VBox"]
 texture_filter = 1
 layout_mode = 2
-texture = ExtResource("4_06x8k")
 expand_mode = 4
 
 [node name="HSeparator4" type="HSeparator" parent="Canvas/Panel/Margin/VBox/HBox/Jugador/Panel/VBox"]
@@ -1501,7 +1498,6 @@ horizontal_alignment = 1
 [node name="Enemy" type="TextureRect" parent="Canvas/Panel/Margin/VBox/HBox/Enemigo/Panel/VBox"]
 texture_filter = 1
 layout_mode = 2
-texture = ExtResource("7_a6bao")
 expand_mode = 5
 
 [node name="HSeparator5" type="HSeparator" parent="Canvas/Panel/Margin/VBox/HBox/Enemigo/Panel/VBox"]

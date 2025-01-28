@@ -36,6 +36,7 @@ var ids = {
 
 # Inica los datos cuando se instancia por primera vez
 func _ready():
+	Videogame.setGameMusic()
 	await get_tree().create_timer(0.5).timeout
 
 
@@ -52,17 +53,11 @@ func setupData(level_data : Dictionary):
 	get_window().content_scale_size = maze.scale
 	header.size.x = maze.scale.x
 	
-	if Videogame.nivel == VideogameConstants.Nivel.ALEATORIO:
-		recreateMaze(level_data.map, level_data.scale)
-	createMap(maze.maze_size.x, maze.maze_size.y)
 
-	if Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
-		maze.jugador.setAlgorithm(Videogame.algoritmo_jugador, graph)
 	
 
 # Inicia las posiciones de los elementos
-func initConfigs(pos: Vector2):
-	Videogame.move_player = false
+func initPositions(pos: Vector2):
 	Videogame.move_enemy = false
 	maze.jugador.position = pos	
 	maze.jugador.player.position = pos	
@@ -74,6 +69,12 @@ func initConfigs(pos: Vector2):
 # Inicia los datos de configuracion, y en su defecto, recrea el mapa de tiles
 func initGame(level_data : Dictionary):
 	setupData(level_data)
+	if Videogame.nivel == VideogameConstants.Nivel.ALEATORIO:
+		recreateMaze(level_data.map, level_data.scale)
+	createMap(maze.maze_size.x, maze.maze_size.y)
+
+	if Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
+		maze.jugador.setAlgorithm(Videogame.algoritmo_jugador, graph)
 	nuevoJuego()
 
 		
@@ -85,17 +86,33 @@ func initGame(level_data : Dictionary):
 func nuevoJuego():
 	initiate = false
 	timeLabel.text = str(maze.time)
-	await get_tree().create_timer(5.0).timeout
-
+	
+	var init_time = $"../Layer/Time"
+	init_time.position = Vector2(maze.scale.x/2-25,maze.scale.y/2-75)
+	init_time.text = "5"
+	init_time.show()
+	
+	await get_tree().create_timer(1.0).timeout
+	maze.timer.start(6)
+	while maze.timer.time_left > 1:
+		init_time.text = str(int(maze.timer.time_left - 1))
+		await get_tree().create_timer(0.1).timeout
+		if maze.timer.time_left == 1:
+			maze.timer.stop()
+			
+	init_time.text = "¡YA!"	
+	await get_tree().create_timer(0.5).timeout
+		
+	init_time.hide()
 	winLabel.hide()
 	loseLabel.hide()
 	game.numero += 1
 	
-	initConfigs(maze.initial_player_position)
+	initPositions(maze.initial_player_position)
 
 	if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 		spawnEnemy(maze.initial_enemy_position)
-	maze.jugador.maze_finished = false
+	maze.jugador.player.maze_finished = false
 	
 	if game.estado != 1:
 		maze.timer.start(maze.time)
@@ -123,19 +140,14 @@ func gameProcess():
 	var scene = get_tree().get_current_scene()
 
 	# maze.timer.stop()
-
-	# Crear heuristica
-	if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-		heuristic = algorithm.createHeuristic(Videogame.maze_size.x, Videogame.maze_size.y, maze.enemigo.position)
-		algorithm.setEnemyHeuristic(heuristic)
-
-	if Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
-		heuristic = algorithm.createHeuristic(Videogame.maze_size.x, Videogame.maze_size.y)
-		algorithm.setPlayerHeuristic(heuristic)
+	createHeuristic(algorithm, heuristic)
+	deshabilitaConfiguracion()
 
 	if Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO and Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_SOLITARIO:
+		habilitaConfiguracion()
 		return
 
+	# Para modo usuario interactivo y enfrentandose al enemigo
 	elif Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO and Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 		await searchPath(algorithm, trayectory, scene)
 
@@ -144,7 +156,7 @@ func gameProcess():
 				await moveOneStep(algorithm)
 				Videogame.move_enemy = false
 				if Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.DIJKSTRA or Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.A_STAR:
-					var path_enemigo = await newSearch(Videogame.algoritmo_enemigo ,algorithm, heuristic, maze.enemigo.position, maze.jugador.position, maze.initial_coin_position)
+					var path_enemigo = await newSearch(Videogame.algoritmo_enemigo, algorithm, heuristic, maze.enemigo.position, maze.jugador.position)
 					if !path_enemigo.is_empty():
 						await maze.enemigo.setPath(maze.enemigo.position, maze.jugador.position, path_enemigo)
 			else:
@@ -159,42 +171,49 @@ func gameProcess():
 			if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 				if maze.enemigo.enemy.path.trayectoria.size() > 0:
 					await moveOneStep(algorithm)
-					var path_enemigo = await newSearch(Videogame.algoritmo_enemigo ,algorithm, heuristic, maze.enemigo.position, maze.jugador.position, maze.initial_coin_position)
+					Videogame.move_enemy = false
+					var path_enemigo = await newSearch(Videogame.algoritmo_enemigo, algorithm, heuristic, maze.enemigo.position, maze.jugador.position)
 					if !path_enemigo.is_empty():
 						await maze.enemigo.setPath(maze.enemigo.position, maze.jugador.position, path_enemigo)
 				else:
 					Videogame.move_enemy = false
-					break	
-			else:
-				await moveOneStep(algorithm)
+					await moveOneStepPlayer(algorithm)
+				 
 
-	# Para DFS y BFS con enemigo y modo interaccion
+	# Para DFS y BFS del enemigo y Dijkstra y A Estrella para jugador
 	elif Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.BFS or Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.DFS:		
 		await searchPath(algorithm, trayectory, scene)
-
 		algorithm.setValueIsPlayer(true)
 
 		while initiate:	
 			if maze.enemigo.enemy.path.trayectoria.size() > 0:
 				await moveOneStep(algorithm)
-				var path_jugador = await newSearch(Videogame.algoritmo_jugador,algorithm , heuristic, maze.jugador.position, maze.initial_coin_position, maze.enemigo.position)
+				var path_jugador = await newSearch(Videogame.algoritmo_jugador, algorithm, heuristic, maze.jugador.position, maze.initial_coin_position)
 				if !path_jugador.is_empty():
 					await maze.jugador.setPath(maze.jugador.position, maze.initial_coin_position, path_jugador)
 			else:
 				Videogame.move_enemy = false
 				break		
 
+	# Resto de casos, ambos tienen algoritmos dijkstra o a estrella
 	else:
 		while initiate:
 			await searchPath(algorithm, trayectory, scene)
 			await moveOneStep(algorithm) 
+			createHeuristic(algorithm, heuristic)
 
-			if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-				heuristic = algorithm.createHeuristic(Videogame.maze_size.x, Videogame.maze_size.y, maze.enemigo.position)
-				algorithm.setEnemyHeuristic(heuristic)
 
-			heuristic = algorithm.createHeuristic(Videogame.maze_size.x, Videogame.maze_size.y)
-			algorithm.setPlayerHeuristic(heuristic)
+func createHeuristic(algorithm: AlgorithmController, heuristic: Dictionary):
+	if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+		heuristic = algorithm.createHeuristic(maze.maze_size.x, maze.maze_size.y, maze.moneda.position)
+		algorithm.setEnemyHeuristic(heuristic)
+		heuristic = algorithm.createHeuristic(maze.maze_size.x, maze.maze_size.y, maze.enemigo.position)
+		algorithm.setPlayerHeuristic(heuristic)
+
+	elif Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
+		heuristic = algorithm.createHeuristic(maze.maze_size.x, maze.maze_size.y)
+		algorithm.setPlayerHeuristic(heuristic)
+
 
 
 # Busqueda del camino/trayectoria que conecta dos elementos
@@ -209,17 +228,14 @@ func searchPath(algorithm: AlgorithmController, trayectory: Array, scene):
 
 
 # Repite la busqueda del camino/trayectoria que conecta dos elementos cuando el algoritmo es A Estrella o Dijkstra
-func newSearch(algorithm_type: VideogameConstants.Algoritmo ,algorithm: AlgorithmController, heuristic: Dictionary, start_node: Vector2, end_node: Vector2, heuristic_position: Vector2):
+func newSearch(algorithm_type: VideogameConstants.Algoritmo, algorithm: AlgorithmController, heuristic: Dictionary, start_node: Vector2, end_node: Vector2):
 
 	var path = []
 	if algorithm_type == VideogameConstants.Algoritmo.DIJKSTRA:
-		heuristic = algorithm.createHeuristic(Videogame.maze_size.x, Videogame.maze_size.y, heuristic_position)
-		algorithm.setPlayerHeuristic(heuristic)
+		createHeuristic(algorithm, heuristic)
 		path = await algorithm.dijkstraSearch(start_node, end_node)
-	
 	elif algorithm_type == VideogameConstants.Algoritmo.A_STAR:
-		heuristic = algorithm.createHeuristic(Videogame.maze_size.x, Videogame.maze_size.y, heuristic_position)
-		algorithm.setPlayerHeuristic(heuristic)
+		createHeuristic(algorithm, heuristic)
 		path = await algorithm.aStarSearch(start_node, end_node, algorithm.heuristic_player)
 
 	return path
@@ -237,12 +253,18 @@ func moveOneStep(algorithm: AlgorithmController):
 			algorithm.setTilesPath([], maze.enemigo.enemy.path.trayectoria)
 			if Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO:
 				await maze.jugador.movement_finished
+
+	await moveOneStepPlayer(algorithm) 
+
+
+# Mueve un nodo para el jugador, esperando a completar el movimiento
+# 	- Borra los tiles que ha recorrido cada personaje
+func moveOneStepPlayer(algorithm: AlgorithmController):				
 	if maze.jugador.player.path.trayectoria.size() > 0:
 		maze.jugador.desplazarse()
 		algorithm.setTilesPath(maze.jugador.player.path.trayectoria, [])
 		await maze.jugador.movement_finished
 		
-
 
 # Inicia el temporizador desde un valor determinado
 func continueTimer(time: int):
@@ -261,10 +283,10 @@ func spawnEnemy(enemy_position: Vector2):
 	maze.enemigo.position = enemy_position
 	maze.enemigo.connect("eliminated", mostrarEliminado)
 	maze.jugador.enemy = maze.enemigo
-	maze.enemigo.enemy.maze_finished = false
 	get_parent().add_child(maze.enemigo)
+	maze.enemigo.maze_finished = false
 	maze.enemigo.setAlgorithm(Videogame.algoritmo_enemigo, graph)
-
+	
 
 # Muestra el resultado de victoria
 # 	- Aumenta en 1 el numero de victorias del jugador y actualiza la puntuacion
@@ -272,16 +294,17 @@ func spawnEnemy(enemy_position: Vector2):
 # 	- Espera 5 segundos hasta iniciar el siguiente juego
 func mostrarResultado():
 	initiate = false
+	habilitaConfiguracion()
 	win += 1
 	maze.timer.stop()
 
-	winLabel.position = Vector2(maze.scale.x/2-125,maze.scale.y/2-75)
+	winLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
 	winLabel.show()
 	maze.moneda.hide()
 	actualizaPuntuacion()
 	await get_tree().create_timer(2.0).timeout
 	if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-		maze.enemigo.enemy.maze_finished = true
+		maze.enemigo.maze_finished = true
 		maze.enemigo.enemy.queue_free() 
 	maze.jugador.player.maze_finished = true
 	await get_tree().create_timer(3.0).timeout
@@ -289,6 +312,7 @@ func mostrarResultado():
 	if game.numero < Videogame.juegos:
 		nuevoJuego()
 	else:
+		winLabel.hide()
 		finishLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
 		finishLabel.show()
 
@@ -300,11 +324,12 @@ func mostrarResultado():
 func mostrarEliminado():
 	initiate = false
 	maze.timer.stop()
+	habilitaConfiguracion()
 	maze.jugador.player.maze_finished = true
-	maze.enemigo.enemy.maze_finished = true
+	maze.enemigo.maze_finished = true
 
 	lose += 1
-	loseLabel.position = Vector2(maze.scale.x/2-125,maze.scale.y/2-75)
+	loseLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
 	loseLabel.show()
 
 	maze.enemigo.queue_free() 
@@ -315,6 +340,7 @@ func mostrarEliminado():
 	if game.numero < Videogame.juegos:
 		nuevoJuego()
 	else:
+		loseLabel.hide()
 		finishLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
 		finishLabel.show()
 
@@ -326,14 +352,15 @@ func mostrarEliminado():
 func _on_timer_timeout():
 	initiate = false
 	maze.timer.stop()
+	habilitaConfiguracion()
 	maze.jugador.player.maze_finished = true
 	lose += 1
 
 	if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-		maze.enemigo.enemy.maze_finished = true
+		maze.enemigo.maze_finished = true
 		maze.enemigo.queue_free()
 
-	timeExceedLabel.position = Vector2(maze.scale.x/2-125,maze.scale.y/2-75)
+	timeExceedLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
 	loseLabel.show()
 	actualizaPuntuacion()
 	await get_tree().create_timer(5.0).timeout
@@ -341,6 +368,7 @@ func _on_timer_timeout():
 	if game.numero < Videogame.juegos:
 		nuevoJuego()
 	else:
+		loseLabel.hide()
 		finishLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
 		finishLabel.show()
 		
@@ -349,6 +377,18 @@ func _on_timer_timeout():
 func actualizaPuntuacion():
 	var puntuation : Label  = $"../Layer/Header/Layer/Panel/Container/Result/Results/LabelResultado"	
 	puntuation.text = str(win) + "-" + str(lose)
+
+
+# Deshabilita el boton de configuración
+func deshabilitaConfiguracion():
+	var config = $"../Layer/Header/Layer/Panel/Container/Configuration"
+	config.disabled = true
+
+
+# Habilita el boton de configuración
+func habilitaConfiguracion():
+	var config = $"../Layer/Header/Layer/Panel/Container/Configuration"
+	config.disabled = false
 
 
 # Crea el array con los datos del laberinto (celdas con colision y sin colision)
@@ -393,7 +433,7 @@ func guardarPartida(nombre: String):
 	
 	var partida: Dictionary = {
 		"nombre": nombre,
-		"estado": maze.estado,
+		"estado": maze.match_state,
 		"resultado": str(win) + "," + str(lose),
 		"numero_juegos": Videogame.juegos,
 		"dificultad": Videogame.dificultad,
@@ -403,8 +443,8 @@ func guardarPartida(nombre: String):
 	}
 
 	var mapa: String = ""
-	for i in graph:
-		var node = tilemap.local_to_map(i)
+	for node in graph:
+		#var node = tilemap.local_to_map(i)
 		mapa += str(node.x) + "," + str(node.y) + ";"
 
 	var nivel: Dictionary = {
@@ -468,16 +508,20 @@ func guardarPartida(nombre: String):
 func continuarPartida(partida : Dictionary, jugador: Dictionary, juego: Dictionary, level_data: Dictionary, 
 		enemigo: Dictionary, camino_jugador: Dictionary, camino_enemigo: Dictionary):
 
-	setIds(partida, jugador, enemigo, juego, level_data, camino_jugador, camino_enemigo)		
-
+	setIds(partida, jugador, enemigo, juego, level_data, camino_jugador, camino_enemigo)
 	setupData(level_data)
+	if Videogame.nivel == VideogameConstants.Nivel.ALEATORIO:
+		recreateMap(level_data.map, maze.maze_size.x, maze.maze_size.y, level_data.scale)
+	createMap(maze.maze_size.x, maze.maze_size.y)
+
+	if Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
+		maze.jugador.setAlgorithm(Videogame.algoritmo_jugador, graph)
 	initiate = false
-	Videogame.move_player = false
 	Videogame.move_enemy = false
 	
 	var jugador_position = jugador["posicion"].split(",")
 	jugador_position = Vector2(int(jugador_position[0]), int(jugador_position[1]))
-	initConfigs(jugador_position)
+	initPositions(jugador_position)
 
 	if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 		var enemy_position = enemigo["posicion"].split(",")
@@ -514,7 +558,7 @@ func continuarPartida(partida : Dictionary, jugador: Dictionary, juego: Dictiona
 	lose = int(resultado[1])
 	actualizaPuntuacion()
 	
-	maze.estado = VideogameConstants.EstadoPartida.EN_CURSO
+	maze.match_state = VideogameConstants.EstadoPartida.EN_CURSO
 	game.estado = VideogameConstants.EstadoJuego.EN_CURSO
 	game.tiempo_restante = juego["tiempo_restante"]
 	timeLabel.text = str(game.tiempo_restante)
@@ -522,6 +566,41 @@ func continuarPartida(partida : Dictionary, jugador: Dictionary, juego: Dictiona
 	if game.estado != 1:
 		maze.timer.start(game.tiempo_restante)
 		gameProcess()
+
+
+# Guarda la configuracion modificada
+func guardarConfiguracion(modo_interaccion, modo_juego, jugador, enemigo):
+	if modo_juego == 0:
+		Videogame.modo_juego = VideogameConstants.ModoJuego.MODO_SOLITARIO
+	else:
+		Videogame.modo_juego = VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO
+		
+	if modo_interaccion == 0:
+		Videogame.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_USUARIO
+	else:
+		Videogame.modo_interaccion = VideogameConstants.ModoInteraccion.MODO_SIMULACION
+	
+	if jugador == 0:
+		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.BFS
+	elif jugador == 1:
+		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.DFS
+	elif jugador == 2:
+		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.DIJKSTRA
+	elif jugador == 3:
+		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.A_STAR
+	elif jugador == -1:
+		Videogame.algoritmo_jugador = VideogameConstants.Algoritmo.EMPTY	
+		
+	if enemigo == 0:
+		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.BFS
+	elif enemigo == 1:
+		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.DFS
+	elif enemigo == 2:
+		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.DIJKSTRA
+	elif enemigo == 3:
+		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.A_STAR
+	elif enemigo == -1:
+		Videogame.algoritmo_enemigo = VideogameConstants.Algoritmo.EMPTY
 
 
 # Asigna los ids de la partida recuperada para su guardado posterior
@@ -541,11 +620,43 @@ func setIds(partida: Dictionary, jugador: Dictionary,  enemigo: Dictionary, jueg
 		ids["id_camino_enemigo"] = camino_enemigo["id_camino"]
 
 
+
+# Recrea el mapa de la cadena de texto almacenada
+func recreateMap(maze_map: String, xSize: int, ySize: int, scale_size: Vector2):
+	var mapa: Array = [] 
+	var pares = maze_map.split(";")
+	for par in pares:
+		if par != "":
+			var coordenadas = par.split(",")
+			var x = int(coordenadas[0])
+			var y = int(coordenadas[1])
+			mapa.append(Vector2(x, y))  
+			
+	for y in range(2,  ySize/pixels_move + 2):
+		for x in range(2,  xSize/pixels_move + 2):
+			var node = Vector2(y,x)
+			if node not in mapa:
+				var atlas_coords = Vector2(0, 0)
+				if x == 2 or x == xSize/pixels_move + 1 or y == 2 or y == ySize/pixels_move + 1:
+					tilemap.set_cell(0, node, 1, atlas_coords)
+				else:
+					tilemap.set_cell(0, node, 3, atlas_coords)
+	
+	for node in mapa:
+		var cell = tilemap.local_to_map(node)
+		var atlas_coords = Vector2(0, 0)
+		tilemap.set_cell(0, cell, 0, atlas_coords)
+		
+	$"../TextureRect".custom_minimum_size = scale_size
+
+
 # Recrea el mapa basandose en los id de los tiles del mapa creado
 func recreateMaze(maze_map: Dictionary, scale_size: Vector2):
 	for node in maze_map:
 		var cell = tilemap.local_to_map(node)
-		var atlas_coords = Vector2i(0, 0)
+		var atlas_coords = Vector2(0, 0)
 		tilemap.set_cell(0, cell, maze_map[node], atlas_coords)
+		
+	
 
 	$"../TextureRect".custom_minimum_size = scale_size

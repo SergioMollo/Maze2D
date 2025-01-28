@@ -11,7 +11,7 @@ func _ready():
 
 # Guarda los datos relevantes de la partida, asignando un nombre establecido por el usuario
 func _on_guardar_pressed():
-	maze_instance.maze.estado = VideogameConstants.EstadoPartida.GUARDADA
+	maze_instance.maze.match_state = VideogameConstants.EstadoPartida.GUARDADA
 	maze_instance.game.estado = VideogameConstants.EstadoJuego.EN_PAUSA
 	maze_instance.guardarPartida(nombre.text)
 	queue_free()

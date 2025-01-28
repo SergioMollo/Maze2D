@@ -28,18 +28,18 @@ func _on_left_pressed():
 	if Videogame.selection == "player":
 		if index == 0:
 			index = player_textures.size()-1
-			texture = load("res://Resources/PixelArt/" + player_textures[index])
+			texture = load("res://Resources/Pixelart/" + player_textures[index])
 		else:
 			index -= 1
-			texture = load("res://Resources/PixelArt/" + player_textures[index])
+			texture = load("res://Resources/Pixelart/" + player_textures[index])
 	elif Videogame.selection == "enemy":
 		if index == 0:
 			index = enemy_textures.size()-1
-			texture = load("res://Resources/PixelArt/" + enemy_textures[index])
+			texture = load("res://Resources/Pixelart/" + enemy_textures[index])
 			
 		else:
 			index -= 1
-			texture = load("res://Resources/PixelArt/" + enemy_textures[index])
+			texture = load("res://Resources/Pixelart/" + enemy_textures[index])
 	
 	imagen.texture = texture
 
@@ -51,17 +51,17 @@ func _on_rigth_pressed():
 	if Videogame.selection == "player":
 		if index == player_textures.size()-1:
 			index = 0
-			texture = load("res://Resources/PixelArt/" + player_textures[index])			
+			texture = load("res://Resources/Pixelart/" + player_textures[index])			
 		else:
 			index += 1
-			texture = load("res://Resources/PixelArt/" + player_textures[index])
+			texture = load("res://Resources/Pixelart/" + player_textures[index])
 	elif Videogame.selection == "enemy":
 		if index == enemy_textures.size()-1:
 			index = 0
-			texture = load("res://Resources/PixelArt/" + enemy_textures[index])
+			texture = load("res://Resources/Pixelart/" + enemy_textures[index])
 		else:
 			index += 1
-			texture = load("res://Resources/PixelArt/" + enemy_textures[index])
+			texture = load("res://Resources/Pixelart/" + enemy_textures[index])
 	
 	imagen.texture = texture
 	

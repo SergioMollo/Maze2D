@@ -6,12 +6,11 @@ const color_blue = Color(0,0,1)
 
 var initial_resolution: Vector2 = Vector2(1920,1080)
 
-var player_texture = "res://Resources/PixelArt/player1.png"
-var enemy_texture = "res://Resources/PixelArt/enemy1.png"
+var player_texture = "res://Resources/Pixelart/player1.png"
+var enemy_texture = "res://Resources/Pixelart/enemy1.png"
 
 var selection = ""
 
-var move_player = false
 var move_enemy = false
 
 var nivel: VideogameConstants.Nivel
@@ -22,9 +21,9 @@ var algoritmo_jugador: VideogameConstants.Algoritmo
 var algoritmo_enemigo: VideogameConstants.Algoritmo
 var juegos: int
 
-var maze_size: Vector2i = Vector2i(0,0)
-
 var usuario: User
+var music_player: AudioStreamPlayer
+var nombre_partida: String = ""
 
 signal set_text_info(message: String, color: Color)
 signal save_completed
@@ -32,22 +31,45 @@ signal save_completed
 
 # Inica los datos cuando se instancia por primera vez
 func _ready():
-	pass
+	music_player = AudioStreamPlayer.new()
+	add_child(music_player)
+	music_player.stream = preload("res://Resources/Music/PianoMusic.wav")  
+	configureMusic()
+
+
+# Detiene la musica
+func stopMusic():
+	music_player.stop()
+	
+
+# Configura el volumen de la musica y la inicia
+func configureMusic():
+	music_player.volume_db = -10 
+	music_player.autoplay = true  
+	music_player.play()
+
+# Establece la pista de musica principal
+func setPrincipalMusic():
+	music_player.stream = preload("res://Resources/Music/PianoMusic.wav")
+	configureMusic()
+
+
+# Establece la pista de musica del juego
+func setGameMusic():
+	music_player.stream = preload("res://Resources/Music/PixelMusic.wav")
+	configureMusic()
 
 
 # Inicia sesion con el usuario y contraseña introducidos
 # 	- Comprueba que las credenciales sean correctas
-func login(user_email: String, user_password: String):
+func login(user_nickname: String, user_password: String):
 
 	var database_api = Database.new()
 	database_api.initDatabase()
-	var result = database_api.getUser(user_email)
+	var result = database_api.getUser(user_nickname)
 
 	if !result.is_empty() and result["password"] == user_password:
-		usuario = User.new()	
-		usuario.setEmail(result["email"])
-		usuario.setPassword(result["password"])
-		usuario.setNombre(result["nombre"])
+		usuario = User.new(result["nombre"], result["user"], result["password"])	
 		loginSucceeded()
 	else:
 		loginFailed()
@@ -56,18 +78,18 @@ func login(user_email: String, user_password: String):
 
 
 # Crea un usuario y contraseña
-# 	- Comprueba que el email no exista
-func signUp(user_email: String, user_password: String, user_name: String):
+# 	- Comprueba que el user no exista
+func signUp(user_nickname: String, user_password: String, user_name: String):
 
 	var database_api = Database.new()
 	database_api.initDatabase()
-	var result = database_api.getUser(user_email)
+	var result = database_api.getUser(user_nickname)
 
 	if result.is_empty():
 
 		var user: Dictionary = {
 			"nombre": user_name,
-			"email": user_email,
+			"user": user_nickname,
 			"password": user_password
 		}
 
@@ -115,7 +137,7 @@ func guardarPartida(partida: Dictionary, level_data: Dictionary, jugador: Dictio
 	var database_api = Database.new()
 	database_api.initDatabase()
 
-	if ids["id_partida"] == -1:
+	if !compruebaPartidaGuardada(ids):
 		database_api.addResource("juego", juego)
 		partida["id_juego"] = database_api.getLastInsertId()
 		database_api.addResource("nivel", level_data)
@@ -134,7 +156,7 @@ func guardarPartida(partida: Dictionary, level_data: Dictionary, jugador: Dictio
 			database_api.addResource("enemigo", enemigo)
 			partida["id_enemigo"] = database_api.getLastInsertId()
 		
-		partida["email_usuario"] = usuario.getEmail()
+		partida["user"] = usuario.getUser()
 		database_api.addResource("partida", partida)
 
 	else:
@@ -154,13 +176,22 @@ func guardarPartida(partida: Dictionary, level_data: Dictionary, jugador: Dictio
 	emit_signal("save_completed")
 
 
+# Comprueba si la partida ha sido guardada anteriormente
+# 	- Comprueba que el id de la partida sea un numero positivo
+func compruebaPartidaGuardada(ids: Dictionary):
+	if ids["id_partida"] == -1:
+		return false
+	else: 
+		return true
+
+
 # Carga las partidas guardadas por un usuario
 # 	- Obtiene las partidas del usuario con la sesion iniciada para mostrarlas en la lista
 func cargarPartidasGuardadas():
 	var database_api = Database.new()
 	database_api.initDatabase()
-	var enCurso = database_api.getPartidasEnCurso(usuario.getEmail())
-	var finalizadas = database_api.getPartidasFinalizadas(usuario.getEmail())
+	var enCurso = database_api.getPartidasEnCurso(usuario.getUser())
+	var finalizadas = database_api.getPartidasFinalizadas(usuario.getUser())
 	database_api.closeDatabase()
 	return [enCurso, finalizadas]
 	

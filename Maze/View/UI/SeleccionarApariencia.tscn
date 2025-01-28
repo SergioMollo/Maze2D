@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://buj4aqstdtxro"]
+[gd_scene load_steps=24 format=3 uid="uid://buj4aqstdtxro"]
 
 [ext_resource type="Script" path="res://Maze/Controller/UI/SeleccionarApariencia.gd" id="1_tuwol"]
 [ext_resource type="Texture2D" uid="uid://babog7m3qbbqj" path="res://Resources/ImagenesTextures/seleccionar-apariencia-texture.jpg" id="2_tbh4h"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://tr8xkxfete8h" path="res://Resources/Pixelart/arrow_rigth_hover.png" id="8_jkxtk"]
 [ext_resource type="Texture2D" uid="uid://cadevp6xkcygb" path="res://Resources/Pixelart/arrow_rigth_focus.png" id="9_dwfd5"]
 [ext_resource type="Texture2D" uid="uid://diytq37w3a8fe" path="res://Resources/Inkscape/PanelInformacion.svg" id="10_dksnx"]
-[ext_resource type="Texture2D" uid="uid://mc08adn3lorq" path="res://Resources/ImagenesTextures/Player.png" id="11_fneg6"]
 [ext_resource type="Theme" uid="uid://dpjj7oabgkofc" path="res://Resources/Edit_Textures/buttons.tres" id="12_38jhi"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wyph4"]
@@ -163,7 +162,6 @@ offset_right = 375.0
 offset_bottom = 375.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("11_fneg6")
 
 [node name="Seleccionar" type="Button" parent="."]
 layout_mode = 0

@@ -64,12 +64,9 @@ func createGame():
 # 	- Carga la partida con la configuracion recuperada
 func asignValues(partida: Dictionary, jugador: Dictionary, juego: Dictionary, nivel: Dictionary, 
 	enemigo: Dictionary = {}, camino_jugador: Dictionary = {}, camino_enemigo: Dictionary = {}):
-
-	for key in level_data.keys():
-		if nivel.has(key):
-			level_data[key] = nivel[key]
-		
-	maze_controller.continuarPartida(partida, jugador, juego, level_data, enemigo, camino_jugador, camino_enemigo)
+			
+	nivel["time"] = juego["tiempo_restante"]
+	maze_controller.continuarPartida(partida, jugador, juego, nivel, enemigo, camino_jugador, camino_enemigo)
 
 
 # Genera un mapa aleatorio asegurando la conexion entre el jugador y la moneda, y el jugador y el enemigo (en su defecto)
@@ -79,7 +76,7 @@ func generateAleatoryMap(pos_player: Vector2, pos_coin: Vector2, pos_enemy: Vect
 	var graph = {}
 	var maze_map = []
 	var map = {}
-	var values = [0, 2]
+	var values = [0, 3]
 	var conexion_coin = []
 	var conexion_enemy = []
 	var algorithm = AlgorithmController.new()
