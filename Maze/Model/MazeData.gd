@@ -2,26 +2,24 @@ extends Node
 
 class_name Maze
 
-var xSize
-var ySize
-var map = []
-var result = []
-var graph = {}
+var nombre_partida: String = ""
 
-var player: CharacterBody2D
-var enemy: CharacterBody2D
+var jugador: CharacterBody2D
+var enemigo: CharacterBody2D
 var moneda: Area2D
 var tilemap: Node2D
-var scale: Vector2i
 
+var maze_size: Vector2i
+var scale: Vector2i
 var initial_player_position: Vector2
 var initial_enemy_position: Vector2
 var initial_coin_position: Vector2
 
-var timer : Timer
+var level_data: Dictionary
 
-
-# var panel_informacion: InformationPanel
+var timer: Timer
+var time: int
+var match_state: VideogameConstants.EstadoPartida
 
 
 # Called when the node enters the scene tree for the first time.
@@ -29,22 +27,18 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-func initialize_data(level_data, player_ref, coin_ref, timer_ref, tilemap_ref):
-	xSize = level_data.xSize
-	ySize = level_data.ySize
-	map = level_data.map
-	result = level_data.result
-	graph = level_data.graph
-	scale = level_data.scale
-	initial_player_position = level_data.initial_player_position
-	initial_enemy_position = level_data.initial_enemy_position
-	initial_coin_position = level_data.initial_coin_position
-	player = player_ref
+# Asigna los valores de configuracion del laberitno
+func _init(level: Dictionary, player_ref: CharacterBody2D, coin_ref: Area2D, timer_ref: Timer, tilemap_ref: TileMap):
+	
+	level_data = level
+	maze_size = level.maze_size
+	scale = level.scale
+	initial_player_position = level.initial_player_position
+	initial_enemy_position = level.initial_enemy_position
+	initial_coin_position = level.initial_coin_position
+	
+	jugador = player_ref
 	moneda = coin_ref
 	timer = timer_ref
 	tilemap = tilemap_ref
-	
+	time = level_data.time

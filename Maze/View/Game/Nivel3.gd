@@ -5,16 +5,30 @@ class_name Nivel3
 @onready var maze_controller: Node2D = $Maze
 
 var level_data = {
-	"xSize" : 1600,
-	"ySize" : 800,
-	"map" : [],
-	"result" : [],
-	"graph" : {},
-	"scale": Vector2i(1728, 864),
+	"maze_size": Vector2i(1600,800),
+	"scale": Vector2i(1728, 928),
 	"initial_player_position": Vector2(112,304),
 	"initial_enemy_position": Vector2(880,464),
-	"initial_coin_position": Vector2(1360,176)
+	"initial_coin_position": Vector2(1360,176),
+	"time": 180
 }
 
-func _ready():
-	maze_controller.setup(level_data)
+func _ready():	
+	pass
+	
+	
+	
+func createGame():
+	maze_controller.initGame(level_data)
+
+
+# Asigna los valores de la partida cargada
+# 	- Carga la partida con la configuracion recuperada
+func asignValues(partida: Dictionary, jugador: Dictionary, juego: Dictionary, nivel: Dictionary, 
+	enemigo: Dictionary = {}, camino_jugador: Dictionary = {}, camino_enemigo: Dictionary = {}):
+
+	for key in level_data.keys():
+		if nivel.has(key):
+			level_data[key] = nivel[key]
+		
+	maze_controller.continuarPartida(partida, jugador, juego, level_data, enemigo, camino_jugador, camino_enemigo)

@@ -9,8 +9,8 @@ anchors_preset = 0
 pivot_offset = Vector2(225, 150)
 script = ExtResource("1_v7x7n")
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(450, 300)
+[node name="Panel" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(450, 250)
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -20,128 +20,155 @@ anchor_bottom = 0.5
 offset_left = -225.0
 offset_top = -150.0
 offset_right = 225.0
-offset_bottom = 150.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_bmmjp")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBox" type="VBoxContainer" parent="Panel"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Margin" type="MarginContainer" parent="Panel/VBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="Panel/VBox/Margin"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Panel/VBox/Margin/VBox"]
 layout_mode = 2
 text = "Cambiar Configuración"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Panel/VBox/Margin/VBox"]
 layout_mode = 2
 
-[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Margin2" type="MarginContainer" parent="Panel/VBox"]
 layout_mode = 2
 theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer3"]
+[node name="VBox" type="VBoxContainer" parent="Panel/VBox/Margin2"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer"]
+[node name="HBox" type="HBoxContainer" parent="Panel/VBox/Margin2/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ModoJuego" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer"]
+[node name="ModoJuego" type="Label" parent="Panel/VBox/Margin2/VBox/HBox"]
 layout_mode = 2
 text = "Modo de Interacción:"
 
-[node name="JuegoOption" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer"]
+[node name="InteraccionOption" type="OptionButton" parent="Panel/VBox/Margin2/VBox/HBox"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Usuario"
-popup/item_0/id = 0
-popup/item_1/text = "Computadora"
+popup/item_1/text = "Simulacion"
 popup/item_1/id = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer"]
+[node name="HBox2" type="HBoxContainer" parent="Panel/VBox/Margin2/VBox"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ModoJuego" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer2"]
+[node name="ModoJuego" type="Label" parent="Panel/VBox/Margin2/VBox/HBox2"]
+layout_mode = 2
+text = "Algoritmo Jugador:"
+
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBox/Margin2/VBox/HBox2"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="AlgotirmoOption" type="OptionButton" parent="Panel/VBox/Margin2/VBox/HBox2"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+item_count = 4
+popup/item_0/text = "Anchura"
+popup/item_1/text = "Profundidad"
+popup/item_1/id = 1
+popup/item_2/text = "Dijkstra"
+popup/item_2/id = 2
+popup/item_3/text = "A Estrella"
+popup/item_3/id = 3
+
+[node name="HBox3" type="HBoxContainer" parent="Panel/VBox/Margin2/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ModoJuego" type="Label" parent="Panel/VBox/Margin2/VBox/HBox3"]
 layout_mode = 2
 text = "Modo de Juego:"
 
-[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer2"]
+[node name="HSeparator" type="HSeparator" parent="Panel/VBox/Margin2/VBox/HBox3"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 
-[node name="JuegoOption" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer2"]
+[node name="JuegoOption" type="OptionButton" parent="Panel/VBox/Margin2/VBox/HBox3"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-item_count = 2
 selected = 0
+item_count = 2
 popup/item_0/text = "Solitario"
-popup/item_0/id = 0
 popup/item_1/text = "Enfrentamiento"
 popup/item_1/id = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer"]
+[node name="HBox4" type="HBoxContainer" parent="Panel/VBox/Margin2/VBox"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="ModoJuego" type="Label" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer3"]
+[node name="ModoJuego" type="Label" parent="Panel/VBox/Margin2/VBox/HBox4"]
 layout_mode = 2
-text = "Algoritmo:"
+text = "Algoritmo Enemigo:"
 
-[node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer3"]
+[node name="HSeparator2" type="HSeparator" parent="Panel/VBox/Margin2/VBox/HBox4"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(75, 0)
+custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 
-[node name="AlgotirmoOption" type="OptionButton" parent="PanelContainer/VBoxContainer/MarginContainer3/VBoxContainer/HBoxContainer3"]
+[node name="AlgotirmoOption" type="OptionButton" parent="Panel/VBox/Margin2/VBox/HBox4"]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 item_count = 4
-selected = 0
-popup/item_0/text = "BFS"
-popup/item_0/id = 0
-popup/item_1/text = "DFS"
+popup/item_0/text = "Anchura"
+popup/item_1/text = "Profundidad"
 popup/item_1/id = 1
 popup/item_2/text = "Dijkstra"
 popup/item_2/id = 2
-popup/item_3/text = "A star"
+popup/item_3/text = "A Estrella"
 popup/item_3/id = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+[node name="Margin3" type="MarginContainer" parent="Panel/VBox"]
 layout_mode = 2
+size_flags_vertical = 8
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/MarginContainer2"]
+[node name="HBox" type="HBoxContainer" parent="Panel/VBox/Margin3"]
 layout_mode = 2
 size_flags_horizontal = 8
+size_flags_vertical = 8
 
-[node name="Guardar" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="Guardar" type="Button" parent="Panel/VBox/Margin3/HBox"]
 layout_mode = 2
-text = "Guardar"
+text = "Confirmar"
 
-[node name="Cancelar" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer"]
+[node name="Cancelar" type="Button" parent="Panel/VBox/Margin3/HBox"]
 layout_mode = 2
 text = "Cancelar"
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer/Guardar" to="." method="_on_guardar_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer2/HBoxContainer/Cancelar" to="." method="_on_cancelar_pressed"]
+[connection signal="item_selected" from="Panel/VBox/Margin2/VBox/HBox/InteraccionOption" to="." method="_on_interaccion_option_item_selected"]
+[connection signal="item_selected" from="Panel/VBox/Margin2/VBox/HBox3/JuegoOption" to="." method="_on_juego_option_item_selected"]
+[connection signal="pressed" from="Panel/VBox/Margin3/HBox/Guardar" to="." method="_on_guardar_pressed"]
+[connection signal="pressed" from="Panel/VBox/Margin3/HBox/Cancelar" to="." method="_on_cancelar_pressed"]

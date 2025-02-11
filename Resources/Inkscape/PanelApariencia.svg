@@ -24,22 +24,22 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="px"
-     inkscape:zoom="1.2727922"
-     inkscape:cx="828.49345"
-     inkscape:cy="755.42575"
-     inkscape:window-width="2400"
-     inkscape:window-height="1261"
-     inkscape:window-x="-9"
+     inkscape:zoom="0.6363961"
+     inkscape:cx="701.60706"
+     inkscape:cy="563.3284"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="2391"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g133" />
+     inkscape:current-layer="layer1" />
   <defs
      id="defs1">
     <linearGradient
        id="swatch53"
        inkscape:swatch="solid">
       <stop
-         style="stop-color:#fa8124;stop-opacity:1;"
+         style="stop-color:#ed8026;stop-opacity:1;"
          offset="0"
          id="stop53" />
     </linearGradient>
@@ -47,7 +47,7 @@
        id="swatch52"
        inkscape:swatch="solid">
       <stop
-         style="stop-color:#fa9241;stop-opacity:1;"
+         style="stop-color:#f6a851;stop-opacity:1;"
          offset="0"
          id="stop52" />
     </linearGradient>
@@ -79,7 +79,7 @@
        id="swatch1"
        inkscape:swatch="solid">
       <stop
-         style="stop-color:#7a6a5d;stop-opacity:1;"
+         style="stop-color:#ae7988;stop-opacity:1;"
          offset="0"
          id="stop1" />
     </linearGradient>
@@ -289,7 +289,7 @@
          id="g60"
          inkscape:label="Panel">
         <rect
-           style="opacity:1;fill:#7a615d;fill-opacity:1;stroke:#ffffff;stroke-width:0.25;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter64)"
+           style="opacity:1;fill:#ae7988;fill-opacity:1;stroke:#ffffff;stroke-width:0.25;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter64)"
            id="rect63"
            width="118.47453"
            height="3.2337964"
@@ -413,7 +413,7 @@
         </g>
       </g>
       <path
-         style="fill:#4182fa;fill-opacity:0.8;stroke-width:0.292848;stroke-dasharray:none"
+         style="fill:#4b8d98;fill-opacity:0.80000001;stroke-width:0.292848;stroke-dasharray:none"
          d="M 60.854166,59.531249 H 177.27083 v 61.212531 l -7.34953,3.7697 7.34953,1.61557 v 21.90009 l -10.80786,0.71804 10.80786,2.1541 c -5.72843,54.88532 -4.46131,51.60312 0,48.94387 0,0 -43.27649,-4.57838 -64.9699,-4.42564 -18.959779,0.13348 -56.738431,4.66723 -56.738431,4.66723 0,0 5.06268,-57.17783 4.115739,-85.80526 -0.398926,-12.06015 -4.115739,-35.859389 -4.115739,-35.859389 z"
          id="path97"
          sodipodi:nodetypes="cccccccccacacc"
@@ -423,7 +423,7 @@
          inkscape:label="Personaje"
          transform="translate(9.1134259,0.29398148)">
         <path
-           style="fill:#c2fa41;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-dasharray:none;stroke-opacity:1"
+           style="fill:#aaed26;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-dasharray:none;stroke-opacity:1"
            d="m 77,47.095833 h 70.10833 L 143,62 H 81 Z"
            id="path94"
            sodipodi:nodetypes="ccccc"
@@ -471,7 +471,7 @@
       <g
          id="g59"
          inkscape:label="Chincheta"
-         transform="matrix(0.35955446,0,0,0.34186042,55.713997,171.43641)">
+         transform="matrix(0.35955446,0,0,0.34186042,55.713997,188.89802)">
         <ellipse
            style="opacity:1;fill:#4d5046;fill-opacity:1;stroke:none;stroke-width:0.272267;stroke-dasharray:none;filter:url(#filter56)"
            id="ellipse57"
@@ -498,13 +498,13 @@
     </g>
     <g
        id="g141"
-       inkscape:label="Jugador"
+       inkscape:label="Enemigo"
        transform="translate(139.2807,7.2277659)">
       <g
          id="g131"
          inkscape:label="Panel">
         <rect
-           style="opacity:1;fill:#7a615d;fill-opacity:1;stroke:#ffffff;stroke-width:0.25;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter64)"
+           style="opacity:1;fill:#ae7988;fill-opacity:1;stroke:#ffffff;stroke-width:0.25;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter64)"
            id="rect114"
            width="118.47453"
            height="3.2337964"
@@ -512,7 +512,7 @@
            y="48.065971"
            transform="matrix(0.99969683,0,0,1.3083613,0.03507165,-15.259391)" />
         <path
-           style="mix-blend-mode:normal;fill:#7a615d;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:butt;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;paint-order:normal;filter:url(#filter20)"
+           style="mix-blend-mode:normal;fill:#ae7988;fill-opacity:1;stroke:#000000;stroke-width:0.25;stroke-linecap:butt;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;paint-order:normal;filter:url(#filter20)"
            d="m 56.736808,53.124117 c 0,0 72.301142,45.159224 118.087152,-3.441683 z"
            id="path114"
            sodipodi:nodetypes="ccc"
@@ -628,7 +628,7 @@
         </g>
       </g>
       <path
-         style="fill:#4182fa;fill-opacity:0.8;stroke-width:0.292633;stroke-dasharray:none"
+         style="fill:#4b8d98;fill-opacity:0.80000001;stroke-width:0.292633;stroke-dasharray:none"
          d="M 60.854166,59.531249 H 177.27083 v 61.122631 l -7.34953,3.76416 7.34953,1.6132 v 21.86792 l -10.80786,0.71699 10.80786,2.15093 c -5.72843,54.80471 -4.46131,51.52733 0,48.87198 0,0 -43.27649,-4.57165 -64.9699,-4.41914 -18.959779,0.13329 -56.738431,4.66038 -56.738431,4.66038 0,0 5.06268,-57.09385 4.115739,-85.67924 -0.398926,-12.04243 -4.115739,-35.806715 -4.115739,-35.806715 z"
          id="path131"
          sodipodi:nodetypes="cccccccccacacc"
@@ -686,7 +686,7 @@
       <g
          id="g140"
          inkscape:label="Chincheta"
-         transform="matrix(0.35955446,0,0,0.34186042,55.713997,171.43641)">
+         transform="matrix(0.35955446,0,0,0.34186042,56.12975,190.56103)">
         <ellipse
            style="opacity:1;fill:#4d5046;fill-opacity:1;stroke:none;stroke-width:0.272267;stroke-dasharray:none;filter:url(#filter56)"
            id="ellipse138"
@@ -713,16 +713,17 @@
     </g>
     <g
        id="g146"
-       inkscape:label="SeleccionButtonHover">
+       inkscape:label="SeleccionButtonHover"
+       style="fill:#616e48;fill-opacity:1">
       <path
-         style="opacity:1;fill:#74854c;fill-opacity:1;stroke:none;filter:url(#filter146)"
+         style="opacity:1;fill:#616e48;fill-opacity:1;stroke:none;filter:url(#filter146)"
          d="m 227.9306,173.57672 c 0,0 30.84536,-3.32602 79.90417,0.20787 4.15197,0.29908 -1.05834,12.80352 -1.05834,12.80352 0,0 -81.92637,-1.5496 -82.55,0.52916 -0.62363,2.07877 3.70417,-13.54055 3.70417,-13.54055 z"
          id="path144"
          sodipodi:nodetypes="cscsc"
          inkscape:label="SeleccionSombra"
          transform="translate(-10.310245,90.881628)" />
       <path
-         style="opacity:1;fill:#5c693c;fill-opacity:1;stroke:#c2fa41;stroke-width:0.25;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter145)"
+         style="opacity:1;fill:#616e48;fill-opacity:1;stroke:#c2fa41;stroke-width:0.25;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter145)"
          d="m 225.64396,175.65548 c 0,0 30.84536,-3.32602 79.90417,0.20787 4.15197,0.29908 -1.05834,12.80352 -1.05834,12.80352 0,0 -81.92637,-1.5496 -82.55,0.52916 -0.62363,2.07877 3.70417,-13.54055 3.70417,-13.54055 z"
          id="path145"
          sodipodi:nodetypes="cscsc"
@@ -732,7 +733,8 @@
     <g
        id="g143"
        inkscape:label="SeleccionBoton"
-       transform="translate(-10.310245,90.881628)">
+       transform="translate(-10.310245,90.881628)"
+       style="fill:#91a562;fill-opacity:1">
       <path
          style="opacity:1;fill:#91a562;fill-opacity:1;stroke:none;filter:url(#filter23)"
          d="m 74.517888,174.6161 c 0,0 30.845362,-3.32602 79.904172,0.20787 4.15197,0.29908 -1.05834,12.80352 -1.05834,12.80352 0,0 -81.926367,-1.5496 -82.549998,0.52916 -0.623628,2.07877 3.704166,-13.54055 3.704166,-13.54055 z"

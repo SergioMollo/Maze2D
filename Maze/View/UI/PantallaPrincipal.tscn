@@ -1,12 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cafaxt36dri1m"]
+[gd_scene load_steps=8 format=3 uid="uid://cafaxt36dri1m"]
 
 [ext_resource type="Script" path="res://Maze/Controller/UI/PantallaPrincipal.gd" id="1_831yr"]
 [ext_resource type="Texture2D" uid="uid://pck2gtyxs6fp" path="res://Resources/ImagenesTextures/initial-texture.jpg" id="2_qiq10"]
 [ext_resource type="Theme" uid="uid://p0br4mpvjifp" path="res://Resources/Edit_Textures/panel_apariencia.tres" id="3_4xcu5"]
-[ext_resource type="Texture2D" uid="uid://8xx3oo8scomu" path="res://Resources/Pixelart/Player.png" id="4_06x8k"]
 [ext_resource type="Theme" uid="uid://dpjj7oabgkofc" path="res://Resources/Edit_Textures/buttons.tres" id="5_nbxkg"]
 [ext_resource type="Theme" uid="uid://c114exd44o8sj" path="res://Resources/Edit_Textures/panel_apariencia_enemigo.tres" id="6_yud2d"]
-[ext_resource type="Texture2D" uid="uid://1xr187ux22cy" path="res://Resources/ImagenesTextures/Enemy.png" id="7_a6bao"]
 
 [sub_resource type="FontFile" id="FontFile_7txp5"]
 cache/0/16/0/ascent = 0.0
@@ -1351,9 +1349,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_831yr")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Canvas" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="Fondo" type="TextureRect" parent="Canvas"]
 modulate = Color(0.537255, 0.537255, 0.537255, 1)
 anchors_preset = 15
 anchor_right = 1.0
@@ -1364,7 +1362,7 @@ texture = ExtResource("2_qiq10")
 expand_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+[node name="Panel" type="PanelContainer" parent="Canvas"]
 self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -1372,51 +1370,51 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/PanelContainer"]
+[node name="Margin" type="MarginContainer" parent="Canvas/Panel"]
 layout_mode = 2
 theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 50
 theme_override_constants/margin_right = 50
 theme_override_constants/margin_bottom = 50
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer"]
+[node name="VBox" type="VBoxContainer" parent="Canvas/Panel/Margin"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 50
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "MAZE 2D"
 label_settings = SubResource("LabelSettings_o4kw6")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBox" type="HBoxContainer" parent="Canvas/Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 100
 alignment = 1
 
-[node name="Jugador" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Jugador" type="VBoxContainer" parent="Canvas/Panel/Margin/VBox/HBox"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Jugador"]
+[node name="HSeparator" type="HSeparator" parent="Canvas/Panel/Margin/VBox/HBox/Jugador"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Jugador"]
+[node name="Panel" type="PanelContainer" parent="Canvas/Panel/Margin/VBox/HBox/Jugador"]
 layout_mode = 2
 theme = ExtResource("3_4xcu5")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Jugador/PanelContainer"]
+[node name="VBox" type="VBoxContainer" parent="Canvas/Panel/Margin/VBox/HBox/Jugador/Panel"]
 layout_mode = 2
 
-[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Jugador/PanelContainer/VBoxContainer"]
+[node name="HSeparator3" type="HSeparator" parent="Canvas/Panel/Margin/VBox/HBox/Jugador/Panel/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Jugador/PanelContainer/VBoxContainer"]
+[node name="JugadorLabel" type="Label" parent="Canvas/Panel/Margin/VBox/HBox/Jugador/Panel/VBox"]
 modulate = Color(0.184314, 0.2, 0.141176, 1)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -1425,72 +1423,71 @@ text = "Jugador
 "
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Jugador/PanelContainer/VBoxContainer"]
+[node name="Player" type="TextureRect" parent="Canvas/Panel/Margin/VBox/HBox/Jugador/Panel/VBox"]
 texture_filter = 1
 layout_mode = 2
-texture = ExtResource("4_06x8k")
 expand_mode = 4
 
-[node name="HSeparator4" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Jugador/PanelContainer/VBoxContainer"]
+[node name="HSeparator4" type="HSeparator" parent="Canvas/Panel/Margin/VBox/HBox/Jugador/Panel/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="AparienciaJugador" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Jugador/PanelContainer/VBoxContainer"]
+[node name="AparienciaJugador" type="Button" parent="Canvas/Panel/Margin/VBox/HBox/Jugador/Panel/VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 25
 text = "Seleccionar Apariencia"
 
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Jugador/PanelContainer/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="Canvas/Panel/Margin/VBox/HBox/Jugador/Panel/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBox" type="VBoxContainer" parent="Canvas/Panel/Margin/VBox/HBox"]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme = ExtResource("5_nbxkg")
 
-[node name="CrearPartida" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="CrearPartida" type="Button" parent="Canvas/Panel/Margin/VBox/HBox/VBox"]
 layout_mode = 2
 text = "Crear Partida"
 
-[node name="ContinuarPartida" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="ContinuarPartida" type="Button" parent="Canvas/Panel/Margin/VBox/HBox/VBox"]
 layout_mode = 2
-text = "Continuar Partida"
+text = "Cargar Partida"
 
-[node name="Ajustes" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Ajustes" type="Button" parent="Canvas/Panel/Margin/VBox/HBox/VBox"]
 layout_mode = 2
 text = "Configuración"
 
-[node name="Salir" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Salir" type="Button" parent="Canvas/Panel/Margin/VBox/HBox/VBox"]
 layout_mode = 2
 text = "Salir"
 
-[node name="Enemigo" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Enemigo" type="VBoxContainer" parent="Canvas/Panel/Margin/VBox/HBox"]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Enemigo"]
+[node name="HSeparator2" type="HSeparator" parent="Canvas/Panel/Margin/VBox/HBox/Enemigo"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Enemigo"]
+[node name="Panel" type="PanelContainer" parent="Canvas/Panel/Margin/VBox/HBox/Enemigo"]
 layout_mode = 2
 theme = ExtResource("6_yud2d")
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Enemigo/PanelContainer"]
+[node name="VBox" type="VBoxContainer" parent="Canvas/Panel/Margin/VBox/HBox/Enemigo/Panel"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 
-[node name="HSeparator4" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Enemigo/PanelContainer/VBoxContainer3"]
+[node name="HSeparator4" type="HSeparator" parent="Canvas/Panel/Margin/VBox/HBox/Enemigo/Panel/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Enemigo/PanelContainer/VBoxContainer3"]
+[node name="EnemyLabel" type="Label" parent="Canvas/Panel/Margin/VBox/HBox/Enemigo/Panel/VBox"]
 modulate = Color(0.756863, 0.231373, 0.0313726, 1)
 layout_mode = 2
 theme_override_font_sizes/font_size = 40
@@ -1498,32 +1495,31 @@ text = "Enemigo
 "
 horizontal_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Enemigo/PanelContainer/VBoxContainer3"]
+[node name="Enemy" type="TextureRect" parent="Canvas/Panel/Margin/VBox/HBox/Enemigo/Panel/VBox"]
 texture_filter = 1
 layout_mode = 2
-texture = ExtResource("7_a6bao")
 expand_mode = 5
 
-[node name="HSeparator5" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Enemigo/PanelContainer/VBoxContainer3"]
+[node name="HSeparator5" type="HSeparator" parent="Canvas/Panel/Margin/VBox/HBox/Enemigo/Panel/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="AparienciaEnemigo" type="Button" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Enemigo/PanelContainer/VBoxContainer3"]
+[node name="AparienciaEnemigo" type="Button" parent="Canvas/Panel/Margin/VBox/HBox/Enemigo/Panel/VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_font_sizes/font_size = 25
 text = "Seleccionar Apariencia"
 
-[node name="HSeparator3" type="HSeparator" parent="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Enemigo/PanelContainer/VBoxContainer3"]
+[node name="HSeparator3" type="HSeparator" parent="Canvas/Panel/Margin/VBox/HBox/Enemigo/Panel/VBox"]
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Jugador/PanelContainer/VBoxContainer/AparienciaJugador" to="." method="_on_apariencia_jugador_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/CrearPartida" to="." method="_on_crear_partida_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/ContinuarPartida" to="." method="_on_continuar_partida_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Ajustes" to="." method="_on_ajustes_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/Salir" to="." method="_on_salir_pressed"]
-[connection signal="pressed" from="CanvasLayer/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Enemigo/PanelContainer/VBoxContainer3/AparienciaEnemigo" to="." method="_on_apariencia_enemigo_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBox/Jugador/Panel/VBox/AparienciaJugador" to="." method="_on_apariencia_jugador_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBox/VBox/CrearPartida" to="." method="_on_crear_partida_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBox/VBox/ContinuarPartida" to="." method="_on_continuar_partida_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBox/VBox/Ajustes" to="." method="_on_ajustes_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBox/VBox/Salir" to="." method="_on_salir_pressed"]
+[connection signal="pressed" from="Canvas/Panel/Margin/VBox/HBox/Enemigo/Panel/VBox/AparienciaEnemigo" to="." method="_on_apariencia_enemigo_pressed"]

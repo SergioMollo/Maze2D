@@ -1,17 +1,29 @@
-[gd_scene load_steps=18 format=3 uid="uid://doh4ewp4r6fym"]
+[gd_scene load_steps=27 format=3 uid="uid://doh4ewp4r6fym"]
 
 [ext_resource type="Script" path="res://Maze/View/Game/Nivel3.gd" id="1_2qem4"]
 [ext_resource type="Texture2D" uid="uid://br386dljoaedf" path="res://Resources/WallMazeInteriora64x64.png" id="2_6n84l"]
-[ext_resource type="Script" path="res://Maze/Controller/MazeController.gd" id="2_fn7uc"]
+[ext_resource type="Script" path="res://Maze/Controller/Game/MazeController.gd" id="2_fn7uc"]
 [ext_resource type="PackedScene" uid="uid://r0bherb862i5" path="res://Maze/View/Game/Personaje.tscn" id="2_nu1hc"]
 [ext_resource type="PackedScene" uid="uid://ctseifvcmjqrr" path="res://Maze/View/Game/Enemy.tscn" id="3_dpp3j"]
 [ext_resource type="Texture2D" uid="uid://ccdvefapkn64h" path="res://Resources/MuroContorno64x64.png" id="3_ksx82"]
 [ext_resource type="PackedScene" uid="uid://bc28ey48ixyl2" path="res://Maze/View/UI/GameHeader.tscn" id="4_7omxh"]
 [ext_resource type="Texture2D" uid="uid://pck2gtyxs6fp" path="res://Resources/ImagenesTextures/initial-texture.jpg" id="4_atr7l"]
 [ext_resource type="Texture2D" uid="uid://bjkwetwd828kp" path="res://Resources/Cesped32x32.png" id="4_gxqrr"]
-[ext_resource type="PackedScene" uid="uid://d1ghr5ojp13cd" path="res://Maze/View/Game/Moneda.tscn" id="6_l51q8"]
+[ext_resource type="PackedScene" uid="uid://dywo2s7j12e0f" path="res://Maze/View/Game/Moneda.tscn" id="6_l51q8"]
+[ext_resource type="Texture2D" uid="uid://oswblhtp5ohf" path="res://Resources/Pixelart/EnemyPathOk_32x32.png" id="9_t5chk"]
+[ext_resource type="Texture2D" uid="uid://cn70q04gpdt1a" path="res://Resources/Pixelart/PlayerPathSearch_32x32.png" id="10_oilxn"]
+[ext_resource type="Texture2D" uid="uid://y5waasdwv32b" path="res://Resources/Pixelart/PlayerPathOK_32x32.png" id="11_avdqo"]
 
-[sub_resource type="FontFile" id="FontFile_7r0xj"]
+[sub_resource type="LabelSettings" id="LabelSettings_vqviq"]
+line_spacing = 25.0
+font_size = 50
+font_color = Color(0.207843, 0.513726, 0.203922, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_r4xiq"]
+font_size = 50
+font_color = Color(0.823529, 0.305882, 0, 1)
+
+[sub_resource type="FontFile" id="FontFile_16col"]
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -2312,6 +2324,11 @@ cache/0/50/0/descent = 0.0
 cache/0/50/0/underline_position = 0.0
 cache/0/50/0/underline_thickness = 0.0
 cache/0/50/0/scale = 1.0
+cache/0/50/0/glyphs/0/advance = Vector2(0, 0)
+cache/0/50/0/glyphs/0/offset = Vector2(0, 0)
+cache/0/50/0/glyphs/0/size = Vector2(0, 0)
+cache/0/50/0/glyphs/0/uv_rect = Rect2(0, 0, 0, 0)
+cache/0/50/0/glyphs/0/texture_idx = -1
 cache/0/50/0/kerning_overrides/16/0 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/17/0 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/18/0 = Vector2(0, 0)
@@ -2359,131 +2376,94 @@ cache/0/50/0/kerning_overrides/88/0 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/60/0 = Vector2(0, 0)
 cache/0/50/0/kerning_overrides/50/0 = Vector2(0, 0)
 
-[sub_resource type="LabelSettings" id="LabelSettings_kr5ro"]
-line_spacing = 25.0
-font = SubResource("FontFile_7r0xj")
+[sub_resource type="LabelSettings" id="LabelSettings_0drpm"]
+line_spacing = 10.0
+font = SubResource("FontFile_16col")
 font_size = 50
-font_color = Color(1, 1, 0, 1)
+font_color = Color(0.705882, 0.478431, 0.278431, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_3qq4l"]
-font_size = 50
-font_color = Color(0.984314, 0.109804, 0, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_tct8v"]
+font_size = 40
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ehlgt"]
+[sub_resource type="LabelSettings" id="LabelSettings_d7i5o"]
+font_size = 128
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fjf6c"]
 texture = ExtResource("4_gxqrr")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
 1:0/0 = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
 2:0/0 = 0
-2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:0/0/physics_layer_0/angular_velocity = 0.0
 0:1/0 = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
 1:1/0 = 0
-1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_0/angular_velocity = 0.0
 2:1/0 = 0
-2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:1/0/physics_layer_0/angular_velocity = 0.0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_okk7q"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u1o6b"]
 texture = ExtResource("3_ksx82")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ibi4t"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tootq"]
 texture = ExtResource("2_6n84l")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/terrain_set = 0
-0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:0/0/physics_layer_0/angular_velocity = 0.0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:0/0 = 0
 1:0/0/terrain_set = 0
-1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:0/0/physics_layer_0/angular_velocity = 0.0
 1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:0/0 = 0
-3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:0/0/physics_layer_0/angular_velocity = 0.0
 3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:0/0 = 0
-4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-4:0/0/physics_layer_0/angular_velocity = 0.0
 4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:0/0 = 0
-5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-5:0/0/physics_layer_0/angular_velocity = 0.0
 5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:0/0 = 0
-7:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-7:0/0/physics_layer_0/angular_velocity = 0.0
 7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:1/0 = 0
 0:1/0/terrain_set = 0
-0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:1/0/physics_layer_0/angular_velocity = 0.0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:1/0 = 0
-7:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-7:1/0/physics_layer_0/angular_velocity = 0.0
 7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 0:2/0 = 0
-0:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-0:2/0/physics_layer_0/angular_velocity = 0.0
 0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:2/0 = 0
-1:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:2/0/physics_layer_0/angular_velocity = 0.0
 1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:2/0 = 0
-2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:2/0/physics_layer_0/angular_velocity = 0.0
 2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:2/0 = 0
-5:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-5:2/0/physics_layer_0/angular_velocity = 0.0
 5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:2/0 = 0
-6:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-6:2/0/physics_layer_0/angular_velocity = 0.0
 6:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 7:2/0 = 0
-7:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-7:2/0/physics_layer_0/angular_velocity = 0.0
 7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:3/0 = 0
-1:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:3/0/physics_layer_0/angular_velocity = 0.0
 1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 2:3/0 = 0
-2:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-2:3/0/physics_layer_0/angular_velocity = 0.0
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 3:3/0 = 0
-3:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-3:3/0/physics_layer_0/angular_velocity = 0.0
 3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 4:3/0 = 0
-4:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-4:3/0/physics_layer_0/angular_velocity = 0.0
 4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 5:3/0 = 0
-5:3/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-5:3/0/physics_layer_0/angular_velocity = 0.0
 5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 1:1/0 = 0
-1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
-1:1/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qt67p"]
+texture = ExtResource("9_t5chk")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_limko"]
+texture = ExtResource("10_oilxn")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w436v"]
+texture = ExtResource("11_avdqo")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_acrdd"]
 tile_size = Vector2i(32, 32)
@@ -2491,9 +2471,12 @@ physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "AriibaIzq"
 terrain_set_0/terrain_0/color = Color(0.517647, 0, 0.12549, 1)
-sources/1 = SubResource("TileSetAtlasSource_okk7q")
-sources/2 = SubResource("TileSetAtlasSource_ibi4t")
-sources/0 = SubResource("TileSetAtlasSource_ehlgt")
+sources/1 = SubResource("TileSetAtlasSource_u1o6b")
+sources/2 = SubResource("TileSetAtlasSource_tootq")
+sources/0 = SubResource("TileSetAtlasSource_fjf6c")
+sources/7 = SubResource("TileSetAtlasSource_limko")
+sources/8 = SubResource("TileSetAtlasSource_w436v")
+sources/4 = SubResource("TileSetAtlasSource_qt67p")
 
 [node name="Nivel3" type="Node2D"]
 script = ExtResource("1_2qem4")
@@ -2511,37 +2494,96 @@ offset_right = 576.0
 offset_bottom = 64.0
 
 [node name="LabelWin" type="Label" parent="Layer"]
-anchors_preset = -1
-anchor_right = 0.474
-anchor_bottom = 0.533
-offset_left = 1320.0
-offset_top = 184.0
-offset_right = 1417.0
-offset_bottom = 251.0
-text = "WIN"
-label_settings = SubResource("LabelSettings_kr5ro")
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -35.0
+offset_right = 135.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(115, 35)
+size_flags_horizontal = 4
+text = "VICTORIA"
+label_settings = SubResource("LabelSettings_vqviq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LabelLose" type="Label" parent="Layer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -35.0
+offset_right = 135.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(115, 35)
+size_flags_horizontal = 4
+text = "DERROTA"
+label_settings = SubResource("LabelSettings_r4xiq")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="LabelTimeExceed" type="Label" parent="Layer"]
-anchors_preset = -1
-anchor_right = 0.474
-anchor_bottom = 0.533
-offset_left = 1560.0
-offset_top = 200.0
-offset_right = 1744.0
-offset_bottom = 341.0
-text = "TIME
-EXCEED"
-label_settings = SubResource("LabelSettings_3qq4l")
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -80.0
+offset_right = 130.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(120, 80)
+size_flags_horizontal = 4
+text = "TIEMPO
+EXCEDIDO"
+label_settings = SubResource("LabelSettings_0drpm")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="LabelFinish" type="Label" parent="Layer"]
+visible = false
+offset_right = 340.0
+offset_bottom = 60.0
+size_flags_horizontal = 4
+text = "Partida finalizada"
+label_settings = SubResource("LabelSettings_tct8v")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Label" parent="Layer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -688.0
+offset_top = -324.0
+offset_right = -615.0
+offset_bottom = -149.0
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_d7i5o")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 self_modulate = Color(0.415686, 0.415686, 0.415686, 0.976471)
 offset_top = 64.0
 offset_right = 1728.0
-offset_bottom = 865.0
+offset_bottom = 928.0
 texture = ExtResource("4_atr7l")
 expand_mode = 2
 
@@ -2555,6 +2597,5 @@ position = Vector2(112, 304)
 scale = Vector2(1, 1)
 
 [node name="Moneda" parent="." instance=ExtResource("6_l51q8")]
-position = Vector2(1360, 176)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

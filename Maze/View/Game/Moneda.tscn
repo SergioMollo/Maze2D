@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dywo2s7j12e0f"]
 
-[ext_resource type="Script" path="res://Maze/Controller/CoinController.gd" id="1_7jm1k"]
+[ext_resource type="Script" path="res://Maze/Controller/Game/CoinController.gd" id="1_7jm1k"]
 [ext_resource type="Texture2D" uid="uid://reefyu4gqonu" path="res://Resources/MonedaMovimiento32x32.png" id="2_4elu2"]
 
 [sub_resource type="Animation" id="Animation_ablef"]
@@ -47,12 +47,10 @@ radius = 14.0
 [node name="Moneda" type="Node2D"]
 
 [node name="Moneda2D" type="Area2D" parent="."]
-position = Vector2(4, 0)
 script = ExtResource("1_7jm1k")
 
 [node name="SpritesMoneda" type="Sprite2D" parent="Moneda2D"]
 texture_filter = 1
-position = Vector2(-4, 0)
 texture = ExtResource("2_4elu2")
 hframes = 7
 
@@ -63,7 +61,6 @@ libraries = {
 autoplay = "Animacion_Moneda"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Moneda2D"]
-position = Vector2(-4, 0)
 shape = SubResource("CircleShape2D_pa45r")
 
 [connection signal="body_entered" from="Moneda2D" to="Moneda2D" method="_on_body_entered"]

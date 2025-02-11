@@ -67,12 +67,12 @@ region_rect = Rect2(23.9665, 594.188, 323.162, 42.8339)
 
 [resource]
 default_font_size = 40
-Button/font_sizes/font_size = 20
+Button/font_sizes/font_size = 30
 Button/styles/focus = SubResource("StyleBoxTexture_8a0rw")
 Button/styles/hover = SubResource("StyleBoxTexture_7ufv1")
 Button/styles/normal = SubResource("StyleBoxTexture_tyc8i")
 Button/styles/pressed = SubResource("StyleBoxTexture_tyc8i")
-Label/font_sizes/font_size = 25
+Label/font_sizes/font_size = 35
 LineEdit/styles/normal = SubResource("StyleBoxTexture_727nv")
 OptionButton/constants/arrow_margin = 11
 OptionButton/icons/arrow = ExtResource("2_3jh10")

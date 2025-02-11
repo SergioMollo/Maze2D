@@ -1,12 +1,90 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyv21ol70tga3"]
+[gd_scene load_steps=18 format=3 uid="uid://dyv21ol70tga3"]
 
 [ext_resource type="Script" path="res://Maze/Controller/UI/Configuracion.gd" id="1_ffm7y"]
-[ext_resource type="Texture2D" uid="uid://csixtmspdmla7" path="res://Resources/ImagenesTextures/background6.jpg" id="2_jy4gv"]
+[ext_resource type="Texture2D" uid="uid://d138kb1ilodlp" path="res://Resources/Inkscape/PanelConfiguracion.svg" id="2_b43rb"]
+[ext_resource type="Theme" uid="uid://w5b2mtpwf0ab" path="res://Resources/Edit_Textures/option_buttons.tres" id="3_81au0"]
+[ext_resource type="Texture2D" uid="uid://c07sb8wmwlb0o" path="res://Resources/Inkscape/Botones.svg" id="3_hdva6"]
 
-[sub_resource type="Theme" id="Theme_btf1m"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_c3m02"]
+texture = ExtResource("2_b43rb")
+region_rect = Rect2(802.041, 80.3611, 590.964, 549.703)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pypgs"]
-texture = ExtResource("2_jy4gv")
+[sub_resource type="Theme" id="Theme_06ml4"]
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_c3m02")
+
+[sub_resource type="LabelSettings" id="LabelSettings_gblp2"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dfn3s"]
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_8qivc"]
+font_size = 30
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rd62g"]
+texture = ExtResource("3_hdva6")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 15.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(5.28266, 225.777, 338.577, 69.0473)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_77028"]
+texture = ExtResource("3_hdva6")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 15.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(11.942, 129.741, 336.124, 69.3978)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3gqfr"]
+texture = ExtResource("3_hdva6")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 15.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(11.942, 129.741, 336.124, 69.3978)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_880p3"]
+texture = ExtResource("3_hdva6")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 15.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(13.5033, 37.321, 341.732, 70.4493)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2kuj7"]
+texture = ExtResource("3_hdva6")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 15.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(5.28266, 225.777, 338.577, 69.0473)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k47se"]
+texture = ExtResource("3_hdva6")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 15.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(11.942, 129.741, 336.124, 69.3978)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y52ge"]
+texture = ExtResource("3_hdva6")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 15.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(11.942, 129.741, 336.124, 69.3978)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t0ovn"]
+texture = ExtResource("3_hdva6")
+texture_margin_left = 15.0
+texture_margin_top = 10.0
+texture_margin_right = 15.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(13.5033, 37.321, 341.732, 70.4493)
 
 [node name="Configuracion" type="Control"]
 layout_mode = 3
@@ -41,16 +119,30 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_btf1m")
-theme_override_styles/panel = SubResource("StyleBoxTexture_pypgs")
+theme = SubResource("Theme_06ml4")
 
 [node name="Margin" type="MarginContainer" parent="Canvas/Panel"]
+custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 50
+theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 10
 
 [node name="Container" type="VBoxContainer" parent="Canvas/Panel/Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Canvas/Panel/Margin/Container"]
+layout_mode = 2
+text = "Ajustes generales"
+label_settings = SubResource("LabelSettings_gblp2")
+
+[node name="HSeparator3" type="HSeparator" parent="Canvas/Panel/Margin/Container"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Canvas/Panel/Margin/Container"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
 
 [node name="Settings" type="VBoxContainer" parent="Canvas/Panel/Margin/Container"]
@@ -66,12 +158,13 @@ alignment = 1
 [node name="VolumeLabel" type="Label" parent="Canvas/Panel/Margin/Container/Settings/Volume"]
 layout_mode = 2
 text = "Volumen"
+label_settings = SubResource("LabelSettings_dfn3s")
 
 [node name="VolumeSlider" type="HSlider" parent="Canvas/Panel/Margin/Container/Settings/Volume"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(100, 50)
 layout_mode = 2
 size_flags_vertical = 4
-value = 50.0
+max_value = 10.0
 
 [node name="Resolution" type="HBoxContainer" parent="Canvas/Panel/Margin/Container/Settings"]
 layout_mode = 2
@@ -80,14 +173,18 @@ alignment = 1
 
 [node name="ResolutionLabel" type="Label" parent="Canvas/Panel/Margin/Container/Settings/Resolution"]
 layout_mode = 2
-text = "Resolución"
+text = "Tamaño ventana"
+label_settings = SubResource("LabelSettings_8qivc")
 
 [node name="ResolutionOption" type="OptionButton" parent="Canvas/Panel/Margin/Container/Settings/Resolution"]
+custom_minimum_size = Vector2(175, 50)
 layout_mode = 2
-item_count = 4
+theme = ExtResource("3_81au0")
+theme_override_constants/arrow_margin = 5
+alignment = 1
 selected = 0
+item_count = 4
 popup/item_0/text = "1920x1080"
-popup/item_0/id = 0
 popup/item_1/text = "1280x720"
 popup/item_1/id = 1
 popup/item_2/text = "960x540"
@@ -97,7 +194,7 @@ popup/item_3/id = 3
 
 [node name="HSeparator" type="HSeparator" parent="Canvas/Panel/Margin/Container"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 40)
+custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
 [node name="HBoxContainer" type="PanelContainer" parent="Canvas/Panel/Margin/Container"]
@@ -120,11 +217,27 @@ alignment = 2
 
 [node name="SaveButton" type="Button" parent="Canvas/Panel/Margin/Container/HBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxTexture_rd62g")
+theme_override_styles/hover = SubResource("StyleBoxTexture_77028")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_3gqfr")
+theme_override_styles/normal = SubResource("StyleBoxTexture_880p3")
 text = "Guardar"
 
 [node name="BackButton" type="Button" parent="Canvas/Panel/Margin/Container/HBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
+theme_override_styles/focus = SubResource("StyleBoxTexture_2kuj7")
+theme_override_styles/hover = SubResource("StyleBoxTexture_k47se")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_y52ge")
+theme_override_styles/normal = SubResource("StyleBoxTexture_t0ovn")
 text = "Cerrar"
 
+[node name="HSeparator4" type="HSeparator" parent="Canvas/Panel/Margin/Container"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[connection signal="value_changed" from="Canvas/Panel/Margin/Container/Settings/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="Canvas/Panel/Margin/Container/HBoxContainer/MarginContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="Canvas/Panel/Margin/Container/HBoxContainer/MarginContainer/HBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
