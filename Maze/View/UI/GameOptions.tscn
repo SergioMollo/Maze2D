@@ -128,11 +128,12 @@ text = "Menú de configuración general"
 
 [node name="HSeparator3" type="HSeparator" parent="PanelContainer/Container/Margin/Info"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="JuegoOptions" type="VBoxContainer" parent="PanelContainer/Container"]
 layout_mode = 2
+theme_override_constants/separation = 8
 
 [node name="Guardar" type="Button" parent="PanelContainer/Container/JuegoOptions"]
 custom_minimum_size = Vector2(225, 0)
@@ -156,6 +157,7 @@ theme_override_font_sizes/font_size = 16
 text = "Cambiar Configuración"
 
 [node name="Finalizar" type="Button" parent="PanelContainer/Container/JuegoOptions"]
+visible = false
 custom_minimum_size = Vector2(225, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -171,7 +173,7 @@ text = "Salir"
 
 [node name="HSeparator4" type="HSeparator" parent="PanelContainer/Container/JuegoOptions"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(0, 10)
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
 [node name="GeneralOptions" type="VBoxContainer" parent="PanelContainer/Container"]

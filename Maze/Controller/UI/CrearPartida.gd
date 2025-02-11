@@ -141,7 +141,7 @@ func _on_nivel_option_item_selected(index: int) -> void:
 	elif index == 3:
 		$PanelNivel/Nombre.text = "Tamaño: Nivel Aleatorio"
 		$PanelNivel/Informacion.text = "El nivel Aleatorio tiene un tamaño comprendido 
-										entre 15x15 y 50x25.
+										entre 15x15 y 40x25.
 										Recomendado para usuarios de nivel intermedio-alto."
 
 

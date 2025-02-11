@@ -22,8 +22,8 @@ func _on_guardar_pressed():
 
 	maze_instance.guardarConfiguracion(modo_interaccion, modo_juego, jugador, enemigo)
 	
-	maze_instance.time_left = maze_instance.maze.time
-	maze_instance.game_number -= 1
+	#maze_instance.timer.time_left = maze_instance.maze.time
+	maze_instance.game.numero -= 1
 	maze_instance.initiate = false
 	queue_free()
 	maze_instance.nuevoJuego()

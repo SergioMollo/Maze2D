@@ -2,16 +2,18 @@ extends Control
 
 var maze_instance: MazeController
 
+signal menu_closed
+
 # Sale de la partida al menu principal, guardando el progreso alcanzado
 func _on_guardar_salir_pressed():
-	maze_instance.maze.estado = VideogameConstants.EstadoPartida.GUARDADA
+	maze_instance.maze.match_state = VideogameConstants.EstadoPartida.GUARDADA
 	maze_instance.game.estado = VideogameConstants.EstadoJuego.EN_PAUSA
 	save()
 
 
 # Finaliza la partida al menu principal, guardando el progreso alcanzado
 func _on_finalizar_pressed():
-	maze_instance.maze.estado = VideogameConstants.EstadoPartida.FINALIZADA
+	maze_instance.maze.match_state = VideogameConstants.EstadoPartida.FINALIZADA
 	maze_instance.game.estado = VideogameConstants.EstadoJuego.FINALIZADO
 	await save()
 	maze_instance.maze.nombre_partida = ""	
@@ -26,6 +28,8 @@ func _on_reiniciar_pressed():
 	maze_instance.game.tiempo_restante = maze_instance.maze.time
 	maze_instance.actualizaPuntuacion()
 	maze_instance.nuevoJuego()
+	
+	emit_signal("menu_closed")
 	queue_free()
 
 

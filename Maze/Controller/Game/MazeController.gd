@@ -36,6 +36,7 @@ var ids = {
 
 # Inica los datos cuando se instancia por primera vez
 func _ready():
+	Videogame.stopMusic()
 	Videogame.setGameMusic()
 	await get_tree().create_timer(0.5).timeout
 
@@ -85,12 +86,13 @@ func initGame(level_data : Dictionary):
 #  	- Inicia el contador de tiempo
 func nuevoJuego():
 	initiate = false
-	timeLabel.text = str(maze.time)
+	timeLabel.text = str("--")
 	
 	var init_time = $"../Layer/Time"
 	init_time.position = Vector2(maze.scale.x/2-25,maze.scale.y/2-75)
 	init_time.text = "5"
 	init_time.show()
+	deshabilitaConfiguracion()
 	
 	await get_tree().create_timer(1.0).timeout
 	maze.timer.start(6)
@@ -141,14 +143,14 @@ func gameProcess():
 
 	# maze.timer.stop()
 	createHeuristic(algorithm, heuristic)
-	deshabilitaConfiguracion()
 
 	if Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO and Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_SOLITARIO:
 		habilitaConfiguracion()
-		return
+	else:
+		deshabilitaConfiguracion()
 
 	# Para modo usuario interactivo y enfrentandose al enemigo
-	elif Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO and Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+	if Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO and Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 		await searchPath(algorithm, trayectory, scene)
 
 		while initiate:
@@ -156,7 +158,7 @@ func gameProcess():
 				await moveOneStep(algorithm)
 				Videogame.move_enemy = false
 				if Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.DIJKSTRA or Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.A_STAR:
-					var path_enemigo = await newSearch(Videogame.algoritmo_enemigo, algorithm, heuristic, maze.enemigo.position, maze.jugador.position)
+					var path_enemigo = await newSearch(Videogame.algoritmo_enemigo, algorithm, heuristic, maze.enemigo.position, maze.jugador.position, maze.moneda.position)
 					if !path_enemigo.is_empty():
 						await maze.enemigo.setPath(maze.enemigo.position, maze.jugador.position, path_enemigo)
 			else:
@@ -172,13 +174,15 @@ func gameProcess():
 				if maze.enemigo.enemy.path.trayectoria.size() > 0:
 					await moveOneStep(algorithm)
 					Videogame.move_enemy = false
-					var path_enemigo = await newSearch(Videogame.algoritmo_enemigo, algorithm, heuristic, maze.enemigo.position, maze.jugador.position)
+					var path_enemigo = await newSearch(Videogame.algoritmo_enemigo, algorithm, heuristic, maze.enemigo.position, maze.jugador.position, maze.moneda.position)
 					if !path_enemigo.is_empty():
 						await maze.enemigo.setPath(maze.enemigo.position, maze.jugador.position, path_enemigo)
 				else:
 					Videogame.move_enemy = false
 					await moveOneStepPlayer(algorithm)
-				 
+			else:
+				await moveOneStepPlayer(algorithm)
+			
 
 	# Para DFS y BFS del enemigo y Dijkstra y A Estrella para jugador
 	elif Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.BFS or Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.DFS:		
@@ -188,7 +192,7 @@ func gameProcess():
 		while initiate:	
 			if maze.enemigo.enemy.path.trayectoria.size() > 0:
 				await moveOneStep(algorithm)
-				var path_jugador = await newSearch(Videogame.algoritmo_jugador, algorithm, heuristic, maze.jugador.position, maze.initial_coin_position)
+				var path_jugador = await newSearch(Videogame.algoritmo_jugador, algorithm, heuristic, maze.jugador.position, maze.initial_coin_position, maze.enemigo.position)
 				if !path_jugador.is_empty():
 					await maze.jugador.setPath(maze.jugador.position, maze.initial_coin_position, path_jugador)
 			else:
@@ -205,13 +209,11 @@ func gameProcess():
 
 func createHeuristic(algorithm: AlgorithmController, heuristic: Dictionary):
 	if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-		heuristic = algorithm.createHeuristic(maze.maze_size.x, maze.maze_size.y, maze.moneda.position)
+		heuristic = algorithm.createHeuristic(maze.maze_size.x, maze.maze_size.y, maze.jugador.position)
 		algorithm.setEnemyHeuristic(heuristic)
-		heuristic = algorithm.createHeuristic(maze.maze_size.x, maze.maze_size.y, maze.enemigo.position)
-		algorithm.setPlayerHeuristic(heuristic)
 
-	elif Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
-		heuristic = algorithm.createHeuristic(maze.maze_size.x, maze.maze_size.y)
+	if Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_SIMULACION:
+		heuristic = algorithm.createHeuristic(maze.maze_size.x, maze.maze_size.y, maze.moneda.position)
 		algorithm.setPlayerHeuristic(heuristic)
 
 
@@ -228,15 +230,14 @@ func searchPath(algorithm: AlgorithmController, trayectory: Array, scene):
 
 
 # Repite la busqueda del camino/trayectoria que conecta dos elementos cuando el algoritmo es A Estrella o Dijkstra
-func newSearch(algorithm_type: VideogameConstants.Algoritmo, algorithm: AlgorithmController, heuristic: Dictionary, start_node: Vector2, end_node: Vector2):
-
+func newSearch(algorithm_type: VideogameConstants.Algoritmo, algorithm: AlgorithmController, heuristic: Dictionary, start_node: Vector2, end_node: Vector2, avoid_position: Vector2):
 	var path = []
 	if algorithm_type == VideogameConstants.Algoritmo.DIJKSTRA:
 		createHeuristic(algorithm, heuristic)
-		path = await algorithm.dijkstraSearch(start_node, end_node)
+		path = await algorithm.dijkstraSearch(start_node, end_node, avoid_position)
 	elif algorithm_type == VideogameConstants.Algoritmo.A_STAR:
 		createHeuristic(algorithm, heuristic)
-		path = await algorithm.aStarSearch(start_node, end_node, algorithm.heuristic_player)
+		path = await algorithm.aStarSearch(start_node, end_node, algorithm.heuristic_player, avoid_position)
 
 	return path
 
@@ -294,11 +295,10 @@ func spawnEnemy(enemy_position: Vector2):
 # 	- Espera 5 segundos hasta iniciar el siguiente juego
 func mostrarResultado():
 	initiate = false
-	habilitaConfiguracion()
 	win += 1
 	maze.timer.stop()
 
-	winLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
+	winLabel.position = Vector2(maze.scale.x/2-126,maze.scale.y-60)
 	winLabel.show()
 	maze.moneda.hide()
 	actualizaPuntuacion()
@@ -306,6 +306,8 @@ func mostrarResultado():
 	if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
 		maze.enemigo.maze_finished = true
 		maze.enemigo.enemy.queue_free() 
+	
+	habilitaConfiguracion()
 	maze.jugador.player.maze_finished = true
 	await get_tree().create_timer(3.0).timeout
 
@@ -324,15 +326,15 @@ func mostrarResultado():
 func mostrarEliminado():
 	initiate = false
 	maze.timer.stop()
-	habilitaConfiguracion()
 	maze.jugador.player.maze_finished = true
 	maze.enemigo.maze_finished = true
 
 	lose += 1
-	loseLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
+	loseLabel.position = Vector2(maze.scale.x/2-125,maze.scale.y-60)
 	loseLabel.show()
 
 	maze.enemigo.queue_free() 
+	habilitaConfiguracion()
 	maze.moneda.hide()
 	actualizaPuntuacion()
 	await get_tree().create_timer(5.0).timeout
@@ -360,7 +362,7 @@ func _on_timer_timeout():
 		maze.enemigo.maze_finished = true
 		maze.enemigo.queue_free()
 
-	timeExceedLabel.position = Vector2(maze.scale.x/2-170,maze.scale.y-60)
+	timeExceedLabel.position = Vector2(maze.scale.x/2-125,maze.scale.y-60)
 	loseLabel.show()
 	actualizaPuntuacion()
 	await get_tree().create_timer(5.0).timeout
@@ -383,6 +385,8 @@ func actualizaPuntuacion():
 func deshabilitaConfiguracion():
 	var config = $"../Layer/Header/Layer/Panel/Container/Configuration"
 	config.disabled = true
+	maze.timer.stop()
+	timeLabel.text = str("--")
 
 
 # Habilita el boton de configuración

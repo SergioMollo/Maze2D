@@ -9,3 +9,7 @@ func _on_configuration_pressed():
 	instance.setMaze(labirytnm)
 	$"..".add_child(instance)
 	instance.position = Vector2(labirytnm.maze.scale.x/2,labirytnm.maze.scale.y/2)
+
+
+func _on_cerrar_pressed() -> void:
+	get_tree().quit()

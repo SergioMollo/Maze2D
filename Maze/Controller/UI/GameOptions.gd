@@ -4,6 +4,7 @@ var maze_instance: MazeController
 
 var bus_index = AudioServer.get_bus_index("Master")
 var volume_value
+var resolution_text
 
 # Inica los datos cuando se instancia por primera vez
 func _ready():
@@ -14,7 +15,7 @@ func _ready():
 	volume_value = db_to_linear(AudioServer.get_bus_volume_db(bus_index))
 	volume.value = volume_value
 	var resolution_value = get_window().size
-	var resolution_text = str(resolution_value.x) + "x" + str(resolution_value.y)
+	resolution_text = str(resolution_value.x) + "x" + str(resolution_value.y)
 	if resolution_text == "1920x1080":
 		resolution.selected = 0
 	elif resolution_text == "1280x720":
@@ -63,7 +64,7 @@ func _on_reiniciar_pressed():
 	instance.setOptions(maze_instance, "Reiniciar")
 	add_child(instance)
 	instance.position = Vector2(0,0)
-
+	instance.connect("menu_closed", Callable(self, "_on_confirm_options_closed")) 
 
 # Cambia las opciones de configuracion establecidas
 # 	- Muestra el menu de cambiar configuracion de la partida
@@ -99,10 +100,12 @@ func _on_salir_pressed():
 # Continua la partida con las opciones de configuracion establecidas
 # 	- Cierra el menu de configuracion de partida
 func _on_continuar_pressed():
-	var resolution = $PanelContainer/Container/GeneralOptions/Resolution/ResolutionOption
-	var values = resolution.get_item_text(resolution.get_selected()).split("x")
-	
-	get_window().size = Vector2(int(values[0]), int(values[1]))
+	#var resolution = $PanelContainer/Container/GeneralOptions/Resolution/ResolutionOption
+	#var resolution_value = resolution.get_item_text(resolution.get_selected())
+	#if resolution_text != resolution_value:
+		#resolution_value.split("x")
+		#get_window().size = Vector2(int(resolution_value[0]), int(resolution_value[1]))
+		
 	maze_instance.game.estado = VideogameConstants.EstadoJuego.EN_CURSO
 	queue_free()
 	if maze_instance.initiate:
@@ -133,3 +136,12 @@ func _on_volume_slider_value_changed(value: float) -> void:
 		bus_index,
 		linear_to_db(volume.value)
 	)
+
+
+func _on_confirm_options_closed():
+	maze_instance.game.estado = VideogameConstants.EstadoJuego.EN_CURSO
+	queue_free()
+	if maze_instance.initiate:
+		maze_instance.continueTimer(maze_instance.game.tiempo_restante)
+		maze_instance.gameProcess()
+	

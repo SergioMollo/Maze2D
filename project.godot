@@ -17,19 +17,19 @@ boot_splash/bg_color=Color(0.00392157, 0.176471, 0, 1)
 
 [autoload]
 
-Firebase="*res://addons/godot-firebase/firebase/firebase.tscn"
 Videogame="*res://Maze/Model/Videogame.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/size/mode=3
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-firebase/plugin.cfg", "res://addons/godot-sqlite/plugin.cfg", "res://addons/godot_rl_agents/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-sqlite/plugin.cfg", "res://addons/godot_rl_agents/plugin.cfg")
 
 [input]
 

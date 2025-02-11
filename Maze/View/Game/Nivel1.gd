@@ -8,7 +8,7 @@ var level_data = {
 	"maze_size": Vector2i(480,480),
 	"scale": Vector2i(608, 608),
 	"initial_player_position": Vector2(112,112),
-	"initial_enemy_position": Vector2(496,208),
+	"initial_enemy_position": Vector2(496,176),
 	"initial_coin_position": Vector2(496,496),
 	"time": 60
 }
