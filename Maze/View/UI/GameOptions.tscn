@@ -207,6 +207,7 @@ custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
 [node name="Resolution" type="HBoxContainer" parent="PanelContainer/Container/GeneralOptions"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1

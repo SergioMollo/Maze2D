@@ -100,12 +100,6 @@ func _on_salir_pressed():
 # Continua la partida con las opciones de configuracion establecidas
 # 	- Cierra el menu de configuracion de partida
 func _on_continuar_pressed():
-	#var resolution = $PanelContainer/Container/GeneralOptions/Resolution/ResolutionOption
-	#var resolution_value = resolution.get_item_text(resolution.get_selected())
-	#if resolution_text != resolution_value:
-		#resolution_value.split("x")
-		#get_window().size = Vector2(int(resolution_value[0]), int(resolution_value[1]))
-		
 	maze_instance.game.estado = VideogameConstants.EstadoJuego.EN_CURSO
 	queue_free()
 	if maze_instance.initiate:

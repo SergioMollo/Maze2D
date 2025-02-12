@@ -22,7 +22,6 @@ var ids = {
 @export var enemy_scene: PackedScene
 
 @onready var player: CharacterBody2D = $"../Jugador"
-@onready var agente: Node2D = $"../Jugador/AIController2D"
 @onready var coin: Area2D = $"../Moneda/Moneda2D"
 @onready var header = $"../Layer/Header/Layer/Panel"
 @onready var winLabel : Label  = $"../Layer/LabelWin"
@@ -45,6 +44,9 @@ func _ready():
 func setupData(level_data : Dictionary):
 	winLabel.hide()
 	loseLabel.hide()
+	
+	var nivel_label : Label  = $"../Layer/Header/Layer/Panel/Container/LabelNivel"	
+	nivel_label.text = Videogame.getNivelString(Videogame.nivel)
 	
 	maze = Maze.new(level_data, player, coin, timer, tilemap)
 	game = Game.new(level_data.time)
@@ -141,70 +143,68 @@ func gameProcess():
 	var trayectory = []
 	var scene = get_tree().get_current_scene()
 
-	# maze.timer.stop()
 	createHeuristic(algorithm, heuristic)
 
 	if Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO and Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_SOLITARIO:
 		habilitaConfiguracion()
 	else:
 		deshabilitaConfiguracion()
+		# Para modo usuario interactivo y enfrentandose al enemigo
+		if Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO and Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+			await searchPath(algorithm, trayectory, scene)
 
-	# Para modo usuario interactivo y enfrentandose al enemigo
-	if Videogame.modo_interaccion == VideogameConstants.ModoInteraccion.MODO_USUARIO and Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
-		await searchPath(algorithm, trayectory, scene)
-
-		while initiate:
-			if maze.enemigo.enemy.path.trayectoria.size() > 0:
-				await moveOneStep(algorithm)
-				Videogame.move_enemy = false
-				if Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.DIJKSTRA or Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.A_STAR:
-					var path_enemigo = await newSearch(Videogame.algoritmo_enemigo, algorithm, heuristic, maze.enemigo.position, maze.jugador.position, maze.moneda.position)
-					if !path_enemigo.is_empty():
-						await maze.enemigo.setPath(maze.enemigo.position, maze.jugador.position, path_enemigo)
-			else:
-				Videogame.move_enemy = false
-				break
-
-	# Para DFS y BFS con y sin enemigo
-	elif Videogame.algoritmo_jugador == VideogameConstants.Algoritmo.BFS or Videogame.algoritmo_jugador == VideogameConstants.Algoritmo.DFS:
-		await searchPath(algorithm, trayectory, scene)
-
-		while initiate:	
-			if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+			while initiate:
 				if maze.enemigo.enemy.path.trayectoria.size() > 0:
 					await moveOneStep(algorithm)
 					Videogame.move_enemy = false
-					var path_enemigo = await newSearch(Videogame.algoritmo_enemigo, algorithm, heuristic, maze.enemigo.position, maze.jugador.position, maze.moneda.position)
-					if !path_enemigo.is_empty():
-						await maze.enemigo.setPath(maze.enemigo.position, maze.jugador.position, path_enemigo)
+					if Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.DIJKSTRA or Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.A_STAR:
+						var path_enemigo = await newSearch(Videogame.algoritmo_enemigo, algorithm, heuristic, maze.enemigo.position, maze.jugador.position, maze.moneda.position)
+						if !path_enemigo.is_empty():
+							await maze.enemigo.setPath(maze.enemigo.position, maze.jugador.position, path_enemigo)
 				else:
 					Videogame.move_enemy = false
-					await moveOneStepPlayer(algorithm)
-			else:
-				await moveOneStepPlayer(algorithm)
-			
+					break
 
-	# Para DFS y BFS del enemigo y Dijkstra y A Estrella para jugador
-	elif Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.BFS or Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.DFS:		
-		await searchPath(algorithm, trayectory, scene)
-		algorithm.setValueIsPlayer(true)
-
-		while initiate:	
-			if maze.enemigo.enemy.path.trayectoria.size() > 0:
-				await moveOneStep(algorithm)
-				var path_jugador = await newSearch(Videogame.algoritmo_jugador, algorithm, heuristic, maze.jugador.position, maze.initial_coin_position, maze.enemigo.position)
-				if !path_jugador.is_empty():
-					await maze.jugador.setPath(maze.jugador.position, maze.initial_coin_position, path_jugador)
-			else:
-				Videogame.move_enemy = false
-				break		
-
-	# Resto de casos, ambos tienen algoritmos dijkstra o a estrella
-	else:
-		while initiate:
+		# Para DFS y BFS con y sin enemigo
+		elif Videogame.algoritmo_jugador == VideogameConstants.Algoritmo.BFS or Videogame.algoritmo_jugador == VideogameConstants.Algoritmo.DFS:
 			await searchPath(algorithm, trayectory, scene)
-			await moveOneStep(algorithm) 
-			createHeuristic(algorithm, heuristic)
+
+			while initiate:	
+				if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:
+					if maze.enemigo.enemy.path.trayectoria.size() > 0:
+						await moveOneStep(algorithm)
+						Videogame.move_enemy = false
+						var path_enemigo = await newSearch(Videogame.algoritmo_enemigo, algorithm, heuristic, maze.enemigo.position, maze.jugador.position, maze.moneda.position)
+						if !path_enemigo.is_empty():
+							await maze.enemigo.setPath(maze.enemigo.position, maze.jugador.position, path_enemigo)
+					else:
+						Videogame.move_enemy = false
+						await moveOneStepPlayer(algorithm)
+				else:
+					await moveOneStepPlayer(algorithm)
+				
+
+		# Para DFS y BFS del enemigo y Dijkstra y A Estrella para jugador
+		elif Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.BFS or Videogame.algoritmo_enemigo == VideogameConstants.Algoritmo.DFS:		
+			await searchPath(algorithm, trayectory, scene)
+			algorithm.setValueIsPlayer(true)
+
+			while initiate:	
+				if maze.enemigo.enemy.path.trayectoria.size() > 0:
+					await moveOneStep(algorithm)
+					var path_jugador = await newSearch(Videogame.algoritmo_jugador, algorithm, heuristic, maze.jugador.position, maze.initial_coin_position, maze.enemigo.position)
+					if !path_jugador.is_empty():
+						await maze.jugador.setPath(maze.jugador.position, maze.initial_coin_position, path_jugador)
+				else:
+					Videogame.move_enemy = false
+					break		
+
+		# Resto de casos, ambos tienen algoritmos dijkstra o a estrella
+		else:
+			while initiate:
+				await searchPath(algorithm, trayectory, scene)
+				await moveOneStep(algorithm) 
+				createHeuristic(algorithm, heuristic)
 
 
 func createHeuristic(algorithm: AlgorithmController, heuristic: Dictionary):
