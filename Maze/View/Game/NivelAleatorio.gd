@@ -43,22 +43,23 @@ func createGame():
 	pos_player = Vector2(randi_range(1, size_x-2) * pixels_move + pixels_init, randi_range(1, size_y-2) * pixels_move + pixels_init)
 	pos_coin = Vector2(randi_range(1, size_x-2) * pixels_move + pixels_init, randi_range(1, size_y-2) * pixels_move + pixels_init)
 
+	var min_x = (min(pos_player.x, pos_coin.x) - pixels_center) / pixels_move
+	var max_x = (max(pos_player.x, pos_coin.x) - pixels_center) / pixels_move
+	var min_y = (min(pos_player.y, pos_coin.y) - pixels_center) / pixels_move
+	var max_y = (max(pos_player.y, pos_coin.y) - pixels_center) / pixels_move	
+
 	if Videogame.modo_juego == VideogameConstants.ModoJuego.MODO_ENFRENTAMIENTO:		
-		var min_x = (min(pos_player.x, pos_coin.x) - pixels_center) / pixels_move
-		var max_x = (max(pos_player.x, pos_coin.x) - pixels_center) / pixels_move
-		var min_y = (min(pos_player.y, pos_coin.y) - pixels_center) / pixels_move
-		var max_y = (max(pos_player.y, pos_coin.y) - pixels_center) / pixels_move
-		pos_enemy = Vector2(randi_range(min_x, max_x/2) * pixels_move + pixels_init, randi_range(min_y, max_y/2) * pixels_move + pixels_init)
+		var enemy_x = randi_range(min_x, max_x - 1) if pos_player.x > pos_coin.x else randi_range(min_x + 1, max_x)
+		var enemy_y = randi_range(min_y, max_y - 1) if pos_player.y > pos_coin.y else randi_range(min_y + 1, max_y)
+		pos_enemy = Vector2(enemy_x * pixels_move + pixels_init, enemy_y * pixels_move + pixels_init)
 	
 	while pos_coin == pos_player:
 		pos_coin = Vector2(randi_range(1, size_x-2) * pixels_move + pixels_init, randi_range(1, size_y-2) * pixels_move + pixels_init)
 		
 	while pos_coin == pos_enemy or pos_enemy == pos_player:
-		var min_x = (min(pos_player.x, pos_coin.x) - pixels_center) / pixels_move
-		var max_x = (max(pos_player.x, pos_coin.x) - pixels_center) / pixels_move
-		var min_y = (min(pos_player.y, pos_coin.y) - pixels_center) / pixels_move
-		var max_y = (max(pos_player.y, pos_coin.y) - pixels_center) / pixels_move
-		pos_enemy = Vector2(randi_range(min_x, max_x/2) * pixels_move + pixels_init, randi_range(min_y, max_y/2) * pixels_move + pixels_init)
+		var enemy_x = randi_range(min_x, max_x - 1) if pos_player.x > pos_coin.x else randi_range(min_x + 1, max_x)
+		var enemy_y = randi_range(min_y, max_y - 1) if pos_player.y > pos_coin.y else randi_range(min_y + 1, max_y)
+		pos_enemy = Vector2(enemy_x * pixels_move + pixels_init, enemy_y * pixels_move + pixels_init)
 
 	map = await generateAleatoryMap(pos_player, pos_coin, pos_enemy, size_x, size_y)	
 	level_data.initial_player_position = pos_player
