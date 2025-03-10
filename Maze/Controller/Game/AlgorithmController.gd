@@ -157,27 +157,30 @@ func dijkstraSearch(start_node: Vector2, end_node: Vector2, avoid_position: Vect
 	distances = asign[0]
 	parent = asign[1]
 
-	heap.append([0, start_node])
-	visited.append(start_node)
+	pushHeap(heap, [0, start_node])
+	# heap.append([0, start_node])
+	# visited.append(start_node)
 		
 	while heap:
 		var node = popHeap(heap)
 		var accumulated_cost = node[0]
 		var current_node = node[1]
-		visited.append(current_node)
-		
-		if current_node == end_node:
-			await printSearchTiles()
-			return await createPath(start_node, end_node, parent)
-		
-		for neighbor in get_neighbors(current_node):
-			var cost = getCost(neighbor, avoid_position)
-			var new_cost = accumulated_cost + cost
 
-			if new_cost < distances[neighbor]:
-				distances[neighbor] = new_cost
-				parent[neighbor] = current_node
-				pushHeap(heap, [new_cost, neighbor])
+		if current_node not in visited:
+			visited.append(current_node)
+			
+			if current_node == end_node:
+				await printSearchTiles()
+				return await createPath(start_node, end_node, parent)
+			
+			for neighbor in get_neighbors(current_node):
+				var cost = getCost(neighbor, avoid_position)
+				var new_cost = accumulated_cost + cost
+
+				if new_cost < distances[neighbor]:
+					distances[neighbor] = new_cost
+					parent[neighbor] = current_node
+					pushHeap(heap, [new_cost, neighbor])
 				
 	return []		
 
