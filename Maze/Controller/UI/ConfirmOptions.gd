@@ -27,6 +27,13 @@ func _on_reiniciar_pressed():
 	maze_instance.lose = 0
 	maze_instance.game.tiempo_restante = maze_instance.maze.time
 	maze_instance.actualizaPuntuacion()
+	if maze_instance.maze.enemigo != null:
+		maze_instance.maze.enemigo.maze_finished = true
+		maze_instance.maze.enemigo.queue_free() 
+	maze_instance.winLabel.hide()
+	maze_instance.finishLabel.hide()
+	maze_instance.loseLabel.hide()
+	maze_instance.timeExceedLabel.hide()
 	maze_instance.nuevoJuego()
 	
 	emit_signal("menu_closed")

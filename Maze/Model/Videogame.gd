@@ -56,6 +56,7 @@ func setPrincipalMusic():
 
 # Establece la pista de musica del juego
 func setGameMusic():
+	music_player.stop()
 	music_player.stream = preload("res://Resources/Music/PixelMusic.wav")
 	configureMusic()
 

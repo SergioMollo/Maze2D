@@ -24,7 +24,6 @@ func _ready():
 
 
 func _on_save_button_pressed():
-	var volume = $Canvas/Panel/Margin/Container/Settings/Volume/VolumeSlider
 	var resolution = $Canvas/Panel/Margin/Container/Settings/Resolution/ResolutionOption
 	
 	var values = resolution.get_item_text(resolution.get_selected()).split("x")

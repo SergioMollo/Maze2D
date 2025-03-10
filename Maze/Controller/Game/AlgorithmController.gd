@@ -103,7 +103,6 @@ func bfsSearch(start_node: Vector2, end_node: Vector2):
 
 	while queue:
 		var current_node = queue.pop_front()
-		visited.append(current_node)
 		if current_node == end_node:
 			await printSearchTiles()
 			return await createPath(start_node, end_node, parent)
@@ -111,6 +110,7 @@ func bfsSearch(start_node: Vector2, end_node: Vector2):
 		for neighbor in get_neighbors(current_node):	
 			if neighbor not in visited:
 				queue.append(neighbor)
+				visited.append(neighbor)
 				parent[neighbor] = current_node
 
 
@@ -118,6 +118,7 @@ func bfsSearch(start_node: Vector2, end_node: Vector2):
 # 	- Itera recursivamente en la busqueda de los nodos hijos
 func dfsSearch(start_node: Vector2, end_node: Vector2):
 	visited = []
+	resultdfs = []
 	recursiveDFS(start_node, end_node)
 	await printSearchTiles()
 	return resultdfs

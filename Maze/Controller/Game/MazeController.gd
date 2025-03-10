@@ -125,7 +125,7 @@ func nuevoJuego():
 
 # Procesa las fisicas del juego, se ejecuta continuamente
 # 	- Actualiza el contador de tiempo
-func _process(delta):
+func _process(_delta):
 	if initiate:
 		while maze.timer.time_left > 0:
 			timeLabel.text = str(int(maze.timer.time_left))
@@ -197,7 +197,12 @@ func gameProcess():
 						await maze.jugador.setPath(maze.jugador.position, maze.initial_coin_position, path_jugador)
 				else:
 					Videogame.move_enemy = false
-					break		
+					await moveOneStepPlayer(algorithm)
+					var path_jugador = await newSearch(Videogame.algoritmo_jugador, algorithm, heuristic, maze.jugador.position, maze.initial_coin_position, maze.enemigo.position)
+					if !path_jugador.is_empty():
+						await maze.jugador.setPath(maze.jugador.position, maze.initial_coin_position, path_jugador)
+					else:
+						break		
 
 		# Resto de casos, ambos tienen algoritmos dijkstra o a estrella
 		else:
@@ -307,9 +312,9 @@ func mostrarResultado():
 		maze.enemigo.maze_finished = true
 		maze.enemigo.enemy.queue_free() 
 	
-	habilitaConfiguracion()
 	maze.jugador.player.maze_finished = true
 	await get_tree().create_timer(3.0).timeout
+	habilitaConfiguracion()
 
 	if game.numero < Videogame.juegos:
 		nuevoJuego()
@@ -334,10 +339,11 @@ func mostrarEliminado():
 	loseLabel.show()
 
 	maze.enemigo.queue_free() 
-	habilitaConfiguracion()
+	maze.enemigo = null
 	maze.moneda.hide()
 	actualizaPuntuacion()
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(3.0).timeout
+	habilitaConfiguracion()
 
 	if game.numero < Videogame.juegos:
 		nuevoJuego()
@@ -354,7 +360,6 @@ func mostrarEliminado():
 func _on_timer_timeout():
 	initiate = false
 	maze.timer.stop()
-	habilitaConfiguracion()
 	maze.jugador.player.maze_finished = true
 	lose += 1
 
@@ -365,7 +370,8 @@ func _on_timer_timeout():
 	timeExceedLabel.position = Vector2(maze.scale.x/2-125,maze.scale.y-60)
 	loseLabel.show()
 	actualizaPuntuacion()
-	await get_tree().create_timer(5.0).timeout
+	await get_tree().create_timer(3.0).timeout
+	habilitaConfiguracion()
 
 	if game.numero < Videogame.juegos:
 		nuevoJuego()
@@ -379,6 +385,7 @@ func _on_timer_timeout():
 func actualizaPuntuacion():
 	var puntuation : Label  = $"../Layer/Header/Layer/Panel/Container/Result/Results/LabelResultado"	
 	puntuation.text = str(win) + "-" + str(lose)
+
 
 
 # Deshabilita el boton de configuración

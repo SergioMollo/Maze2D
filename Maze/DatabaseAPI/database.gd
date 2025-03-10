@@ -16,11 +16,8 @@ func initDatabase():
 	var path = "user://db_Maze2D.db"
 
 	if not FileAccess.file_exists(path):
-		var file = FileAccess.open("res://Database/Maze2D.db", FileAccess.READ)
-		var db_copy = FileAccess.open(path, FileAccess.WRITE)
-		db_copy.store_buffer(file.get_buffer(file.get_length()))
+		var file = FileAccess.open(path, FileAccess.WRITE)
 		file.close()
-		db_copy.close()
 
 	database.path = path
 	database.open_db()

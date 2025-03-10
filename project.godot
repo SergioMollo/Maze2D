@@ -11,9 +11,12 @@ config_version=5
 [application]
 
 config/name="Maze2D"
+config/version="1.0"
 run/main_scene="res://Maze/View/UI/InicioSesion.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 boot_splash/bg_color=Color(0.00392157, 0.176471, 0, 1)
+config/icon="res://maze_icon256.png"
+config/windows_native_icon="res://maze_icon.ico"
 
 [autoload]
 
@@ -23,13 +26,12 @@ Videogame="*res://Maze/Model/Videogame.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-sqlite/plugin.cfg", "res://addons/godot_rl_agents/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-sqlite/plugin.cfg")
 
 [input]
 
