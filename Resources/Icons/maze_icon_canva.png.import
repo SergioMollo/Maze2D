@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dguvd2s0fmatg"
-path="res://.godot/imported/LaberintoTFG.icon.png-57bb62ce2c7e257f8b369f22f29b37b1.ctex"
+uid="uid://b780hfk86atx1"
+path="res://.godot/imported/maze_icon_canva.png-2633cf5fa06dbcb190e8ad80823212a7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://LaberintoTFG.icon.png"
-dest_files=["res://.godot/imported/LaberintoTFG.icon.png-57bb62ce2c7e257f8b369f22f29b37b1.ctex"]
+source_file="res://Resources/Icons/maze_icon_canva.png"
+dest_files=["res://.godot/imported/maze_icon_canva.png-2633cf5fa06dbcb190e8ad80823212a7.ctex"]
 
 [params]
 
