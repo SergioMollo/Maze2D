@@ -203,12 +203,15 @@ func aStarSearch(start_node: Vector2, end_node: Vector2, heuristic: Dictionary, 
 	parent = asign[1]
 
 	heap.append([0, start_node])
-	visited.append(start_node)
 		
 	while heap:
 		var node = popHeap(heap)
 		var accumulated_cost = node[0]
 		var current_node = node[1]
+		
+		if current_node in visited:
+			continue
+			
 		visited.append(current_node)
 		
 		if current_node == end_node:
@@ -219,7 +222,7 @@ func aStarSearch(start_node: Vector2, end_node: Vector2, heuristic: Dictionary, 
 			var cost = getCost(neighbor, avoid_position)
 			var movement_cost = cost + heuristic[neighbor]
 			var new_cost = accumulated_cost + movement_cost
-
+			
 			if new_cost < distances[neighbor]:
 				distances[neighbor] = new_cost
 				parent[neighbor] = current_node
