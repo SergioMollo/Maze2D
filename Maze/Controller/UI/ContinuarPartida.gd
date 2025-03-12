@@ -12,6 +12,8 @@ func _ready():
 	var listas = Videogame.cargarPartidasGuardadas()
 	partidas = listas[0]
 	finalizadas = listas[1]
+	
+	$Canvas/VBox/MarginContainer3/HBoxContainer/SeleccionarButton.disabled = true
 	printGames()
 
 
@@ -21,6 +23,7 @@ func _ready():
 func _on_name_label_pressed(button) -> void:
 	var panel = button.get_parent().get_parent().get_parent()
 	var index_panel = listado.get_children().find(panel)
+	$Canvas/VBox/MarginContainer3/HBoxContainer/SeleccionarButton.disabled = false
 	printExtensionGame(partidas[index_panel])
 
 
