@@ -14,9 +14,16 @@ El juego dispone de las siguientes funciones:
 - Carga de partidas guardadas.
 
 El videojuego Maze2D se puede descargar y ejecutar desde la sección Releases para la versión 1.0 https://github.com/SergioMollo/Maze2D/releases, disponible para el sistema operativo 
-Windows en la versión de 64 bits. Para su correcto funcionamiento, es necesario tener descargados los archivos .exe y .dll que se encuentran en la carpeta llamada Maze2D\_x64\_Windows.zip, 
+Windows en la versión de 64 bits. Para su correcto funcionamiento, es necesario tener descargados los archivos .exe y .dll que se encuentran en la carpeta llamada Maze2D_x64_Windows.zip, 
 y asegurándose de ubicarlos en la misma carpeta. Además, se recomienda tener instalado el componente más reciente de Microsoft Visual C++ Redistributable desde la pagina oficial 
 https://www.microsoft.com/es-es/download/details.aspx?id=48145, los controladores gráficos actualizados y un sistema operativo basado en 64 bits.
+
+Tras las multiples pruebas realizadas en diferentes ordenadores se han encontrado dificultades de ejecución en algunos de ellos los cuales presentan una tarjeta gráfica NVIDIA (en concreto la tarjeta GeForce RTX 4060) y otros con 
+ella integrada en el propio ordenador. Las pruebas realizadas y correctamente funcionales se han realizado en ordenadores con las siguientes caracteristicas:
+- Todos ellos cuentan con el sistema operativo Windows.
+  1. HP con Windows 11 de 8 GB de RAM, con AMD Ryzen 7 5700U y Radeon Graphics.
+  2. Lenovo con Windows 8 Pro de 4 GB de RAM, con Intel Celeron.
+  3. HP
 
 La primera interfaz de usuario que aparece al ejecutar el videojuego, es la interfaz de inicio de sesión, donde se debe introducir un nombre de usuario y una contraseña registrados en el 
 sistema para proceder a la pantalla principal del videojuego. La primera ejecución del videojuego, requiere de la creación de un nuevo usuario, pues no existe ninguno registrado previamente 
