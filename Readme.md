@@ -19,8 +19,7 @@ y asegurándose de ubicarlos en la misma carpeta. Además, se recomienda tener i
 https://www.microsoft.com/es-es/download/details.aspx?id=48145, los controladores gráficos actualizados y un sistema operativo basado en 64 bits.
 
 Tras las multiples pruebas realizadas en diferentes ordenadores se han encontrado dificultades de ejecución en algunos de ellos los cuales presentan una tarjeta gráfica NVIDIA (en concreto la tarjeta GeForce RTX 4060) y otros con 
-ella integrada en el propio ordenador. Las pruebas realizadas y correctamente funcionales se han realizado en ordenadores con las siguientes caracteristicas:
-- Todos ellos cuentan con el sistema operativo Windows.
+ella integrada en el propio ordenador. Las pruebas realizadas y correctamente funcionales se han realizado en ordenadores con el sistema operativo Windows y las siguientes caracteristicas:
   1. HP con Windows 11 de 8 GB de RAM, con AMD Ryzen 7 5700U y Radeon Graphics.
   2. Lenovo con Windows 8 Pro de 4 GB de RAM, con Intel Celeron.
   3. HP
