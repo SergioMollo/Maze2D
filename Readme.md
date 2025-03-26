@@ -22,7 +22,7 @@ Tras las multiples pruebas realizadas en diferentes ordenadores se han encontrad
 ella integrada en el propio ordenador. Las pruebas realizadas y correctamente funcionales se han realizado en ordenadores con el sistema operativo Windows y las siguientes caracteristicas:
   1. HP con Windows 11 de 8 GB de RAM, con AMD Ryzen 7 5700U y Radeon Graphics.
   2. Lenovo con Windows 8 Pro de 4 GB de RAM, con Intel Celeron.
-  3. HP
+  3. HP con Windows 10 de 4 GB de RAM, con Intel Core I3-6006U.
 
 La primera interfaz de usuario que aparece al ejecutar el videojuego, es la interfaz de inicio de sesión, donde se debe introducir un nombre de usuario y una contraseña registrados en el 
 sistema para proceder a la pantalla principal del videojuego. La primera ejecución del videojuego, requiere de la creación de un nuevo usuario, pues no existe ninguno registrado previamente 
